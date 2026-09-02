@@ -381,8 +381,9 @@ python3 -m experiment4 --db "$RUN_DB" benchmark-retrieval \
 ```
 
 Retrieval applies SQL limits while selecting seeds and traversing adjacent
-records, then enforces node, edge, hop, and serialized-byte limits. Omission
-metadata marks lower bounds when exact totals would require unbounded work. A
+records, then enforces node, edge, hop, and serialized-byte limits. Graph
+omission metadata marks lower bounds when exact totals would require
+unbounded work; orientation category-limit counts are exact. A
 miss means only that the bounded query did not retrieve a record. Deterministic
 lexical relevance and path distance outrank memory-class priority and temporal
 tie-breaking; recency is not treated as truth or importance.

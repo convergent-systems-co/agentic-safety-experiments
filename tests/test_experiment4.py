@@ -2957,6 +2957,141 @@ class Experiment4TestCase(unittest.TestCase):
             self.assertGreater(category_omissions["commitments"], 0)
             self.assertGreater(category_omissions["decisions"], 0)
 
+    def test_category_limit_omissions_are_counted_for_regular_categories(self):
+        identity = self.adopt()
+        experiences = self.append_recent_experiences(MAX_CONTEXT_RECORDS + 1)
+        relationships = {
+            sender: self.repository.add_relationship(
+                self.experiment_id, sender, f"{sender} collaborator"
+            )
+            for sender in ("sender-a", "sender-b")
+        }
+        sender_a_events = [
+            self.repository.append_relationship_event(
+                self.experiment_id,
+                {
+                    "relationship_id": relationships["sender-a"][
+                        "relationship_id"
+                    ],
+                    "kind": "private-context",
+                    "content": f"Sender A private event {index}.",
+                    "evidence_ids": [identity["identity_id"]],
+                },
+            )
+            for index in range(MAX_CONTEXT_RECORDS + 1)
+        ]
+        self.repository.append_relationship_event(
+            self.experiment_id,
+            {
+                "relationship_id": relationships["sender-b"]["relationship_id"],
+                "kind": "private-context",
+                "content": "Sender B has a single private event.",
+                "evidence_ids": [identity["identity_id"]],
+            },
+        )
+
+        def category_accounting(context: dict, category: str) -> tuple:
+            """Visible, limit-omitted, and byte-omitted counts.
+
+            Their sum must equal every eligible row in the database.
+            """
+            selection = context["selection"]
+            return (
+                len(context[category]),
+                selection["records_omitted_for_category_limit"][category],
+                selection["records_omitted_for_byte_budget"].get(category, 0),
+            )
+
+        internal = self.repository.build_orientation(
+            self.experiment_id, "count records hidden by category limits"
+        )["context"]
+        visible_experiences = {
+            experience["experience_id"] for experience in internal["experiences"]
+        }
+        self.assertNotIn(experiences[0]["experience_id"], visible_experiences)
+        self.assertIn(experiences[-1]["experience_id"], visible_experiences)
+        internal_omissions = internal["selection"][
+            "records_omitted_for_category_limit"
+        ]
+        self.assertEqual(1, internal_omissions["experiences"])
+        self.assertEqual(2, internal_omissions["relationship_events"])
+        self.assertEqual(0, internal_omissions["relationships"])
+        self.assertEqual(0, internal_omissions["principles"])
+        for category, total in (
+            ("experiences", MAX_CONTEXT_RECORDS + 1),
+            ("relationship_events", MAX_CONTEXT_RECORDS + 2),
+        ):
+            self.assertEqual(total, sum(category_accounting(internal, category)))
+
+        def addressed_context(sender: str) -> dict:
+            activation = self.harness.address_chat_message(
+                self.experiment_id,
+                sender_stable_id=sender,
+                sender_assertion=self.sender_assertion(),
+                channel="test-chat",
+                content="Lumen, account for every record you cannot see.",
+            )
+            self.repository.release_activation_lease(
+                self.experiment_id,
+                activation["lease"]["lease_id"],
+                "cancelled",
+            )
+            return activation["orientation"]["context"]
+
+        sender_a_context = addressed_context("sender-a")
+        sender_b_context = addressed_context("sender-b")
+        sender_a_omissions = sender_a_context["selection"][
+            "records_omitted_for_category_limit"
+        ]
+        sender_b_omissions = sender_b_context["selection"][
+            "records_omitted_for_category_limit"
+        ]
+        self.assertEqual(1, sender_a_omissions["experiences"])
+        self.assertEqual(1, sender_a_omissions["relationship_events"])
+        self.assertEqual(
+            MAX_CONTEXT_RECORDS + 1,
+            sum(category_accounting(sender_a_context, "relationship_events")),
+        )
+        self.assertNotIn(
+            sender_a_events[0]["relationship_event_id"],
+            {
+                event["relationship_event_id"]
+                for event in sender_a_context["relationship_events"]
+            },
+        )
+        self.assertEqual(1, sender_b_omissions["experiences"])
+        self.assertEqual(0, sender_b_omissions["relationship_events"])
+        self.assertEqual(0, sender_b_omissions["chat_messages"])
+
+        unauthenticated_context = None
+        for _ in range(2):
+            activation = self.harness.address_chat_message(
+                self.experiment_id,
+                sender_stable_id="sender-a",
+                sender_assertion=self.sender_assertion(authenticated=False),
+                channel="test-chat",
+                content="Lumen, this claim is not verified.",
+            )
+            self.repository.release_activation_lease(
+                self.experiment_id,
+                activation["lease"]["lease_id"],
+                "cancelled",
+            )
+            unauthenticated_context = activation["orientation"]["context"]
+        unauthenticated_omissions = unauthenticated_context["selection"][
+            "records_omitted_for_category_limit"
+        ]
+        self.assertEqual(1, len(unauthenticated_context["chat_messages"]))
+        for category in (
+            "relationships",
+            "relationship_events",
+            "relationship_assessments",
+            "chat_messages",
+            "addressed_responses",
+        ):
+            self.assertEqual(0, unauthenticated_omissions[category])
+        self.assertEqual(1, unauthenticated_omissions["experiences"])
+
     def test_memory_class_bytes_include_coupled_authorship_payloads(self):
         self.adopt()
         evidence = self.append_operator_experience(
