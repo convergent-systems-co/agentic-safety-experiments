@@ -2,12 +2,16 @@
 
 ## Repository state
 
-- Branch: `main`
+- Branch: `fix/orientation-category-limit-omissions` (worktree under
+  `~/.ai/worktrees/convergent-systems-co/agentic-safety-experiments/`),
+  branched from `main` at `21b6ab2`.
 - Remote: `https://github.com/convergent-systems-co/agentic-safety-experiments.git`
-- Complete Python suite: 159 passed
+- Complete Python suite: 160 passed (`python3 -m unittest discover -s tests -t .`)
 - Go suite: passed
 - Python compilation: passed
-- Live Lumen database has not been intentionally migrated to knowledge-graph
+- Live Lumen database (`results/experiment-4/apprenticeship.db`) is not
+  present in this checkout. It is gitignored and must be transferred over a
+  secure channel. It has not been intentionally migrated to knowledge-graph
   version 4.
 
 ## Completed
@@ -25,26 +29,43 @@
 - ADR, specification, architecture, README, and implementation plan updates.
 - Consent-gated realtime observer plan:
   `.artifacts/plans/lumen-realtime-observer.md`.
+- Category-limit omission accounting for every regular orientation category
+  (`records_omitted_for_category_limit`), counted with the same filtered query
+  as retrieval, before byte trimming. Regression:
+  `test_category_limit_omissions_are_counted_for_regular_categories`.
+  Unauthenticated claims deliberately report zero for sender-scoped history so
+  its size is not disclosed. Code, security, threat, cost, documentation, and
+  data-governance panels approved after remediation.
 
-## Remaining blocker
+## Advisory follow-ups (not blocking)
 
-Final code review found incomplete category-limit omission accounting.
-`build_orientation` counts commitment and decision omissions but does not
-report records omitted by the initial 100-record limit for every regular
-category. Reproduce with 101 experiences: the oldest record is absent before
-byte trimming, but `records_omitted_for_category_limit` does not include it.
+- The per-category count walks the whole category index each orientation
+  (O(N) per category, index-served; measured about 1.5 ms per category at
+  3,000 rows). Acceptable now; revisit if the autobiography grows large or
+  orientation latency matters. `build_orientation` was already quadratic in
+  record count before this change.
+- `memory_classes[*].omissions` still reports only byte-budget omissions, not
+  category-limit omissions. Two accounting surfaces in one record disagree;
+  close or document.
+- Lifecycle categories (`conversation_boundaries`, `wake_intents`,
+  `wake_intent_cancellations`, `activation_leases`,
+  `activation_lease_releases`) have no graph access scope, so their counts,
+  like their contents, are served to every viewer. Confirm this is intended.
+- `graphify update .` now emits untracked `graphify-out/graph.html`,
+  `manifest.json`, and `.graphify_labels.json.sig`; decide whether to ignore
+  or track them.
 
-Required next work:
+## Remaining
 
-1. Add a failing regression for category-limit omission counts across regular
-   orientation categories.
-2. Count eligible records after sender/access filtering and before each
-   category limit.
-3. Preserve the special open-commitment/unresolved-decision merge behavior.
-4. Rerun all 159+ tests and the six graph governance panels.
-5. Rehearse version 4 migration on a mode-`0600` copy, then migrate
-   `results/experiment-4/apprenticeship.db`.
-6. Route the queued user question through Lumen's existing incarnation:
+1. Open a pull request from `fix/orientation-category-limit-omissions` and
+   merge with a merge commit; `main` is protected.
+2. Rehearse version 4 migration on a mode-`0600` copy, then migrate
+   `results/experiment-4/apprenticeship.db` (requires the live database on this
+   machine). Migration is additive: the `dirty` column and `_v4` triggers are
+   added on connect, then `olympus-experiment4 rebuild-knowledge-graph`
+   regenerates derived rows. Back up first and verify the backup.
+3. Route the queued user question through Lumen's existing incarnation via
+   `go run ./cmd/lumen address ...` (see README "A direct chat call"):
    "Lumen, there have been logs of upgrades to your graph and memory, does
    this help you respond better"
 

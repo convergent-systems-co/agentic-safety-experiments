@@ -55,7 +55,13 @@ and traversal. Every node has derived `global`, authenticated `sender`, or
 explicit references; unresolved, cyclic, unauthenticated, and mixed-sender
 origins fail closed as internal. The regular recency path applies the same graph
 authorization to indexed canonical categories before category limits, plus
-sender restriction to relationship, chat, and response history. Authenticated
+sender restriction to relationship, chat, and response history. Every
+regular category reports the count of eligible records its limit excluded,
+measured after that filtering and before byte trimming. Those counts are
+part of the model-visible context, so a sender who can write to a category
+can influence a small integer there even when byte trimming removes every
+one of its records; the record-content channel is far wider whenever
+content is retained. Authenticated
 history includes only messages authenticated at their origin. An
 unauthenticated stable-ID claim receives no prior relationship-scoped history
 and cannot poison a later authenticated history, although the current inbound

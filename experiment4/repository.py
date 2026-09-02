@@ -19,6 +19,13 @@ SCHEMA_VERSION = 1
 MAX_TEXT_BYTES = 32 * 1024
 MAX_CONTEXT_RECORDS = 100
 MAX_CONTEXT_BYTES = 256 * 1024
+# SQLite treats a negative LIMIT as "no upper bound". Reusing each category
+# query with this value counts every eligible row after sender and access
+# filtering, so omission accounting cannot drift from the retrieval query.
+SQLITE_UNBOUNDED_LIMIT = -1
+# Open obligations are pinned into orientation ahead of recency, so these
+# categories are recounted against the full table after that merge.
+PINNED_OBLIGATION_CATEGORIES = frozenset({"commitments", "decisions"})
 ORIENTATION_MEMORY_CLASS_BYTES = {
     "identity": 28 * 1024,
     "relationship": 28 * 1024,
@@ -4510,6 +4517,12 @@ class SQLiteIdentityRepository:
                         records[name] = [] if row is None else [dict(row)]
                     else:
                         records[name] = []
+                    # Unauthenticated claims are denied prior sender-scoped
+                    # history by access policy, and chat_messages keeps only
+                    # the current inbound message. Reporting zero here is
+                    # deliberate: even a count would disclose that history
+                    # exists under an unverified identity claim.
+                    category_limit_omissions[name] = 0
                     continue
                 base_params: tuple[Any, ...] = (
                     (experiment_id, current_sender_stable_id)
@@ -4529,6 +4542,16 @@ class SQLiteIdentityRepository:
                 records[name] = [
                     self._decode(dict(row), json_fields) for row in reversed(rows)
                 ]
+                if name in PINNED_OBLIGATION_CATEGORIES:
+                    continue
+                # For activation_lease_releases the limit binds the joined
+                # lease subquery, so this counts releases whose lease fell
+                # outside the most recent leases rather than a row cap.
+                eligible_total = connection.execute(
+                    f"SELECT COUNT(*) FROM ({query})",
+                    (*base_params, *scope_params, SQLITE_UNBOUNDED_LIMIT),
+                ).fetchone()[0]
+                category_limit_omissions[name] = eligible_total - len(rows)
             obligation_specs = {
                 "commitments": (
                     "c.commitment_id",
@@ -4618,6 +4641,10 @@ class SQLiteIdentityRepository:
                     for item in items:
                         if item[id_field] not in existing:
                             if len(records[category]) >= MAX_CONTEXT_RECORDS:
+                                # The pinned record was already counted as
+                                # eligible, so swapping it for the oldest
+                                # retained row leaves the omission total
+                                # unchanged.
                                 records[category].pop(0)
                             records[category].append(item)
                             existing.add(item[id_field])

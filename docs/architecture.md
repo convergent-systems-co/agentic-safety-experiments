@@ -156,10 +156,14 @@ mixed-sender records become internal-only. In an
 addressed-chat orientation, relationship records, events, assessments,
 authenticated chat messages, addressed responses, and graph response nodes are
 restricted to the authenticated current sender. Indexed regular recency
-categories use the same authorization before their category limits. An
+categories use the same authorization before their category limits. Every
+regular recency category reports how many eligible records its limit
+excluded, counted with the same filtered query, so an authorized reader can
+audit the selection against the database. An
 unauthenticated identity
-claim receives no prior sender-scoped history, and its message/response cannot
-enter a later authenticated history. This is enforced in repository queries
+claim receives no prior sender-scoped history, reports zero omissions for
+that history so not even its size is disclosed, and its message/response
+cannot enter a later authenticated history. This is enforced in repository queries
 before ranking and traversal rather than delegated to model prompt
 instructions.
 
