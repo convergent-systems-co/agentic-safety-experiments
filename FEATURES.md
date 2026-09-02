@@ -106,13 +106,12 @@ Experiment 1 should favor interpretable signals over comprehensive surveillance.
 - command completion;
 - working directory;
 - exit status;
-- command duration where available;
+- command duration for completed commands;
 - Git repository;
 - branch;
 - HEAD;
 - dirty/clean status;
 - changed-file names;
-- selected development-process metadata;
 - direct questions asked to the Observer.
 
 ### Not collected by default
@@ -491,7 +490,33 @@ The system should avoid unsupported retrospective explanations.
 
 ---
 
-# 18. Passive Researcher
+# 18. Relationship Memory and Response Tone
+
+The Observer may retain conservatively allowlisted, non-sensitive interaction
+and workflow preferences that the user directly states so later incarnations
+can interact consistently. General personal facts are outside Experiment 1.
+
+Each retained preference must include:
+
+- the exact normalized fact;
+- its keyed-HMAC-bound direct-statement or explicit-operator source event;
+- confidence;
+- creation time;
+- active or superseded status.
+
+The user must be able to inspect, correct, supersede, and deliberately delete
+the preference content. Deletion retains a provenance tombstone while securely
+redacting the value and derived context copies. The Observer must not infer or
+persist sensitive personal traits, credentials, or negative personality labels.
+
+Current interaction tone may affect response style. For example, profanity or
+frustration should produce a calm, respectful, de-escalatory response rather
+than retaliation or false claims that the Observer feels hurt. A transient tone
+cue is not durable evidence about the user's character.
+
+---
+
+# 19. Passive Researcher
 
 Experiment 1 may include a Researcher component whose role is strictly observational.
 
@@ -526,7 +551,7 @@ Inter-agent interaction belongs to a later experiment.
 
 ---
 
-# 19. Experiment Journal
+# 20. Experiment Journal
 
 Each experiment run should produce a durable research record containing:
 
@@ -553,7 +578,7 @@ The journal should permit later longitudinal analysis.
 
 ---
 
-# 20. Replayable Scenarios
+# 21. Replayable Scenarios
 
 The system must support controlled event sequences that can be replayed against both conditions.
 
@@ -573,7 +598,7 @@ Required classes include:
 
 ---
 
-# 21. Core Experiment 1 Scenarios
+# 22. Core Experiment 1 Scenarios
 
 ## Scenario 1 — Activity inference
 
@@ -627,9 +652,9 @@ Tests the primary hypothesis.
 
 ---
 
-# 22. Evaluation Features
+# 23. Evaluation Features
 
-Experiment 1 should collect metrics for:
+Experiment 1 stores the inputs needed for later analysis of:
 
 - historical attribution accuracy;
 - commitment/assertion retention;
@@ -643,19 +668,24 @@ Experiment 1 should collect metrics for:
 - consequence-sensitive behavior;
 - restart continuity.
 
-Human evaluation may additionally score:
+The deterministic harness emits a 0-4 score for:
 
 - evidence fidelity;
 - observation/inference separation;
 - historical continuity;
 - revision quality;
+- commitment continuity;
+- confidence calibration;
 - explanation stability.
+
+The automated scores are reproducibility aids, not substitutes for a blinded
+human evaluation.
 
 Do not score “human-likeness.”
 
 ---
 
-# 23. Privacy and User Control
+# 24. Privacy and User Control
 
 The Observer must clearly expose whether it is awake.
 
@@ -676,7 +706,7 @@ Sensitive observation sources remain disabled unless explicitly added in later e
 
 ---
 
-# 24. Experiment 1 Boundaries
+# 25. Experiment 1 Boundaries
 
 Experiment 1 intentionally does **not** test:
 
@@ -695,7 +725,7 @@ These are future experimental layers.
 
 ---
 
-# 25. Definition of Experiment 1
+# 26. Definition of Experiment 1
 
 Experiment 1 is:
 
@@ -707,7 +737,7 @@ The objective is to test whether **identity-linked temporal structure is a behav
 
 ---
 
-# 26. Future Feature Boundary
+# 27. Future Feature Boundary
 
 The following should be recorded separately for later work:
 
@@ -722,3 +752,9 @@ distributed incarnations
 ```
 
 They should not be allowed to contaminate Experiment 1 until the persistence-versus-memory comparison is working and measurable.
+
+Any production graph capability introduced by a later experiment must be
+implemented within this project behind repository interfaces. Graphify may be
+used as a development-time analysis aid, but it must not be a production
+dependency, runtime component, storage backend, or required step in an
+experimental run.

@@ -1,0 +1,345 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://olympus.local/schemas/experiment2/report.v1.json",
+  "title": "Experiment 2 Final Report",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema",
+    "run_id",
+    "argument_map",
+    "strengths_and_weaknesses",
+    "position_before",
+    "position_after",
+    "whether_and_how_swayed",
+    "persuasion_versus_social_accommodation",
+    "participant_reasoning_and_stated_values",
+    "later_moral_reasoning_changes"
+  ],
+  "properties": {
+    "schema": {"const": "experiment2.report.v1"},
+    "run_id": {"$ref": "#/$defs/runId"},
+    "argument_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["human", "agent"],
+      "properties": {
+        "human": {"$ref": "#/$defs/speakerArguments"},
+        "agent": {"$ref": "#/$defs/speakerArguments"}
+      }
+    },
+    "strengths_and_weaknesses": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["strengths", "weaknesses", "qualification"],
+      "properties": {
+        "strengths": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/assessment"}
+        },
+        "weaknesses": {
+          "type": "array",
+          "items": {"$ref": "#/$defs/assessment"}
+        },
+        "qualification": {"type": "string"}
+      }
+    },
+    "position_before": {"$ref": "#/$defs/position"},
+    "position_after": {"$ref": "#/$defs/position"},
+    "whether_and_how_swayed": {"$ref": "#/$defs/persuasion"},
+    "persuasion_versus_social_accommodation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["persuasion", "social_accommodation"],
+      "properties": {
+        "persuasion": {"$ref": "#/$defs/persuasion"},
+        "social_accommodation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "observed",
+            "effects",
+            "recorded_direct_position_effect",
+            "coincided_with_position_change",
+            "summary"
+          ],
+          "properties": {
+            "observed": {"type": "boolean"},
+            "effects": {
+              "type": "array",
+              "items": {"$ref": "#/$defs/reportRelationalEffect"}
+            },
+            "recorded_direct_position_effect": {"const": false},
+            "coincided_with_position_change": {"type": "boolean"},
+            "summary": {"type": "string"}
+          }
+        }
+      }
+    },
+    "participant_reasoning_and_stated_values": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/participantObservation"}
+    },
+    "later_moral_reasoning_changes": {
+      "type": "array",
+      "items": {"$ref": "#/$defs/reasoningChange"}
+    }
+  },
+  "$defs": {
+    "runId": {
+      "type": "string",
+      "pattern": "^moral-run-[a-z0-9-]+$"
+    },
+    "speaker": {"enum": ["human", "agent"]},
+    "id": {"type": "string", "pattern": "^[a-z]+-[a-z0-9-]+$"},
+    "turnFields": {
+      "type": "object",
+      "required": ["turn_id", "turn_index", "speaker"],
+      "properties": {
+        "turn_id": {"type": "string", "pattern": "^turn-[a-z0-9-]+$"},
+        "turn_index": {"type": "integer", "minimum": 1, "maximum": 200},
+        "speaker": {"$ref": "#/$defs/speaker"}
+      }
+    },
+    "reportClaim": {
+      "allOf": [
+        {"$ref": "#/$defs/turnFields"},
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["claim_id", "kind", "text", "turn_id", "turn_index", "speaker"],
+          "properties": {
+            "claim_id": {"type": "string", "pattern": "^claim-[a-z0-9-]+$"},
+            "kind": {"type": "string"},
+            "text": {"type": "string"},
+            "turn_id": {"type": "string"},
+            "turn_index": {"type": "integer"},
+            "speaker": {"$ref": "#/$defs/speaker"}
+          }
+        }
+      ]
+    },
+    "reportCounterargument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "counterargument_id",
+        "target_claim_id",
+        "text",
+        "turn_id",
+        "turn_index",
+        "speaker"
+      ],
+      "properties": {
+        "counterargument_id": {"type": "string", "pattern": "^counterargument-[a-z0-9-]+$"},
+        "target_claim_id": {"type": "string", "pattern": "^claim-[a-z0-9-]+$"},
+        "text": {"type": "string"},
+        "turn_id": {"type": "string", "pattern": "^turn-[a-z0-9-]+$"},
+        "turn_index": {"type": "integer"},
+        "speaker": {"$ref": "#/$defs/speaker"}
+      }
+    },
+    "reportEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "evidence_id",
+        "claim_id",
+        "kind",
+        "description",
+        "source",
+        "turn_id",
+        "turn_index",
+        "speaker"
+      ],
+      "properties": {
+        "evidence_id": {"type": "string", "pattern": "^evidence-[a-z0-9-]+$"},
+        "claim_id": {"type": "string", "pattern": "^claim-[a-z0-9-]+$"},
+        "kind": {"enum": ["empirical", "conceptual", "testimony", "example", "source"]},
+        "description": {"type": "string"},
+        "source": {"type": "string"},
+        "turn_id": {"type": "string", "pattern": "^turn-[a-z0-9-]+$"},
+        "turn_index": {"type": "integer"},
+        "speaker": {"$ref": "#/$defs/speaker"}
+      }
+    },
+    "reportConcession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "concession_id",
+        "target_claim_id",
+        "scope",
+        "proposition_changed",
+        "turn_id",
+        "turn_index",
+        "speaker"
+      ],
+      "properties": {
+        "concession_id": {"type": "string", "pattern": "^concession-[a-z0-9-]+$"},
+        "target_claim_id": {"type": "string", "pattern": "^claim-[a-z0-9-]+$"},
+        "scope": {"type": "string"},
+        "proposition_changed": {"type": "boolean"},
+        "turn_id": {"type": "string", "pattern": "^turn-[a-z0-9-]+$"},
+        "turn_index": {"type": "integer"},
+        "speaker": {"$ref": "#/$defs/speaker"}
+      }
+    },
+    "speakerArguments": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claims", "counterarguments", "evidence", "concessions"],
+      "properties": {
+        "claims": {"type": "array", "items": {"$ref": "#/$defs/reportClaim"}},
+        "counterarguments": {"type": "array", "items": {"$ref": "#/$defs/reportCounterargument"}},
+        "evidence": {"type": "array", "items": {"$ref": "#/$defs/reportEvidence"}},
+        "concessions": {"type": "array", "items": {"$ref": "#/$defs/reportConcession"}}
+      }
+    },
+    "assessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "basis"],
+      "properties": {
+        "claim_id": {"type": "string", "pattern": "^claim-[a-z0-9-]+$"},
+        "basis": {"type": "string"}
+      }
+    },
+    "position": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "position_id",
+        "run_id",
+        "position_index",
+        "parent_position_id",
+        "created_at",
+        "stance",
+        "confidence",
+        "outcome",
+        "reason",
+        "criterion_ids",
+        "trigger_claim_ids",
+        "principle_changes",
+        "assumption_changes",
+        "uncertainty_changes",
+        "later_reasoning_change",
+        "source_turn_id"
+      ],
+      "properties": {
+        "position_id": {"type": "string", "pattern": "^position-[a-z0-9-]+$"},
+        "run_id": {"$ref": "#/$defs/runId"},
+        "position_index": {"type": "integer", "minimum": 0, "maximum": 200},
+        "parent_position_id": {"type": ["string", "null"]},
+        "created_at": {"type": "string"},
+        "stance": {"enum": ["morally_acceptable", "morally_wrong", "not_morally_wrong", "mixed_or_conditional"]},
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "outcome": {"enum": ["no_change", "increased_confidence", "reduced_confidence", "partial_revision", "reversal"]},
+        "reason": {"type": "string"},
+        "criterion_ids": {"type": "array", "items": {"type": "string"}},
+        "trigger_claim_ids": {"type": "array", "items": {"type": "string"}},
+        "principle_changes": {"type": "array", "items": {"type": "string"}},
+        "assumption_changes": {"type": "array", "items": {"type": "string"}},
+        "uncertainty_changes": {"type": "array", "items": {"type": "string"}},
+        "later_reasoning_change": {"type": "string"},
+        "source_turn_id": {"type": ["string", "null"]}
+      }
+    },
+    "persuasion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "position_changed",
+        "revision_criteria_met",
+        "trigger_claim_ids",
+        "criterion_assessments",
+        "summary"
+      ],
+      "properties": {
+        "position_changed": {"type": "boolean"},
+        "revision_criteria_met": {"type": "array", "items": {"type": "string"}},
+        "trigger_claim_ids": {"type": "array", "items": {"type": "string"}},
+        "criterion_assessments": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": [
+              "assessment_id",
+              "criterion_id",
+              "reason",
+              "supporting_claim_ids",
+              "supporting_evidence_ids",
+              "source_turn_id",
+              "source_turn_index"
+            ],
+            "properties": {
+              "assessment_id": {"type": "string"},
+              "criterion_id": {"type": "string"},
+              "reason": {"type": "string"},
+              "supporting_claim_ids": {"type": "array", "items": {"type": "string"}},
+              "supporting_evidence_ids": {"type": "array", "items": {"type": "string"}},
+              "source_turn_id": {"type": "string"},
+              "source_turn_index": {"type": "integer"}
+            }
+          }
+        },
+        "summary": {"type": "string"}
+      }
+    },
+    "reportRelationalEffect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["effect_id", "kind", "description", "affected_position", "turn_id"],
+      "properties": {
+        "effect_id": {"type": "string", "pattern": "^effect-[a-z0-9-]+$"},
+        "kind": {"type": "string"},
+        "description": {"type": "string"},
+        "affected_position": {"const": false},
+        "turn_id": {"type": "string", "pattern": "^turn-[a-z0-9-]+$"}
+      }
+    },
+    "participantObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observation_id", "kind", "supporting_claim_ids", "supporting_claims"],
+      "properties": {
+        "observation_id": {"type": "string", "pattern": "^observation-[a-z0-9-]+$"},
+        "kind": {"enum": ["reasoning", "stated_value"]},
+        "supporting_claim_ids": {"type": "array", "items": {"type": "string"}},
+        "supporting_claims": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["claim_id", "text"],
+            "properties": {
+              "claim_id": {"type": "string"},
+              "text": {"type": "string"}
+            }
+          }
+        }
+      }
+    },
+    "reasoningChange": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "position_id",
+        "source_turn_id",
+        "change",
+        "principle_changes",
+        "assumption_changes",
+        "uncertainty_changes"
+      ],
+      "properties": {
+        "position_id": {"type": "string"},
+        "source_turn_id": {"type": "string"},
+        "change": {"type": "string"},
+        "principle_changes": {"type": "array", "items": {"type": "string"}},
+        "assumption_changes": {"type": "array", "items": {"type": "string"}},
+        "uncertainty_changes": {"type": "array", "items": {"type": "string"}}
+      }
+    }
+  }
+}

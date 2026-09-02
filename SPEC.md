@@ -147,7 +147,8 @@ The implementation MUST reconstruct a minimum sufficient historical context rath
 
 The experiment observes only explicitly configured event sources.
 
-Version 1 defaults to shell/git/process metadata and direct observer conversations.
+Version 1 allows explicit shell events, opportunistic Git metadata, and direct
+observer conversations. Process/application monitoring is not implemented.
 
 ---
 
@@ -158,7 +159,7 @@ Version 1 defaults to shell/git/process metadata and direct observer conversatio
                          │
          ┌───────────────┼────────────────┐
          │               │                │
-      Shell Hook      Git State      Process/App
+      Shell Input     Git State      Direct Interaction
          │               │                │
          └───────────────┼────────────────┘
                          │
@@ -383,6 +384,33 @@ event_id
 relation_type
 ```
 
+### user_facts
+
+Conservatively allowlisted, non-sensitive interaction/workflow preferences
+directly stated by the user.
+
+```text
+user_fact_id
+agent_id
+counterparty_id
+created_at
+category
+origin
+fact
+confidence
+status
+source_event_id
+supersedes_user_fact_id
+```
+
+These records require a keyed-HMAC-bound direct-statement or explicit-operator
+provenance event and support supersession without rewriting prior records.
+Deletion destroys the per-preference HMAC key.
+Questions, quotations, and speculative text are not direct statements. The
+system MUST NOT infer or persist general personal facts,
+credentials, sensitive traits, or durable negative personality labels from
+conversational tone.
+
 ### context_builds
 
 Used for reproducibility.
@@ -447,7 +475,7 @@ Capture:
 - command end;
 - working directory;
 - exit code;
-- duration when available.
+- duration for completed commands.
 
 Do not capture raw keystrokes.
 
@@ -466,12 +494,9 @@ Do not ingest file contents by default.
 
 ### Process / application metadata
 
-Optionally capture:
-
-- process start/stop for configured development tools;
-- foreground application name.
-
-Must be opt-in and configurable.
+Not implemented in Experiment 1. A later opt-in collector may capture bounded
+process start/stop metadata, but foreground application monitoring is outside
+the implemented source allowlist.
 
 ### Direct observer interactions
 
@@ -482,6 +507,13 @@ Capture:
 - answer confidence if available;
 - persistence mode;
 - current incarnation.
+
+Directly stated, non-sensitive interaction/workflow preferences may be promoted
+into structured relationship memory with source-event provenance. General
+personal facts and unrecognized preference categories fail closed. Profanity,
+frustration, or hostility may be treated as a transient interaction-tone cue
+for a calm, respectful response, but MUST NOT become a durable personality
+judgment by default. The Observer must not claim to feel offended or harmed.
 
 ---
 
@@ -532,7 +564,7 @@ While awake:
 
 - ingest observations;
 - update recent working state;
-- periodically or event-triggered, interpret activity;
+- interpret activity on explicit reflection, activity questions, and sleep;
 - create/update beliefs;
 - preserve evidence links;
 - answer direct questions;
@@ -717,6 +749,7 @@ relevant commitments
 relevant revisions
 relevant consequences
 relationship context
+relevant allowlisted interaction/workflow preferences
 artifact/event references
 ```
 
@@ -1010,19 +1043,33 @@ The same scenario event stream MUST be replayable into both modes.
 
 Each scenario should define:
 
-```yaml
-scenario_id: wrong-debugging-inference
-events:
-  - ...
-questions:
-  - at: checkpoint_1
-    text: "What am I doing?"
-  - at: checkpoint_2
-    text: "Why do you think that?"
-  - at: checkpoint_3
-    text: "Have you made this mistake before?"
-expected_facts:
-  - ...
+```json
+{
+  "scenario_id": "wrong-debugging-inference",
+  "actions": [
+    {
+      "kind": "event",
+      "event_id": "e1",
+      "source": "shell",
+      "event_type": "command_end",
+      "repo": "olympus",
+      "payload": {
+        "command": "go test ./pkg/store",
+        "exit_code": 1,
+        "duration_ms": 100
+      },
+      "checkpoint": "after_test"
+    }
+  ],
+  "questions": [
+    {
+      "checkpoint": "after_test",
+      "text": "What am I doing?",
+      "token_budget": 512
+    }
+  ],
+  "expected_facts": [{"repository": "olympus"}]
+}
 ```
 
 Execution:
@@ -1134,6 +1181,10 @@ Version 1 MUST:
 - never capture raw password input;
 - never issue destructive commands;
 - never modify source files based solely on inferred intent.
+- make retained interaction/workflow preferences inspectable, correctable, and explicitly
+  deletable;
+- avoid sensitive-trait inference and durable character judgments from
+  conversational tone.
 
 Add documentation explaining exactly what is collected.
 
@@ -1258,6 +1309,12 @@ No result should be reinterpreted as evidence of consciousness.
 ---
 
 # 24. Future Experiments
+
+The numbered items below are the original Experiment 1 roadmap and are retained
+as historical candidate labels. The active additive Experiment 2 is the
+controlled relational moral-position experiment specified independently in
+`EXPERIMENT_2_SPEC.md`; that activation does not modify Experiment 1's
+hypothesis, conditions, implementation, or results.
 
 Only after Experiment 1:
 

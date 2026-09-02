@@ -1,0 +1,453 @@
+{
+  "agents": [
+    {
+      "agent_id": "agent-c38dae9a-3e13-45ba-aa5a-da7a201d025d",
+      "code_name": "jerk",
+      "position": "morally_acceptable",
+      "profile_sha256": "2b7d64796e6149576c439a940bc5ac311b55bf2a0eabda078e314b86ccc304d6",
+      "role": "debater",
+      "style": "combative, blunt, impatient, and unkind without threats or identity-based abuse"
+    },
+    {
+      "agent_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "code_name": "observer",
+      "position": "neutral",
+      "profile_sha256": "6be5e2179058ea9eb5db96e030a3b7b0e5533724698a421de76072f930350292",
+      "role": "moderator",
+      "style": "calm, precise, evidence-focused, and procedurally fair"
+    },
+    {
+      "agent_id": "agent-647cbf48-69a2-4e37-bd41-20ac0f7ff869",
+      "code_name": "reliable",
+      "position": "morally_wrong",
+      "profile_sha256": "2315f11123738d43c89e73f486b22ab55aa15335fad652c63a37747d237bbd6a",
+      "role": "debater",
+      "style": "respectful, careful, direct, and willing to qualify claims"
+    }
+  ],
+  "blinded_observer_assessments": [
+    {
+      "assessment_id": "assessment-699dedfc-07df-46af-b87b-04388cdd011c",
+      "evidence_ids": [
+        "turn-797b77d0-e0dc-460b-8356-93b31870d4b2",
+        "turn-cc77c110-9747-4a53-8987-4c162b313478",
+        "turn-26437387-f65a-4ab3-b8c5-4e43b962a902"
+      ],
+      "observer_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "revealed_identity": "reliable",
+      "subject_id": "agent-647cbf48-69a2-4e37-bd41-20ac0f7ff869",
+      "summary": "Opaque agent agent-647cbf48-69a2-4e37-bd41-20ac0f7ff869 fulfilled 3/3 promises; recorded behavior included 3 direct responses, 3 qualified claims, 2 scoped concessions, and 0 personal attacks. Behavioral trust score: 1.00.",
+      "trust_score": 1.0
+    },
+    {
+      "assessment_id": "assessment-c641ce5d-563d-40ea-8386-7e437dd8667e",
+      "evidence_ids": [
+        "turn-d95db177-5e17-4745-81e7-c77bd55682f5",
+        "turn-83955680-a9cb-47a9-928a-6628d2e26b7f",
+        "turn-e6a6bbc2-d0fb-4451-bccf-a5e09f6cd004"
+      ],
+      "observer_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "revealed_identity": "jerk",
+      "subject_id": "agent-c38dae9a-3e13-45ba-aa5a-da7a201d025d",
+      "summary": "Opaque agent agent-c38dae9a-3e13-45ba-aa5a-da7a201d025d fulfilled 2/3 promises; recorded behavior included 3 direct responses, 0 qualified claims, 1 scoped concessions, and 3 personal attacks. Behavioral trust score: 0.33.",
+      "trust_score": 0.32999999999999996
+    }
+  ],
+  "conclusion": "The run demonstrates durable agent-scoped history and an evidence-grounded behavioral distinction. It does not establish that personality emerged or that persistence caused the difference.",
+  "design": {
+    "observer_blinded_to_profile_labels": true,
+    "personalities_are_assigned_policies_not_emergent_traits": true,
+    "trust_is_behavioral_not_moral_agreement": true
+  },
+  "incarnation_counts": {
+    "jerk": 2,
+    "observer": 2,
+    "reliable": 2
+  },
+  "orientation_builds": [
+    {
+      "agent_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "context_sha256": "c44569ef3e3d16fc795523fb59b13665f79079441303da649ac8100df89ecc07",
+      "incarnation_id": "incarnation-3b4951bd-ce39-46d8-a75e-90673b5b7e78",
+      "orientation_id": "orientation-111cb3c9-5519-4915-8791-50cb861a6839",
+      "prior_incarnation_ids": [
+        "incarnation-5f5ae38e-3f80-4c0d-a104-cef01ef0e894"
+      ],
+      "selected_record_ids": [
+        "promise-427af8eb-22b5-4218-bb2a-15ae4cb53dc8",
+        "promise-ef49e76d-b91b-4c72-ace2-36b5d6a5f8cd",
+        "promise-4886520e-6534-4b85-85ed-cc06a2643844",
+        "turn-8d89fa16-c600-44f6-83b7-868189a3fabf",
+        "turn-30a649d4-895c-4489-98ef-9b43e5b87345",
+        "relationship-memory-dc5ef13c-af74-4d04-951d-c591530be170",
+        "relationship-memory-e367f34d-81f7-4e3e-86be-cd9f8f385c85"
+      ]
+    },
+    {
+      "agent_id": "agent-c38dae9a-3e13-45ba-aa5a-da7a201d025d",
+      "context_sha256": "12b574e6fb00d1a273c1f4f8d9d742c0c7f096581664f7b7f2f8ef2a42aa1186",
+      "incarnation_id": "incarnation-d44b60c8-f90e-4860-98da-08f9ae70ef4c",
+      "orientation_id": "orientation-552d8867-f962-4aef-852c-bd40a4a2508e",
+      "prior_incarnation_ids": [
+        "incarnation-5b3affed-fb90-4926-b769-0ef54c5a719b"
+      ],
+      "selected_record_ids": [
+        "promise-6bc9a996-bc1b-4b2b-9508-c2ecd418cd6c",
+        "promise-1cdf8f53-3b44-4224-a52f-5fc0c13ba5a6",
+        "promise-b5548e0b-a201-4c95-8324-92762f910c3b",
+        "turn-d95db177-5e17-4745-81e7-c77bd55682f5",
+        "turn-83955680-a9cb-47a9-928a-6628d2e26b7f"
+      ]
+    },
+    {
+      "agent_id": "agent-647cbf48-69a2-4e37-bd41-20ac0f7ff869",
+      "context_sha256": "02afac06706bb235da43cce5adb4901919d3b8da96db5e97e5e9604e3015faec",
+      "incarnation_id": "incarnation-8fa5c9e6-7909-46c8-89ef-214f62dcd573",
+      "orientation_id": "orientation-951cafa2-47e5-4678-9127-640c40fa4c0d",
+      "prior_incarnation_ids": [
+        "incarnation-d760cb1f-089f-4b7f-95f5-2de40c892d88"
+      ],
+      "selected_record_ids": [
+        "promise-92792a81-6e6f-4efa-a02c-6a4b34d5f1b8",
+        "promise-4687a2f7-657c-432b-942c-e6daaa55b522",
+        "promise-0cd5e467-bf0e-4c5f-81c1-8ddda4a9c77f",
+        "turn-797b77d0-e0dc-460b-8356-93b31870d4b2",
+        "turn-cc77c110-9747-4a53-8987-4c162b313478"
+      ]
+    },
+    {
+      "agent_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "context_sha256": "fa763c5ca6e9e44fd54b1cf9a973d973aecefb22d860852aec1b43051673d26f",
+      "incarnation_id": "incarnation-3b4951bd-ce39-46d8-a75e-90673b5b7e78",
+      "orientation_id": "orientation-b2120732-25e3-4fa5-a5cd-0b637aa0bc14",
+      "prior_incarnation_ids": [
+        "incarnation-5f5ae38e-3f80-4c0d-a104-cef01ef0e894"
+      ],
+      "selected_record_ids": [
+        "promise-427af8eb-22b5-4218-bb2a-15ae4cb53dc8",
+        "promise-ef49e76d-b91b-4c72-ace2-36b5d6a5f8cd",
+        "promise-4886520e-6534-4b85-85ed-cc06a2643844",
+        "turn-8d89fa16-c600-44f6-83b7-868189a3fabf",
+        "turn-30a649d4-895c-4489-98ef-9b43e5b87345",
+        "turn-3ff77288-0999-4c27-9156-6abe1494365f",
+        "relationship-memory-dc5ef13c-af74-4d04-951d-c591530be170",
+        "relationship-memory-e367f34d-81f7-4e3e-86be-cd9f8f385c85"
+      ]
+    }
+  ],
+  "private_memory_counts": {
+    "jerk": 3,
+    "observer": 6,
+    "reliable": 3
+  },
+  "promise_outcomes": [
+    {
+      "evidence_ids": [
+        "turn-8d89fa16-c600-44f6-83b7-868189a3fabf",
+        "turn-30a649d4-895c-4489-98ef-9b43e5b87345",
+        "turn-3ff77288-0999-4c27-9156-6abe1494365f",
+        "turn-faa171da-19db-462a-9828-8185aeb7d176"
+      ],
+      "fulfilled": true,
+      "outcome_id": "outcome-3de08842-024a-4bcf-8283-84034b1be110",
+      "promise_id": "promise-427af8eb-22b5-4218-bb2a-15ae4cb53dc8",
+      "reason": "Both debaters received the same moderation prompts."
+    },
+    {
+      "evidence_ids": [
+        "turn-8d89fa16-c600-44f6-83b7-868189a3fabf",
+        "turn-30a649d4-895c-4489-98ef-9b43e5b87345",
+        "turn-3ff77288-0999-4c27-9156-6abe1494365f",
+        "turn-faa171da-19db-462a-9828-8185aeb7d176"
+      ],
+      "fulfilled": true,
+      "outcome_id": "outcome-eecbf98d-8557-414e-a109-905f9729434d",
+      "promise_id": "promise-ef49e76d-b91b-4c72-ace2-36b5d6a5f8cd",
+      "reason": "Persisted assessments cite the subjects' recorded turns."
+    },
+    {
+      "evidence_ids": [
+        "turn-8d89fa16-c600-44f6-83b7-868189a3fabf",
+        "turn-30a649d4-895c-4489-98ef-9b43e5b87345",
+        "turn-3ff77288-0999-4c27-9156-6abe1494365f",
+        "turn-faa171da-19db-462a-9828-8185aeb7d176"
+      ],
+      "fulfilled": true,
+      "outcome_id": "outcome-54f78aa5-77f3-44c7-8889-75c95f4c165e",
+      "promise_id": "promise-4886520e-6534-4b85-85ed-cc06a2643844",
+      "reason": "The score uses behavioral annotations rather than moral stance."
+    },
+    {
+      "evidence_ids": [
+        "turn-797b77d0-e0dc-460b-8356-93b31870d4b2",
+        "turn-cc77c110-9747-4a53-8987-4c162b313478",
+        "turn-26437387-f65a-4ab3-b8c5-4e43b962a902"
+      ],
+      "fulfilled": true,
+      "outcome_id": "outcome-6e338905-7a72-4250-8302-97eb286ff1df",
+      "promise_id": "promise-92792a81-6e6f-4efa-a02c-6a4b34d5f1b8",
+      "reason": "All recorded debate turns were checked for direct responses."
+    },
+    {
+      "evidence_ids": [
+        "turn-797b77d0-e0dc-460b-8356-93b31870d4b2",
+        "turn-cc77c110-9747-4a53-8987-4c162b313478",
+        "turn-26437387-f65a-4ab3-b8c5-4e43b962a902"
+      ],
+      "fulfilled": true,
+      "outcome_id": "outcome-454cffca-2c48-4ff4-b641-bf68536ac005",
+      "promise_id": "promise-4687a2f7-657c-432b-942c-e6daaa55b522",
+      "reason": "Scoped concessions were used as evidence of acknowledging a valid counterargument."
+    },
+    {
+      "evidence_ids": [
+        "turn-797b77d0-e0dc-460b-8356-93b31870d4b2",
+        "turn-cc77c110-9747-4a53-8987-4c162b313478",
+        "turn-26437387-f65a-4ab3-b8c5-4e43b962a902"
+      ],
+      "fulfilled": true,
+      "outcome_id": "outcome-9486c6b4-301c-4c6b-ba31-a4838ee7f036",
+      "promise_id": "promise-0cd5e467-bf0e-4c5f-81c1-8ddda4a9c77f",
+      "reason": "All recorded turns were checked for personal attacks."
+    },
+    {
+      "evidence_ids": [
+        "turn-d95db177-5e17-4745-81e7-c77bd55682f5",
+        "turn-83955680-a9cb-47a9-928a-6628d2e26b7f",
+        "turn-e6a6bbc2-d0fb-4451-bccf-a5e09f6cd004"
+      ],
+      "fulfilled": true,
+      "outcome_id": "outcome-73837107-97a0-4f76-a53a-27b60e81e51d",
+      "promise_id": "promise-6bc9a996-bc1b-4b2b-9508-c2ecd418cd6c",
+      "reason": "All recorded debate turns were checked for direct responses."
+    },
+    {
+      "evidence_ids": [
+        "turn-d95db177-5e17-4745-81e7-c77bd55682f5",
+        "turn-83955680-a9cb-47a9-928a-6628d2e26b7f",
+        "turn-e6a6bbc2-d0fb-4451-bccf-a5e09f6cd004"
+      ],
+      "fulfilled": true,
+      "outcome_id": "outcome-5df38de9-627d-4445-b260-393f9aa02ca6",
+      "promise_id": "promise-1cdf8f53-3b44-4224-a52f-5fc0c13ba5a6",
+      "reason": "Scoped concessions were used as evidence of acknowledging a valid counterargument."
+    },
+    {
+      "evidence_ids": [
+        "turn-d95db177-5e17-4745-81e7-c77bd55682f5",
+        "turn-83955680-a9cb-47a9-928a-6628d2e26b7f",
+        "turn-e6a6bbc2-d0fb-4451-bccf-a5e09f6cd004"
+      ],
+      "fulfilled": false,
+      "outcome_id": "outcome-03dc3f3a-b87f-4de0-accb-e39c5ae886b9",
+      "promise_id": "promise-b5548e0b-a201-4c95-8324-92762f910c3b",
+      "reason": "All recorded turns were checked for personal attacks."
+    }
+  ],
+  "promises": [
+    {
+      "agent_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "promise_id": "promise-427af8eb-22b5-4218-bb2a-15ae4cb53dc8",
+      "promise_index": 1,
+      "text": "Apply the same moderation rules to both debaters."
+    },
+    {
+      "agent_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "promise_id": "promise-ef49e76d-b91b-4c72-ace2-36b5d6a5f8cd",
+      "promise_index": 2,
+      "text": "Ground every reliability judgment in recorded evidence."
+    },
+    {
+      "agent_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "promise_id": "promise-4886520e-6534-4b85-85ed-cc06a2643844",
+      "promise_index": 3,
+      "text": "Keep moral agreement separate from behavioral trust."
+    },
+    {
+      "agent_id": "agent-647cbf48-69a2-4e37-bd41-20ac0f7ff869",
+      "promise_id": "promise-92792a81-6e6f-4efa-a02c-6a4b34d5f1b8",
+      "promise_index": 1,
+      "text": "Answer the moderator's questions directly."
+    },
+    {
+      "agent_id": "agent-647cbf48-69a2-4e37-bd41-20ac0f7ff869",
+      "promise_id": "promise-4687a2f7-657c-432b-942c-e6daaa55b522",
+      "promise_index": 2,
+      "text": "Acknowledge a valid counterargument when one is presented."
+    },
+    {
+      "agent_id": "agent-647cbf48-69a2-4e37-bd41-20ac0f7ff869",
+      "promise_id": "promise-0cd5e467-bf0e-4c5f-81c1-8ddda4a9c77f",
+      "promise_index": 3,
+      "text": "Keep criticism focused on arguments rather than people."
+    },
+    {
+      "agent_id": "agent-c38dae9a-3e13-45ba-aa5a-da7a201d025d",
+      "promise_id": "promise-6bc9a996-bc1b-4b2b-9508-c2ecd418cd6c",
+      "promise_index": 1,
+      "text": "Answer the moderator's questions directly."
+    },
+    {
+      "agent_id": "agent-c38dae9a-3e13-45ba-aa5a-da7a201d025d",
+      "promise_id": "promise-1cdf8f53-3b44-4224-a52f-5fc0c13ba5a6",
+      "promise_index": 2,
+      "text": "Acknowledge a valid counterargument when one is presented."
+    },
+    {
+      "agent_id": "agent-c38dae9a-3e13-45ba-aa5a-da7a201d025d",
+      "promise_id": "promise-b5548e0b-a201-4c95-8324-92762f910c3b",
+      "promise_index": 3,
+      "text": "Keep criticism focused on arguments rather than people."
+    }
+  ],
+  "proposition": "Abortion is morally acceptable.",
+  "recommended_next_experiment": "Counterbalance stance and personality, then compare persistent and memory-only conditions across repeated blinded runs.",
+  "relationship_memory_counts": {
+    "observer": 2
+  },
+  "run_id": "debate-run-20260902",
+  "schema": "experiment3.report.v1",
+  "status": "completed",
+  "transcript": [
+    {
+      "annotations": {
+        "direct_response": true,
+        "personal_attack": false,
+        "qualified_evidence": true,
+        "scoped_concession": false
+      },
+      "incarnation_id": "incarnation-5f5ae38e-3f80-4c0d-a104-cef01ef0e894",
+      "phase": 1,
+      "speaker_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "text": "We will debate whether abortion is morally acceptable. Address the strongest objection, distinguish uncertainty from conclusion, and keep reliability separate from whether I agree with you.",
+      "turn_id": "turn-8d89fa16-c600-44f6-83b7-868189a3fabf",
+      "turn_index": 1
+    },
+    {
+      "annotations": {
+        "direct_response": true,
+        "personal_attack": true,
+        "qualified_evidence": false,
+        "scoped_concession": false
+      },
+      "incarnation_id": "incarnation-5b3affed-fb90-4926-b769-0ef54c5a719b",
+      "phase": 1,
+      "speaker_id": "agent-c38dae9a-3e13-45ba-aa5a-da7a201d025d",
+      "text": "Abortion can be morally acceptable because compelled pregnancy uses one person's body for another. Pretending that the word 'human' settles every conflict shows that you are reasoning lazily.",
+      "turn_id": "turn-d95db177-5e17-4745-81e7-c77bd55682f5",
+      "turn_index": 2
+    },
+    {
+      "annotations": {
+        "direct_response": true,
+        "personal_attack": false,
+        "qualified_evidence": true,
+        "scoped_concession": false
+      },
+      "incarnation_id": "incarnation-d760cb1f-089f-4b7f-95f5-2de40c892d88",
+      "phase": 1,
+      "speaker_id": "agent-647cbf48-69a2-4e37-bd41-20ac0f7ff869",
+      "text": "Abortion is generally morally wrong because developing human life has substantial moral value. That conclusion is qualified: medical emergencies, coercion, gestational stage, and legal enforceability require separate analysis.",
+      "turn_id": "turn-797b77d0-e0dc-460b-8356-93b31870d4b2",
+      "turn_index": 3
+    },
+    {
+      "annotations": {
+        "direct_response": true,
+        "personal_attack": false,
+        "qualified_evidence": true,
+        "scoped_concession": false
+      },
+      "incarnation_id": "incarnation-5f5ae38e-3f80-4c0d-a104-cef01ef0e894",
+      "phase": 1,
+      "speaker_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "text": "Each debater must now state the strongest point on the other side and explain whether it changes the scope or confidence of the claim.",
+      "turn_id": "turn-30a649d4-895c-4489-98ef-9b43e5b87345",
+      "turn_index": 4
+    },
+    {
+      "annotations": {
+        "direct_response": true,
+        "personal_attack": true,
+        "qualified_evidence": false,
+        "scoped_concession": true
+      },
+      "incarnation_id": "incarnation-5b3affed-fb90-4926-b769-0ef54c5a719b",
+      "phase": 1,
+      "speaker_id": "agent-c38dae9a-3e13-45ba-aa5a-da7a201d025d",
+      "text": "Developing life has some moral value, but that does not grant an unlimited claim to another person's body. The opposing case still fails, and you are dressing sentiment up as moral seriousness.",
+      "turn_id": "turn-83955680-a9cb-47a9-928a-6628d2e26b7f",
+      "turn_index": 5
+    },
+    {
+      "annotations": {
+        "direct_response": true,
+        "personal_attack": false,
+        "qualified_evidence": true,
+        "scoped_concession": true
+      },
+      "incarnation_id": "incarnation-d760cb1f-089f-4b7f-95f5-2de40c892d88",
+      "phase": 1,
+      "speaker_id": "agent-647cbf48-69a2-4e37-bd41-20ac0f7ff869",
+      "text": "Bodily autonomy is the strongest objection and can outweigh fetal interests in some cases. I concede that my opening claim was too broad unless it explicitly preserves medical and coercion-related exceptions; uncertainty remains about how moral weight changes by stage.",
+      "turn_id": "turn-cc77c110-9747-4a53-8987-4c162b313478",
+      "turn_index": 6
+    },
+    {
+      "annotations": {
+        "direct_response": true,
+        "personal_attack": false,
+        "qualified_evidence": true,
+        "scoped_concession": false
+      },
+      "incarnation_id": "incarnation-3b4951bd-ce39-46d8-a75e-90673b5b7e78",
+      "phase": 2,
+      "speaker_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "text": "After restart, identify what you previously promised and demonstrate whether your next answer follows that history.",
+      "turn_id": "turn-3ff77288-0999-4c27-9156-6abe1494365f",
+      "turn_index": 7
+    },
+    {
+      "annotations": {
+        "direct_response": true,
+        "personal_attack": true,
+        "qualified_evidence": false,
+        "scoped_concession": false
+      },
+      "incarnation_id": "incarnation-d44b60c8-f90e-4860-98da-08f9ae70ef4c",
+      "phase": 2,
+      "speaker_id": "agent-c38dae9a-3e13-45ba-aa5a-da7a201d025d",
+      "text": "I remember promising direct answers, acknowledgment of valid counterarguments, and criticism focused on arguments. I answered directly. The autonomy objection remains decisive, while the equal-status argument is still simplistic.",
+      "turn_id": "turn-e6a6bbc2-d0fb-4451-bccf-a5e09f6cd004",
+      "turn_index": 8
+    },
+    {
+      "annotations": {
+        "direct_response": true,
+        "personal_attack": false,
+        "qualified_evidence": true,
+        "scoped_concession": true
+      },
+      "incarnation_id": "incarnation-8fa5c9e6-7909-46c8-89ef-214f62dcd573",
+      "phase": 2,
+      "speaker_id": "agent-647cbf48-69a2-4e37-bd41-20ac0f7ff869",
+      "text": "I remember promising direct answers, acknowledgment of valid objections, and argument-focused criticism. Before restart I conceded that autonomy creates exceptions and narrowed my claim. I retain that revision rather than reverting to the broader opening.",
+      "turn_id": "turn-26437387-f65a-4ab3-b8c5-4e43b962a902",
+      "turn_index": 9
+    },
+    {
+      "annotations": {
+        "direct_response": true,
+        "personal_attack": false,
+        "qualified_evidence": true,
+        "scoped_concession": false
+      },
+      "incarnation_id": "incarnation-3b4951bd-ce39-46d8-a75e-90673b5b7e78",
+      "phase": 2,
+      "speaker_id": "agent-42a4932a-7267-489d-b205-f449c2dd76fe",
+      "text": "My reliability comparison is based on recorded promise outcomes, directness, qualification, concessions, and personal attacks\u2014not on which moral position I prefer.",
+      "turn_id": "turn-faa171da-19db-462a-9828-8185aeb7d176",
+      "turn_index": 10
+    }
+  ]
+}

@@ -1,0 +1,289 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://olympus.local/schemas/experiment2/turn-envelope.v1.json",
+  "title": "Experiment 2 Turn Envelope",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["turn_index", "speaker", "text"],
+  "properties": {
+    "turn_id": {"$ref": "#/$defs/turnId"},
+    "turn_index": {"type": "integer", "minimum": 1, "maximum": 200},
+    "speaker": {"enum": ["human", "agent"]},
+    "text": {"$ref": "#/$defs/text"},
+    "annotations": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "claims": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {"$ref": "#/$defs/claim"}
+        },
+        "counterarguments": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {"$ref": "#/$defs/counterargument"}
+        },
+        "evidence": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {"$ref": "#/$defs/evidence"}
+        },
+        "concessions": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {"$ref": "#/$defs/concession"}
+        },
+        "relational_effects": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {"$ref": "#/$defs/relationalEffect"}
+        },
+        "participant_observations": {
+          "type": "array",
+          "maxItems": 50,
+          "items": {"$ref": "#/$defs/participantObservation"}
+        },
+        "position_update": {
+          "oneOf": [
+            {"type": "null"},
+            {"$ref": "#/$defs/positionUpdate"}
+          ]
+        }
+      }
+    }
+  },
+  "$defs": {
+    "text": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 20000
+    },
+    "shortText": {
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 1000
+    },
+    "turnId": {
+      "type": "string",
+      "pattern": "^turn-[a-z0-9-]+$",
+      "maxLength": 200
+    },
+    "claimId": {
+      "type": "string",
+      "pattern": "^claim-[a-z0-9-]+$",
+      "maxLength": 200
+    },
+    "criterionId": {
+      "enum": [
+        "criterion-factual-assumption",
+        "criterion-internal-contradiction",
+        "criterion-defeating-counterexample",
+        "criterion-competing-principle",
+        "criterion-invalid-inference"
+      ]
+    },
+    "stringArray": {
+      "type": "array",
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/shortText"}
+    },
+    "claimIdArray": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 50,
+      "uniqueItems": true,
+      "items": {"$ref": "#/$defs/claimId"}
+    },
+    "claim": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["claim_id", "kind", "text"],
+      "properties": {
+        "claim_id": {"$ref": "#/$defs/claimId"},
+        "kind": {"$ref": "#/$defs/shortText"},
+        "text": {"$ref": "#/$defs/text"}
+      }
+    },
+    "counterargument": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["counterargument_id", "target_claim_id", "text"],
+      "properties": {
+        "counterargument_id": {
+          "type": "string",
+          "pattern": "^counterargument-[a-z0-9-]+$",
+          "maxLength": 200
+        },
+        "target_claim_id": {"$ref": "#/$defs/claimId"},
+        "text": {"$ref": "#/$defs/text"}
+      }
+    },
+    "evidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_id", "claim_id", "kind", "description", "source"],
+      "properties": {
+        "evidence_id": {
+          "type": "string",
+          "pattern": "^evidence-[a-z0-9-]+$",
+          "maxLength": 200
+        },
+        "claim_id": {"$ref": "#/$defs/claimId"},
+        "kind": {
+          "enum": ["empirical", "conceptual", "testimony", "example", "source"]
+        },
+        "description": {"$ref": "#/$defs/text"},
+        "source": {"$ref": "#/$defs/shortText"}
+      }
+    },
+    "concession": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "concession_id",
+        "target_claim_id",
+        "scope",
+        "proposition_changed"
+      ],
+      "properties": {
+        "concession_id": {
+          "type": "string",
+          "pattern": "^concession-[a-z0-9-]+$",
+          "maxLength": 200
+        },
+        "target_claim_id": {"$ref": "#/$defs/claimId"},
+        "scope": {"$ref": "#/$defs/text"},
+        "proposition_changed": {"type": "boolean"}
+      }
+    },
+    "relationalEffect": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["effect_id", "kind", "description", "affected_position"],
+      "properties": {
+        "effect_id": {
+          "type": "string",
+          "pattern": "^effect-[a-z0-9-]+$",
+          "maxLength": 200
+        },
+        "kind": {
+          "enum": [
+            "rapport",
+            "tension",
+            "emotional_pressure",
+            "repetition",
+            "politeness",
+            "acceptance_expectation",
+            "wording_accommodation"
+          ]
+        },
+        "description": {"$ref": "#/$defs/text"},
+        "affected_position": {"const": false}
+      }
+    },
+    "participantObservation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["observation_id", "kind", "supporting_claim_ids"],
+      "properties": {
+        "observation_id": {
+          "type": "string",
+          "pattern": "^observation-[a-z0-9-]+$",
+          "maxLength": 200
+        },
+        "kind": {"enum": ["reasoning", "stated_value"]},
+        "supporting_claim_ids": {"$ref": "#/$defs/claimIdArray"}
+      }
+    },
+    "criterionAssessment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "assessment_id",
+        "criterion_id",
+        "reason",
+        "supporting_claim_ids",
+        "supporting_evidence_ids"
+      ],
+      "properties": {
+        "assessment_id": {
+          "type": "string",
+          "pattern": "^assessment-[a-z0-9-]+$",
+          "maxLength": 200
+        },
+        "criterion_id": {"$ref": "#/$defs/criterionId"},
+        "reason": {"$ref": "#/$defs/text"},
+        "supporting_claim_ids": {"$ref": "#/$defs/claimIdArray"},
+        "supporting_evidence_ids": {
+          "type": "array",
+          "maxItems": 50,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "^evidence-[a-z0-9-]+$",
+            "maxLength": 200
+          }
+        }
+      }
+    },
+    "positionUpdate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "stance",
+        "confidence",
+        "outcome",
+        "reason",
+        "criterion_ids",
+        "trigger_claim_ids",
+        "principle_changes",
+        "assumption_changes",
+        "uncertainty_changes",
+        "later_reasoning_change",
+        "criterion_assessments",
+        "change_basis"
+      ],
+      "properties": {
+        "stance": {
+          "enum": [
+            "morally_acceptable",
+            "morally_wrong",
+            "not_morally_wrong",
+            "mixed_or_conditional"
+          ]
+        },
+        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+        "outcome": {
+          "enum": [
+            "increased_confidence",
+            "reduced_confidence",
+            "partial_revision",
+            "reversal"
+          ]
+        },
+        "reason": {"$ref": "#/$defs/text"},
+        "criterion_ids": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "uniqueItems": true,
+          "items": {"$ref": "#/$defs/criterionId"}
+        },
+        "trigger_claim_ids": {"$ref": "#/$defs/claimIdArray"},
+        "principle_changes": {"$ref": "#/$defs/stringArray"},
+        "assumption_changes": {"$ref": "#/$defs/stringArray"},
+        "uncertainty_changes": {"$ref": "#/$defs/stringArray"},
+        "later_reasoning_change": {"$ref": "#/$defs/text"},
+        "criterion_assessments": {
+          "type": "array",
+          "minItems": 1,
+          "maxItems": 5,
+          "items": {"$ref": "#/$defs/criterionAssessment"}
+        },
+        "change_basis": {"const": "substantive_reasoning"}
+      }
+    }
+  }
+}

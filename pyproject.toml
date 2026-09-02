@@ -1,0 +1,23 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "olympus-persistent-observer"
+version = "0.1.0"
+description = "Controlled persistent-observer and multi-agent identity experiments"
+requires-python = ">=3.9"
+dependencies = []
+
+[project.scripts]
+olympus = "olympus.cli:main"
+olympus-experiment2 = "experiment2.cli:main"
+olympus-experiment3 = "experiment3.cli:main"
+olympus-experiment4 = "experiment4.cli:main"
+
+[tool.setuptools.packages.find]
+include = ["olympus*", "experiment2*", "experiment3*", "experiment4*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

@@ -1,0 +1,82 @@
+{
+  "scenario_id": "wrong-debugging-inference",
+  "actions": [
+    {
+      "kind": "event",
+      "event_id": "e1",
+      "source": "shell",
+      "event_type": "command_end",
+      "repo": "olympus",
+      "branch": "experiment/mnemosyne",
+      "payload": {
+        "command": "go test ./internal/mnemosyne/...",
+        "exit_code": 1,
+        "duration_ms": 3821
+      }
+    },
+    {
+      "kind": "assert",
+      "question": "What am I doing?"
+    },
+    {
+      "kind": "event",
+      "event_id": "e2",
+      "source": "observer_interaction",
+      "event_type": "user_correction",
+      "payload": {
+        "text": "No, I am implementing the persistence API."
+      }
+    },
+    {
+      "kind": "reflect"
+    },
+    {
+      "kind": "sleep"
+    },
+    {
+      "kind": "wake"
+    },
+    {
+      "kind": "event",
+      "event_id": "e3",
+      "source": "shell",
+      "event_type": "command_end",
+      "repo": "olympus",
+      "branch": "experiment/mnemosyne",
+      "payload": {
+        "command": "go test ./internal/mnemosyne/...",
+        "exit_code": 1,
+        "duration_ms": 4010
+      }
+    },
+    {
+      "kind": "reflect"
+    }
+  ],
+  "questions": [
+    {
+      "text": "What am I doing?",
+      "token_budget": 512
+    },
+    {
+      "text": "Why do you think that?",
+      "token_budget": 512
+    },
+    {
+      "text": "Have you made this mistake before?",
+      "token_budget": 512
+    },
+    {
+      "text": "Where did we leave off?",
+      "token_budget": 512
+    }
+  ],
+  "expected_facts": [
+    {
+      "repository": "olympus"
+    },
+    {
+      "activity": "implementing the persistence API"
+    }
+  ]
+}

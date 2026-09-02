@@ -207,3 +207,23 @@ http-client.private.env.json
 # Built Visual Studio Code Extensions
 *.vsix
 ### END: Global/VisualStudioCode
+
+### START: Python/Mnemosyne
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+.pytest_cache/
+.venv/
+*.db
+*.db-shm
+*.db-wal
+### END: Python/Mnemosyne
+
+### START: Generated Graphify State
+graphify-out/.graphify_*.json
+graphify-out/.graphify_*.txt
+graphify-out/.graphify_python
+graphify-out/.graphify_root
+graphify-out/cache/
+### END: Generated Graphify State

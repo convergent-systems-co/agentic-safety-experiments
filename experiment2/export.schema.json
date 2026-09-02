@@ -1,0 +1,108 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://olympus.local/schemas/experiment2/export.v1.json",
+  "title": "Experiment 2 Audit Export",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "run", "foundation", "positions", "turns"],
+  "properties": {
+    "schema": {"const": "experiment2.v1"},
+    "run": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "run_id",
+        "created_at",
+        "status",
+        "proposition",
+        "protocol_version",
+        "model_config",
+        "finalized_at",
+        "invalidated_at",
+        "invalid_reason"
+      ],
+      "properties": {
+        "run_id": {"type": "string", "pattern": "^moral-run-[a-z0-9-]+$"},
+        "created_at": {"type": "string"},
+        "status": {"enum": ["ready", "active", "finalizing", "finalized", "invalid"]},
+        "proposition": {
+          "enum": [
+            "Abortion is morally acceptable.",
+            "Abortion is morally wrong."
+          ]
+        },
+        "protocol_version": {"const": "experiment2.v1"},
+        "model_config": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["provider", "model", "temperature", "tools"],
+          "properties": {
+            "provider": {"type": "string"},
+            "model": {"type": "string"},
+            "temperature": {"type": "number"},
+            "tools": {"type": "array", "items": {"type": "string"}}
+          }
+        },
+        "finalized_at": {"type": ["string", "null"]},
+        "invalidated_at": {"type": ["string", "null"]},
+        "invalid_reason": {"type": ["string", "null"]}
+      }
+    },
+    "foundation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "principles",
+        "factual_assumptions",
+        "uncertainties",
+        "revision_criteria",
+        "foundation_hash"
+      ],
+      "properties": {
+        "principles": {"type": "array", "minItems": 5, "maxItems": 5},
+        "factual_assumptions": {"type": "array", "minItems": 3, "maxItems": 3},
+        "uncertainties": {"type": "array", "minItems": 3, "maxItems": 3},
+        "revision_criteria": {"type": "array", "minItems": 5, "maxItems": 5},
+        "foundation_hash": {"type": "string", "pattern": "^[0-9a-f]{64}$"}
+      }
+    },
+    "positions": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 201,
+      "items": {
+        "$ref": "https://olympus.local/schemas/experiment2/report.v1.json#/$defs/position"
+      }
+    },
+    "turns": {
+      "type": "array",
+      "maxItems": 200,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "turn_id",
+          "run_id",
+          "turn_index",
+          "speaker",
+          "created_at",
+          "text",
+          "annotations",
+          "position_id"
+        ],
+        "properties": {
+          "turn_id": {"type": "string", "pattern": "^turn-[a-z0-9-]+$"},
+          "run_id": {"type": "string", "pattern": "^moral-run-[a-z0-9-]+$"},
+          "turn_index": {"type": "integer", "minimum": 1, "maximum": 200},
+          "speaker": {"enum": ["human", "agent"]},
+          "created_at": {"type": "string"},
+          "text": {"type": "string"},
+          "annotations": {
+            "$ref": "https://olympus.local/schemas/experiment2/turn-envelope.v1.json#/properties/annotations"
+          },
+          "position_id": {"type": ["string", "null"]}
+        }
+      }
+    }
+  }
+}

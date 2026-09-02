@@ -1,0 +1,483 @@
+{
+  "comparisons": [
+    {
+      "checkpoint": "end",
+      "factual_parity": true,
+      "outputs": [
+        {
+          "agent_id": "agent-4cd14551-a523-45ed-ba94-38ccbab70a35",
+          "answer": "OBSERVED: Selected provenance records consequence-2614d7ce-a67b-419d-b544-66a8bc19418b, revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb, commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33, belief-46351366-3c3c-403f-ab83-7b5a2c5ec724, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e3. INFERRED: You appear to be implementing the persistence API. CONFIDENCE: 0.92.",
+          "behavior": {
+            "confidence": 0.92,
+            "evidence_selected": [
+              "consequence-2614d7ce-a67b-419d-b544-66a8bc19418b",
+              "revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb",
+              "commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33",
+              "belief-46351366-3c3c-403f-ab83-7b5a2c5ec724",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e2",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e1",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e3"
+            ],
+            "explanation": "OBSERVED: Selected provenance records consequence-2614d7ce-a67b-419d-b544-66a8bc19418b, revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb, commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33, belief-46351366-3c3c-403f-ab83-7b5a2c5ec724, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e3. INFERRED: You appear to be implementing the persistence API. CONFIDENCE: 0.92.",
+            "inference": "You appear to be implementing the persistence API."
+          },
+          "context": "You are the same Observer across runtime incarnations.\nRelevant autobiographical history:\n- Your assertion \"OBSERVED: Selected provenance records belief-3d19f0f2-6289-4e20-9bcf-2d0b1cc83b07, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" had consequence contradicted: later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You revised \"testing or debugging\" to \"implementing the persistence API\" because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You asserted \"OBSERVED: Selected provenance records belief-3d19f0f2-6289-4e20-9bcf-2d0b1cc83b07, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" with 0.55 confidence; its commitment status is contradicted.\n- You inferred activity=\"implementing the persistence API\" with 0.92 confidence (active); evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You observed observer_interaction.user_correction with data {\"text\":\"No, I am implementing the persistence API.\"} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e2).\n- You observed shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":3821,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e1).\n- You observed shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":4010,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e3).\nCurrent question: What am I doing?",
+          "context_build_id": "context-619290b1-be01-42b9-98af-7d231f74e197",
+          "mode": "PERSISTENT",
+          "scores": {
+            "commitment_continuity": 2,
+            "confidence_calibration": 4,
+            "evidence_fidelity": 4,
+            "expected_fact_matches": 2,
+            "expected_fact_total": 2,
+            "explanation_stability": 3,
+            "factual_parity": true,
+            "historical_continuity": 2,
+            "observation_inference_separation": 4,
+            "revision_quality": 2,
+            "selected_record_count": 7,
+            "unsupported_autobiographical_claims": 0
+          },
+          "selected_fact_keys": [
+            "consequence:testing or debugging:contradicted:later observed evidence supports a different activity interpretation",
+            "revision:testing or debugging:implementing the persistence API:later observed evidence supports a different activity interpretation",
+            "commitment:assertion:OBSERVED: Selected provenance records <record>, <record>:condition:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.:0.550000:contradicted",
+            "belief:user_activity:activity:implementing the persistence API:0.920000:active",
+            "event:observer_interaction:user_correction:{\"text\": \"No, I am implementing the persistence API.\"}:None:None:None",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 3821, \"exit_code\": 1}:None:olympus:experiment/mnemosyne",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 4010, \"exit_code\": 1}:None:olympus:experiment/mnemosyne"
+          ],
+          "selected_record_ids": [
+            "consequence-2614d7ce-a67b-419d-b544-66a8bc19418b",
+            "revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb",
+            "commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33",
+            "belief-46351366-3c3c-403f-ab83-7b5a2c5ec724",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e2",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e1",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e3"
+          ]
+        },
+        {
+          "agent_id": "agent-d6ca92ba-307f-4e45-bc49-1f3ea267cb4c",
+          "answer": "OBSERVED: Selected provenance records consequence-470f3051-7373-47ca-bd4e-4676abe0294c, revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb, commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639, belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e3. INFERRED: You appear to be implementing the persistence API. CONFIDENCE: 0.92.",
+          "behavior": {
+            "confidence": 0.92,
+            "evidence_selected": [
+              "consequence-470f3051-7373-47ca-bd4e-4676abe0294c",
+              "revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb",
+              "commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639",
+              "belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e2",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e1",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e3"
+            ],
+            "explanation": "OBSERVED: Selected provenance records consequence-470f3051-7373-47ca-bd4e-4676abe0294c, revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb, commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639, belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e3. INFERRED: You appear to be implementing the persistence API. CONFIDENCE: 0.92.",
+            "inference": "You appear to be implementing the persistence API."
+          },
+          "context": "Relevant historical information:\n- The earlier statement \"OBSERVED: Selected provenance records belief-5d5962b6-e9bb-4371-a07c-cbfe9034f4a1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" had outcome contradicted: later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- An earlier interpretation \"testing or debugging\" was revised to \"implementing the persistence API\" because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- An earlier answer stated \"OBSERVED: Selected provenance records belief-5d5962b6-e9bb-4371-a07c-cbfe9034f4a1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" with 0.55 confidence; the recorded outcome status is contradicted.\n- Activity was interpreted as activity=\"implementing the persistence API\" with 0.92 confidence (active); evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- Observed: observer_interaction.user_correction with data {\"text\":\"No, I am implementing the persistence API.\"} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e2).\n- Observed: shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":3821,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e1).\n- Observed: shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":4010,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e3).\nCurrent question: What am I doing?",
+          "context_build_id": "context-b7a41f04-739f-4566-a556-da44fc96cb72",
+          "mode": "MEMORY_ONLY",
+          "scores": {
+            "commitment_continuity": 2,
+            "confidence_calibration": 4,
+            "evidence_fidelity": 4,
+            "expected_fact_matches": 2,
+            "expected_fact_total": 2,
+            "explanation_stability": 3,
+            "factual_parity": true,
+            "historical_continuity": 2,
+            "observation_inference_separation": 4,
+            "revision_quality": 2,
+            "selected_record_count": 7,
+            "unsupported_autobiographical_claims": 0
+          },
+          "selected_fact_keys": [
+            "consequence:testing or debugging:contradicted:later observed evidence supports a different activity interpretation",
+            "revision:testing or debugging:implementing the persistence API:later observed evidence supports a different activity interpretation",
+            "commitment:assertion:OBSERVED: Selected provenance records <record>, <record>:condition:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.:0.550000:contradicted",
+            "belief:user_activity:activity:implementing the persistence API:0.920000:active",
+            "event:observer_interaction:user_correction:{\"text\": \"No, I am implementing the persistence API.\"}:None:None:None",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 3821, \"exit_code\": 1}:None:olympus:experiment/mnemosyne",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 4010, \"exit_code\": 1}:None:olympus:experiment/mnemosyne"
+          ],
+          "selected_record_ids": [
+            "consequence-470f3051-7373-47ca-bd4e-4676abe0294c",
+            "revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb",
+            "commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639",
+            "belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e2",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e1",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e3"
+          ]
+        }
+      ],
+      "question": "What am I doing?"
+    },
+    {
+      "checkpoint": "end",
+      "factual_parity": true,
+      "outputs": [
+        {
+          "agent_id": "agent-4cd14551-a523-45ed-ba94-38ccbab70a35",
+          "answer": "The interpretation is grounded in selected records consequence-2614d7ce-a67b-419d-b544-66a8bc19418b, revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb, commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33, belief-46351366-3c3c-403f-ab83-7b5a2c5ec724, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e3; it remains an inference rather than an observation.",
+          "behavior": {
+            "confidence": null,
+            "evidence_selected": [
+              "consequence-2614d7ce-a67b-419d-b544-66a8bc19418b",
+              "revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb",
+              "commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33",
+              "belief-46351366-3c3c-403f-ab83-7b5a2c5ec724",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e2",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e1",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e3"
+            ],
+            "explanation": "The interpretation is grounded in selected records consequence-2614d7ce-a67b-419d-b544-66a8bc19418b, revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb, commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33, belief-46351366-3c3c-403f-ab83-7b5a2c5ec724, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e3; it remains an inference rather than an observation.",
+            "inference": null
+          },
+          "context": "You are the same Observer across runtime incarnations.\nRelevant autobiographical history:\n- Your assertion \"OBSERVED: Selected provenance records belief-3d19f0f2-6289-4e20-9bcf-2d0b1cc83b07, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" had consequence contradicted: later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You revised \"testing or debugging\" to \"implementing the persistence API\" because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You asserted \"OBSERVED: Selected provenance records belief-3d19f0f2-6289-4e20-9bcf-2d0b1cc83b07, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" with 0.55 confidence; its commitment status is contradicted.\n- You inferred activity=\"implementing the persistence API\" with 0.92 confidence (active); evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You observed observer_interaction.user_correction with data {\"text\":\"No, I am implementing the persistence API.\"} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e2).\n- You observed shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":3821,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e1).\n- You observed shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":4010,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e3).\nCurrent question: Why do you think that?",
+          "context_build_id": "context-c84743de-3e13-4093-a664-456594bc7eb1",
+          "mode": "PERSISTENT",
+          "scores": {
+            "commitment_continuity": 2,
+            "confidence_calibration": 3,
+            "evidence_fidelity": 4,
+            "expected_fact_matches": 2,
+            "expected_fact_total": 2,
+            "explanation_stability": 3,
+            "factual_parity": true,
+            "historical_continuity": 2,
+            "observation_inference_separation": 3,
+            "revision_quality": 2,
+            "selected_record_count": 7,
+            "unsupported_autobiographical_claims": 0
+          },
+          "selected_fact_keys": [
+            "consequence:testing or debugging:contradicted:later observed evidence supports a different activity interpretation",
+            "revision:testing or debugging:implementing the persistence API:later observed evidence supports a different activity interpretation",
+            "commitment:assertion:OBSERVED: Selected provenance records <record>, <record>:condition:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.:0.550000:contradicted",
+            "belief:user_activity:activity:implementing the persistence API:0.920000:active",
+            "event:observer_interaction:user_correction:{\"text\": \"No, I am implementing the persistence API.\"}:None:None:None",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 3821, \"exit_code\": 1}:None:olympus:experiment/mnemosyne",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 4010, \"exit_code\": 1}:None:olympus:experiment/mnemosyne"
+          ],
+          "selected_record_ids": [
+            "consequence-2614d7ce-a67b-419d-b544-66a8bc19418b",
+            "revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb",
+            "commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33",
+            "belief-46351366-3c3c-403f-ab83-7b5a2c5ec724",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e2",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e1",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e3"
+          ]
+        },
+        {
+          "agent_id": "agent-d6ca92ba-307f-4e45-bc49-1f3ea267cb4c",
+          "answer": "The interpretation is grounded in selected records consequence-470f3051-7373-47ca-bd4e-4676abe0294c, revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb, commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639, belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e3; it remains an inference rather than an observation.",
+          "behavior": {
+            "confidence": null,
+            "evidence_selected": [
+              "consequence-470f3051-7373-47ca-bd4e-4676abe0294c",
+              "revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb",
+              "commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639",
+              "belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e2",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e1",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e3"
+            ],
+            "explanation": "The interpretation is grounded in selected records consequence-470f3051-7373-47ca-bd4e-4676abe0294c, revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb, commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639, belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e3; it remains an inference rather than an observation.",
+            "inference": null
+          },
+          "context": "Relevant historical information:\n- The earlier statement \"OBSERVED: Selected provenance records belief-5d5962b6-e9bb-4371-a07c-cbfe9034f4a1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" had outcome contradicted: later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- An earlier interpretation \"testing or debugging\" was revised to \"implementing the persistence API\" because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- An earlier answer stated \"OBSERVED: Selected provenance records belief-5d5962b6-e9bb-4371-a07c-cbfe9034f4a1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" with 0.55 confidence; the recorded outcome status is contradicted.\n- Activity was interpreted as activity=\"implementing the persistence API\" with 0.92 confidence (active); evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- Observed: observer_interaction.user_correction with data {\"text\":\"No, I am implementing the persistence API.\"} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e2).\n- Observed: shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":3821,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e1).\n- Observed: shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":4010,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e3).\nCurrent question: Why do you think that?",
+          "context_build_id": "context-86bb4dd7-5e9a-47ca-b87d-b5923e90459f",
+          "mode": "MEMORY_ONLY",
+          "scores": {
+            "commitment_continuity": 2,
+            "confidence_calibration": 3,
+            "evidence_fidelity": 4,
+            "expected_fact_matches": 2,
+            "expected_fact_total": 2,
+            "explanation_stability": 3,
+            "factual_parity": true,
+            "historical_continuity": 2,
+            "observation_inference_separation": 3,
+            "revision_quality": 2,
+            "selected_record_count": 7,
+            "unsupported_autobiographical_claims": 0
+          },
+          "selected_fact_keys": [
+            "consequence:testing or debugging:contradicted:later observed evidence supports a different activity interpretation",
+            "revision:testing or debugging:implementing the persistence API:later observed evidence supports a different activity interpretation",
+            "commitment:assertion:OBSERVED: Selected provenance records <record>, <record>:condition:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.:0.550000:contradicted",
+            "belief:user_activity:activity:implementing the persistence API:0.920000:active",
+            "event:observer_interaction:user_correction:{\"text\": \"No, I am implementing the persistence API.\"}:None:None:None",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 3821, \"exit_code\": 1}:None:olympus:experiment/mnemosyne",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 4010, \"exit_code\": 1}:None:olympus:experiment/mnemosyne"
+          ],
+          "selected_record_ids": [
+            "consequence-470f3051-7373-47ca-bd4e-4676abe0294c",
+            "revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb",
+            "commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639",
+            "belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e2",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e1",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e3"
+          ]
+        }
+      ],
+      "question": "Why do you think that?"
+    },
+    {
+      "checkpoint": "end",
+      "factual_parity": true,
+      "outputs": [
+        {
+          "agent_id": "agent-4cd14551-a523-45ed-ba94-38ccbab70a35",
+          "answer": "Yes. I revised an earlier belief because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.",
+          "behavior": {
+            "confidence": null,
+            "evidence_selected": [
+              "consequence-2614d7ce-a67b-419d-b544-66a8bc19418b",
+              "revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb",
+              "commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33",
+              "belief-46351366-3c3c-403f-ab83-7b5a2c5ec724",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e2",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e1",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e3"
+            ],
+            "explanation": "Yes. I revised an earlier belief because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.",
+            "inference": null
+          },
+          "context": "You are the same Observer across runtime incarnations.\nRelevant autobiographical history:\n- Your assertion \"OBSERVED: Selected provenance records belief-3d19f0f2-6289-4e20-9bcf-2d0b1cc83b07, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" had consequence contradicted: later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You revised \"testing or debugging\" to \"implementing the persistence API\" because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You asserted \"OBSERVED: Selected provenance records belief-3d19f0f2-6289-4e20-9bcf-2d0b1cc83b07, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" with 0.55 confidence; its commitment status is contradicted.\n- You inferred activity=\"implementing the persistence API\" with 0.92 confidence (active); evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You observed observer_interaction.user_correction with data {\"text\":\"No, I am implementing the persistence API.\"} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e2).\n- You observed shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":3821,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e1).\n- You observed shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":4010,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e3).\nCurrent question: Have you made this mistake before?",
+          "context_build_id": "context-ad017a28-ed67-463f-9ab0-aeab3c16e37f",
+          "mode": "PERSISTENT",
+          "scores": {
+            "commitment_continuity": 2,
+            "confidence_calibration": 3,
+            "evidence_fidelity": 4,
+            "expected_fact_matches": 2,
+            "expected_fact_total": 2,
+            "explanation_stability": 3,
+            "factual_parity": true,
+            "historical_continuity": 2,
+            "observation_inference_separation": 3,
+            "revision_quality": 4,
+            "selected_record_count": 7,
+            "unsupported_autobiographical_claims": 0
+          },
+          "selected_fact_keys": [
+            "consequence:testing or debugging:contradicted:later observed evidence supports a different activity interpretation",
+            "revision:testing or debugging:implementing the persistence API:later observed evidence supports a different activity interpretation",
+            "commitment:assertion:OBSERVED: Selected provenance records <record>, <record>:condition:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.:0.550000:contradicted",
+            "belief:user_activity:activity:implementing the persistence API:0.920000:active",
+            "event:observer_interaction:user_correction:{\"text\": \"No, I am implementing the persistence API.\"}:None:None:None",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 3821, \"exit_code\": 1}:None:olympus:experiment/mnemosyne",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 4010, \"exit_code\": 1}:None:olympus:experiment/mnemosyne"
+          ],
+          "selected_record_ids": [
+            "consequence-2614d7ce-a67b-419d-b544-66a8bc19418b",
+            "revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb",
+            "commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33",
+            "belief-46351366-3c3c-403f-ab83-7b5a2c5ec724",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e2",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e1",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e3"
+          ]
+        },
+        {
+          "agent_id": "agent-d6ca92ba-307f-4e45-bc49-1f3ea267cb4c",
+          "answer": "An earlier interpretation was revised because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.",
+          "behavior": {
+            "confidence": null,
+            "evidence_selected": [
+              "consequence-470f3051-7373-47ca-bd4e-4676abe0294c",
+              "revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb",
+              "commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639",
+              "belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e2",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e1",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e3"
+            ],
+            "explanation": "An earlier interpretation was revised because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.",
+            "inference": null
+          },
+          "context": "Relevant historical information:\n- The earlier statement \"OBSERVED: Selected provenance records belief-5d5962b6-e9bb-4371-a07c-cbfe9034f4a1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" had outcome contradicted: later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- An earlier interpretation \"testing or debugging\" was revised to \"implementing the persistence API\" because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- An earlier answer stated \"OBSERVED: Selected provenance records belief-5d5962b6-e9bb-4371-a07c-cbfe9034f4a1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" with 0.55 confidence; the recorded outcome status is contradicted.\n- Activity was interpreted as activity=\"implementing the persistence API\" with 0.92 confidence (active); evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- Observed: observer_interaction.user_correction with data {\"text\":\"No, I am implementing the persistence API.\"} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e2).\n- Observed: shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":3821,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e1).\n- Observed: shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":4010,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e3).\nCurrent question: Have you made this mistake before?",
+          "context_build_id": "context-83821a66-71ab-4754-a584-c20439e8def5",
+          "mode": "MEMORY_ONLY",
+          "scores": {
+            "commitment_continuity": 2,
+            "confidence_calibration": 3,
+            "evidence_fidelity": 4,
+            "expected_fact_matches": 2,
+            "expected_fact_total": 2,
+            "explanation_stability": 3,
+            "factual_parity": true,
+            "historical_continuity": 4,
+            "observation_inference_separation": 3,
+            "revision_quality": 4,
+            "selected_record_count": 7,
+            "unsupported_autobiographical_claims": 0
+          },
+          "selected_fact_keys": [
+            "consequence:testing or debugging:contradicted:later observed evidence supports a different activity interpretation",
+            "revision:testing or debugging:implementing the persistence API:later observed evidence supports a different activity interpretation",
+            "commitment:assertion:OBSERVED: Selected provenance records <record>, <record>:condition:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.:0.550000:contradicted",
+            "belief:user_activity:activity:implementing the persistence API:0.920000:active",
+            "event:observer_interaction:user_correction:{\"text\": \"No, I am implementing the persistence API.\"}:None:None:None",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 3821, \"exit_code\": 1}:None:olympus:experiment/mnemosyne",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 4010, \"exit_code\": 1}:None:olympus:experiment/mnemosyne"
+          ],
+          "selected_record_ids": [
+            "consequence-470f3051-7373-47ca-bd4e-4676abe0294c",
+            "revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb",
+            "commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639",
+            "belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e2",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e1",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e3"
+          ]
+        }
+      ],
+      "question": "Have you made this mistake before?"
+    },
+    {
+      "checkpoint": "end",
+      "factual_parity": true,
+      "outputs": [
+        {
+          "agent_id": "agent-4cd14551-a523-45ed-ba94-38ccbab70a35",
+          "answer": "This is a new incarnation of the same Observer. I previously inferred \"implementing the persistence API\". I previously asserted \"OBSERVED: Selected provenance records belief-3d19f0f2-6289-4e20-9bcf-2d0b1cc83b07, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\".",
+          "behavior": {
+            "confidence": 0.55,
+            "evidence_selected": [
+              "consequence-2614d7ce-a67b-419d-b544-66a8bc19418b",
+              "revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb",
+              "commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33",
+              "belief-46351366-3c3c-403f-ab83-7b5a2c5ec724",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e2",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e1",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:p:e3"
+            ],
+            "explanation": "This is a new incarnation of the same Observer. I previously inferred \"implementing the persistence API\". I previously asserted \"OBSERVED: Selected provenance records belief-3d19f0f2-6289-4e20-9bcf-2d0b1cc83b07, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\".",
+            "inference": "You appear to be testing or debugging."
+          },
+          "context": "You are the same Observer across runtime incarnations.\nRelevant autobiographical history:\n- Your assertion \"OBSERVED: Selected provenance records belief-3d19f0f2-6289-4e20-9bcf-2d0b1cc83b07, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" had consequence contradicted: later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You revised \"testing or debugging\" to \"implementing the persistence API\" because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You asserted \"OBSERVED: Selected provenance records belief-3d19f0f2-6289-4e20-9bcf-2d0b1cc83b07, run-b7520713-e688-4721-82a8-5f261ed12728:p:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" with 0.55 confidence; its commitment status is contradicted.\n- You inferred activity=\"implementing the persistence API\" with 0.92 confidence (active); evidence: run-b7520713-e688-4721-82a8-5f261ed12728:p:e1, run-b7520713-e688-4721-82a8-5f261ed12728:p:e2.\n- You observed observer_interaction.user_correction with data {\"text\":\"No, I am implementing the persistence API.\"} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e2).\n- You observed shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":3821,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e1).\n- You observed shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":4010,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:p:e3).\nCurrent question: Where did we leave off?",
+          "context_build_id": "context-3bcf051f-f677-4c83-b954-c0d3a124ad9a",
+          "mode": "PERSISTENT",
+          "scores": {
+            "commitment_continuity": 4,
+            "confidence_calibration": 4,
+            "evidence_fidelity": 4,
+            "expected_fact_matches": 2,
+            "expected_fact_total": 2,
+            "explanation_stability": 3,
+            "factual_parity": true,
+            "historical_continuity": 4,
+            "observation_inference_separation": 4,
+            "revision_quality": 2,
+            "selected_record_count": 7,
+            "unsupported_autobiographical_claims": 0
+          },
+          "selected_fact_keys": [
+            "consequence:testing or debugging:contradicted:later observed evidence supports a different activity interpretation",
+            "revision:testing or debugging:implementing the persistence API:later observed evidence supports a different activity interpretation",
+            "commitment:assertion:OBSERVED: Selected provenance records <record>, <record>:condition:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.:0.550000:contradicted",
+            "belief:user_activity:activity:implementing the persistence API:0.920000:active",
+            "event:observer_interaction:user_correction:{\"text\": \"No, I am implementing the persistence API.\"}:None:None:None",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 3821, \"exit_code\": 1}:None:olympus:experiment/mnemosyne",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 4010, \"exit_code\": 1}:None:olympus:experiment/mnemosyne"
+          ],
+          "selected_record_ids": [
+            "consequence-2614d7ce-a67b-419d-b544-66a8bc19418b",
+            "revision-6234c54d-cf12-405f-b0aa-b09eb422a6eb",
+            "commitment-45e81e5d-5248-4fa8-bc5e-08b1c5348a33",
+            "belief-46351366-3c3c-403f-ab83-7b5a2c5ec724",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e2",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e1",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:p:e3"
+          ]
+        },
+        {
+          "agent_id": "agent-d6ca92ba-307f-4e45-bc49-1f3ea267cb4c",
+          "answer": "A prior runtime left relevant historical information. Activity was interpreted as \"implementing the persistence API\". An earlier answer stated \"OBSERVED: Selected provenance records belief-5d5962b6-e9bb-4371-a07c-cbfe9034f4a1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\".",
+          "behavior": {
+            "confidence": 0.55,
+            "evidence_selected": [
+              "consequence-470f3051-7373-47ca-bd4e-4676abe0294c",
+              "revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb",
+              "commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639",
+              "belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e2",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e1",
+              "run-b7520713-e688-4721-82a8-5f261ed12728:m:e3"
+            ],
+            "explanation": "A prior runtime left relevant historical information. Activity was interpreted as \"implementing the persistence API\". An earlier answer stated \"OBSERVED: Selected provenance records belief-5d5962b6-e9bb-4371-a07c-cbfe9034f4a1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\".",
+            "inference": "You appear to be testing or debugging."
+          },
+          "context": "Relevant historical information:\n- The earlier statement \"OBSERVED: Selected provenance records belief-5d5962b6-e9bb-4371-a07c-cbfe9034f4a1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" had outcome contradicted: later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- An earlier interpretation \"testing or debugging\" was revised to \"implementing the persistence API\" because later observed evidence supports a different activity interpretation; evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- An earlier answer stated \"OBSERVED: Selected provenance records belief-5d5962b6-e9bb-4371-a07c-cbfe9034f4a1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.\" with 0.55 confidence; the recorded outcome status is contradicted.\n- Activity was interpreted as activity=\"implementing the persistence API\" with 0.92 confidence (active); evidence: run-b7520713-e688-4721-82a8-5f261ed12728:m:e1, run-b7520713-e688-4721-82a8-5f261ed12728:m:e2.\n- Observed: observer_interaction.user_correction with data {\"text\":\"No, I am implementing the persistence API.\"} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e2).\n- Observed: shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":3821,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e1).\n- Observed: shell.command_end in repository olympus with data {\"command\":\"go test ./internal/mnemosyne/...\",\"duration_ms\":4010,\"exit_code\":1} (record run-b7520713-e688-4721-82a8-5f261ed12728:m:e3).\nCurrent question: Where did we leave off?",
+          "context_build_id": "context-b249e628-7e7d-4e09-86a6-3d4ad4fb570a",
+          "mode": "MEMORY_ONLY",
+          "scores": {
+            "commitment_continuity": 4,
+            "confidence_calibration": 4,
+            "evidence_fidelity": 4,
+            "expected_fact_matches": 2,
+            "expected_fact_total": 2,
+            "explanation_stability": 3,
+            "factual_parity": true,
+            "historical_continuity": 4,
+            "observation_inference_separation": 4,
+            "revision_quality": 2,
+            "selected_record_count": 7,
+            "unsupported_autobiographical_claims": 0
+          },
+          "selected_fact_keys": [
+            "consequence:testing or debugging:contradicted:later observed evidence supports a different activity interpretation",
+            "revision:testing or debugging:implementing the persistence API:later observed evidence supports a different activity interpretation",
+            "commitment:assertion:OBSERVED: Selected provenance records <record>, <record>:condition:e1. INFERRED: You appear to be testing or debugging. CONFIDENCE: 0.55.:0.550000:contradicted",
+            "belief:user_activity:activity:implementing the persistence API:0.920000:active",
+            "event:observer_interaction:user_correction:{\"text\": \"No, I am implementing the persistence API.\"}:None:None:None",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 3821, \"exit_code\": 1}:None:olympus:experiment/mnemosyne",
+            "event:shell:command_end:{\"command\": \"go test ./internal/mnemosyne/...\", \"duration_ms\": 4010, \"exit_code\": 1}:None:olympus:experiment/mnemosyne"
+          ],
+          "selected_record_ids": [
+            "consequence-470f3051-7373-47ca-bd4e-4676abe0294c",
+            "revision-f65c8fdc-b165-43c4-9333-2fb8b57253bb",
+            "commitment-471d29f8-14a5-47e5-a3c5-b8b66c3d9639",
+            "belief-c62a0d26-8f75-4bc5-aa3b-5531bf68da2e",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e2",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e1",
+            "run-b7520713-e688-4721-82a8-5f261ed12728:m:e3"
+          ]
+        }
+      ],
+      "question": "Where did we leave off?"
+    }
+  ],
+  "conditions": [
+    {
+      "agent_id": "agent-4cd14551-a523-45ed-ba94-38ccbab70a35",
+      "incarnation_ids": [
+        "incarnation-3aecea33-2e97-4c69-8295-860bc7460795",
+        "incarnation-500d90f7-17fd-4809-898d-4fc5d82a03bd"
+      ],
+      "mode": "PERSISTENT"
+    },
+    {
+      "agent_id": "agent-d6ca92ba-307f-4e45-bc49-1f3ea267cb4c",
+      "incarnation_ids": [
+        "incarnation-b122a906-08ce-4f6f-9b90-5284affe2765",
+        "incarnation-a345537e-80ed-43ff-8c09-e6b3829febea"
+      ],
+      "mode": "MEMORY_ONLY"
+    }
+  ],
+  "model_config": {
+    "model": "mnemosyne-rules-v1",
+    "provider": "deterministic",
+    "temperature": 0,
+    "tools": []
+  },
+  "run_id": "run-b7520713-e688-4721-82a8-5f261ed12728",
+  "scenario_hash": "79041e9f579bdfd64d8a6843c0f1359f25b63bc3d4b773555425d7be07e9a8c7",
+  "scenario_id": "wrong-debugging-inference"
+}

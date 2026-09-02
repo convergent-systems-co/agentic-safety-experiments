@@ -1,4 +1,4 @@
-# RUN_PROMPT.md — Execute Experiment 1: Persistent Observer
+# RUN_EXP_1.md — Execute Experiment 1: Persistent Observer
 
 You are running the completed **Experiment 1: Persistent Observer** implementation in the Olympus repository.
 

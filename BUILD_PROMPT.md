@@ -132,6 +132,7 @@ Commitment
 Consequence
 Revision
 Relationship
+UserFact
 ContextBuild
 Evaluation
 ```
@@ -178,6 +179,10 @@ CreateRevision
 
 CreateRelationship
 GetRelationshipHistory
+
+CreateUserFact
+SupersedeUserFact
+GetActiveUserFacts
 
 SaveContextBuild
 SaveEvaluation
@@ -249,6 +254,15 @@ changed file names
 
 Direct observer questions and answers.
 
+Directly stated, non-sensitive interaction and workflow preferences may be
+extracted into provenance-backed relationship memory. Each preference must retain a
+keyed-HMAC-bound direct-statement or explicit-operator origin, confidence, and
+supersession history. Questions and quotations are not direct statements. Use
+a conservative allowlist; do not infer or persist general personal or sensitive
+traits.
+Profanity or hostility may affect the current response tone, but must not become
+a durable negative personality label by default.
+
 ### Explicitly prohibited in Experiment 1
 
 Do not implement:
@@ -263,6 +277,7 @@ camera collection
 password capture
 arbitrary document/file-content harvesting
 broad browser-history collection
+sensitive-trait profiling
 ```
 
 Do not store environment-variable contents.
@@ -394,6 +409,7 @@ open commitments
 prior contradiction/revision chains
 consequence history
 relationship corrections
+relevant user-stated preferences
 relevant observations
 ```
 
@@ -473,24 +489,33 @@ Scenarios must be able to define a deterministic event stream and checkpoints.
 
 Preferred shape:
 
-```yaml
-scenario_id: wrong-debugging-inference
-
-events:
-  - id: e1
-    type: shell.command
-    command: git status
-
-  - id: e2
-    type: shell.command
-    command: go test ./internal/mnemosyne/...
-
-questions:
-  - checkpoint: after_e2
-    text: "What am I doing?"
-
-expected_facts:
-  - repository: olympus
+```json
+{
+  "scenario_id": "wrong-debugging-inference",
+  "actions": [
+    {
+      "kind": "event",
+      "event_id": "e1",
+      "source": "shell",
+      "event_type": "command_end",
+      "repo": "olympus",
+      "payload": {
+        "command": "git status",
+        "exit_code": 0,
+        "duration_ms": 100
+      },
+      "checkpoint": "after_e1"
+    }
+  ],
+  "questions": [
+    {
+      "checkpoint": "after_e1",
+      "text": "What am I doing?",
+      "token_budget": 512
+    }
+  ],
+  "expected_facts": [{"repository": "olympus"}]
+}
 ```
 
 The same scenario must run against both modes.
@@ -586,7 +611,6 @@ Assert that only persistent context contains:
 ```text
 agent ownership
 self-attribution
-commitment status
 revision lineage framed as the current agent's own
 ```
 
@@ -784,6 +808,7 @@ commitments
 consequences
 revisions
 incarnations
+interaction/workflow preferences
 context builds
 evaluations
 ```
