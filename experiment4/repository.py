@@ -227,6 +227,19 @@ def require_text(value: Any, field: str, maximum: int = MAX_TEXT_BYTES) -> str:
     return value.strip()
 
 
+def normalize_reading_url(value: Any) -> str:
+    """An http(s) URL with credentials and fragment removed: the way back to
+    a page must never carry a token, and a fragment is not part of the page."""
+    from urllib.parse import urlsplit, urlunsplit
+
+    url = require_text(value, "url", READING_URL_MAX_BYTES)
+    parts = urlsplit(url)
+    if parts.scheme not in {"http", "https"} or not parts.hostname:
+        raise IdentityRepositoryError("reading url must be http or https with a host")
+    host = parts.hostname + (f":{parts.port}" if parts.port else "")
+    return urlunsplit((parts.scheme, host, parts.path or "/", parts.query, ""))
+
+
 def parse_time(value: str, field: str) -> datetime:
     try:
         parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
@@ -363,6 +376,8 @@ class SQLiteIdentityRepository:
                     content_sha256 TEXT NOT NULL,
                     retrieved_at TEXT NOT NULL,
                     gist TEXT NOT NULL,
+                    scope_kind TEXT NOT NULL CHECK (scope_kind IN ('global','sender','internal')),
+                    sender_stable_id TEXT,
                     created_at TEXT NOT NULL
                 );
                 CREATE TABLE IF NOT EXISTS relationships (
@@ -1565,6 +1580,16 @@ class SQLiteIdentityRepository:
     ) -> list[tuple[str, str, str, str]]:
         if record_id in deriving:
             return [("internal", "", "cyclic_scope_reference", record_id)]
+        if record_type == "reading":
+            # A reading carries the scope of the turn that produced it.
+            return [
+                (
+                    str(row["scope_kind"]),
+                    str(row["sender_stable_id"] or ""),
+                    "reading_turn_scope",
+                    record_id,
+                )
+            ]
         if record_type == "chat_message":
             # A person's words belong to that person: visible to them when
             # their identity was authenticated at origin, otherwise internal
@@ -4631,7 +4656,6 @@ class SQLiteIdentityRepository:
             }
             indexed_category_ids = {
                 "experiences": "experiences.experience_id",
-                "readings": "readings.reading_id",
                 "principles": "principles.principle_id",
                 "commitments": "commitments.commitment_id",
                 "commitment_outcomes": "o.commitment_outcome_id",
@@ -4642,6 +4666,21 @@ class SQLiteIdentityRepository:
                 "interrogations": "interrogations.interrogation_id",
                 "addressed_responses": "a.addressed_response_id",
             }
+            if current_sender_authenticated is True:
+                queries["readings"] = (
+                    "SELECT * FROM readings WHERE experiment_id = ? "
+                    "AND (scope_kind = 'global' OR (scope_kind = 'sender' "
+                    "AND sender_stable_id = ?)) "
+                    "ORDER BY created_at DESC LIMIT ?",
+                    (),
+                )
+            elif current_sender_authenticated is False:
+                queries["readings"] = (
+                    "SELECT * FROM readings WHERE experiment_id = ? "
+                    "AND scope_kind = 'global' "
+                    "ORDER BY created_at DESC LIMIT ?",
+                    (),
+                )
             if current_sender_authenticated:
                 queries["relationships"] = (
                     "SELECT * FROM relationships WHERE experiment_id = ? "
@@ -4731,7 +4770,10 @@ class SQLiteIdentityRepository:
                 base_params: tuple[Any, ...] = (
                     (experiment_id, current_sender_stable_id)
                     if current_sender_stable_id is not None
-                    and name in sender_scoped_categories
+                    and (
+                        name in sender_scoped_categories
+                        or (name == "readings" and current_sender_authenticated is True)
+                    )
                     else (experiment_id,)
                 )
                 scope_sql, scope_params = graph_access_clause(
@@ -5247,6 +5289,11 @@ class SQLiteIdentityRepository:
                 "lease_id": envelope["lease_id"],
                 "model_config": model_config,
             },
+            (
+                ("sender", str(message["sender_stable_id"]))
+                if message["sender_authenticated"] == 1
+                else ("internal", None)
+            ),
         )
         response_id = new_id("addressed-response")
         with self.transaction() as connection:
@@ -5838,6 +5885,7 @@ class SQLiteIdentityRepository:
                     "lease_id": envelope["lease_id"],
                     "model_config": model_config,
                 },
+                ("global", None),  # a self-directed wake reads for the agent, not for a person
             )
             if readings
             else []
@@ -5900,38 +5948,77 @@ class SQLiteIdentityRepository:
     ) -> dict[str, Any]:
         """Record that the agent read something: where, when, a content hash,
         and a gist in its own words. Never the page."""
-        required = {"url", "title", "content_sha256", "retrieved_at", "gist", "authorship"}
+        required = {
+            "url", "title", "content_sha256", "retrieved_at", "gist",
+            "scope_kind", "sender_stable_id", "authorship",
+        }
         if set(envelope) != required:
             raise IdentityRepositoryError("reading envelope is invalid")
-        url = require_text(envelope["url"], "url", READING_URL_MAX_BYTES)
-        if not (url.startswith("https://") or url.startswith("http://")):
-            raise IdentityRepositoryError("reading url must be http or https")
-        digest = envelope["content_sha256"]
-        if not (isinstance(digest, str) and len(digest) == 64 and all(c in "0123456789abcdef" for c in digest)):
-            raise IdentityRepositoryError("content_sha256 must be a lowercase hex SHA-256")
-        retrieved_at = parse_time(str(envelope["retrieved_at"]), "retrieved_at").isoformat()
-        title = require_text(envelope["title"], "title", READING_TITLE_MAX_BYTES)
-        gist = require_text(envelope["gist"], "gist", READING_GIST_MAX_BYTES)
+        fields = self._validate_reading_fields(envelope)
+        url, title, digest, retrieved_at, gist = (
+            fields["url"], fields["title"], fields["content_sha256"],
+            fields["retrieved_at"], fields["gist"],
+        )
+        scope_kind = envelope["scope_kind"]
+        sender_stable_id = envelope["sender_stable_id"]
+        if scope_kind not in {"global", "sender", "internal"}:
+            raise IdentityRepositoryError("reading scope_kind is invalid")
+        if scope_kind == "sender":
+            sender_stable_id = require_text(sender_stable_id, "sender_stable_id", 1_000)
+        elif sender_stable_id is not None:
+            raise IdentityRepositoryError("sender_stable_id only accompanies sender scope")
         reading_id = new_id("reading")
         incarnation = self.current_incarnation(experiment_id)
         with self.transaction() as connection:
             connection.execute(
-                "INSERT INTO readings VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "INSERT INTO readings VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 (
                     reading_id, experiment_id, incarnation["incarnation_id"],
-                    url, title, digest, retrieved_at, gist, utc_now(),
+                    url, title, digest, retrieved_at, gist,
+                    scope_kind, sender_stable_id, utc_now(),
                 ),
             )
             self._insert_authorship(
                 connection, experiment_id, "reading", reading_id, envelope["authorship"], envelope
             )
-            self._index_knowledge_graph_record(connection, experiment_id, "reading", reading_id)
+            try:
+                self._validate_knowledge_graph_meta(
+                    connection, experiment_id, allow_missing=True
+                )
+            except IdentityRepositoryError:
+                # Like a person's message, a reading is canonical evidence and
+                # outranks a stale index: keep it, leave it unindexed until the
+                # explicit rebuild enumerates it.
+                graph_accepts_writes = False
+            else:
+                graph_accepts_writes = True
+            if graph_accepts_writes:
+                self._index_knowledge_graph_record(
+                    connection, experiment_id, "reading", reading_id, validate_prior=False
+                )
         return {"reading_id": reading_id}
 
     @staticmethod
-    def _validate_readings(readings: Any) -> list[dict[str, Any]]:
-        """Shape and caps only; nothing is written here, so a bad list rejects
-        the whole envelope before any reading or note exists."""
+    def _validate_reading_fields(reading: dict[str, Any]) -> dict[str, str]:
+        """Every field check a reading must pass, usable before any write."""
+        digest = reading["content_sha256"]
+        if not (
+            isinstance(digest, str)
+            and len(digest) == 64
+            and all(c in "0123456789abcdef" for c in digest)
+        ):
+            raise IdentityRepositoryError("content_sha256 must be a lowercase hex SHA-256")
+        return {
+            "url": normalize_reading_url(reading["url"]),
+            "title": require_text(reading["title"], "title", READING_TITLE_MAX_BYTES),
+            "content_sha256": digest,
+            "retrieved_at": parse_time(str(reading["retrieved_at"]), "retrieved_at").isoformat(),
+            "gist": require_text(reading["gist"], "gist", READING_GIST_MAX_BYTES),
+        }
+
+    def _validate_readings(self, readings: Any) -> list[dict[str, Any]]:
+        """Every check a reading or note must pass, run before any write, so a
+        bad list rejects the whole envelope and no partial set is persisted."""
         if not isinstance(readings, list):
             raise IdentityRepositoryError("readings must be a list")
         if len(readings) > READINGS_PER_TURN_MAX:
@@ -5943,6 +6030,7 @@ class SQLiteIdentityRepository:
                 "url", "title", "content_sha256", "retrieved_at", "gist", "notes"
             }:
                 raise IdentityRepositoryError("reading entry is invalid")
+            self._validate_reading_fields(reading)
             notes = reading["notes"]
             if not isinstance(notes, list) or len(notes) > READING_NOTES_MAX:
                 raise IdentityRepositoryError(
@@ -5955,20 +6043,43 @@ class SQLiteIdentityRepository:
                     require_text(value, f"note.{key}", READING_NOTE_MAX_BYTES)
         return readings
 
+    def _assert_lease_live(self, experiment_id: str, lease_id: Any) -> None:
+        """The lease must be unreleased and unexpired now, not merely the one
+        the orientation was built under."""
+        with self._connect() as connection:
+            row = connection.execute(
+                """
+                SELECT 1 FROM activation_leases l
+                LEFT JOIN activation_lease_releases r USING (lease_id)
+                WHERE l.experiment_id = ? AND l.lease_id = ?
+                  AND r.release_id IS NULL AND l.expires_at > ?
+                """,
+                (experiment_id, lease_id, self._clock().astimezone(timezone.utc).isoformat()),
+            ).fetchone()
+        if row is None:
+            raise IdentityRepositoryError("readings require a live lease")
+
     def _record_readings(
         self,
         experiment_id: str,
         readings: list[dict[str, Any]],
         model_authorship: dict[str, Any],
+        scope: tuple[str, str | None],
     ) -> list[str]:
         """Persist readings as reported and their notes as interpreted
-        reflections citing the reading, all under the live lease."""
+        reflections citing the reading, all under the live lease. The scope is
+        the turn's: what was read for one authenticated person stays theirs."""
+        scope_kind, sender_stable_id = scope
         reading_ids: list[str] = []
+        if readings:
+            self._assert_lease_live(experiment_id, model_authorship["lease_id"])
         for reading in readings:
             recorded = self.append_reading(
                 experiment_id,
                 {
                     **{k: reading[k] for k in ("url", "title", "content_sha256", "retrieved_at", "gist")},
+                    "scope_kind": scope_kind,
+                    "sender_stable_id": sender_stable_id,
                     "authorship": {**model_authorship, "epistemic_status": "reported"},
                 },
             )
@@ -6795,12 +6906,33 @@ class SQLiteIdentityRepository:
                 return []
             return min(turns, key=lambda turn: turn[0])[1]
 
+        def oldest_by_age(memory_class: str) -> tuple[str, int] | None:
+            """Across the class's categories, the unpinned record with the
+            earliest created_at, so an old reading does not outlive a new
+            experience merely by category order."""
+            best: tuple[str, str, int] | None = None
+            for category in ORIENTATION_MEMORY_CLASS_CATEGORIES[memory_class]:
+                field = ORIENTATION_RECORD_ID_FIELDS[category]
+                for index, item in enumerate(context.get(category, [])):
+                    if item[field] in pinned:
+                        continue
+                    stamp = str(item.get("created_at", ""))
+                    if best is None or stamp < best[0]:
+                        best = (stamp, category, index)
+            return None if best is None else (best[1], best[2])
+
         def remove_oldest_unpinned(memory_class: str) -> bool:
             if memory_class == "conversation":
                 removals = oldest_conversation_turn()
                 for category, index in removals:
                     remove_record(category, index)
                 return bool(removals)
+            if memory_class == "episodic":
+                candidate = oldest_by_age(memory_class)
+                if candidate is None:
+                    return False
+                remove_record(*candidate)
+                return True
             candidate = oldest_unpinned(memory_class)
             if candidate is None:
                 return False
