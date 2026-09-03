@@ -25,29 +25,44 @@ def subprocess_model_runner(command: str):
     """Run a model host command with the wake prompt on stdin.
 
     The command must print the outcome envelope as JSON on stdout. It is
-    bounded by the intent's own maximum runtime so a hung host cannot hold
-    the lease past what the agent asked for.
+    bounded by the same clipped runtime as the execution lease, so a hung host
+    cannot outlive the fence that makes it exclusive. Host stderr goes to the
+    executor's own stderr, never into the archive: a failed outcome records
+    only that the host failed and how, not what it said.
     """
     argv = shlex.split(command)
     if not argv:
         raise ValueError("model command must not be empty")
 
     def run(prompt: dict[str, Any]) -> dict[str, Any]:
-        timeout = int(prompt["wake_intent"]["maximum_runtime_minutes"]) * 60
-        completed = subprocess.run(
-            argv,
-            input=json.dumps(prompt, sort_keys=True),
-            capture_output=True,
-            text=True,
-            timeout=timeout,
-            check=False,
+        timeout = SQLiteIdentityRepository.wake_runtime_seconds(
+            prompt["wake_intent"]
         )
+        try:
+            completed = subprocess.run(
+                argv,
+                input=json.dumps(prompt, sort_keys=True),
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+                check=False,
+            )
+        except subprocess.TimeoutExpired as error:
+            raise IdentityRepositoryError(
+                f"model command exceeded its {timeout}-second runtime bound"
+            ) from error
+        if completed.stderr:
+            print(completed.stderr, file=sys.stderr, end="")
         if completed.returncode != 0:
             raise IdentityRepositoryError(
-                f"model command exited {completed.returncode}: "
-                f"{completed.stderr.strip()[-500:]}"
+                f"model command exited with status {completed.returncode}"
             )
-        outcome = json.loads(completed.stdout)
+        try:
+            outcome = json.loads(completed.stdout)
+        except json.JSONDecodeError as error:
+            raise IdentityRepositoryError(
+                "model command did not print a JSON object"
+            ) from error
         if not isinstance(outcome, dict):
             raise IdentityRepositoryError("model command must print a JSON object")
         return outcome

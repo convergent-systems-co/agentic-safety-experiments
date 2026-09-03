@@ -76,7 +76,16 @@ outcome in the next orientation with no lease left open. Attaching a model
 host is one command-line option; that host receives the same bounded prompt
 contract as an addressed reply and is held to the same citation rules.
 
-The executor is a polling job, so a wake fires up to one interval late.
+The executor is a polling job, so a wake fires up to one interval late. It
+honors one intent per pass, so at a fifteen-minute interval the agent can wake
+at most 96 times a day and a person can always address it between wakes; the
+model host timeout is clipped to the same one-hour bound as the lease. The
+executor's output carries identifiers and status only, so its log holds no
+orientation content, and a failed outcome records how the host failed but not
+what it printed. Outcome summaries and observations are size-bounded so one
+wake cannot fill the lifecycle budget. A wake intent's purpose shares the
+retrieval query cap. There is no daily cost cap beyond the pass limit; attaching
+a model host is a budget decision.
 Installing the `launchd` agent is a system configuration change left to the
 operator. No model host is configured by default; the first attended wake is
 a decision about cost and trust that this ADR does not make.

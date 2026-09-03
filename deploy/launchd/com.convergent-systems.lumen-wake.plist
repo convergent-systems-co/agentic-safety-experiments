@@ -7,7 +7,14 @@
   Nothing stays resident. Without a model command each wake is recorded as
   unattended, so Lumen can later see that it woke and that no one was there.
 
-  Install (replace the four placeholders first; create the log directory):
+  Placeholders: __PYTHON__ (absolute interpreter path, from `which python3`;
+  launchd's PATH is minimal), __REPO_ROOT__, __LUMEN_DB__ (the one live
+  database; a copy would diverge), __EXPERIMENT_ID__, __LOG_DIR__ (outside the
+  repository, created first). Executor output carries identifiers and outcome
+  status only, never orientation content.
+
+  Install (replace the placeholders first):
+    mkdir -p __LOG_DIR__
     cp deploy/launchd/com.convergent-systems.lumen-wake.plist \
        ~/Library/LaunchAgents/
     launchctl bootstrap gui/$(id -u) \
@@ -21,8 +28,7 @@
   <string>com.convergent-systems.lumen-wake</string>
   <key>ProgramArguments</key>
   <array>
-    <string>/usr/bin/env</string>
-    <string>python3</string>
+    <string>__PYTHON__</string>
     <string>-m</string>
     <string>experiment4</string>
     <string>--db</string>

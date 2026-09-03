@@ -178,7 +178,10 @@ citations must come from the orientation, and a completed outcome carries
 model authorship under the live lease. Without a model host the wake is
 recorded as `unattended`; a host failure is recorded as `failed` with the
 error, then surfaced. Every outcome releases the lease in the same transaction,
-so a wake can never leave the agent leased. Executions and outcomes appear in
+and a failure before any outcome releases it as `failed`, so a wake never
+leaves the agent leased. The executor honors one intent per pass, so a flood
+of due intents cannot hold the lease for longer than one bounded wake; its
+output carries identifiers and status only, never orientation content. Executions and outcomes appear in
 later orientations under lifecycle memory, so the agent can see that it woke
 and what came of it. An intent from a session the agent has ended is refused;
 a manual wake must begin the successor. Recurring intents are recorded but not

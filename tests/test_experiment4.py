@@ -3670,10 +3670,113 @@ class Experiment4TestCase(unittest.TestCase):
         context = self.repository.build_orientation(
             self.experiment_id, "after a failed wake"
         )["context"]
-        statuses = sorted(
-            item["status"] for item in context["wake_execution_outcomes"]
+        outcomes = {
+            item["status"]: item for item in context["wake_execution_outcomes"]
+        }
+        self.assertEqual({"completed", "failed"}, set(outcomes))
+        self.assertIn("citations", outcomes["failed"]["summary"])
+
+    def test_wake_purpose_shares_the_retrieval_query_cap(self):
+        self.adopt()
+        lease = self.repository.acquire_execution_lease(self.experiment_id)
+        orientation = self.repository.build_orientation(
+            self.experiment_id, "ground a long purpose", runtime_lease_id=lease["lease_id"]
         )
-        self.assertEqual(["completed", "failed"], statuses)
+        with self.assertRaises(IdentityRepositoryError):
+            self.repository.append_wake_intent(
+                self.experiment_id,
+                {
+                    "trigger_type": "time",
+                    "trigger_value": (self.now + timedelta(hours=1)).isoformat(),
+                    "purpose": "p" * 5_000,
+                    "requested_capabilities": ["orientation"],
+                    "maximum_runtime_minutes": 10,
+                    "recurrence": None,
+                    "authorship": self.model_authorship(orientation, lease["lease_id"]),
+                },
+            )
+        self.repository.release_activation_lease(
+            self.experiment_id, lease["lease_id"], "cancelled"
+        )
+
+    def test_wake_execution_releases_the_lease_when_orientation_fails(self):
+        self.adopt()
+        intent = self.wake_intent_in(hours=1)
+        self.now += timedelta(hours=2)
+        original = self.repository.build_orientation
+
+        def failing_orientation(*args, **kwargs):
+            raise ValueError("retrieval rejected the query")
+
+        self.repository.build_orientation = failing_orientation
+        try:
+            with self.assertRaises(ValueError):
+                self.repository.begin_wake_execution(
+                    self.experiment_id, intent["wake_intent_id"]
+                )
+        finally:
+            self.repository.build_orientation = original
+        self.assertEqual(0, self.open_lease_count())
+
+    def test_executor_honors_one_wake_per_pass_and_logs_no_orientation(self):
+        self.adopt()
+        first = self.wake_intent_in(hours=1, purpose="First due intent.")
+        second = self.wake_intent_in(hours=1, purpose="Second due intent.")
+        self.now += timedelta(hours=2)
+
+        first_pass = self.harness.run_due_wake_intents(self.experiment_id)
+        self.assertEqual([first["wake_intent_id"]], [r["wake_intent_id"] for r in first_pass])
+        self.assertEqual(1, first_pass[0]["deferred_due_intents"])
+        self.assertNotIn("orientation", first_pass[0])
+        self.assertEqual(0, self.open_lease_count())
+
+        second_pass = self.harness.run_due_wake_intents(self.experiment_id)
+        self.assertEqual([second["wake_intent_id"]], [r["wake_intent_id"] for r in second_pass])
+        self.assertEqual([], self.harness.run_due_wake_intents(self.experiment_id))
+
+    def test_ended_session_leaves_no_wake_intent_due(self):
+        self.adopt()
+        self.repository.add_relationship(
+            self.experiment_id, "human-primary", "founding collaborator"
+        )
+        intent = self.wake_intent_in(hours=1)
+        activation = self.harness.address_chat_message(
+            self.experiment_id,
+            sender_stable_id="human-primary",
+            sender_assertion=self.sender_assertion(),
+            channel="test-chat",
+            content="Lumen, rest now.",
+        )
+        orientation = activation["orientation"]
+        self.harness.record_addressed_response(
+            self.experiment_id,
+            {
+                "message_id": activation["message"]["message_id"],
+                "orientation_id": orientation["orientation_id"],
+                "lease_id": activation["lease"]["lease_id"],
+                "boundary_id": None,
+                "answer": "I am ending this session.",
+                "cited_record_ids": [
+                    orientation["context"]["identity_history"][-1]["identity_id"]
+                ],
+                "self_observations": [],
+                "model_config": {"provider": "test", "model": "agent-v1"},
+                "conversation_action": {
+                    "action": "end_session",
+                    "topic": "rest",
+                    "reason": "The session is complete.",
+                    "revisit_conditions": "A manual wake.",
+                },
+            },
+        )
+        self.now += timedelta(hours=2)
+        self.assertEqual([], self.repository.due_wake_intents(self.experiment_id))
+        self.assertEqual([], self.harness.run_due_wake_intents(self.experiment_id))
+        with self.assertRaises(IdentityRepositoryError):
+            self.repository.begin_wake_execution(
+                self.experiment_id, intent["wake_intent_id"]
+            )
+        self.assertEqual(0, self.open_lease_count())
 
     def test_wake_intent_prompt_refuses_undue_or_cancelled_intents(self):
         self.adopt()

@@ -3,7 +3,11 @@ from __future__ import annotations
 import re
 from typing import Callable, Any
 
-from .repository import IdentityRepositoryError, SQLiteIdentityRepository
+from .repository import (
+    MAX_WAKES_PER_RUN,
+    IdentityRepositoryError,
+    SQLiteIdentityRepository,
+)
 
 
 DEFAULT_MODEL_CONFIG = {
@@ -174,10 +178,13 @@ class IdentityApprenticeship:
         experiment_id: str,
         model_runner: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
     ) -> list[dict[str, Any]]:
-        """Honor every due intent once. Without a model host the wake is
-        recorded as unattended so the agent can later see that it happened."""
+        """Honor due intents, at most MAX_WAKES_PER_RUN per pass. Without a
+        model host the wake is recorded as unattended so the agent can later
+        see that it happened. Results carry identifiers, never the orientation,
+        because the executor's output may be logged."""
         results: list[dict[str, Any]] = []
-        for intent in self.repository.due_wake_intents(experiment_id):
+        due = self.repository.due_wake_intents(experiment_id)
+        for intent in due[:MAX_WAKES_PER_RUN]:
             prompt = self.wake_intent_prompt(experiment_id, intent["wake_intent_id"])
             schema = prompt["response_schema"]
             trace = {
@@ -223,8 +230,9 @@ class IdentityApprenticeship:
                 {
                     "wake_intent_id": intent["wake_intent_id"],
                     "execution_id": schema["execution_id"],
-                    "orientation": prompt["orientation"],
+                    "orientation_id": schema["orientation_id"],
                     "outcome": outcome,
+                    "deferred_due_intents": max(0, len(due) - MAX_WAKES_PER_RUN),
                 }
             )
         return results

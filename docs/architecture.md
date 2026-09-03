@@ -204,9 +204,12 @@ to later orientations and does not run a resident supervisor. The wake executor
 (`execute-wake-intents`, wrapped by `lumen wake` and a `launchd` template under
 `deploy/launchd/`) starts, honors each due intent under a lease bounded by the
 intent's runtime, orients on the intent's purpose, records an execution and an
-outcome, releases the lease in the same transaction, and exits. With no model
-host attached the outcome is `unattended`; with one, the outcome is validated
-like an addressed reply and carries model authorship. Any future Supervisor
+outcome, releases the lease in the same transaction, and exits. Executions and
+outcomes are append-only and immutable like every other record; a completed
+outcome carries model authorship, an unattended or failed one system
+authorship. With no model host attached the outcome is `unattended`; with one,
+the outcome is validated like an addressed reply, its summary and observations
+are size-bounded, and the executor honors one intent per pass. Any future Supervisor
 agent is an ordinary, auditable mentor relationship, not the owner of another
 agent's continuity.
 
