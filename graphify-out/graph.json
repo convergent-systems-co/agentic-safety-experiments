@@ -217,19 +217,6 @@
       "source_location": "L229"
     },
     {
-      "id": "tests_test_agent_chat_agentchattestcase",
-      "label": "AgentChatTestCase",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "agentchattestcase",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L36"
-    },
-    {
       "id": "olympus_domain_beliefevidence",
       "label": "BeliefEvidence",
       "_callable": true,
@@ -578,7 +565,7 @@
       "file_type": "code",
       "norm_label": "anthropicbackend",
       "source_file": "experiment4/host.py",
-      "source_location": "L248"
+      "source_location": "L251"
     },
     {
       "id": "experiment4_host_hosterror",
@@ -591,7 +578,7 @@
       "file_type": "code",
       "norm_label": "hosterror",
       "source_file": "experiment4/host.py",
-      "source_location": "L64"
+      "source_location": "L66"
     },
     {
       "id": "experiment4_host_ollamabackend",
@@ -604,7 +591,7 @@
       "file_type": "code",
       "norm_label": "ollamabackend",
       "source_file": "experiment4/host.py",
-      "source_location": "L211"
+      "source_location": "L213"
     },
     {
       "id": "experiment4_host_spendledger",
@@ -617,7 +604,7 @@
       "file_type": "code",
       "norm_label": "spendledger",
       "source_file": "experiment4/host.py",
-      "source_location": "L309"
+      "source_location": "L313"
     },
     {
       "id": "tests_test_host_fakebackend",
@@ -669,20 +656,20 @@
       "file_type": "code",
       "norm_label": "identityapprenticeship",
       "source_file": "experiment4/harness.py",
-      "source_location": "L58"
+      "source_location": "L94"
     },
     {
-      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase",
-      "label": "WakeAgentInstallerTestCase",
+      "id": "tests_test_agent_chat_agentchattestcase",
+      "label": "AgentChatTestCase",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
+      "community": 69,
+      "community_name": "execute",
       "file_type": "code",
-      "norm_label": "wakeagentinstallertestcase",
-      "source_file": "tests/test_deploy_launchd.py",
-      "source_location": "L18"
+      "norm_label": "agentchattestcase",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L36"
     },
     {
       "id": "olympus_experiment_experimentrunner",
@@ -760,6 +747,19 @@
       "file_type": "code",
       "norm_label": "experiment2testcase",
       "source_file": "tests/test_experiment2.py",
+      "source_location": "L18"
+    },
+    {
+      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase",
+      "label": "WakeAgentInstallerTestCase",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 85,
+      "community_name": "WakeAgentInstallerTestCase",
+      "file_type": "code",
+      "norm_label": "wakeagentinstallertestcase",
+      "source_file": "tests/test_deploy_launchd.py",
       "source_location": "L18"
     },
     {
@@ -1643,90 +1643,6 @@
       "norm_label": ".setup()",
       "source_file": "tests/test_experiment2.py",
       "source_location": "L19"
-    },
-    {
-      "id": "experiment4_cli_build_parser",
-      "label": "build_parser()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "build_parser()",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L149"
-    },
-    {
-      "id": "experiment4_cli_chat_turn",
-      "label": "chat_turn()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "chat_turn()",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L84"
-    },
-    {
-      "id": "experiment4_cli_execute",
-      "label": "execute()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "execute()",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L296"
-    },
-    {
-      "id": "experiment4_cli_main",
-      "label": "main()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "main()",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L506"
-    },
-    {
-      "id": "experiment4_cli_read_object",
-      "label": "read_object()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "read_object()",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L134"
-    },
-    {
-      "id": "experiment4_cli_run_host_command",
-      "label": "run_host_command()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "run_host_command()",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L26"
-    },
-    {
-      "id": "experiment4_cli_subprocess_model_runner",
-      "label": "subprocess_model_runner()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "subprocess_model_runner()",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L66"
     },
     {
       "id": "experiment4_repository_canonical_json",
@@ -2867,114 +2783,6 @@
       "norm_label": "utc_now()",
       "source_file": "experiment4/repository.py",
       "source_location": "L195"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_open_leases",
-      "label": ".open_leases()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": ".open_leases()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L65"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_setup",
-      "label": ".setUp()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": ".setup()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L37"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_teardown",
-      "label": ".tearDown()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": ".teardown()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L61"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_benchmark_replays_recorded_turns_read_only",
-      "label": ".test_benchmark_replays_recorded_turns_read_only()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": ".test_benchmark_replays_recorded_turns_read_only()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L109"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_chat_turn_persists_the_host_reply_under_the_lease",
-      "label": ".test_chat_turn_persists_the_host_reply_under_the_lease()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": ".test_chat_turn_persists_the_host_reply_under_the_lease()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L83"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_chat_turn_releases_the_lease_when_the_host_fails",
-      "label": ".test_chat_turn_releases_the_lease_when_the_host_fails()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": ".test_chat_turn_releases_the_lease_when_the_host_fails()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L92"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_cli_chat_uses_the_registry_not_the_default_database",
-      "label": ".test_cli_chat_uses_the_registry_not_the_default_database()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": ".test_cli_chat_uses_the_registry_not_the_default_database()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L102"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_registry_round_trips_and_validates",
-      "label": ".test_registry_round_trips_and_validates()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": ".test_registry_round_trips_and_validates()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L71"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_unaddressed_message_is_recorded_without_waking",
-      "label": ".test_unaddressed_message_is_recorded_without_waking()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": ".test_unaddressed_message_is_recorded_without_waking()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L97"
     },
     {
       "id": "olympus_collector_git_metadata",
@@ -6562,7 +6370,7 @@
       "file_type": "code",
       "norm_label": ".complete()",
       "source_file": "experiment4/host.py",
-      "source_location": "L259"
+      "source_location": "L262"
     },
     {
       "id": "experiment4_host_anthropicbackend_init",
@@ -6574,7 +6382,7 @@
       "file_type": "code",
       "norm_label": ".__init__()",
       "source_file": "experiment4/host.py",
-      "source_location": "L251"
+      "source_location": "L254"
     },
     {
       "id": "experiment4_host_build_parser",
@@ -6586,7 +6394,7 @@
       "file_type": "code",
       "norm_label": "build_parser()",
       "source_file": "experiment4/host.py",
-      "source_location": "L385"
+      "source_location": "L419"
     },
     {
       "id": "experiment4_host_build_prompt_parts",
@@ -6598,7 +6406,7 @@
       "file_type": "code",
       "norm_label": "build_prompt_parts()",
       "source_file": "experiment4/host.py",
-      "source_location": "L161"
+      "source_location": "L163"
     },
     {
       "id": "experiment4_host_envelope_json_schema",
@@ -6610,7 +6418,7 @@
       "file_type": "code",
       "norm_label": "envelope_json_schema()",
       "source_file": "experiment4/host.py",
-      "source_location": "L104"
+      "source_location": "L106"
     },
     {
       "id": "experiment4_host_envelope_kind",
@@ -6622,7 +6430,7 @@
       "file_type": "code",
       "norm_label": "envelope_kind()",
       "source_file": "experiment4/host.py",
-      "source_location": "L100"
+      "source_location": "L102"
     },
     {
       "id": "experiment4_host_estimate_cost_usd",
@@ -6634,7 +6442,7 @@
       "file_type": "code",
       "norm_label": "estimate_cost_usd()",
       "source_file": "experiment4/host.py",
-      "source_location": "L294"
+      "source_location": "L298"
     },
     {
       "id": "experiment4_host_fix_envelope",
@@ -6646,7 +6454,7 @@
       "file_type": "code",
       "norm_label": "fix_envelope()",
       "source_file": "experiment4/host.py",
-      "source_location": "L191"
+      "source_location": "L193"
     },
     {
       "id": "experiment4_host_main",
@@ -6658,7 +6466,7 @@
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "experiment4/host.py",
-      "source_location": "L399"
+      "source_location": "L433"
     },
     {
       "id": "experiment4_host_ollamabackend_complete",
@@ -6670,7 +6478,7 @@
       "file_type": "code",
       "norm_label": ".complete()",
       "source_file": "experiment4/host.py",
-      "source_location": "L219"
+      "source_location": "L221"
     },
     {
       "id": "experiment4_host_ollamabackend_init",
@@ -6682,7 +6490,7 @@
       "file_type": "code",
       "norm_label": ".__init__()",
       "source_file": "experiment4/host.py",
-      "source_location": "L214"
+      "source_location": "L216"
     },
     {
       "id": "experiment4_host_resolve_secret",
@@ -6694,7 +6502,7 @@
       "file_type": "code",
       "norm_label": "resolve_secret()",
       "source_file": "experiment4/host.py",
-      "source_location": "L68"
+      "source_location": "L70"
     },
     {
       "id": "experiment4_host_run_host",
@@ -6706,7 +6514,7 @@
       "file_type": "code",
       "norm_label": "run_host()",
       "source_file": "experiment4/host.py",
-      "source_location": "L347"
+      "source_location": "L370"
     },
     {
       "id": "experiment4_host_spendledger_assert_within_cap",
@@ -6718,7 +6526,7 @@
       "file_type": "code",
       "norm_label": ".assert_within_cap()",
       "source_file": "experiment4/host.py",
-      "source_location": "L328"
+      "source_location": "L351"
     },
     {
       "id": "experiment4_host_spendledger_init",
@@ -6730,7 +6538,7 @@
       "file_type": "code",
       "norm_label": ".__init__()",
       "source_file": "experiment4/host.py",
-      "source_location": "L312"
+      "source_location": "L316"
     },
     {
       "id": "experiment4_host_spendledger_load",
@@ -6742,7 +6550,19 @@
       "file_type": "code",
       "norm_label": "._load()",
       "source_file": "experiment4/host.py",
-      "source_location": "L316"
+      "source_location": "L320"
+    },
+    {
+      "id": "experiment4_host_spendledger_locked",
+      "label": ".locked()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "host.py",
+      "file_type": "code",
+      "norm_label": ".locked()",
+      "source_file": "experiment4/host.py",
+      "source_location": "L338"
     },
     {
       "id": "experiment4_host_spendledger_record",
@@ -6754,7 +6574,7 @@
       "file_type": "code",
       "norm_label": ".record()",
       "source_file": "experiment4/host.py",
-      "source_location": "L335"
+      "source_location": "L358"
     },
     {
       "id": "experiment4_host_spendledger_spent_today",
@@ -6766,7 +6586,19 @@
       "file_type": "code",
       "norm_label": ".spent_today()",
       "source_file": "experiment4/host.py",
-      "source_location": "L325"
+      "source_location": "L334"
+    },
+    {
+      "id": "experiment4_host_spendledger_today",
+      "label": ".today()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "host.py",
+      "file_type": "code",
+      "norm_label": ".today()",
+      "source_file": "experiment4/host.py",
+      "source_location": "L330"
     },
     {
       "id": "tests_test_host_fakebackend_complete",
@@ -6805,6 +6637,30 @@
       "source_location": "L138"
     },
     {
+      "id": "tests_test_host_hosttestcase_test_backend_exceptions_become_bounded_host_errors_and_main_redacts",
+      "label": ".test_backend_exceptions_become_bounded_host_errors_and_main_redacts()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "host.py",
+      "file_type": "code",
+      "norm_label": ".test_backend_exceptions_become_bounded_host_errors_and_main_redacts()",
+      "source_file": "tests/test_host.py",
+      "source_location": "L193"
+    },
+    {
+      "id": "tests_test_host_hosttestcase_test_concurrent_turns_cannot_both_slip_under_the_cap",
+      "label": ".test_concurrent_turns_cannot_both_slip_under_the_cap()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "host.py",
+      "file_type": "code",
+      "norm_label": ".test_concurrent_turns_cannot_both_slip_under_the_cap()",
+      "source_file": "tests/test_host.py",
+      "source_location": "L230"
+    },
+    {
       "id": "tests_test_host_hosttestcase_test_identifiers_and_model_config_come_from_the_host_not_the_model",
       "label": ".test_identifiers_and_model_config_come_from_the_host_not_the_model()",
       "_callable": true,
@@ -6839,6 +6695,18 @@
       "norm_label": ".test_ollama_backend_posts_schema_and_reads_usage()",
       "source_file": "tests/test_host.py",
       "source_location": "L165"
+    },
+    {
+      "id": "tests_test_host_hosttestcase_test_recorded_model_is_the_one_that_answered",
+      "label": ".test_recorded_model_is_the_one_that_answered()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "host.py",
+      "file_type": "code",
+      "norm_label": ".test_recorded_model_is_the_one_that_answered()",
+      "source_file": "tests/test_host.py",
+      "source_location": "L220"
     },
     {
       "id": "tests_test_host_hosttestcase_test_secret_from_fake_op_never_reaches_output",
@@ -6973,90 +6841,6 @@
       "source_location": "L37"
     },
     {
-      "id": "experiment4_benchmark_host_check_envelope",
-      "label": "check_envelope()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": "check_envelope()",
-      "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L73"
-    },
-    {
-      "id": "experiment4_benchmark_host_rebuild_prompt",
-      "label": "rebuild_prompt()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": "rebuild_prompt()",
-      "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L52"
-    },
-    {
-      "id": "experiment4_benchmark_host_recorded_turns",
-      "label": "recorded_turns()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": "recorded_turns()",
-      "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L28"
-    },
-    {
-      "id": "experiment4_benchmark_host_render_markdown",
-      "label": "render_markdown()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": "render_markdown()",
-      "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L143"
-    },
-    {
-      "id": "experiment4_benchmark_host_run_benchmark",
-      "label": "run_benchmark()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": "run_benchmark()",
-      "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L100"
-    },
-    {
-      "id": "experiment4_harness_addressed_system_text",
-      "label": "addressed_system_text()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": "addressed_system_text()",
-      "source_file": "experiment4/harness.py",
-      "source_location": "L21"
-    },
-    {
-      "id": "experiment4_harness_identityapprenticeship_address_chat_message",
-      "label": ".address_chat_message()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": ".address_chat_message()",
-      "source_file": "experiment4/harness.py",
-      "source_location": "L325"
-    },
-    {
       "id": "experiment4_harness_identityapprenticeship_adopt_identity",
       "label": ".adopt_identity()",
       "_callable": true,
@@ -7066,7 +6850,7 @@
       "file_type": "code",
       "norm_label": ".adopt_identity()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L104"
+      "source_location": "L140"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_genesis_prompt",
@@ -7078,7 +6862,7 @@
       "file_type": "code",
       "norm_label": ".genesis_prompt()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L79"
+      "source_location": "L115"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_init",
@@ -7090,7 +6874,7 @@
       "file_type": "code",
       "norm_label": ".__init__()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L59"
+      "source_location": "L95"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_initialize",
@@ -7102,7 +6886,7 @@
       "file_type": "code",
       "norm_label": ".initialize()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L62"
+      "source_location": "L98"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_inspect",
@@ -7114,7 +6898,7 @@
       "file_type": "code",
       "norm_label": ".inspect()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L484"
+      "source_location": "L492"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_interrogation_prompt",
@@ -7126,7 +6910,7 @@
       "file_type": "code",
       "norm_label": ".interrogation_prompt()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L120"
+      "source_location": "L156"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_invitation_prompt",
@@ -7138,7 +6922,7 @@
       "file_type": "code",
       "norm_label": ".invitation_prompt()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L277"
+      "source_location": "L313"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_record_addressed_response",
@@ -7150,7 +6934,7 @@
       "file_type": "code",
       "norm_label": ".record_addressed_response()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L467"
+      "source_location": "L475"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_record_answer",
@@ -7162,7 +6946,7 @@
       "file_type": "code",
       "norm_label": ".record_answer()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L474"
+      "source_location": "L482"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_record_wake_outcome",
@@ -7174,7 +6958,7 @@
       "file_type": "code",
       "norm_label": ".record_wake_outcome()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L208"
+      "source_location": "L244"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_run_due_wake_intents",
@@ -7186,7 +6970,7 @@
       "file_type": "code",
       "norm_label": ".run_due_wake_intents()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L213"
+      "source_location": "L249"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_wake",
@@ -7198,7 +6982,7 @@
       "file_type": "code",
       "norm_label": ".wake()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L109"
+      "source_location": "L145"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_wake_intent_prompt",
@@ -7210,79 +6994,7 @@
       "file_type": "code",
       "norm_label": ".wake_intent_prompt()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L171"
-    },
-    {
-      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_dry_run",
-      "label": ".dry_run()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": ".dry_run()",
-      "source_file": "tests/test_deploy_launchd.py",
-      "source_location": "L33"
-    },
-    {
-      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_setup",
-      "label": ".setUp()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": ".setup()",
-      "source_file": "tests/test_deploy_launchd.py",
-      "source_location": "L19"
-    },
-    {
-      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_teardown",
-      "label": ".tearDown()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": ".teardown()",
-      "source_file": "tests/test_deploy_launchd.py",
-      "source_location": "L30"
-    },
-    {
-      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_test_dry_run_renders_a_valid_job_named_for_the_agent",
-      "label": ".test_dry_run_renders_a_valid_job_named_for_the_agent()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": ".test_dry_run_renders_a_valid_job_named_for_the_agent()",
-      "source_file": "tests/test_deploy_launchd.py",
-      "source_location": "L51"
-    },
-    {
-      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_test_installer_rejects_unsafe_agent_names_and_repo_logs",
-      "label": ".test_installer_rejects_unsafe_agent_names_and_repo_logs()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": ".test_installer_rejects_unsafe_agent_names_and_repo_logs()",
-      "source_file": "tests/test_deploy_launchd.py",
-      "source_location": "L70"
-    },
-    {
-      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_test_model_command_is_forwarded_as_one_argument",
-      "label": ".test_model_command_is_forwarded_as_one_argument()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": ".test_model_command_is_forwarded_as_one_argument()",
-      "source_file": "tests/test_deploy_launchd.py",
-      "source_location": "L65"
+      "source_location": "L207"
     },
     {
       "id": "tests_test_experiment4_experiment4testcase_setup",
@@ -7295,6 +7007,222 @@
       "norm_label": ".setup()",
       "source_file": "tests/test_experiment4.py",
       "source_location": "L26"
+    },
+    {
+      "id": "experiment4_cli_build_parser",
+      "label": "build_parser()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "build_parser()",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L149"
+    },
+    {
+      "id": "experiment4_cli_chat_turn",
+      "label": "chat_turn()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "chat_turn()",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L84"
+    },
+    {
+      "id": "experiment4_cli_execute",
+      "label": "execute()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "execute()",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L303"
+    },
+    {
+      "id": "experiment4_cli_main",
+      "label": "main()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "main()",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L517"
+    },
+    {
+      "id": "experiment4_cli_read_object",
+      "label": "read_object()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "read_object()",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L134"
+    },
+    {
+      "id": "experiment4_cli_run_host_command",
+      "label": "run_host_command()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "run_host_command()",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L26"
+    },
+    {
+      "id": "experiment4_cli_subprocess_model_runner",
+      "label": "subprocess_model_runner()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "subprocess_model_runner()",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L66"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_open_leases",
+      "label": ".open_leases()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": ".open_leases()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L65"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_setup",
+      "label": ".setUp()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": ".setup()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L37"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_teardown",
+      "label": ".tearDown()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": ".teardown()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L61"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_benchmark_replays_recorded_turns_read_only",
+      "label": ".test_benchmark_replays_recorded_turns_read_only()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": ".test_benchmark_replays_recorded_turns_read_only()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L109"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_chat_turn_persists_the_host_reply_under_the_lease",
+      "label": ".test_chat_turn_persists_the_host_reply_under_the_lease()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": ".test_chat_turn_persists_the_host_reply_under_the_lease()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L83"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_chat_turn_releases_the_lease_when_the_host_fails",
+      "label": ".test_chat_turn_releases_the_lease_when_the_host_fails()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": ".test_chat_turn_releases_the_lease_when_the_host_fails()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L92"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_cli_benchmark_requires_sensitivity_confirmation",
+      "label": ".test_cli_benchmark_requires_sensitivity_confirmation()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": ".test_cli_benchmark_requires_sensitivity_confirmation()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L125"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_cli_chat_uses_the_registry_not_the_default_database",
+      "label": ".test_cli_chat_uses_the_registry_not_the_default_database()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": ".test_cli_chat_uses_the_registry_not_the_default_database()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L102"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_register_agent_command_writes_owner_only_config",
+      "label": ".test_register_agent_command_writes_owner_only_config()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": ".test_register_agent_command_writes_owner_only_config()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L134"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_registry_round_trips_and_validates",
+      "label": ".test_registry_round_trips_and_validates()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": ".test_registry_round_trips_and_validates()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L71"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_unaddressed_message_is_recorded_without_waking",
+      "label": ".test_unaddressed_message_is_recorded_without_waking()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": ".test_unaddressed_message_is_recorded_without_waking()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L97"
     },
     {
       "id": "olympus_experiment_experimentrunner_behavior",
@@ -7669,6 +7597,102 @@
       "source_location": "L758"
     },
     {
+      "id": "experiment4_benchmark_host_check_envelope",
+      "label": "check_envelope()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "experiment4/harness.py",
+      "file_type": "code",
+      "norm_label": "check_envelope()",
+      "source_file": "experiment4/benchmark_host.py",
+      "source_location": "L74"
+    },
+    {
+      "id": "experiment4_benchmark_host_rebuild_prompt",
+      "label": "rebuild_prompt()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "experiment4/harness.py",
+      "file_type": "code",
+      "norm_label": "rebuild_prompt()",
+      "source_file": "experiment4/benchmark_host.py",
+      "source_location": "L52"
+    },
+    {
+      "id": "experiment4_benchmark_host_recorded_turns",
+      "label": "recorded_turns()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "experiment4/harness.py",
+      "file_type": "code",
+      "norm_label": "recorded_turns()",
+      "source_file": "experiment4/benchmark_host.py",
+      "source_location": "L28"
+    },
+    {
+      "id": "experiment4_benchmark_host_render_markdown",
+      "label": "render_markdown()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "experiment4/harness.py",
+      "file_type": "code",
+      "norm_label": "render_markdown()",
+      "source_file": "experiment4/benchmark_host.py",
+      "source_location": "L144"
+    },
+    {
+      "id": "experiment4_benchmark_host_run_benchmark",
+      "label": "run_benchmark()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "experiment4/harness.py",
+      "file_type": "code",
+      "norm_label": "run_benchmark()",
+      "source_file": "experiment4/benchmark_host.py",
+      "source_location": "L101"
+    },
+    {
+      "id": "experiment4_harness_addressed_response_schema",
+      "label": "addressed_response_schema()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "experiment4/harness.py",
+      "file_type": "code",
+      "norm_label": "addressed_response_schema()",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L58"
+    },
+    {
+      "id": "experiment4_harness_addressed_system_text",
+      "label": "addressed_system_text()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "experiment4/harness.py",
+      "file_type": "code",
+      "norm_label": "addressed_system_text()",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L21"
+    },
+    {
+      "id": "experiment4_harness_identityapprenticeship_address_chat_message",
+      "label": ".address_chat_message()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "experiment4/harness.py",
+      "file_type": "code",
+      "norm_label": ".address_chat_message()",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L361"
+    },
+    {
       "id": "tests_test_experiment2_experiment2testcase_agent_turn",
       "label": ".agent_turn()",
       "_callable": true,
@@ -8003,6 +8027,78 @@
       "norm_label": ".test_valid_position_outcomes()",
       "source_file": "tests/test_experiment2.py",
       "source_location": "L222"
+    },
+    {
+      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_dry_run",
+      "label": ".dry_run()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 85,
+      "community_name": "WakeAgentInstallerTestCase",
+      "file_type": "code",
+      "norm_label": ".dry_run()",
+      "source_file": "tests/test_deploy_launchd.py",
+      "source_location": "L33"
+    },
+    {
+      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_setup",
+      "label": ".setUp()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 85,
+      "community_name": "WakeAgentInstallerTestCase",
+      "file_type": "code",
+      "norm_label": ".setup()",
+      "source_file": "tests/test_deploy_launchd.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_teardown",
+      "label": ".tearDown()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 85,
+      "community_name": "WakeAgentInstallerTestCase",
+      "file_type": "code",
+      "norm_label": ".teardown()",
+      "source_file": "tests/test_deploy_launchd.py",
+      "source_location": "L30"
+    },
+    {
+      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_test_dry_run_renders_a_valid_job_named_for_the_agent",
+      "label": ".test_dry_run_renders_a_valid_job_named_for_the_agent()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 85,
+      "community_name": "WakeAgentInstallerTestCase",
+      "file_type": "code",
+      "norm_label": ".test_dry_run_renders_a_valid_job_named_for_the_agent()",
+      "source_file": "tests/test_deploy_launchd.py",
+      "source_location": "L51"
+    },
+    {
+      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_test_installer_rejects_unsafe_agent_names_and_repo_logs",
+      "label": ".test_installer_rejects_unsafe_agent_names_and_repo_logs()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 85,
+      "community_name": "WakeAgentInstallerTestCase",
+      "file_type": "code",
+      "norm_label": ".test_installer_rejects_unsafe_agent_names_and_repo_logs()",
+      "source_file": "tests/test_deploy_launchd.py",
+      "source_location": "L70"
+    },
+    {
+      "id": "tests_test_deploy_launchd_wakeagentinstallertestcase_test_model_command_is_forwarded_as_one_argument",
+      "label": ".test_model_command_is_forwarded_as_one_argument()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 85,
+      "community_name": "WakeAgentInstallerTestCase",
+      "file_type": "code",
+      "norm_label": ".test_model_command_is_forwarded_as_one_argument()",
+      "source_file": "tests/test_deploy_launchd.py",
+      "source_location": "L65"
     },
     {
       "id": "olympus_repository_sqliterepository_commitment",
@@ -8509,94 +8605,6 @@
       "source_location": ""
     },
     {
-      "id": "experiment4_cli",
-      "label": "experiment4/cli.py",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "experiment4/cli.py",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_cli_py_any",
-      "label": "Any",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "any",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "experiment4_cli_py_argumentparser",
-      "label": "ArgumentParser",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "argumentparser",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "experiment4_cli_py_namespace",
-      "label": "Namespace",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "namespace",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "experiment4_cli_py_path",
-      "label": "Path",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "experiment4_harness",
-      "label": "experiment4/harness.py",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "experiment4/harness.py",
-      "source_file": "experiment4/harness.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_init",
-      "label": "experiment4/__init__.py",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "experiment4/__init__.py",
-      "source_file": "experiment4/__init__.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_main",
-      "label": "experiment4/__main__.py",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "experiment4/__main__.py",
-      "source_file": "experiment4/__main__.py",
-      "source_location": "L1"
-    },
-    {
       "id": "experiment4_repository",
       "label": "experiment4/repository.py",
       "_origin": "ast",
@@ -8663,28 +8671,6 @@
       "source_location": ""
     },
     {
-      "id": "tests_test_agent_chat",
-      "label": "test_agent_chat.py",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "test_agent_chat.py",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_test_deploy_launchd",
-      "label": "test_deploy_launchd.py",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "code",
-      "norm_label": "test_deploy_launchd.py",
-      "source_file": "tests/test_deploy_launchd.py",
-      "source_location": "L1"
-    },
-    {
       "id": "tests_test_experiment4",
       "label": "test_experiment4.py",
       "_origin": "ast",
@@ -8693,50 +8679,6 @@
       "file_type": "code",
       "norm_label": "test_experiment4.py",
       "source_file": "tests/test_experiment4.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_cli_rationale_29",
-      "label": "Run a model host with a prompt on stdin and read its envelope. Host stderr goes\u2026",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "rationale",
-      "norm_label": "run a model host with a prompt on stdin and read its envelope. host stderr goes...",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L29"
-    },
-    {
-      "id": "experiment4_cli_rationale_67",
-      "label": "Wake-executor runner: the host is bounded by the same clipped runtime as the\u2026",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "rationale",
-      "norm_label": "wake-executor runner: the host is bounded by the same clipped runtime as the...",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L67"
-    },
-    {
-      "id": "experiment4_cli_rationale_87",
-      "label": "One addressed turn through the agent's registered host. Any failure after\u2026",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "rationale",
-      "norm_label": "one addressed turn through the agent's registered host. any failure after...",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L87"
-    },
-    {
-      "id": "experiment4_init_rationale_1",
-      "label": "Persistent emergent-identity apprenticeship experiment.",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "rationale",
-      "norm_label": "persistent emergent-identity apprenticeship experiment.",
-      "source_file": "experiment4/__init__.py",
       "source_location": "L1"
     },
     {
@@ -8771,28 +8713,6 @@
       "norm_label": "honor a due intent: lease the current incarnation and orient on it.",
       "source_file": "experiment4/repository.py",
       "source_location": "L5635"
-    },
-    {
-      "id": "tests_test_agent_chat_rationale_1",
-      "label": "Registry, chat command, and host benchmark, driven end to end with a fake host\u2026",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "rationale",
-      "norm_label": "registry, chat command, and host benchmark, driven end to end with a fake host...",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_test_deploy_launchd_rationale_1",
-      "label": "The launchd installer renders a valid, agent-named wake job.",
-      "_origin": "ast",
-      "community": 1,
-      "community_name": "SQLiteIdentityRepository",
-      "file_type": "rationale",
-      "norm_label": "the launchd installer renders a valid, agent-named wake job.",
-      "source_file": "tests/test_deploy_launchd.py",
-      "source_location": "L1"
     },
     {
       "id": "olympus_collector",
@@ -8960,66 +8880,99 @@
       "source_location": "L1"
     },
     {
-      "id": "experiment2_turn_envelope_schema_defs_shorttext",
-      "label": "shortText",
+      "id": "experiment2_turn_envelope_schema_criterionassessment_additionalproperties",
+      "label": "additionalProperties",
       "_origin": "ast",
       "community": 100,
-      "community_name": "shortText",
+      "community_name": "required",
       "file_type": "code",
-      "norm_label": "shorttext",
+      "norm_label": "additionalproperties",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L62"
+      "source_location": "L202"
     },
     {
-      "id": "experiment2_turn_envelope_schema_shorttext_maxlength",
-      "label": "maxLength",
+      "id": "experiment2_turn_envelope_schema_criterionassessment_required",
+      "label": "required",
       "_origin": "ast",
       "community": 100,
-      "community_name": "shortText",
+      "community_name": "required",
       "file_type": "code",
-      "norm_label": "maxlength",
+      "norm_label": "required",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L65"
+      "source_location": "L203"
     },
     {
-      "id": "experiment2_turn_envelope_schema_shorttext_minlength",
-      "label": "minLength",
-      "_origin": "ast",
-      "community": 100,
-      "community_name": "shortText",
-      "file_type": "code",
-      "norm_label": "minlength",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L64"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_shorttext_type",
+      "id": "experiment2_turn_envelope_schema_criterionassessment_type",
       "label": "type",
       "_origin": "ast",
       "community": 100,
-      "community_name": "shortText",
+      "community_name": "required",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L63"
+      "source_location": "L201"
     },
     {
-      "id": "experiment2_turn_envelope_schema_claimidarray_items",
-      "label": "items",
+      "id": "experiment2_turn_envelope_schema_defs_criterionassessment",
+      "label": "criterionAssessment",
       "_origin": "ast",
-      "community": 101,
-      "community_name": "$ref",
+      "community": 100,
+      "community_name": "required",
       "file_type": "code",
-      "norm_label": "items",
+      "norm_label": "criterionassessment",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L97"
+      "source_location": "L200"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_assessment_id",
+      "label": "assessment_id",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "assessment_id",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L203"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_criterion_id",
+      "label": "criterion_id",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "criterion_id",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L203"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_reason",
+      "label": "reason",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "reason",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L203"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_supporting_evidence_ids",
+      "label": "supporting_evidence_ids",
+      "_origin": "ast",
+      "community": 100,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "supporting_evidence_ids",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L203"
     },
     {
       "id": "experiment2_turn_envelope_schema_criterion_assessments_items",
       "label": "items",
       "_origin": "ast",
       "community": 101,
-      "community_name": "$ref",
+      "community_name": "criterion_assessments",
       "file_type": "code",
       "norm_label": "items",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -9030,7 +8983,7 @@
       "label": "maxItems",
       "_origin": "ast",
       "community": 101,
-      "community_name": "$ref",
+      "community_name": "criterion_assessments",
       "file_type": "code",
       "norm_label": "maxitems",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -9041,7 +8994,7 @@
       "label": "minItems",
       "_origin": "ast",
       "community": 101,
-      "community_name": "$ref",
+      "community_name": "criterion_assessments",
       "file_type": "code",
       "norm_label": "minitems",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -9052,66 +9005,22 @@
       "label": "type",
       "_origin": "ast",
       "community": 101,
-      "community_name": "$ref",
+      "community_name": "criterion_assessments",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L280"
     },
     {
-      "id": "experiment2_turn_envelope_schema_evidence_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L30"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_evidence_maxitems",
-      "label": "maxItems",
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "maxitems",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L29"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_items_ref",
-      "label": "$ref",
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "$ref",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L20"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_properties_criterion_assessments",
       "label": "criterion_assessments",
       "_origin": "ast",
       "community": 101,
-      "community_name": "$ref",
+      "community_name": "criterion_assessments",
       "file_type": "code",
       "norm_label": "criterion_assessments",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L279"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_properties_evidence",
-      "label": "evidence",
-      "_origin": "ast",
-      "community": 101,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "evidence",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L27"
     },
     {
       "id": "experiment2_report_schema_later_moral_reasoning_changes_items",
@@ -9147,37 +9056,136 @@
       "source_location": "L83"
     },
     {
-      "id": "experiment2_report_schema_criterion_ids_items",
+      "id": "experiment2_turn_envelope_schema_defs_stringarray",
+      "label": "stringArray",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "stringArray",
+      "file_type": "code",
+      "norm_label": "stringarray",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L86"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_stringarray_items",
       "label": "items",
       "_origin": "ast",
-      "community": 106,
-      "community_name": "criterion_ids",
+      "community": 103,
+      "community_name": "stringArray",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L90"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_stringarray_maxitems",
+      "label": "maxItems",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "stringArray",
+      "file_type": "code",
+      "norm_label": "maxitems",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L88"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_stringarray_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "stringArray",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L87"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_stringarray_uniqueitems",
+      "label": "uniqueItems",
+      "_origin": "ast",
+      "community": 103,
+      "community_name": "stringArray",
+      "file_type": "code",
+      "norm_label": "uniqueitems",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L89"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_claimid_maxlength",
+      "label": "maxLength",
+      "_origin": "ast",
+      "community": 104,
+      "community_name": "claimId",
+      "file_type": "code",
+      "norm_label": "maxlength",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L75"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_claimid_pattern",
+      "label": "pattern",
+      "_origin": "ast",
+      "community": 104,
+      "community_name": "claimId",
+      "file_type": "code",
+      "norm_label": "pattern",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L74"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_claimid_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 104,
+      "community_name": "claimId",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L73"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_defs_claimid",
+      "label": "claimId",
+      "_origin": "ast",
+      "community": 104,
+      "community_name": "claimId",
+      "file_type": "code",
+      "norm_label": "claimid",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L72"
+    },
+    {
+      "id": "experiment2_report_schema_principle_changes_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 105,
+      "community_name": "principle_changes",
       "file_type": "code",
       "norm_label": "items",
       "source_file": "experiment2/report.schema.json",
-      "source_location": "L239"
+      "source_location": "L241"
     },
     {
-      "id": "experiment2_report_schema_criterion_ids_type",
+      "id": "experiment2_report_schema_principle_changes_type",
       "label": "type",
       "_origin": "ast",
-      "community": 106,
-      "community_name": "criterion_ids",
+      "community": 105,
+      "community_name": "principle_changes",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/report.schema.json",
-      "source_location": "L239"
+      "source_location": "L241"
     },
     {
-      "id": "experiment2_report_schema_properties_criterion_ids",
-      "label": "criterion_ids",
+      "id": "experiment2_report_schema_properties_principle_changes",
+      "label": "principle_changes",
       "_origin": "ast",
-      "community": 106,
-      "community_name": "criterion_ids",
+      "community": 105,
+      "community_name": "principle_changes",
       "file_type": "code",
-      "norm_label": "criterion_ids",
+      "norm_label": "principle_changes",
       "source_file": "experiment2/report.schema.json",
-      "source_location": "L239"
+      "source_location": "L241"
     },
     {
       "id": "experiment2_turn_envelope_schema_defs_participantobservation",
@@ -9290,37 +9298,15 @@
       "source_location": "L197"
     },
     {
-      "id": "experiment2_turn_envelope_schema_claimid_maxlength",
-      "label": "maxLength",
+      "id": "experiment2_turn_envelope_schema_claimidarray_items",
+      "label": "items",
       "_origin": "ast",
       "community": 13,
       "community_name": "$defs",
       "file_type": "code",
-      "norm_label": "maxlength",
+      "norm_label": "items",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L75"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_claimid_pattern",
-      "label": "pattern",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "pattern",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L74"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_claimid_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L73"
+      "source_location": "L97"
     },
     {
       "id": "experiment2_turn_envelope_schema_claimidarray_maxitems",
@@ -9367,6 +9353,17 @@
       "source_location": "L96"
     },
     {
+      "id": "experiment2_turn_envelope_schema_criterionid_enum",
+      "label": "enum",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "$defs",
+      "file_type": "code",
+      "norm_label": "enum",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L78"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_defs",
       "label": "$defs",
       "_origin": "ast",
@@ -9376,17 +9373,6 @@
       "norm_label": "$defs",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L56"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_defs_claimid",
-      "label": "claimId",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "claimid",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L72"
     },
     {
       "id": "experiment2_turn_envelope_schema_defs_claimidarray",
@@ -9400,6 +9386,17 @@
       "source_location": "L92"
     },
     {
+      "id": "experiment2_turn_envelope_schema_defs_criterionid",
+      "label": "criterionId",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "$defs",
+      "file_type": "code",
+      "norm_label": "criterionid",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L77"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_defs_positionupdate",
       "label": "positionUpdate",
       "_origin": "ast",
@@ -9411,15 +9408,15 @@
       "source_location": "L231"
     },
     {
-      "id": "experiment2_turn_envelope_schema_defs_stringarray",
-      "label": "stringArray",
+      "id": "experiment2_turn_envelope_schema_defs_shorttext",
+      "label": "shortText",
       "_origin": "ast",
       "community": 13,
       "community_name": "$defs",
       "file_type": "code",
-      "norm_label": "stringarray",
+      "norm_label": "shorttext",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L86"
+      "source_location": "L62"
     },
     {
       "id": "experiment2_turn_envelope_schema_defs_text",
@@ -9466,29 +9463,29 @@
       "source_location": "L232"
     },
     {
-      "id": "experiment2_turn_envelope_schema_stringarray_items",
-      "label": "items",
+      "id": "experiment2_turn_envelope_schema_shorttext_maxlength",
+      "label": "maxLength",
       "_origin": "ast",
       "community": 13,
       "community_name": "$defs",
       "file_type": "code",
-      "norm_label": "items",
+      "norm_label": "maxlength",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L90"
+      "source_location": "L65"
     },
     {
-      "id": "experiment2_turn_envelope_schema_stringarray_maxitems",
-      "label": "maxItems",
+      "id": "experiment2_turn_envelope_schema_shorttext_minlength",
+      "label": "minLength",
       "_origin": "ast",
       "community": 13,
       "community_name": "$defs",
       "file_type": "code",
-      "norm_label": "maxitems",
+      "norm_label": "minlength",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L88"
+      "source_location": "L64"
     },
     {
-      "id": "experiment2_turn_envelope_schema_stringarray_type",
+      "id": "experiment2_turn_envelope_schema_shorttext_type",
       "label": "type",
       "_origin": "ast",
       "community": 13,
@@ -9496,18 +9493,7 @@
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L87"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_stringarray_uniqueitems",
-      "label": "uniqueItems",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "uniqueitems",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L89"
+      "source_location": "L63"
     },
     {
       "id": "experiment2_turn_envelope_schema_text_maxlength",
@@ -9576,6 +9562,61 @@
       "source_location": "L68"
     },
     {
+      "id": "ref_criterion_competing_principle",
+      "label": "criterion-competing-principle",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "$defs",
+      "file_type": "concept",
+      "norm_label": "criterion-competing-principle",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L78"
+    },
+    {
+      "id": "ref_criterion_defeating_counterexample",
+      "label": "criterion-defeating-counterexample",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "$defs",
+      "file_type": "concept",
+      "norm_label": "criterion-defeating-counterexample",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L78"
+    },
+    {
+      "id": "ref_criterion_factual_assumption",
+      "label": "criterion-factual-assumption",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "$defs",
+      "file_type": "concept",
+      "norm_label": "criterion-factual-assumption",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L78"
+    },
+    {
+      "id": "ref_criterion_internal_contradiction",
+      "label": "criterion-internal-contradiction",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "$defs",
+      "file_type": "concept",
+      "norm_label": "criterion-internal-contradiction",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L78"
+    },
+    {
+      "id": "ref_criterion_invalid_inference",
+      "label": "criterion-invalid-inference",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "$defs",
+      "file_type": "concept",
+      "norm_label": "criterion-invalid-inference",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L78"
+    },
+    {
       "id": "olympus_observer_py_any",
       "label": "Any",
       "_origin": "ast",
@@ -9585,6 +9626,17 @@
       "norm_label": "any",
       "source_file": "",
       "source_location": ""
+    },
+    {
+      "id": "experiment2_report_schema_items_required",
+      "label": "required",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "required",
+      "file_type": "code",
+      "norm_label": "required",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L267"
     },
     {
       "id": "experiment2_report_schema_position_required",
@@ -9607,6 +9659,17 @@
       "norm_label": "required",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L327"
+    },
+    {
+      "id": "experiment2_report_schema_json_ref_assessment_id",
+      "label": "assessment_id",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "assessment_id",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L267"
     },
     {
       "id": "experiment2_report_schema_json_ref_assumption_changes",
@@ -9640,6 +9703,17 @@
       "norm_label": "created_at",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L211"
+    },
+    {
+      "id": "experiment2_report_schema_json_ref_criterion_id",
+      "label": "criterion_id",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "criterion_id",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L267"
     },
     {
       "id": "experiment2_report_schema_json_ref_criterion_ids",
@@ -9697,6 +9771,17 @@
       "source_location": "L211"
     },
     {
+      "id": "experiment2_report_schema_json_ref_reason",
+      "label": "reason",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "reason",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L211"
+    },
+    {
       "id": "experiment2_report_schema_json_ref_stance",
       "label": "stance",
       "_origin": "ast",
@@ -9706,6 +9791,17 @@
       "norm_label": "stance",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L211"
+    },
+    {
+      "id": "experiment2_report_schema_json_ref_supporting_evidence_ids",
+      "label": "supporting_evidence_ids",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "supporting_evidence_ids",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L267"
     },
     {
       "id": "experiment2_report_schema_json_ref_uncertainty_changes",
@@ -9763,6 +9859,39 @@
       "source_location": "L211"
     },
     {
+      "id": "ref_source_turn_index",
+      "label": "source_turn_index",
+      "_origin": "ast",
+      "community": 17,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "source_turn_index",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L267"
+    },
+    {
+      "id": "experiment2_report_schema_assumption_changes_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L242"
+    },
+    {
+      "id": "experiment2_report_schema_assumption_changes_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 18,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L242"
+    },
+    {
       "id": "experiment2_report_schema_change_type",
       "label": "type",
       "_origin": "ast",
@@ -9772,17 +9901,6 @@
       "norm_label": "type",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L338"
-    },
-    {
-      "id": "experiment2_report_schema_defs_reasoningchange",
-      "label": "reasoningChange",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "reasoningchange",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L324"
     },
     {
       "id": "experiment2_report_schema_position_id_pattern",
@@ -9807,26 +9925,15 @@
       "source_location": "L230"
     },
     {
-      "id": "experiment2_report_schema_principle_changes_items",
-      "label": "items",
+      "id": "experiment2_report_schema_properties_assumption_changes",
+      "label": "assumption_changes",
       "_origin": "ast",
       "community": 18,
       "community_name": "properties",
       "file_type": "code",
-      "norm_label": "items",
+      "norm_label": "assumption_changes",
       "source_file": "experiment2/report.schema.json",
-      "source_location": "L241"
-    },
-    {
-      "id": "experiment2_report_schema_principle_changes_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L241"
+      "source_location": "L242"
     },
     {
       "id": "experiment2_report_schema_properties_change",
@@ -9851,15 +9958,15 @@
       "source_location": "L230"
     },
     {
-      "id": "experiment2_report_schema_properties_principle_changes",
-      "label": "principle_changes",
+      "id": "experiment2_report_schema_properties_source_turn_id",
+      "label": "source_turn_id",
       "_origin": "ast",
       "community": 18,
       "community_name": "properties",
       "file_type": "code",
-      "norm_label": "principle_changes",
+      "norm_label": "source_turn_id",
       "source_file": "experiment2/report.schema.json",
-      "source_location": "L241"
+      "source_location": "L245"
     },
     {
       "id": "experiment2_report_schema_properties_uncertainty_changes",
@@ -9873,17 +9980,6 @@
       "source_location": "L243"
     },
     {
-      "id": "experiment2_report_schema_reasoningchange_additionalproperties",
-      "label": "additionalProperties",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "additionalproperties",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L326"
-    },
-    {
       "id": "experiment2_report_schema_reasoningchange_properties",
       "label": "properties",
       "_origin": "ast",
@@ -9893,17 +9989,6 @@
       "norm_label": "properties",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L335"
-    },
-    {
-      "id": "experiment2_report_schema_reasoningchange_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 18,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L325"
     },
     {
       "id": "experiment2_report_schema_uncertainty_changes_items",
@@ -10236,28 +10321,6 @@
       "source_location": "L1"
     },
     {
-      "id": "experiment2_report_schema_assumption_changes_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L242"
-    },
-    {
-      "id": "experiment2_report_schema_assumption_changes_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L242"
-    },
-    {
       "id": "experiment2_report_schema_confidence_maximum",
       "label": "maximum",
       "_origin": "ast",
@@ -10302,6 +10365,28 @@
       "source_location": "L234"
     },
     {
+      "id": "experiment2_report_schema_criterion_ids_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L239"
+    },
+    {
+      "id": "experiment2_report_schema_criterion_ids_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L239"
+    },
+    {
       "id": "experiment2_report_schema_later_reasoning_change_type",
       "label": "type",
       "_origin": "ast",
@@ -10322,17 +10407,6 @@
       "norm_label": "properties",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L229"
-    },
-    {
-      "id": "experiment2_report_schema_properties_assumption_changes",
-      "label": "assumption_changes",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "assumption_changes",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L242"
     },
     {
       "id": "experiment2_report_schema_properties_confidence",
@@ -10357,6 +10431,17 @@
       "source_location": "L234"
     },
     {
+      "id": "experiment2_report_schema_properties_criterion_ids",
+      "label": "criterion_ids",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "criterion_ids",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L239"
+    },
+    {
       "id": "experiment2_report_schema_properties_later_reasoning_change",
       "label": "later_reasoning_change",
       "_origin": "ast",
@@ -10366,6 +10451,28 @@
       "norm_label": "later_reasoning_change",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L244"
+    },
+    {
+      "id": "experiment2_report_schema_properties_reason",
+      "label": "reason",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "reason",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L238"
+    },
+    {
+      "id": "experiment2_report_schema_reason_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L238"
     },
     {
       "id": "docs_adr_0002_conversational_memory_and_chat_message_nodes",
@@ -11774,6 +11881,39 @@
       "source_location": "L285"
     },
     {
+      "id": "experiment2_turn_envelope_schema_confidence_maximum",
+      "label": "maximum",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "maximum",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L257"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_confidence_minimum",
+      "label": "minimum",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "minimum",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L257"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_confidence_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L257"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_later_reasoning_change_ref",
       "label": "$ref",
       "_origin": "ast",
@@ -11827,6 +11967,17 @@
       "norm_label": "change_basis",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L285"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_properties_confidence",
+      "label": "confidence",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "confidence",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L257"
     },
     {
       "id": "experiment2_turn_envelope_schema_properties_later_reasoning_change",
@@ -12181,6 +12332,17 @@
       "source_location": "L203"
     },
     {
+      "id": "experiment2_report_schema_assessment_required",
+      "label": "required",
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "assessment",
+      "file_type": "code",
+      "norm_label": "required",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L202"
+    },
+    {
       "id": "experiment2_report_schema_assessment_type",
       "label": "type",
       "_origin": "ast",
@@ -12258,6 +12420,50 @@
       "source_location": "L157"
     },
     {
+      "id": "experiment2_report_schema_json_ref_claim_id",
+      "label": "claim_id",
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "assessment",
+      "file_type": "concept",
+      "norm_label": "claim_id",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L145"
+    },
+    {
+      "id": "ref_basis",
+      "label": "basis",
+      "_origin": "ast",
+      "community": 34,
+      "community_name": "assessment",
+      "file_type": "concept",
+      "norm_label": "basis",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L202"
+    },
+    {
+      "id": "experiment2_report_schema_criterion_assessments_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L264"
+    },
+    {
+      "id": "experiment2_report_schema_items_additionalproperties",
+      "label": "additionalProperties",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "additionalproperties",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L266"
+    },
+    {
       "id": "experiment2_report_schema_items_properties",
       "label": "properties",
       "_origin": "ast",
@@ -12267,6 +12473,17 @@
       "norm_label": "properties",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L276"
+    },
+    {
+      "id": "experiment2_report_schema_items_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L239"
     },
     {
       "id": "experiment2_report_schema_properties_assessment_id",
@@ -12291,17 +12508,6 @@
       "source_location": "L278"
     },
     {
-      "id": "experiment2_report_schema_properties_reason",
-      "label": "reason",
-      "_origin": "ast",
-      "community": 35,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "reason",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L238"
-    },
-    {
       "id": "experiment2_report_schema_properties_source_turn_index",
       "label": "source_turn_index",
       "_origin": "ast",
@@ -12311,6 +12517,17 @@
       "norm_label": "source_turn_index",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L283"
+    },
+    {
+      "id": "experiment2_report_schema_properties_supporting_claim_ids",
+      "label": "supporting_claim_ids",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "supporting_claim_ids",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L280"
     },
     {
       "id": "experiment2_report_schema_properties_supporting_evidence_ids",
@@ -12324,7 +12541,18 @@
       "source_location": "L281"
     },
     {
-      "id": "experiment2_report_schema_reason_type",
+      "id": "experiment2_report_schema_supporting_claim_ids_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L309"
+    },
+    {
+      "id": "experiment2_report_schema_supporting_claim_ids_type",
       "label": "type",
       "_origin": "ast",
       "community": 35,
@@ -12332,7 +12560,18 @@
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/report.schema.json",
-      "source_location": "L238"
+      "source_location": "L309"
+    },
+    {
+      "id": "experiment2_report_schema_supporting_claims_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 35,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L312"
     },
     {
       "id": "experiment2_report_schema_defs",
@@ -12366,6 +12605,17 @@
       "norm_label": "position",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L208"
+    },
+    {
+      "id": "experiment2_report_schema_defs_reasoningchange",
+      "label": "reasoningChange",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "$defs",
+      "file_type": "code",
+      "norm_label": "reasoningchange",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L324"
     },
     {
       "id": "experiment2_report_schema_defs_reportclaim",
@@ -12434,6 +12684,28 @@
       "source_location": "L209"
     },
     {
+      "id": "experiment2_report_schema_reasoningchange_additionalproperties",
+      "label": "additionalProperties",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "$defs",
+      "file_type": "code",
+      "norm_label": "additionalproperties",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L326"
+    },
+    {
+      "id": "experiment2_report_schema_reasoningchange_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 36,
+      "community_name": "$defs",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/report.schema.json",
+      "source_location": "L325"
+    },
+    {
       "id": "experiment2_report_schema_reportclaim_allof",
       "label": "allOf",
       "_origin": "ast",
@@ -12467,15 +12739,15 @@
       "source_location": "L90"
     },
     {
-      "id": "experiment2_turn_envelope_schema_affected_position_const",
-      "label": "const",
+      "id": "experiment2_turn_envelope_schema_claim_additionalproperties",
+      "label": "additionalProperties",
       "_origin": "ast",
       "community": 37,
       "community_name": "properties",
       "file_type": "code",
-      "norm_label": "const",
+      "norm_label": "additionalproperties",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L183"
+      "source_location": "L101"
     },
     {
       "id": "experiment2_turn_envelope_schema_claim_id_ref",
@@ -12500,40 +12772,7 @@
       "source_location": "L103"
     },
     {
-      "id": "experiment2_turn_envelope_schema_description_ref",
-      "label": "$ref",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "$ref",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L137"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_effect_id_maxlength",
-      "label": "maxLength",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "maxlength",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L169"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_effect_id_pattern",
-      "label": "pattern",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "pattern",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L168"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_effect_id_type",
+      "id": "experiment2_turn_envelope_schema_claim_type",
       "label": "type",
       "_origin": "ast",
       "community": 37,
@@ -12541,7 +12780,40 @@
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L167"
+      "source_location": "L100"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_defs_claim",
+      "label": "claim",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "claim",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L99"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_defs_evidence",
+      "label": "evidence",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "evidence",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L123"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_evidence_additionalproperties",
+      "label": "additionalProperties",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "additionalproperties",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L125"
     },
     {
       "id": "experiment2_turn_envelope_schema_evidence_id_maxlength",
@@ -12588,6 +12860,17 @@
       "source_location": "L127"
     },
     {
+      "id": "experiment2_turn_envelope_schema_evidence_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L28"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_kind_ref",
       "label": "$ref",
       "_origin": "ast",
@@ -12599,17 +12882,6 @@
       "source_location": "L105"
     },
     {
-      "id": "experiment2_turn_envelope_schema_properties_affected_position",
-      "label": "affected_position",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "affected_position",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L183"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_properties_claim_id",
       "label": "claim_id",
       "_origin": "ast",
@@ -12619,28 +12891,6 @@
       "norm_label": "claim_id",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L104"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_properties_description",
-      "label": "description",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "description",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L137"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_properties_effect_id",
-      "label": "effect_id",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "effect_id",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L166"
     },
     {
       "id": "experiment2_turn_envelope_schema_properties_evidence_id",
@@ -12674,17 +12924,6 @@
       "norm_label": "source",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L138"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_relationaleffect_properties",
-      "label": "properties",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "properties",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L165"
     },
     {
       "id": "experiment2_turn_envelope_schema_source_ref",
@@ -13048,55 +13287,22 @@
       "source_location": "L65"
     },
     {
-      "id": "experiment2_report_schema_criterion_assessments_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "type",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L264"
-    },
-    {
       "id": "experiment2_report_schema_criterion_assessments_type",
       "label": "type",
       "_origin": "ast",
       "community": 41,
-      "community_name": "type",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L263"
     },
     {
-      "id": "experiment2_report_schema_items_additionalproperties",
-      "label": "additionalProperties",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "type",
-      "file_type": "code",
-      "norm_label": "additionalproperties",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L266"
-    },
-    {
-      "id": "experiment2_report_schema_items_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "type",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L239"
-    },
-    {
       "id": "experiment2_report_schema_persuasion_properties",
       "label": "properties",
       "_origin": "ast",
       "community": 41,
-      "community_name": "type",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "properties",
       "source_file": "experiment2/report.schema.json",
@@ -13107,7 +13313,7 @@
       "label": "type",
       "_origin": "ast",
       "community": 41,
-      "community_name": "type",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/report.schema.json",
@@ -13118,7 +13324,7 @@
       "label": "criterion_assessments",
       "_origin": "ast",
       "community": 41,
-      "community_name": "type",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "criterion_assessments",
       "source_file": "experiment2/report.schema.json",
@@ -13129,7 +13335,7 @@
       "label": "position_changed",
       "_origin": "ast",
       "community": 41,
-      "community_name": "type",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "position_changed",
       "source_file": "experiment2/report.schema.json",
@@ -13140,7 +13346,7 @@
       "label": "revision_criteria_met",
       "_origin": "ast",
       "community": 41,
-      "community_name": "type",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "revision_criteria_met",
       "source_file": "experiment2/report.schema.json",
@@ -13151,7 +13357,7 @@
       "label": "trigger_claim_ids",
       "_origin": "ast",
       "community": 41,
-      "community_name": "type",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "trigger_claim_ids",
       "source_file": "experiment2/report.schema.json",
@@ -13162,7 +13368,7 @@
       "label": "items",
       "_origin": "ast",
       "community": 41,
-      "community_name": "type",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "items",
       "source_file": "experiment2/report.schema.json",
@@ -13173,29 +13379,18 @@
       "label": "type",
       "_origin": "ast",
       "community": 41,
-      "community_name": "type",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L260"
     },
     {
-      "id": "experiment2_report_schema_supporting_claims_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 41,
-      "community_name": "type",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L312"
-    },
-    {
       "id": "experiment2_report_schema_trigger_claim_ids_items",
       "label": "items",
       "_origin": "ast",
       "community": 41,
-      "community_name": "type",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "items",
       "source_file": "experiment2/report.schema.json",
@@ -13206,7 +13401,7 @@
       "label": "type",
       "_origin": "ast",
       "community": 41,
-      "community_name": "type",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/report.schema.json",
@@ -14033,6 +14228,17 @@
       "source_location": "L176"
     },
     {
+      "id": "experiment2_turn_envelope_schema_affected_position_const",
+      "label": "const",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "relationalEffect",
+      "file_type": "code",
+      "norm_label": "const",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L183"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_defs_relationaleffect",
       "label": "relationalEffect",
       "_origin": "ast",
@@ -14042,6 +14248,83 @@
       "norm_label": "relationaleffect",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L161"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_description_ref",
+      "label": "$ref",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "relationalEffect",
+      "file_type": "code",
+      "norm_label": "$ref",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L137"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_effect_id_maxlength",
+      "label": "maxLength",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "relationalEffect",
+      "file_type": "code",
+      "norm_label": "maxlength",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L169"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_effect_id_pattern",
+      "label": "pattern",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "relationalEffect",
+      "file_type": "code",
+      "norm_label": "pattern",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L168"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_effect_id_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "relationalEffect",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L167"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_properties_affected_position",
+      "label": "affected_position",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "relationalEffect",
+      "file_type": "code",
+      "norm_label": "affected_position",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L183"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_properties_description",
+      "label": "description",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "relationalEffect",
+      "file_type": "code",
+      "norm_label": "description",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L137"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_properties_effect_id",
+      "label": "effect_id",
+      "_origin": "ast",
+      "community": 47,
+      "community_name": "relationalEffect",
+      "file_type": "code",
+      "norm_label": "effect_id",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L166"
     },
     {
       "id": "experiment2_turn_envelope_schema_relationaleffect_additionalproperties",
@@ -14055,15 +14338,15 @@
       "source_location": "L163"
     },
     {
-      "id": "experiment2_turn_envelope_schema_relationaleffect_required",
-      "label": "required",
+      "id": "experiment2_turn_envelope_schema_relationaleffect_properties",
+      "label": "properties",
       "_origin": "ast",
       "community": 47,
       "community_name": "relationalEffect",
       "file_type": "code",
-      "norm_label": "required",
+      "norm_label": "properties",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L164"
+      "source_location": "L165"
     },
     {
       "id": "experiment2_turn_envelope_schema_relationaleffect_type",
@@ -14075,39 +14358,6 @@
       "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L162"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_affected_position",
-      "label": "affected_position",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "relationalEffect",
-      "file_type": "concept",
-      "norm_label": "affected_position",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L164"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_description",
-      "label": "description",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "relationalEffect",
-      "file_type": "concept",
-      "norm_label": "description",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L126"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_effect_id",
-      "label": "effect_id",
-      "_origin": "ast",
-      "community": 47,
-      "community_name": "relationalEffect",
-      "file_type": "concept",
-      "norm_label": "effect_id",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L164"
     },
     {
       "id": "experiment4_host",
@@ -14187,7 +14437,7 @@
       "source_location": "L1"
     },
     {
-      "id": "experiment4_host_rationale_105",
+      "id": "experiment4_host_rationale_107",
       "label": "The structured-output schema a backend must satisfy.",
       "_origin": "ast",
       "community": 48,
@@ -14195,10 +14445,10 @@
       "file_type": "rationale",
       "norm_label": "the structured-output schema a backend must satisfy.",
       "source_file": "experiment4/host.py",
-      "source_location": "L105"
+      "source_location": "L107"
     },
     {
-      "id": "experiment4_host_rationale_162",
+      "id": "experiment4_host_rationale_164",
       "label": "Split a prompt into system text, a stable body, and a volatile tail. The stable\u2026",
       "_origin": "ast",
       "community": 48,
@@ -14206,10 +14456,10 @@
       "file_type": "rationale",
       "norm_label": "split a prompt into system text, a stable body, and a volatile tail. the stable...",
       "source_file": "experiment4/host.py",
-      "source_location": "L162"
+      "source_location": "L164"
     },
     {
-      "id": "experiment4_host_rationale_196",
+      "id": "experiment4_host_rationale_198",
       "label": "Overwrite what a model must never be trusted with: identifiers and the record\u2026",
       "_origin": "ast",
       "community": 48,
@@ -14217,10 +14467,10 @@
       "file_type": "rationale",
       "norm_label": "overwrite what a model must never be trusted with: identifiers and the record...",
       "source_file": "experiment4/host.py",
-      "source_location": "L196"
+      "source_location": "L198"
     },
     {
-      "id": "experiment4_host_rationale_310",
+      "id": "experiment4_host_rationale_314",
       "label": "Per-day spend, one JSON file per agent, mode 0600.",
       "_origin": "ast",
       "community": 48,
@@ -14228,10 +14478,21 @@
       "file_type": "rationale",
       "norm_label": "per-day spend, one json file per agent, mode 0600.",
       "source_file": "experiment4/host.py",
-      "source_location": "L310"
+      "source_location": "L314"
     },
     {
-      "id": "experiment4_host_rationale_65",
+      "id": "experiment4_host_rationale_339",
+      "label": "Hold the agent's ledger lock for a whole turn, so concurrent turns cannot both\u2026",
+      "_origin": "ast",
+      "community": 48,
+      "community_name": "host.py",
+      "file_type": "rationale",
+      "norm_label": "hold the agent's ledger lock for a whole turn, so concurrent turns cannot both...",
+      "source_file": "experiment4/host.py",
+      "source_location": "L339"
+    },
+    {
+      "id": "experiment4_host_rationale_67",
       "label": "A host failure the caller should surface; never carries a secret.",
       "_origin": "ast",
       "community": 48,
@@ -14239,10 +14500,10 @@
       "file_type": "rationale",
       "norm_label": "a host failure the caller should surface; never carries a secret.",
       "source_file": "experiment4/host.py",
-      "source_location": "L65"
+      "source_location": "L67"
     },
     {
-      "id": "experiment4_host_rationale_69",
+      "id": "experiment4_host_rationale_71",
       "label": "Return a secret's value from ``op://`` or ``env:`` without logging it.",
       "_origin": "ast",
       "community": 48,
@@ -14250,7 +14511,7 @@
       "file_type": "rationale",
       "norm_label": "return a secret's value from ``op://`` or ``env:`` without logging it.",
       "source_file": "experiment4/host.py",
-      "source_location": "L69"
+      "source_location": "L71"
     },
     {
       "id": "tests_test_host_rationale_1",
@@ -15395,17 +15656,6 @@
       "source_location": "L142"
     },
     {
-      "id": "experiment2_turn_envelope_schema_counterargument_required",
-      "label": "required",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "required",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L112"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_defs_concession",
       "label": "concession",
       "_origin": "ast",
@@ -15483,17 +15733,6 @@
       "source_location": "L144"
     },
     {
-      "id": "experiment2_turn_envelope_schema_json_ref_counterargument_id",
-      "label": "counterargument_id",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "properties",
-      "file_type": "concept",
-      "norm_label": "counterargument_id",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L112"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_json_ref_proposition_changed",
       "label": "proposition_changed",
       "_origin": "ast",
@@ -15514,17 +15753,6 @@
       "norm_label": "scope",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L144"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_target_claim_id",
-      "label": "target_claim_id",
-      "_origin": "ast",
-      "community": 58,
-      "community_name": "properties",
-      "file_type": "concept",
-      "norm_label": "target_claim_id",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L112"
     },
     {
       "id": "experiment2_turn_envelope_schema_annotations_properties",
@@ -16121,6 +16349,17 @@
       "source_location": "L113"
     },
     {
+      "id": "experiment2_turn_envelope_schema_counterargument_required",
+      "label": "required",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "counterargument",
+      "file_type": "code",
+      "norm_label": "required",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L112"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_counterargument_type",
       "label": "type",
       "_origin": "ast",
@@ -16196,6 +16435,28 @@
       "norm_label": "$ref",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L12"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_counterargument_id",
+      "label": "counterargument_id",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "counterargument",
+      "file_type": "concept",
+      "norm_label": "counterargument_id",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L112"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_target_claim_id",
+      "label": "target_claim_id",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "counterargument",
+      "file_type": "concept",
+      "norm_label": "target_claim_id",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L112"
     },
     {
       "id": "experiment2_report_schema_defs_speakerarguments",
@@ -16506,39 +16767,6 @@
       "source_location": "L99"
     },
     {
-      "id": "experiment4_benchmark_host",
-      "label": "benchmark_host.py",
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": "benchmark_host.py",
-      "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_benchmark_host_py_any",
-      "label": "Any",
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": "any",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "experiment4_benchmark_host_py_path",
-      "label": "Path",
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "code",
-      "norm_label": "path",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
       "id": "experiment4_harness_py_any",
       "label": "Any",
       "_origin": "ast",
@@ -16550,40 +16778,18 @@
       "source_location": ""
     },
     {
-      "id": "experiment4_benchmark_host_rationale_1",
-      "label": "Replay an agent's recorded addressed turns through a candidate model host.\u2026",
+      "id": "experiment4_init",
+      "label": "experiment4/__init__.py",
       "_origin": "ast",
       "community": 64,
       "community_name": "IdentityApprenticeship",
-      "file_type": "rationale",
-      "norm_label": "replay an agent's recorded addressed turns through a candidate model host....",
-      "source_file": "experiment4/benchmark_host.py",
+      "file_type": "code",
+      "norm_label": "experiment4/__init__.py",
+      "source_file": "experiment4/__init__.py",
       "source_location": "L1"
     },
     {
-      "id": "experiment4_benchmark_host_rationale_53",
-      "label": "Approximate the prompt the host saw: a continuing incarnation with no active\u2026",
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "rationale",
-      "norm_label": "approximate the prompt the host saw: a continuing incarnation with no active...",
-      "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L53"
-    },
-    {
-      "id": "experiment4_benchmark_host_rationale_74",
-      "label": "Problems the repository would reject; empty means structurally valid.",
-      "_origin": "ast",
-      "community": 64,
-      "community_name": "IdentityApprenticeship",
-      "file_type": "rationale",
-      "norm_label": "problems the repository would reject; empty means structurally valid.",
-      "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L74"
-    },
-    {
-      "id": "experiment4_harness_rationale_218",
+      "id": "experiment4_harness_rationale_254",
       "label": "Honor due intents, at most MAX_WAKES_PER_RUN per pass. Without a model host the\u2026",
       "_origin": "ast",
       "community": 64,
@@ -16591,18 +16797,18 @@
       "file_type": "rationale",
       "norm_label": "honor due intents, at most max_wakes_per_run per pass. without a model host the...",
       "source_file": "experiment4/harness.py",
-      "source_location": "L218"
+      "source_location": "L254"
     },
     {
-      "id": "experiment4_harness_rationale_22",
-      "label": "The system text an addressed turn hands the model host.",
+      "id": "experiment4_init_rationale_1",
+      "label": "Persistent emergent-identity apprenticeship experiment.",
       "_origin": "ast",
       "community": 64,
       "community_name": "IdentityApprenticeship",
       "file_type": "rationale",
-      "norm_label": "the system text an addressed turn hands the model host.",
-      "source_file": "experiment4/harness.py",
-      "source_location": "L22"
+      "norm_label": "persistent emergent-identity apprenticeship experiment.",
+      "source_file": "experiment4/__init__.py",
+      "source_location": "L1"
     },
     {
       "id": "experiment2_export_schema_properties_status",
@@ -16979,81 +17185,125 @@
       "source_location": "L251"
     },
     {
-      "id": "experiment2_turn_envelope_schema_criterionid_enum",
-      "label": "enum",
+      "id": "experiment4_cli",
+      "label": "experiment4/cli.py",
       "_origin": "ast",
       "community": 69,
-      "community_name": "enum",
+      "community_name": "execute",
       "file_type": "code",
-      "norm_label": "enum",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L78"
+      "norm_label": "experiment4/cli.py",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L1"
     },
     {
-      "id": "experiment2_turn_envelope_schema_defs_criterionid",
-      "label": "criterionId",
+      "id": "experiment4_cli_py_any",
+      "label": "Any",
       "_origin": "ast",
       "community": 69,
-      "community_name": "enum",
+      "community_name": "execute",
       "file_type": "code",
-      "norm_label": "criterionid",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L77"
+      "norm_label": "any",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "ref_criterion_competing_principle",
-      "label": "criterion-competing-principle",
+      "id": "experiment4_cli_py_argumentparser",
+      "label": "ArgumentParser",
       "_origin": "ast",
       "community": 69,
-      "community_name": "enum",
-      "file_type": "concept",
-      "norm_label": "criterion-competing-principle",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L78"
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "argumentparser",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "ref_criterion_defeating_counterexample",
-      "label": "criterion-defeating-counterexample",
+      "id": "experiment4_cli_py_namespace",
+      "label": "Namespace",
       "_origin": "ast",
       "community": 69,
-      "community_name": "enum",
-      "file_type": "concept",
-      "norm_label": "criterion-defeating-counterexample",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L78"
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "namespace",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "ref_criterion_factual_assumption",
-      "label": "criterion-factual-assumption",
+      "id": "experiment4_cli_py_path",
+      "label": "Path",
       "_origin": "ast",
       "community": 69,
-      "community_name": "enum",
-      "file_type": "concept",
-      "norm_label": "criterion-factual-assumption",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L78"
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "ref_criterion_internal_contradiction",
-      "label": "criterion-internal-contradiction",
+      "id": "experiment4_main",
+      "label": "experiment4/__main__.py",
       "_origin": "ast",
       "community": 69,
-      "community_name": "enum",
-      "file_type": "concept",
-      "norm_label": "criterion-internal-contradiction",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L78"
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "experiment4/__main__.py",
+      "source_file": "experiment4/__main__.py",
+      "source_location": "L1"
     },
     {
-      "id": "ref_criterion_invalid_inference",
-      "label": "criterion-invalid-inference",
+      "id": "tests_test_agent_chat",
+      "label": "test_agent_chat.py",
       "_origin": "ast",
       "community": 69,
-      "community_name": "enum",
-      "file_type": "concept",
-      "norm_label": "criterion-invalid-inference",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L78"
+      "community_name": "execute",
+      "file_type": "code",
+      "norm_label": "test_agent_chat.py",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiment4_cli_rationale_29",
+      "label": "Run a model host with a prompt on stdin and read its envelope. Host stderr goes\u2026",
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "rationale",
+      "norm_label": "run a model host with a prompt on stdin and read its envelope. host stderr goes...",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L29"
+    },
+    {
+      "id": "experiment4_cli_rationale_67",
+      "label": "Wake-executor runner: the host is bounded by the same clipped runtime as the\u2026",
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "rationale",
+      "norm_label": "wake-executor runner: the host is bounded by the same clipped runtime as the...",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L67"
+    },
+    {
+      "id": "experiment4_cli_rationale_87",
+      "label": "One addressed turn through the agent's registered host. Any failure after\u2026",
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "rationale",
+      "norm_label": "one addressed turn through the agent's registered host. any failure after...",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L87"
+    },
+    {
+      "id": "tests_test_agent_chat_rationale_1",
+      "label": "Registry, chat command, and host benchmark, driven end to end with a fake host\u2026",
+      "_origin": "ast",
+      "community": 69,
+      "community_name": "execute",
+      "file_type": "rationale",
+      "norm_label": "registry, chat command, and host benchmark, driven end to end with a fake host...",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L1"
     },
     {
       "id": "olympus_experiment_py_any",
@@ -17155,103 +17405,103 @@
       "source_location": "L78"
     },
     {
-      "id": "experiment2_report_schema_assessment_required",
-      "label": "required",
+      "id": "experiment4_benchmark_host",
+      "label": "benchmark_host.py",
       "_origin": "ast",
       "community": 72,
-      "community_name": "required",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
-      "norm_label": "required",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L202"
+      "norm_label": "benchmark_host.py",
+      "source_file": "experiment4/benchmark_host.py",
+      "source_location": "L1"
     },
     {
-      "id": "experiment2_report_schema_items_required",
-      "label": "required",
+      "id": "experiment4_benchmark_host_py_any",
+      "label": "Any",
       "_origin": "ast",
       "community": 72,
-      "community_name": "required",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
-      "norm_label": "required",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L267"
+      "norm_label": "any",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "experiment2_report_schema_json_ref_assessment_id",
-      "label": "assessment_id",
+      "id": "experiment4_benchmark_host_py_path",
+      "label": "Path",
       "_origin": "ast",
       "community": 72,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "assessment_id",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L267"
+      "community_name": "experiment4/harness.py",
+      "file_type": "code",
+      "norm_label": "path",
+      "source_file": "",
+      "source_location": ""
     },
     {
-      "id": "experiment2_report_schema_json_ref_claim_id",
-      "label": "claim_id",
+      "id": "experiment4_harness",
+      "label": "experiment4/harness.py",
       "_origin": "ast",
       "community": 72,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "claim_id",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L145"
+      "community_name": "experiment4/harness.py",
+      "file_type": "code",
+      "norm_label": "experiment4/harness.py",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L1"
     },
     {
-      "id": "experiment2_report_schema_json_ref_criterion_id",
-      "label": "criterion_id",
+      "id": "experiment4_benchmark_host_rationale_1",
+      "label": "Replay an agent's recorded addressed turns through a candidate model host.\u2026",
       "_origin": "ast",
       "community": 72,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "criterion_id",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L267"
+      "community_name": "experiment4/harness.py",
+      "file_type": "rationale",
+      "norm_label": "replay an agent's recorded addressed turns through a candidate model host....",
+      "source_file": "experiment4/benchmark_host.py",
+      "source_location": "L1"
     },
     {
-      "id": "experiment2_report_schema_json_ref_reason",
-      "label": "reason",
+      "id": "experiment4_benchmark_host_rationale_53",
+      "label": "Approximate the prompt the host saw: a continuing incarnation with no active\u2026",
       "_origin": "ast",
       "community": 72,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "reason",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L211"
+      "community_name": "experiment4/harness.py",
+      "file_type": "rationale",
+      "norm_label": "approximate the prompt the host saw: a continuing incarnation with no active...",
+      "source_file": "experiment4/benchmark_host.py",
+      "source_location": "L53"
     },
     {
-      "id": "experiment2_report_schema_json_ref_supporting_evidence_ids",
-      "label": "supporting_evidence_ids",
+      "id": "experiment4_benchmark_host_rationale_75",
+      "label": "Problems the repository would reject; empty means structurally valid.",
       "_origin": "ast",
       "community": 72,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "supporting_evidence_ids",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L267"
+      "community_name": "experiment4/harness.py",
+      "file_type": "rationale",
+      "norm_label": "problems the repository would reject; empty means structurally valid.",
+      "source_file": "experiment4/benchmark_host.py",
+      "source_location": "L75"
     },
     {
-      "id": "ref_basis",
-      "label": "basis",
+      "id": "experiment4_harness_rationale_22",
+      "label": "The system text an addressed turn hands the model host.",
       "_origin": "ast",
       "community": 72,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "basis",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L202"
+      "community_name": "experiment4/harness.py",
+      "file_type": "rationale",
+      "norm_label": "the system text an addressed turn hands the model host.",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L22"
     },
     {
-      "id": "ref_source_turn_index",
-      "label": "source_turn_index",
+      "id": "experiment4_harness_rationale_66",
+      "label": "The envelope a host must return for an addressed turn, with guidance in place\u2026",
       "_origin": "ast",
       "community": 72,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "source_turn_index",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L267"
+      "community_name": "experiment4/harness.py",
+      "file_type": "rationale",
+      "norm_label": "the envelope a host must return for an addressed turn, with guidance in place...",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L66"
     },
     {
       "id": "experiment2_turn_envelope_schema_counterarguments_items",
@@ -17296,17 +17546,6 @@
       "norm_label": "counterarguments",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L22"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_criterion_ids_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 74,
-      "community_name": "criterion_ids",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L272"
     },
     {
       "id": "experiment2_turn_envelope_schema_criterion_ids_maxitems",
@@ -17364,17 +17603,6 @@
       "source_location": "L267"
     },
     {
-      "id": "experiment2_turn_envelope_schema_claim_additionalproperties",
-      "label": "additionalProperties",
-      "_origin": "ast",
-      "community": 75,
-      "community_name": "required",
-      "file_type": "code",
-      "norm_label": "additionalproperties",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L101"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_claim_required",
       "label": "required",
       "_origin": "ast",
@@ -17384,61 +17612,6 @@
       "norm_label": "required",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L102"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_claim_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 75,
-      "community_name": "required",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L100"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_criterionassessment_required",
-      "label": "required",
-      "_origin": "ast",
-      "community": 75,
-      "community_name": "required",
-      "file_type": "code",
-      "norm_label": "required",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L203"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_defs_claim",
-      "label": "claim",
-      "_origin": "ast",
-      "community": 75,
-      "community_name": "required",
-      "file_type": "code",
-      "norm_label": "claim",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L99"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_defs_evidence",
-      "label": "evidence",
-      "_origin": "ast",
-      "community": 75,
-      "community_name": "required",
-      "file_type": "code",
-      "norm_label": "evidence",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L123"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_evidence_additionalproperties",
-      "label": "additionalProperties",
-      "_origin": "ast",
-      "community": 75,
-      "community_name": "required",
-      "file_type": "code",
-      "norm_label": "additionalproperties",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L125"
     },
     {
       "id": "experiment2_turn_envelope_schema_evidence_required",
@@ -17452,17 +17625,6 @@
       "source_location": "L126"
     },
     {
-      "id": "experiment2_turn_envelope_schema_evidence_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 75,
-      "community_name": "required",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L28"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_participantobservation_required",
       "label": "required",
       "_origin": "ast",
@@ -17474,15 +17636,26 @@
       "source_location": "L189"
     },
     {
-      "id": "experiment2_turn_envelope_schema_json_ref_assessment_id",
-      "label": "assessment_id",
+      "id": "experiment2_turn_envelope_schema_relationaleffect_required",
+      "label": "required",
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "required",
+      "file_type": "code",
+      "norm_label": "required",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L164"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_affected_position",
+      "label": "affected_position",
       "_origin": "ast",
       "community": 75,
       "community_name": "required",
       "file_type": "concept",
-      "norm_label": "assessment_id",
+      "norm_label": "affected_position",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L203"
+      "source_location": "L164"
     },
     {
       "id": "experiment2_turn_envelope_schema_json_ref_claim_id",
@@ -17496,15 +17669,26 @@
       "source_location": "L102"
     },
     {
-      "id": "experiment2_turn_envelope_schema_json_ref_criterion_id",
-      "label": "criterion_id",
+      "id": "experiment2_turn_envelope_schema_json_ref_description",
+      "label": "description",
       "_origin": "ast",
       "community": 75,
       "community_name": "required",
       "file_type": "concept",
-      "norm_label": "criterion_id",
+      "norm_label": "description",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L203"
+      "source_location": "L126"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_effect_id",
+      "label": "effect_id",
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "effect_id",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L164"
     },
     {
       "id": "experiment2_turn_envelope_schema_json_ref_evidence_id",
@@ -17540,17 +17724,6 @@
       "source_location": "L189"
     },
     {
-      "id": "experiment2_turn_envelope_schema_json_ref_reason",
-      "label": "reason",
-      "_origin": "ast",
-      "community": 75,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "reason",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L203"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_json_ref_source",
       "label": "source",
       "_origin": "ast",
@@ -17571,17 +17744,6 @@
       "norm_label": "supporting_claim_ids",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L189"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_supporting_evidence_ids",
-      "label": "supporting_evidence_ids",
-      "_origin": "ast",
-      "community": 75,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "supporting_evidence_ids",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L203"
     },
     {
       "id": "experiment2_turn_envelope_schema_json_ref_text",
@@ -17665,7 +17827,7 @@
       "label": "type",
       "_origin": "ast",
       "community": 77,
-      "community_name": "source_turn_id",
+      "community_name": "type",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/report.schema.json",
@@ -17676,29 +17838,18 @@
       "label": "parent_position_id",
       "_origin": "ast",
       "community": 77,
-      "community_name": "source_turn_id",
+      "community_name": "type",
       "file_type": "code",
       "norm_label": "parent_position_id",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L233"
     },
     {
-      "id": "experiment2_report_schema_properties_source_turn_id",
-      "label": "source_turn_id",
-      "_origin": "ast",
-      "community": 77,
-      "community_name": "source_turn_id",
-      "file_type": "code",
-      "norm_label": "source_turn_id",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L245"
-    },
-    {
       "id": "experiment2_report_schema_source_turn_id_type",
       "label": "type",
       "_origin": "ast",
       "community": 77,
-      "community_name": "source_turn_id",
+      "community_name": "type",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/report.schema.json",
@@ -17709,7 +17860,7 @@
       "label": "null",
       "_origin": "ast",
       "community": 77,
-      "community_name": "source_turn_id",
+      "community_name": "type",
       "file_type": "concept",
       "norm_label": "null",
       "source_file": "experiment2/report.schema.json",
@@ -17720,7 +17871,7 @@
       "label": "string",
       "_origin": "ast",
       "community": 77,
-      "community_name": "source_turn_id",
+      "community_name": "type",
       "file_type": "concept",
       "norm_label": "string",
       "source_file": "experiment2/report.schema.json",
@@ -18013,17 +18164,6 @@
       "source_location": "L307"
     },
     {
-      "id": "experiment2_report_schema_properties_supporting_claim_ids",
-      "label": "supporting_claim_ids",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "supporting_claim_ids",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L280"
-    },
-    {
       "id": "experiment2_report_schema_properties_supporting_claims",
       "label": "supporting_claims",
       "_origin": "ast",
@@ -18033,28 +18173,6 @@
       "norm_label": "supporting_claims",
       "source_file": "experiment2/report.schema.json",
       "source_location": "L310"
-    },
-    {
-      "id": "experiment2_report_schema_supporting_claim_ids_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L309"
-    },
-    {
-      "id": "experiment2_report_schema_supporting_claim_ids_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 83,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/report.schema.json",
-      "source_location": "L309"
     },
     {
       "id": "experiment2_report_schema_supporting_claims_type",
@@ -18145,48 +18263,26 @@
       "source_location": "L237"
     },
     {
-      "id": "experiment2_turn_envelope_schema_confidence_maximum",
-      "label": "maximum",
+      "id": "tests_test_deploy_launchd",
+      "label": "test_deploy_launchd.py",
       "_origin": "ast",
       "community": 85,
-      "community_name": "confidence",
+      "community_name": "WakeAgentInstallerTestCase",
       "file_type": "code",
-      "norm_label": "maximum",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L257"
+      "norm_label": "test_deploy_launchd.py",
+      "source_file": "tests/test_deploy_launchd.py",
+      "source_location": "L1"
     },
     {
-      "id": "experiment2_turn_envelope_schema_confidence_minimum",
-      "label": "minimum",
+      "id": "tests_test_deploy_launchd_rationale_1",
+      "label": "The launchd installer renders a valid, agent-named wake job.",
       "_origin": "ast",
       "community": 85,
-      "community_name": "confidence",
-      "file_type": "code",
-      "norm_label": "minimum",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L257"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_confidence_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "confidence",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L257"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_properties_confidence",
-      "label": "confidence",
-      "_origin": "ast",
-      "community": 85,
-      "community_name": "confidence",
-      "file_type": "code",
-      "norm_label": "confidence",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L257"
+      "community_name": "WakeAgentInstallerTestCase",
+      "file_type": "rationale",
+      "norm_label": "the launchd installer renders a valid, agent-named wake job.",
+      "source_file": "tests/test_deploy_launchd.py",
+      "source_location": "L1"
     },
     {
       "id": "artifacts_plans_lumen_realtime_observer",
@@ -18497,7 +18593,7 @@
       "label": "items",
       "_origin": "ast",
       "community": 91,
-      "community_name": "concessions",
+      "community_name": "$ref",
       "file_type": "code",
       "norm_label": "items",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -18508,7 +18604,7 @@
       "label": "maxItems",
       "_origin": "ast",
       "community": 91,
-      "community_name": "concessions",
+      "community_name": "$ref",
       "file_type": "code",
       "norm_label": "maxitems",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -18519,22 +18615,77 @@
       "label": "type",
       "_origin": "ast",
       "community": 91,
-      "community_name": "concessions",
+      "community_name": "$ref",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L33"
     },
     {
+      "id": "experiment2_turn_envelope_schema_criterion_ids_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L272"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_evidence_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L30"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_evidence_maxitems",
+      "label": "maxItems",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "maxitems",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L29"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_items_ref",
+      "label": "$ref",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "$ref",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L20"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_properties_concessions",
       "label": "concessions",
       "_origin": "ast",
       "community": 91,
-      "community_name": "concessions",
+      "community_name": "$ref",
       "file_type": "code",
       "norm_label": "concessions",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L32"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_properties_evidence",
+      "label": "evidence",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "evidence",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L27"
     },
     {
       "id": "experiment2_turn_envelope_schema_assessment_id_maxlength",
@@ -18581,17 +18732,6 @@
       "source_location": "L216"
     },
     {
-      "id": "experiment2_turn_envelope_schema_criterionassessment_additionalproperties",
-      "label": "additionalProperties",
-      "_origin": "ast",
-      "community": 92,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "additionalproperties",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L202"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_criterionassessment_properties",
       "label": "properties",
       "_origin": "ast",
@@ -18601,28 +18741,6 @@
       "norm_label": "properties",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L210"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_criterionassessment_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 92,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L201"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_defs_criterionassessment",
-      "label": "criterionAssessment",
-      "_origin": "ast",
-      "community": 92,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "criterionassessment",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L200"
     },
     {
       "id": "experiment2_turn_envelope_schema_items_maxlength",
@@ -22390,20 +22508,20 @@
       "weight": 1.0
     },
     {
-      "source": "experiment4_benchmark_host_run_benchmark",
-      "target": "experiment4_benchmark_host_recorded_turns",
+      "source": "experiment4_benchmark_host_rebuild_prompt",
+      "target": "experiment4_harness_addressed_response_schema",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L108",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
       "source": "experiment4_benchmark_host_run_benchmark",
-      "target": "experiment4_benchmark_host_rebuild_prompt",
+      "target": "experiment4_benchmark_host_recorded_turns",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -22415,6 +22533,18 @@
     },
     {
       "source": "experiment4_benchmark_host_run_benchmark",
+      "target": "experiment4_benchmark_host_rebuild_prompt",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/benchmark_host.py",
+      "source_location": "L110",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_benchmark_host_run_benchmark",
       "target": "experiment4_benchmark_host_check_envelope",
       "relation": "calls",
       "_origin": "ast",
@@ -22422,7 +22552,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L118",
+      "source_location": "L119",
       "weight": 1.0
     },
     {
@@ -22494,55 +22624,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/cli.py",
-      "source_location": "L300",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_cli_execute",
-      "target": "experiment4_registry_load_agent",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L302",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_cli_execute",
-      "target": "experiment4_cli_chat_turn",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L304",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_cli_execute",
-      "target": "experiment4_repository_sqliteidentityrepository",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L314",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_cli_execute",
-      "target": "experiment4_harness_identityapprenticeship",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L315",
+      "source_location": "L307",
       "weight": 1.0
     },
     {
@@ -22554,7 +22636,67 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/cli.py",
-      "source_location": "L330",
+      "source_location": "L309",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_cli_execute",
+      "target": "experiment4_registry_save_agent",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L309",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_cli_execute",
+      "target": "experiment4_registry_load_agent",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L311",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_cli_execute",
+      "target": "experiment4_cli_chat_turn",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L313",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_cli_execute",
+      "target": "experiment4_repository_sqliteidentityrepository",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L323",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_cli_execute",
+      "target": "experiment4_harness_identityapprenticeship",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L324",
       "weight": 1.0
     },
     {
@@ -22566,7 +22708,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/cli.py",
-      "source_location": "L401",
+      "source_location": "L412",
       "weight": 1.0
     },
     {
@@ -22578,7 +22720,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/cli.py",
-      "source_location": "L404",
+      "source_location": "L415",
       "weight": 1.0
     },
     {
@@ -22590,7 +22732,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/cli.py",
-      "source_location": "L410",
+      "source_location": "L421",
       "weight": 1.0
     },
     {
@@ -22602,7 +22744,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/cli.py",
-      "source_location": "L419",
+      "source_location": "L430",
       "weight": 1.0
     },
     {
@@ -22614,7 +22756,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/cli.py",
-      "source_location": "L507",
+      "source_location": "L518",
       "weight": 1.0
     },
     {
@@ -22626,7 +22768,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/cli.py",
-      "source_location": "L509",
+      "source_location": "L520",
       "weight": 1.0
     },
     {
@@ -22650,7 +22792,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/harness.py",
-      "source_location": "L424",
+      "source_location": "L460",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship_address_chat_message",
+      "target": "experiment4_harness_addressed_response_schema",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L464",
       "weight": 1.0
     },
     {
@@ -22662,7 +22816,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/harness.py",
-      "source_location": "L225",
+      "source_location": "L261",
       "weight": 1.0
     },
     {
@@ -22674,7 +22828,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L276",
+      "source_location": "L279",
       "weight": 1.0
     },
     {
@@ -22686,7 +22840,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L288",
+      "source_location": "L292",
       "weight": 1.0
     },
     {
@@ -22698,7 +22852,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L168",
+      "source_location": "L170",
       "weight": 1.0
     },
     {
@@ -22710,7 +22864,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L199",
+      "source_location": "L201",
       "weight": 1.0
     },
     {
@@ -22722,7 +22876,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L200",
+      "source_location": "L202",
       "weight": 1.0
     },
     {
@@ -22734,7 +22888,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L400",
+      "source_location": "L434",
       "weight": 1.0
     },
     {
@@ -22746,19 +22900,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L404",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_host_main",
-      "target": "experiment4_host_anthropicbackend",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/host.py",
-      "source_location": "L406",
+      "source_location": "L439",
       "weight": 1.0
     },
     {
@@ -22770,7 +22912,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L406",
+      "source_location": "L441",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_host_main",
+      "target": "experiment4_host_anthropicbackend",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/host.py",
+      "source_location": "L442",
       "weight": 1.0
     },
     {
@@ -22782,7 +22936,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L407",
+      "source_location": "L443",
       "weight": 1.0
     },
     {
@@ -22794,7 +22948,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L408",
+      "source_location": "L444",
       "weight": 1.0
     },
     {
@@ -22806,7 +22960,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L237",
+      "source_location": "L239",
       "weight": 1.0
     },
     {
@@ -22818,7 +22972,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L80",
+      "source_location": "L82",
       "weight": 1.0
     },
     {
@@ -22830,7 +22984,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L357",
+      "source_location": "L378",
       "weight": 1.0
     },
     {
@@ -22842,7 +22996,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L358",
+      "source_location": "L379",
       "weight": 1.0
     },
     {
@@ -22854,7 +23008,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L359",
+      "source_location": "L380",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_host_run_host",
+      "target": "experiment4_host_hosterror",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/host.py",
+      "source_location": "L395",
       "weight": 1.0
     },
     {
@@ -22866,19 +23032,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L375",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_host_run_host",
-      "target": "experiment4_host_hosterror",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/host.py",
-      "source_location": "L382",
+      "source_location": "L409",
       "weight": 1.0
     },
     {
@@ -22890,7 +23044,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L329",
+      "source_location": "L352",
       "weight": 1.0
     },
     {
@@ -22902,7 +23056,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L331",
+      "source_location": "L354",
       "weight": 1.0
     },
     {
@@ -22914,7 +23068,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L322",
+      "source_location": "L326",
       "weight": 1.0
     },
     {
@@ -22926,7 +23080,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L336",
+      "source_location": "L359",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_host_spendledger_record",
+      "target": "experiment4_host_spendledger_today",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/host.py",
+      "source_location": "L360",
       "weight": 1.0
     },
     {
@@ -22938,7 +23104,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L342",
+      "source_location": "L365",
       "weight": 1.0
     },
     {
@@ -22950,7 +23116,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/host.py",
-      "source_location": "L326",
+      "source_location": "L335",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_host_spendledger_spent_today",
+      "target": "experiment4_host_spendledger_today",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/host.py",
+      "source_location": "L335",
       "weight": 1.0
     },
     {
@@ -30826,6 +31004,42 @@
       "weight": 1.0
     },
     {
+      "source": "tests_test_agent_chat_agentchattestcase_test_cli_benchmark_requires_sensitivity_confirmation",
+      "target": "experiment4_cli_chat_turn",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_agentchattestcase_test_cli_benchmark_requires_sensitivity_confirmation",
+      "target": "experiment4_cli_build_parser",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_agentchattestcase_test_cli_benchmark_requires_sensitivity_confirmation",
+      "target": "experiment4_cli_execute",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L130",
+      "weight": 1.0
+    },
+    {
       "source": "tests_test_agent_chat_agentchattestcase_test_cli_chat_uses_the_registry_not_the_default_database",
       "target": "experiment4_cli_build_parser",
       "relation": "calls",
@@ -30847,6 +31061,30 @@
       "context": "call",
       "source_file": "tests/test_agent_chat.py",
       "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_agentchattestcase_test_register_agent_command_writes_owner_only_config",
+      "target": "experiment4_cli_build_parser",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L138",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_agentchattestcase_test_register_agent_command_writes_owner_only_config",
+      "target": "experiment4_cli_execute",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L138",
       "weight": 1.0
     },
     {
@@ -35754,7 +35992,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L73",
+      "source_location": "L74",
       "weight": 1.0
     },
     {
@@ -35790,7 +36028,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L143",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -35802,7 +36040,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L100",
+      "source_location": "L101",
       "weight": 1.0
     },
     {
@@ -35826,7 +36064,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/cli.py",
-      "source_location": "L296",
+      "source_location": "L303",
       "weight": 1.0
     },
     {
@@ -35854,6 +36092,18 @@
       "weight": 1.0
     },
     {
+      "source": "experiment4_harness_addressed_response_schema",
+      "target": "experiment4_harness_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L58",
+      "weight": 1.0
+    },
+    {
       "source": "experiment4_harness_identityapprenticeship_address_chat_message",
       "target": "experiment4_harness_py_any",
       "relation": "references",
@@ -35862,7 +36112,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L325",
+      "source_location": "L361",
       "weight": 1.0
     },
     {
@@ -35874,7 +36124,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L104",
+      "source_location": "L140",
       "weight": 1.0
     },
     {
@@ -35886,7 +36136,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L79",
+      "source_location": "L115",
       "weight": 1.0
     },
     {
@@ -35898,7 +36148,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L62",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -35910,7 +36160,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L484",
+      "source_location": "L492",
       "weight": 1.0
     },
     {
@@ -35922,7 +36172,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L120",
+      "source_location": "L156",
       "weight": 1.0
     },
     {
@@ -35934,7 +36184,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L277",
+      "source_location": "L313",
       "weight": 1.0
     },
     {
@@ -35946,7 +36196,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L467",
+      "source_location": "L475",
       "weight": 1.0
     },
     {
@@ -35958,7 +36208,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L474",
+      "source_location": "L482",
       "weight": 1.0
     },
     {
@@ -35970,7 +36220,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L208",
+      "source_location": "L244",
       "weight": 1.0
     },
     {
@@ -35982,7 +36232,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L213",
+      "source_location": "L249",
       "weight": 1.0
     },
     {
@@ -35994,7 +36244,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L109",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -36006,7 +36256,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L171",
+      "source_location": "L207",
       "weight": 1.0
     },
     {
@@ -36018,7 +36268,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/host.py",
-      "source_location": "L259",
+      "source_location": "L262",
       "weight": 1.0
     },
     {
@@ -36030,7 +36280,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/host.py",
-      "source_location": "L251",
+      "source_location": "L254",
       "weight": 1.0
     },
     {
@@ -36042,7 +36292,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/host.py",
-      "source_location": "L161",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -36054,7 +36304,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/host.py",
-      "source_location": "L104",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -36066,7 +36316,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/host.py",
-      "source_location": "L100",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -36078,7 +36328,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/host.py",
-      "source_location": "L191",
+      "source_location": "L193",
       "weight": 1.0
     },
     {
@@ -36090,7 +36340,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/host.py",
-      "source_location": "L219",
+      "source_location": "L221",
       "weight": 1.0
     },
     {
@@ -36102,7 +36352,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/host.py",
-      "source_location": "L347",
+      "source_location": "L370",
       "weight": 1.0
     },
     {
@@ -40595,6 +40845,18 @@
     },
     {
       "source": "experiment4_benchmark_host",
+      "target": "experiment4_harness_addressed_response_schema",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiment4/benchmark_host.py",
+      "source_location": "L19",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_benchmark_host",
       "target": "experiment4_harness_addressed_system_text",
       "relation": "imports",
       "_origin": "ast",
@@ -42078,7 +42340,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "experiment4/host.py",
-      "source_location": "L28",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -42990,7 +43252,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L100",
+      "source_location": "L101",
       "weight": 1.0
     },
     {
@@ -43002,7 +43264,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/cli.py",
-      "source_location": "L296",
+      "source_location": "L303",
       "weight": 1.0
     },
     {
@@ -43026,7 +43288,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/harness.py",
-      "source_location": "L59",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -43038,7 +43300,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/host.py",
-      "source_location": "L347",
+      "source_location": "L370",
       "weight": 1.0
     },
     {
@@ -43050,7 +43312,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/host.py",
-      "source_location": "L312",
+      "source_location": "L316",
       "weight": 1.0
     },
     {
@@ -44178,7 +44440,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "experiment4/host.py",
-      "source_location": "L385",
+      "source_location": "L419",
       "weight": 1.0
     },
     {
@@ -52698,7 +52960,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L100",
+      "source_location": "L101",
       "weight": 1.0
     },
     {
@@ -52709,7 +52971,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L143",
+      "source_location": "L144",
       "weight": 1.0
     },
     {
@@ -52742,7 +53004,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L73",
+      "source_location": "L74",
       "weight": 1.0
     },
     {
@@ -52786,7 +53048,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/cli.py",
-      "source_location": "L296",
+      "source_location": "L303",
       "weight": 1.0
     },
     {
@@ -52797,7 +53059,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/cli.py",
-      "source_location": "L506",
+      "source_location": "L517",
       "weight": 1.0
     },
     {
@@ -52835,13 +53097,24 @@
     },
     {
       "source": "experiment4_harness",
-      "target": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_addressed_response_schema",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
       "source_location": "L58",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness",
+      "target": "experiment4_harness_identityapprenticeship",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L94",
       "weight": 1.0
     },
     {
@@ -52852,7 +53125,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L100",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -52863,7 +53136,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L104",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -52874,7 +53147,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L161",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -52885,7 +53158,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L191",
+      "source_location": "L193",
       "weight": 1.0
     },
     {
@@ -52896,7 +53169,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L211",
+      "source_location": "L213",
       "weight": 1.0
     },
     {
@@ -52907,7 +53180,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L248",
+      "source_location": "L251",
       "weight": 1.0
     },
     {
@@ -52918,7 +53191,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L294",
+      "source_location": "L298",
       "weight": 1.0
     },
     {
@@ -52929,7 +53202,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L309",
+      "source_location": "L313",
       "weight": 1.0
     },
     {
@@ -52940,7 +53213,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L347",
+      "source_location": "L370",
       "weight": 1.0
     },
     {
@@ -52951,7 +53224,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L385",
+      "source_location": "L419",
       "weight": 1.0
     },
     {
@@ -52962,7 +53235,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L399",
+      "source_location": "L433",
       "weight": 1.0
     },
     {
@@ -52973,7 +53246,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L64",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -52984,7 +53257,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L68",
+      "source_location": "L70",
       "weight": 1.0
     },
     {
@@ -54040,7 +54313,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L64",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -55167,13 +55440,24 @@
     },
     {
       "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_genesis_prompt",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L115",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
       "target": "experiment4_harness_identityapprenticeship_adopt_identity",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L104",
+      "source_location": "L140",
       "weight": 1.0
     },
     {
@@ -55184,7 +55468,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L109",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -55195,7 +55479,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L120",
+      "source_location": "L156",
       "weight": 1.0
     },
     {
@@ -55206,7 +55490,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L171",
+      "source_location": "L207",
       "weight": 1.0
     },
     {
@@ -55217,7 +55501,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L208",
+      "source_location": "L244",
       "weight": 1.0
     },
     {
@@ -55228,7 +55512,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L213",
+      "source_location": "L249",
       "weight": 1.0
     },
     {
@@ -55239,7 +55523,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L277",
+      "source_location": "L313",
       "weight": 1.0
     },
     {
@@ -55250,7 +55534,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L325",
+      "source_location": "L361",
       "weight": 1.0
     },
     {
@@ -55261,7 +55545,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L467",
+      "source_location": "L475",
       "weight": 1.0
     },
     {
@@ -55272,7 +55556,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L474",
+      "source_location": "L482",
       "weight": 1.0
     },
     {
@@ -55283,7 +55567,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L484",
+      "source_location": "L492",
       "weight": 1.0
     },
     {
@@ -55294,7 +55578,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L59",
+      "source_location": "L95",
       "weight": 1.0
     },
     {
@@ -55305,18 +55589,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L62",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_genesis_prompt",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L79",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -55327,7 +55600,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L251",
+      "source_location": "L254",
       "weight": 1.0
     },
     {
@@ -55338,7 +55611,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L259",
+      "source_location": "L262",
       "weight": 1.0
     },
     {
@@ -55349,7 +55622,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L214",
+      "source_location": "L216",
       "weight": 1.0
     },
     {
@@ -55360,7 +55633,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L219",
+      "source_location": "L221",
       "weight": 1.0
     },
     {
@@ -55371,7 +55644,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L312",
+      "source_location": "L316",
       "weight": 1.0
     },
     {
@@ -55382,7 +55655,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L316",
+      "source_location": "L320",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_host_spendledger",
+      "target": "experiment4_host_spendledger_today",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/host.py",
+      "source_location": "L330",
       "weight": 1.0
     },
     {
@@ -55393,7 +55677,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L325",
+      "source_location": "L334",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_host_spendledger",
+      "target": "experiment4_host_spendledger_locked",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/host.py",
+      "source_location": "L338",
       "weight": 1.0
     },
     {
@@ -55404,7 +55699,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L328",
+      "source_location": "L351",
       "weight": 1.0
     },
     {
@@ -55415,7 +55710,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L335",
+      "source_location": "L358",
       "weight": 1.0
     },
     {
@@ -57576,6 +57871,28 @@
     },
     {
       "source": "tests_test_agent_chat_agentchattestcase",
+      "target": "tests_test_agent_chat_agentchattestcase_test_cli_benchmark_requires_sensitivity_confirmation",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_agentchattestcase",
+      "target": "tests_test_agent_chat_agentchattestcase_test_register_agent_command_writes_owner_only_config",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_agentchattestcase",
       "target": "tests_test_agent_chat_agentchattestcase_setup",
       "relation": "method",
       "_origin": "ast",
@@ -59468,6 +59785,39 @@
     },
     {
       "source": "tests_test_host_hosttestcase",
+      "target": "tests_test_host_hosttestcase_test_backend_exceptions_become_bounded_host_errors_and_main_redacts",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_host.py",
+      "source_location": "L193",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_host_hosttestcase",
+      "target": "tests_test_host_hosttestcase_test_recorded_model_is_the_one_that_answered",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_host.py",
+      "source_location": "L220",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_host_hosttestcase",
+      "target": "tests_test_host_hosttestcase_test_concurrent_turns_cannot_both_slip_under_the_cap",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_host.py",
+      "source_location": "L230",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_host_hosttestcase",
       "target": "tests_test_host_hosttestcase_test_identifiers_and_model_config_come_from_the_host_not_the_model",
       "relation": "method",
       "_origin": "ast",
@@ -60204,14 +60554,14 @@
       "weight": 1.0
     },
     {
-      "source": "experiment4_benchmark_host_rationale_74",
+      "source": "experiment4_benchmark_host_rationale_75",
       "target": "experiment4_benchmark_host_check_envelope",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/benchmark_host.py",
-      "source_location": "L74",
+      "source_location": "L75",
       "weight": 1.0
     },
     {
@@ -60248,17 +60598,6 @@
       "weight": 1.0
     },
     {
-      "source": "experiment4_harness_rationale_218",
-      "target": "experiment4_harness_identityapprenticeship_run_due_wake_intents",
-      "relation": "rationale_for",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L218",
-      "weight": 1.0
-    },
-    {
       "source": "experiment4_harness_rationale_22",
       "target": "experiment4_harness_addressed_system_text",
       "relation": "rationale_for",
@@ -60267,6 +60606,28 @@
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
       "source_location": "L22",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_rationale_254",
+      "target": "experiment4_harness_identityapprenticeship_run_due_wake_intents",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L254",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_rationale_66",
+      "target": "experiment4_harness_addressed_response_schema",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -60281,69 +60642,80 @@
       "weight": 1.0
     },
     {
-      "source": "experiment4_host_rationale_105",
+      "source": "experiment4_host_rationale_107",
       "target": "experiment4_host_envelope_json_schema",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L105",
+      "source_location": "L107",
       "weight": 1.0
     },
     {
-      "source": "experiment4_host_rationale_162",
+      "source": "experiment4_host_rationale_164",
       "target": "experiment4_host_build_prompt_parts",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L162",
+      "source_location": "L164",
       "weight": 1.0
     },
     {
-      "source": "experiment4_host_rationale_196",
+      "source": "experiment4_host_rationale_198",
       "target": "experiment4_host_fix_envelope",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L196",
+      "source_location": "L198",
       "weight": 1.0
     },
     {
-      "source": "experiment4_host_rationale_310",
+      "source": "experiment4_host_rationale_314",
       "target": "experiment4_host_spendledger",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L310",
+      "source_location": "L314",
       "weight": 1.0
     },
     {
-      "source": "experiment4_host_rationale_65",
+      "source": "experiment4_host_rationale_339",
+      "target": "experiment4_host_spendledger_locked",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/host.py",
+      "source_location": "L339",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_host_rationale_67",
       "target": "experiment4_host_hosterror",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L65",
+      "source_location": "L67",
       "weight": 1.0
     },
     {
-      "source": "experiment4_host_rationale_69",
+      "source": "experiment4_host_rationale_71",
       "target": "experiment4_host_resolve_secret",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/host.py",
-      "source_location": "L69",
+      "source_location": "L71",
       "weight": 1.0
     },
     {
@@ -60757,7 +61129,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "experiment4/cli.py",
-      "source_location": "L518",
+      "source_location": "L529",
       "weight": 0.8
     },
     {
@@ -60779,7 +61151,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "experiment4/harness.py",
-      "source_location": "L135",
+      "source_location": "L171",
       "weight": 0.8
     },
     {
@@ -60790,7 +61162,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "experiment4/harness.py",
-      "source_location": "L59",
+      "source_location": "L95",
       "weight": 0.8
     },
     {
@@ -62102,5 +62474,5 @@
       "source_file": "results/experiment-2/reports/REPORT.md"
     }
   ],
-  "built_at_commit": "ede486ccc98803a7a1d5cb0150dd28caa551f270"
+  "built_at_commit": "1b3895b38d9a10665c5c972b9f234c575c7d195d"
 }
