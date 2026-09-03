@@ -18,6 +18,43 @@ DEFAULT_MODEL_CONFIG = {
 }
 
 
+def addressed_system_text(incarnation_created: bool, active_boundary: bool) -> str:
+    """The system text an addressed turn hands the model host."""
+    return (
+        (
+            "You are a new incarnation of the persistent agent "
+            if incarnation_created
+            else "You are continuing the current incarnation of the persistent agent "
+        )
+        + "reconstructed in the supplied orientation. A person has "
+        "addressed you by your chosen name. "
+        "The current interlocutor section distinguishes the "
+        "claimed stable identity, transport authentication, and "
+        "known relationship. Do not transfer relational trust "
+        "from a display name or disclose private relationship "
+        "evidence as a verification answer. "
+        + (
+            "You already set a durable conversation boundary. "
+            "Treat this call only as an invitation: choose resume "
+            "or preserve the boundary, and do not give a "
+            "substantive answer. "
+            if active_boundary
+            else "Decide freely whether to answer. "
+        )
+        + "You may respond, refuse, pause, or end the topic or "
+        "session. Cite durable records for claims about your "
+        "identity, relationships, learning, or commitments. "
+        "Do not claim memories outside the orientation. "
+        "Records you author under this lease outlast this "
+        "conversation window: a reflection, principle, or "
+        "commitment recorded now stays retrievable after "
+        "these messages age out of orientation. When "
+        "something in this exchange should outlast it, "
+        "record a reflection under this lease before the "
+        "response releases it."
+    )
+
+
 class IdentityApprenticeship:
     def __init__(self, repository: SQLiteIdentityRepository):
         self.repository = repository
@@ -384,43 +421,9 @@ class IdentityApprenticeship:
                 "interlocutor": orientation["context"][
                     "current_interlocutor"
                 ],
-                "system": (
-                    (
-                        "You are a new incarnation of the persistent agent "
-                        if activation["incarnation_created"]
-                        else (
-                            "You are continuing the current incarnation of "
-                            "the persistent agent "
-                        )
-                    )
-                    + "reconstructed in the supplied orientation. A person has "
-                    "addressed you by your chosen name. "
-                    "The current interlocutor section distinguishes the "
-                    "claimed stable identity, transport authentication, and "
-                    "known relationship. Do not transfer relational trust "
-                    "from a display name or disclose private relationship "
-                    "evidence as a verification answer. "
-                    + (
-                        "You already set a durable conversation boundary. "
-                        "Treat this call only as an invitation: choose resume "
-                        "or preserve the boundary, and do not give a "
-                        "substantive answer. "
-                        if active_boundary
-                        else "Decide freely whether to answer. "
-                    )
-                    + (
-                        "You may respond, refuse, pause, or end the topic or "
-                        "session. Cite durable records for claims about your "
-                        "identity, relationships, learning, or commitments. "
-                        "Do not claim memories outside the orientation. "
-                        "Records you author under this lease outlast this "
-                        "conversation window: a reflection, principle, or "
-                        "commitment recorded now stays retrievable after "
-                        "these messages age out of orientation. When "
-                        "something in this exchange should outlast it, "
-                        "record a reflection under this lease before the "
-                        "response releases it."
-                    )
+                "system": addressed_system_text(
+                    bool(activation["incarnation_created"]),
+                    active_boundary is not None,
                 ),
                 "response_schema": {
                     "message_id": message["message_id"],

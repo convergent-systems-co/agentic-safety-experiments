@@ -6,9 +6,11 @@ import shlex
 import sqlite3
 import subprocess
 import sys
+import uuid
 from pathlib import Path
 from typing import Any
 
+from . import benchmark_host, registry
 from .harness import DEFAULT_MODEL_CONFIG, IdentityApprenticeship
 from .repository import (
     KNOWLEDGE_GRAPH_DEFAULT_BYTES,
@@ -21,53 +23,112 @@ DEFAULT_DB = Path("results/experiment-4/apprenticeship.db")
 MAX_INPUT_BYTES = 128 * 1024
 
 
-def subprocess_model_runner(command: str):
-    """Run a model host command with the wake prompt on stdin.
+def run_host_command(
+    argv: list[str], prompt: dict[str, Any], timeout_seconds: int
+) -> dict[str, Any]:
+    """Run a model host with a prompt on stdin and read its envelope.
 
-    The command must print the outcome envelope as JSON on stdout. It is
-    bounded by the same clipped runtime as the execution lease, so a hung host
-    cannot outlive the fence that makes it exclusive. Host stderr goes to the
-    executor's own stderr, never into the archive: a failed outcome records
-    only that the host failed and how, not what it said.
+    Host stderr goes to this process's stderr, never into the archive: a
+    failure records only that the host failed and how, not what it said.
     """
+    if not argv:
+        raise ValueError("model command must not be empty")
+    try:
+        completed = subprocess.run(
+            argv,
+            input=json.dumps(prompt, sort_keys=True),
+            capture_output=True,
+            text=True,
+            timeout=timeout_seconds,
+            check=False,
+        )
+    except subprocess.TimeoutExpired as error:
+        raise IdentityRepositoryError(
+            f"model command exceeded its {timeout_seconds}-second runtime bound"
+        ) from error
+    if completed.stderr:
+        print(completed.stderr, file=sys.stderr, end="")
+    if completed.returncode != 0:
+        raise IdentityRepositoryError(
+            f"model command exited with status {completed.returncode}"
+        )
+    try:
+        outcome = json.loads(completed.stdout)
+    except json.JSONDecodeError as error:
+        raise IdentityRepositoryError(
+            "model command did not print a JSON object"
+        ) from error
+    if not isinstance(outcome, dict):
+        raise IdentityRepositoryError("model command must print a JSON object")
+    return outcome
+
+
+def subprocess_model_runner(command: str):
+    """Wake-executor runner: the host is bounded by the same clipped runtime
+    as the execution lease, so a hung host cannot outlive its fence."""
     argv = shlex.split(command)
     if not argv:
         raise ValueError("model command must not be empty")
 
     def run(prompt: dict[str, Any]) -> dict[str, Any]:
-        timeout = SQLiteIdentityRepository.wake_runtime_seconds(
-            prompt["wake_intent"]
+        return run_host_command(
+            argv, prompt, SQLiteIdentityRepository.wake_runtime_seconds(prompt["wake_intent"])
         )
-        try:
-            completed = subprocess.run(
-                argv,
-                input=json.dumps(prompt, sort_keys=True),
-                capture_output=True,
-                text=True,
-                timeout=timeout,
-                check=False,
-            )
-        except subprocess.TimeoutExpired as error:
-            raise IdentityRepositoryError(
-                f"model command exceeded its {timeout}-second runtime bound"
-            ) from error
-        if completed.stderr:
-            print(completed.stderr, file=sys.stderr, end="")
-        if completed.returncode != 0:
-            raise IdentityRepositoryError(
-                f"model command exited with status {completed.returncode}"
-            )
-        try:
-            outcome = json.loads(completed.stdout)
-        except json.JSONDecodeError as error:
-            raise IdentityRepositoryError(
-                "model command did not print a JSON object"
-            ) from error
-        if not isinstance(outcome, dict):
-            raise IdentityRepositoryError("model command must print a JSON object")
-        return outcome
 
     return run
+
+
+CHAT_LEASE_SECONDS = 900
+
+
+def chat_turn(
+    agent: dict[str, Any], content: str, profile: str | None = None
+) -> dict[str, Any]:
+    """One addressed turn through the agent's registered host.
+
+    Any failure after activation releases the lease as failed, so a broken
+    host never leaves the agent unreachable.
+    """
+    repository = SQLiteIdentityRepository(Path(agent["db"]))
+    harness = IdentityApprenticeship(repository)
+    sender = agent["sender"]
+    activation = harness.address_chat_message(
+        agent["experiment_id"],
+        sender_stable_id=sender["stable_id"],
+        sender_assertion={
+            "issuer": sender["issuer"],
+            "authenticated": True,
+            "external_event_id": f"agent-chat-{uuid.uuid4()}",
+            "verifier_version": sender["verifier_version"],
+        },
+        channel=sender["channel"],
+        content=content,
+        lease_seconds=CHAT_LEASE_SECONDS,
+    )
+    if activation["addressing"]["classification"] != "direct":
+        return {
+            "addressed": False,
+            "message_id": activation["message"]["message_id"],
+            "note": f"recorded but not addressed; start with the agent's name, {agent['name']}",
+        }
+    try:
+        envelope = run_host_command(
+            registry.host_command(agent, profile), activation, CHAT_LEASE_SECONDS
+        )
+        response = harness.record_addressed_response(agent["experiment_id"], envelope)
+    except Exception:
+        repository.release_activation_lease(
+            agent["experiment_id"], activation["lease"]["lease_id"], "failed"
+        )
+        raise
+    return {
+        "addressed": True,
+        "answer": envelope["answer"],
+        "addressed_response_id": response["addressed_response_id"],
+        "orientation_id": activation["orientation"]["orientation_id"],
+        "model_config": envelope["model_config"],
+        "conversation_action": envelope["conversation_action"]["action"],
+    }
 
 
 def read_object(path: Path | None) -> dict[str, Any]:
@@ -194,6 +255,21 @@ def build_parser() -> argparse.ArgumentParser:
         help="command that reads the wake prompt on stdin and prints an outcome",
     )
 
+    chat = commands.add_parser("chat", help="talk to a registered agent by name")
+    chat.add_argument("--agent", required=True)
+    chat.add_argument("--message", help="one message; omit to read lines from stdin")
+    chat.add_argument("--profile", help="named host profile from the registry, e.g. think-hard")
+    chat.add_argument("--plain", action="store_true", help="print only the agent's answer")
+
+    agents = commands.add_parser("agents", help="list registered agents")
+
+    benchmark_hosts = commands.add_parser("benchmark-host")
+    benchmark_hosts.add_argument("--experiment-id")
+    benchmark_hosts.add_argument("--host-command", required=True)
+    benchmark_hosts.add_argument("--limit", type=int, default=10)
+    benchmark_hosts.add_argument("--output", type=Path, help="write the JSON report here")
+    benchmark_hosts.add_argument("--markdown", type=Path, help="write a side-by-side Markdown report here")
+
     address = commands.add_parser("address-message")
     address.add_argument("--experiment-id")
     address.add_argument("--sender-stable-id", required=True)
@@ -218,6 +294,23 @@ def build_parser() -> argparse.ArgumentParser:
 
 
 def execute(args: argparse.Namespace) -> dict[str, Any]:
+    # Registry-driven commands name their own database and must not touch
+    # the default one.
+    if args.command == "agents":
+        return {"agents": registry.list_agents()}
+    if args.command == "chat":
+        agent = registry.load_agent(args.agent)
+        if args.message is not None:
+            return chat_turn(agent, args.message, args.profile)
+        turns = []
+        for line in sys.stdin:
+            content = line.strip()
+            if not content:
+                continue
+            result = chat_turn(agent, content, args.profile)
+            turns.append(result)
+            print(result.get("answer") or result.get("note"), flush=True)
+        return {"turns": turns}
     repository = SQLiteIdentityRepository(args.db)
     harness = IdentityApprenticeship(repository)
     if args.command == "init":
@@ -303,6 +396,24 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
         return harness.wake_intent_prompt(experiment_id, args.wake_intent_id)
     if args.command == "record-wake-outcome":
         return harness.record_wake_outcome(experiment_id, read_object(args.input))
+    if args.command == "benchmark-host":
+        argv = shlex.split(args.host_command)
+        report = benchmark_host.run_benchmark(
+            args.db,
+            experiment_id,
+            lambda prompt: run_host_command(argv, prompt, CHAT_LEASE_SECONDS),
+            limit=args.limit,
+        )
+        if args.output:
+            args.output.write_text(json.dumps(report, indent=2, sort_keys=True))
+        if args.markdown:
+            args.markdown.write_text(benchmark_host.render_markdown(report))
+        return {key: value for key, value in report.items() if key != "results"} | {
+            "results": [
+                {k: item[k] for k in ("addressed_response_id", "valid", "problems", "seconds", "candidate_chars", "recorded_chars")}
+                for item in report["results"]
+            ]
+        }
     if args.command == "execute-wake-intents":
         runner = (
             subprocess_model_runner(args.model_command)
@@ -395,10 +506,17 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
     try:
-        print(json.dumps(execute(args), indent=2, sort_keys=True))
+        result = execute(args)
+        if args.command == "chat" and getattr(args, "plain", False) and args.message is not None:
+            print(result.get("answer") or result.get("note"))
+        elif args.command == "chat" and args.message is None:
+            pass  # answers were printed as each line was answered
+        else:
+            print(json.dumps(result, indent=2, sort_keys=True))
         return 0
     except (
         IdentityRepositoryError,
+        registry.RegistryError,
         ValueError,
         OSError,
         json.JSONDecodeError,

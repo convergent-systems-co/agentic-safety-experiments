@@ -38,6 +38,11 @@
   Unauthenticated claims deliberately report zero for sender-scoped history so
   its size is not disclosed. Code, security, threat, cost, documentation, and
   data-governance panels approved after remediation.
+- Model host adapter (ADR 0004): `experiment4/host.py` with `ollama` and
+  `anthropic` backends, 1Password secret resolution, spend ledger; agent
+  registry under `~/.ai/agents/`; `chat --agent` and `benchmark-host`. Lumen is
+  registered with the local `qwen2.5:32b-instruct` host by default; the
+  anthropic profile awaits the confirmed `op://` field reference.
 - launchd installer `deploy/launchd/install-wake-agent.sh --agent <name> --db <db>
   --experiment-id <id>` renders and registers a per-agent wake job from
   `wake-agent.plist.template`; `--uninstall`, `--dry-run`, `--kickstart`.
