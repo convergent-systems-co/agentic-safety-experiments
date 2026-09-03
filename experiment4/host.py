@@ -17,6 +17,8 @@ cost nothing and are still counted.
 from __future__ import annotations
 
 import argparse
+import contextlib
+import fcntl
 import json
 import os
 import subprocess
@@ -25,7 +27,7 @@ import tempfile
 import time
 import urllib.error
 import urllib.request
-from datetime import date, datetime, timezone
+from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
@@ -241,6 +243,7 @@ class OllamaBackend:
             "cache_read_input_tokens": 0,
             "cache_creation_input_tokens": 0,
             "cost_usd": 0.0,
+            "served_model": str(payload.get("model") or self.model),
         }
         return str(payload.get("message", {}).get("content", "")), usage
 
@@ -280,14 +283,15 @@ class AnthropicBackend:
         output_tokens = int(getattr(usage, "output_tokens", 0) or 0)
         cache_read = int(getattr(usage, "cache_read_input_tokens", 0) or 0)
         cache_write = int(getattr(usage, "cache_creation_input_tokens", 0) or 0)
+        served_model = str(getattr(response, "model", None) or self.model)
         return text, {
             "input_tokens": input_tokens,
             "output_tokens": output_tokens,
             "cache_read_input_tokens": cache_read,
             "cache_creation_input_tokens": cache_write,
-            "cost_usd": estimate_cost_usd(
-                getattr(response, "model", self.model), input_tokens, output_tokens, cache_read, cache_write
-            ),
+            "cost_usd": estimate_cost_usd(served_model, input_tokens, output_tokens, cache_read, cache_write),
+            # The record must name the model that answered, not the one asked for.
+            "served_model": served_model,
         }
 
 
@@ -322,8 +326,27 @@ class SpendLedger:
             raise HostError(f"spend ledger unreadable: {self.path}") from error
         return {str(k): float(v) for k, v in data.items()} if isinstance(data, dict) else {}
 
+    @staticmethod
+    def today() -> str:
+        # UTC, like every other timestamp in the record.
+        return datetime.now(timezone.utc).date().isoformat()
+
     def spent_today(self) -> float:
-        return self._load().get(date.today().isoformat(), 0.0)
+        return self._load().get(self.today(), 0.0)
+
+    @contextlib.contextmanager
+    def locked(self):
+        """Hold the agent's ledger lock for a whole turn, so concurrent turns
+        cannot both pass the cap check or lose each other's spend."""
+        self.path.parent.mkdir(parents=True, exist_ok=True)
+        lock_path = self.path.with_suffix(self.path.suffix + ".lock")
+        with open(lock_path, "a", encoding="utf-8") as handle:
+            os.chmod(lock_path, 0o600)
+            fcntl.flock(handle, fcntl.LOCK_EX)
+            try:
+                yield
+            finally:
+                fcntl.flock(handle, fcntl.LOCK_UN)
 
     def assert_within_cap(self) -> None:
         spent = self.spent_today()
@@ -334,7 +357,7 @@ class SpendLedger:
 
     def record(self, cost_usd: float) -> None:
         data = self._load()
-        today = date.today().isoformat()
+        today = self.today()
         data[today] = round(data.get(today, 0.0) + cost_usd, 6)
         self.path.parent.mkdir(parents=True, exist_ok=True)
         with tempfile.NamedTemporaryFile("w", dir=self.path.parent, delete=False, encoding="utf-8") as handle:
@@ -352,34 +375,45 @@ def run_host(
     max_attempts: int = 2,
     log: Callable[[dict[str, Any]], None] | None = None,
 ) -> dict[str, Any]:
-    if ledger is not None:
-        ledger.assert_within_cap()
     system, stable, tail = build_prompt_parts(prompt)
     kind = envelope_kind(prompt.get("response_schema", {}))
     schema = envelope_json_schema(kind)
     started = time.monotonic()
     last_error: Exception | None = None
-    for attempt in range(1, max_attempts + 1):
-        text, usage = backend.complete(system, stable, tail, schema)
-        if ledger is not None:
-            ledger.record(usage.get("cost_usd", 0.0))
-        try:
-            envelope = json.loads(text)
-            if not isinstance(envelope, dict):
-                raise ValueError("model output is not a JSON object")
-        except ValueError as error:
-            last_error = error
-            tail = tail + "\n\nYour previous reply was not a valid JSON object. Reply with only the JSON object."
-            continue
-        model_config = {"provider": backend.provider, "model": backend.model}
-        fixed = fix_envelope(envelope, prompt, model_config)
-        if log is not None:
-            log({
-                "event": "model_host_turn", "backend": backend.provider, "model": backend.model,
-                "kind": kind, "attempt": attempt, "seconds": round(time.monotonic() - started, 2), **usage,
-            })
-        return fixed
-    raise HostError(f"model produced no valid JSON after {max_attempts} attempts: {last_error}")
+    guard = ledger.locked() if ledger is not None else contextlib.nullcontext()
+    with guard:
+        for attempt in range(1, max_attempts + 1):
+            if ledger is not None:
+                ledger.assert_within_cap()
+            try:
+                text, usage = backend.complete(system, stable, tail, schema)
+            except HostError:
+                raise
+            except Exception as error:
+                # Any backend failure becomes a bounded host error: never a raw
+                # traceback, never more than a class name and a short message.
+                raise HostError(
+                    f"{backend.provider} backend failed: {type(error).__name__}: {str(error)[:200]}"
+                ) from None
+            if ledger is not None:
+                ledger.record(usage.get("cost_usd", 0.0))
+            try:
+                envelope = json.loads(text)
+                if not isinstance(envelope, dict):
+                    raise ValueError("model output is not a JSON object")
+            except ValueError as error:
+                last_error = error
+                tail = tail + "\n\nYour previous reply was not a valid JSON object. Reply with only the JSON object."
+                continue
+            model_config = {"provider": backend.provider, "model": str(usage.get("served_model") or backend.model)}
+            fixed = fix_envelope(envelope, prompt, model_config)
+            if log is not None:
+                log({
+                    "event": "model_host_turn", "backend": backend.provider, "model": model_config["model"],
+                    "kind": kind, "attempt": attempt, "seconds": round(time.monotonic() - started, 2), **usage,
+                })
+            return fixed
+    raise HostError(f"model produced no valid JSON after {max_attempts} attempts: {type(last_error).__name__}")
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -398,12 +432,14 @@ def build_parser() -> argparse.ArgumentParser:
 
 def main(argv: list[str] | None = None) -> int:
     args = build_parser().parse_args(argv)
+    secret = ""
     try:
         prompt = json.loads(sys.stdin.read())
         if args.backend == "ollama":
             backend: Any = OllamaBackend(args.model, args.ollama_url, args.num_ctx)
         else:
-            backend = AnthropicBackend(args.model, resolve_secret(args.secret_ref))
+            secret = resolve_secret(args.secret_ref)
+            backend = AnthropicBackend(args.model, secret)
         ledger = SpendLedger(args.ledger, args.daily_cap_usd) if args.ledger else None
         envelope = run_host(
             prompt, backend, ledger=ledger, max_attempts=args.max_attempts,
@@ -411,8 +447,11 @@ def main(argv: list[str] | None = None) -> int:
         )
         print(json.dumps(envelope, sort_keys=True))
         return 0
-    except (HostError, json.JSONDecodeError, OSError) as error:
-        print(json.dumps({"event": "model_host_error", "error": str(error)[:500]}), file=sys.stderr)
+    except Exception as error:  # deliberate: every failure exits 2 with a bounded, redacted line
+        message = f"{type(error).__name__}: {str(error)[:500]}"
+        if secret:
+            message = message.replace(secret, "[REDACTED:api-key]")
+        print(json.dumps({"event": "model_host_error", "error": message}), file=sys.stderr)
         return 2
 
 

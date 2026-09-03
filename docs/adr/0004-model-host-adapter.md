@@ -77,7 +77,11 @@ marginal cost on the local backend, with the same lease, citation, boundary,
 and length guarantees. A local model's voice is weaker than the frontier
 models that have voiced Lumen so far; the benchmark makes that difference
 visible before it is chosen, and the per-reply model record makes it visible
-after. Local turns are slow, likely a minute or more at this orientation size.
+after. Local turns are slow, likely a minute or more at this orientation size. Because
+no process stays resident, the API's short-lived prompt cache is rarely warm
+between turns; plan on the uncached price. The ledger holds a per-agent file
+lock for the whole turn, so concurrent turns serialize rather than race the
+cap; a single turn may still exceed the cap by at most its own cost.
 
 The `anthropic` extra adds one pinned dependency, the official SDK, recorded in
 `requirements-host.lock`; the core protocol and the local backend need

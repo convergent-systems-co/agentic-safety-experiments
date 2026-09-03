@@ -190,5 +190,72 @@ class HostTestCase(unittest.TestCase):
         self.assertEqual(40, usage["input_tokens"]); self.assertEqual(0.0, usage["cost_usd"])
 
 
+    def test_backend_exceptions_become_bounded_host_errors_and_main_redacts(self):
+        class Exploding:
+            provider = "boom"
+            model = "boom-1"
+
+            def complete(self, *args):
+                raise RuntimeError("upstream said: " + "x" * 1000 + " sk-fake-secret-value")
+
+        with self.assertRaises(host.HostError) as caught:
+            host.run_host(PROMPT, Exploding())
+        self.assertLess(len(str(caught.exception)), 320)
+        self.assertNotIn("sk-fake-secret-value", str(caught.exception))
+        with tempfile.TemporaryDirectory() as directory:
+            fake_op = Path(directory) / "op"
+            fake_op.write_text("#!/bin/sh\nprintf 'sk-fake-secret-value\\n'\n")
+            fake_op.chmod(0o700)
+            environment = {**os.environ, "PATH": f"{directory}:{os.environ['PATH']}", "ANTHROPIC_BASE_URL": "http://127.0.0.1:9"}
+            completed = subprocess.run(
+                [sys.executable, "-m", "experiment4.host", "--backend", "anthropic", "--model", "claude-opus-5",
+                 "--secret-ref", "op://Vault/Item/credential", "--max-attempts", "1"],
+                input=json.dumps(PROMPT), capture_output=True, text=True, env=environment, check=False, timeout=120,
+            )
+        self.assertEqual(2, completed.returncode)
+        self.assertNotIn("Traceback", completed.stderr)
+        self.assertNotIn("sk-fake-secret-value", completed.stdout + completed.stderr)
+        self.assertIn("model_host_error", completed.stderr)
+
+    def test_recorded_model_is_the_one_that_answered(self):
+        class Served(FakeBackend):
+            def complete(self, system, stable, tail, schema):
+                text, usage = super().complete(system, stable, tail, schema)
+                return text, {**usage, "served_model": "fake-model-served"}
+
+        envelope = host.run_host(PROMPT, Served([json.dumps({"answer": "a", "cited_record_ids": [], "self_observations": [],
+                                                              "model_config": {}, "conversation_action": {}})]))
+        self.assertEqual("fake-model-served", envelope["model_config"]["model"])
+
+    def test_concurrent_turns_cannot_both_slip_under_the_cap(self):
+        import threading
+
+        class Slow(FakeBackend):
+            def complete(self, system, stable, tail, schema):
+                time.sleep(0.2)
+                return super().complete(system, stable, tail, schema)
+
+        import time
+        with tempfile.TemporaryDirectory() as directory:
+            ledger = host.SpendLedger(Path(directory) / "spend.json", daily_cap_usd=0.015)
+            reply = json.dumps({"answer": "a", "cited_record_ids": [], "self_observations": [], "model_config": {}, "conversation_action": {}})
+            outcomes = []
+
+            def turn():
+                try:
+                    host.run_host(PROMPT, Slow([reply]), ledger=ledger)
+                    outcomes.append("ok")
+                except host.HostError:
+                    outcomes.append("capped")
+
+            threads = [threading.Thread(target=turn) for _ in range(3)]
+            for thread in threads:
+                thread.start()
+            for thread in threads:
+                thread.join()
+            self.assertEqual(["capped", "ok", "ok"], sorted(outcomes))
+            self.assertAlmostEqual(0.02, ledger.spent_today())
+
+
 if __name__ == "__main__":
     unittest.main()

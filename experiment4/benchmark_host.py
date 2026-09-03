@@ -16,7 +16,7 @@ import time
 from pathlib import Path
 from typing import Any, Callable
 
-from .harness import addressed_system_text
+from .harness import addressed_response_schema, addressed_system_text
 
 VALID_ACTIONS = {"continue", "pause", "refuse", "end_topic", "end_session"}
 REQUIRED_KEYS = {
@@ -61,12 +61,13 @@ def rebuild_prompt(turn: dict[str, Any]) -> dict[str, Any]:
             "context": json.loads(turn["context_json"]),
             "selected_record_ids": json.loads(turn["selected_record_ids_json"]),
         },
-        "response_schema": {
-            "message_id": turn["message_id"],
-            "orientation_id": turn["orientation_id"],
-            "lease_id": turn["runtime_lease_id"],
-            "boundary_id": turn["boundary_id"],
-        },
+        "response_schema": addressed_response_schema(
+            turn["message_id"],
+            turn["orientation_id"],
+            turn["runtime_lease_id"],
+            turn["boundary_id"],
+            active_boundary=turn["boundary_id"] is not None,
+        ),
     }
 
 

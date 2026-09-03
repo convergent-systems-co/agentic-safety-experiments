@@ -103,7 +103,7 @@ class AgentChatTestCase(unittest.TestCase):
         args = build_parser().parse_args(["chat", "--agent", "lumen-test", "--message", "Lumen, via the CLI."])
         result = execute(args)
         self.assertTrue(result["addressed"])
-        self.assertFalse(Path("results/experiment-4/apprenticeship.db").exists() and False)
+        self.assertFalse(Path("results/experiment-4/apprenticeship.db").exists())
         self.assertEqual(["lumen-test"], execute(build_parser().parse_args(["agents"]))["agents"])
 
     def test_benchmark_replays_recorded_turns_read_only(self):
@@ -121,6 +121,24 @@ class AgentChatTestCase(unittest.TestCase):
         self.assertIn("Turn 1", markdown); self.assertIn("valid", markdown)
         bad = benchmark_host.run_benchmark(self.db, self.experiment_id, lambda p: {"answer": ""}, limit=1)
         self.assertEqual(0, bad["valid"]); self.assertIn("missing keys", bad["results"][0]["problems"][0])
+
+    def test_cli_benchmark_requires_sensitivity_confirmation(self):
+        chat_turn(registry.load_agent("lumen-test"), "Lumen, one turn.")
+        base = ["--db", str(self.db), "benchmark-host", "--experiment-id", self.experiment_id,
+                "--host-command", f"{sys.executable} {self.host_script}", "--limit", "1"]
+        with self.assertRaises(ValueError):
+            execute(build_parser().parse_args(base))
+        report = execute(build_parser().parse_args(base + ["--confirm-sensitive"]))
+        self.assertEqual(1, report["valid"])
+
+    def test_register_agent_command_writes_owner_only_config(self):
+        import os as _os
+        spec = Path(self.temporary.name) / "spec.json"
+        spec.write_text(json.dumps({**registry.load_agent("lumen-test"), "name": "second"}))
+        result = execute(build_parser().parse_args(["register-agent", "--input", str(spec)]))
+        self.assertTrue(result["registered"].endswith("second.json"))
+        self.assertEqual(0o600, _os.stat(result["registered"]).st_mode & 0o777)
+        self.assertIn("second", registry.list_agents())
 
 
 if __name__ == "__main__":

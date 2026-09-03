@@ -467,16 +467,18 @@ model answered; the repository validates the rest. A per-agent spend ledger
 caps API spend per day.
 
 ```bash
-# register an agent once (configuration, never secrets)
-cat > ~/.ai/agents/lumen.json   # see experiment4/registry.py for the keys
+# register an agent once (configuration, never secrets; written mode 0600)
+python3 -m experiment4 register-agent --input lumen-agent.json
 python3 -m experiment4 agents
 python3 -m experiment4 chat --agent lumen --message "Lumen, are you there?" --plain
 python3 -m experiment4 chat --agent lumen --profile think-hard --message "Lumen, ..."
 # judge a candidate host against what was actually said, read-only
 python3 -m experiment4 --db "$RUN_DB" benchmark-host \
   --host-command "python3 -m experiment4.host --backend ollama --model qwen2.5:32b-instruct" \
-  --limit 5 --markdown report.md
-``` Recurring intents are recorded but not yet executed. A
+  --limit 5 --markdown report.md --confirm-sensitive
+```
+
+Recurring intents are recorded but not yet executed. A
 Supervisor agent, if added, is a visible mentor rather than lifecycle
 infrastructure.
 

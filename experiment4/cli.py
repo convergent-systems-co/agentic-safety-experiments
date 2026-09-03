@@ -269,6 +269,13 @@ def build_parser() -> argparse.ArgumentParser:
     benchmark_hosts.add_argument("--limit", type=int, default=10)
     benchmark_hosts.add_argument("--output", type=Path, help="write the JSON report here")
     benchmark_hosts.add_argument("--markdown", type=Path, help="write a side-by-side Markdown report here")
+    benchmark_hosts.add_argument(
+        "--confirm-sensitive", action="store_true",
+        help="acknowledge that recorded orientations are sent to the candidate host",
+    )
+
+    register = commands.add_parser("register-agent", help="write an agent registry entry with owner-only permissions")
+    register.add_argument("--input", type=Path, required=True, help="agent JSON; see experiment4/registry.py for keys")
 
     address = commands.add_parser("address-message")
     address.add_argument("--experiment-id")
@@ -298,6 +305,8 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
     # the default one.
     if args.command == "agents":
         return {"agents": registry.list_agents()}
+    if args.command == "register-agent":
+        return {"registered": str(registry.save_agent(read_object(args.input)))}
     if args.command == "chat":
         agent = registry.load_agent(args.agent)
         if args.message is not None:
@@ -397,6 +406,8 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
     if args.command == "record-wake-outcome":
         return harness.record_wake_outcome(experiment_id, read_object(args.input))
     if args.command == "benchmark-host":
+        if not args.confirm_sensitive:
+            raise ValueError("benchmark-host requires --confirm-sensitive")
         argv = shlex.split(args.host_command)
         report = benchmark_host.run_benchmark(
             args.db,

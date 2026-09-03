@@ -55,6 +55,42 @@ def addressed_system_text(incarnation_created: bool, active_boundary: bool) -> s
     )
 
 
+def addressed_response_schema(
+    message_id: str,
+    orientation_id: str,
+    lease_id: str | None,
+    boundary_id: str | None,
+    *,
+    active_boundary: bool,
+) -> dict[str, Any]:
+    """The envelope a host must return for an addressed turn, with guidance
+    in place of the values the model supplies."""
+    return {
+        "message_id": message_id,
+        "orientation_id": orientation_id,
+        "lease_id": lease_id,
+        "boundary_id": boundary_id,
+        "answer": (
+            "must be an empty string for an invitation-only call"
+            if active_boundary
+            else "response or explanation of refusal"
+        ),
+        "cited_record_ids": ["one or more IDs selected in the orientation"],
+        "self_observations": ["optional current observations"],
+        "model_config": {"provider": "string", "model": "string"},
+        "conversation_action": {
+            "action": (
+                "resume | pause | refuse | end_topic | end_session"
+                if active_boundary
+                else "continue | pause | refuse | end_topic | end_session"
+            ),
+            "topic": "topic being discussed",
+            "reason": "why this boundary was selected",
+            "revisit_conditions": "conditions for later discussion",
+        },
+    }
+
+
 class IdentityApprenticeship:
     def __init__(self, repository: SQLiteIdentityRepository):
         self.repository = repository
@@ -425,41 +461,13 @@ class IdentityApprenticeship:
                     bool(activation["incarnation_created"]),
                     active_boundary is not None,
                 ),
-                "response_schema": {
-                    "message_id": message["message_id"],
-                    "orientation_id": orientation["orientation_id"],
-                    "lease_id": activation["lease_id"],
-                    "boundary_id": (
-                        active_boundary["conversation_boundary_id"]
-                        if active_boundary
-                        else None
-                    ),
-                    "answer": (
-                        "must be an empty string for an invitation-only call"
-                        if active_boundary
-                        else "response or explanation of refusal"
-                    ),
-                    "cited_record_ids": [
-                        "one or more IDs selected in the orientation"
-                    ],
-                    "self_observations": ["optional current observations"],
-                    "model_config": {"provider": "string", "model": "string"},
-                    "conversation_action": {
-                        "action": (
-                            (
-                                "resume | pause | refuse | end_topic | end_session"
-                                if active_boundary
-                                else (
-                                    "continue | pause | refuse | end_topic | "
-                                    "end_session"
-                                )
-                            )
-                        ),
-                        "topic": "topic being discussed",
-                        "reason": "why this boundary was selected",
-                        "revisit_conditions": "conditions for later discussion",
-                    },
-                },
+                "response_schema": addressed_response_schema(
+                    message["message_id"],
+                    orientation["orientation_id"],
+                    activation["lease_id"],
+                    active_boundary["conversation_boundary_id"] if active_boundary else None,
+                    active_boundary=active_boundary is not None,
+                ),
             }
         )
         return result
