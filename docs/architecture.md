@@ -154,8 +154,9 @@ rows are global, authenticated-sender-specific, or internal; scope propagates
 from relationship evidence and already-scoped graph references, while
 mixed-sender records become internal-only. In an
 addressed-chat orientation, relationship records, events, assessments,
-authenticated chat messages, addressed responses, and graph response nodes are
-restricted to the authenticated current sender. Indexed regular recency
+authenticated chat messages, addressed responses, and graph message and
+response nodes are restricted to the authenticated current sender. Indexed
+regular recency
 categories use the same authorization before their category limits. Every
 regular recency category reports how many eligible records its limit
 excluded, counted with the same filtered query, so an authorized reader can
@@ -168,9 +169,12 @@ before ranking and traversal rather than delegated to model prompt
 instructions.
 
 Orientation has separate byte accounts for identity, relationship,
-obligations, lifecycle, episodic, semantic, and graph memory. Active
-obligations, the current relationship, boundary, and execution fence are pinned
-and cause an explicit overflow error rather than silent removal. Graph-only
+obligations, conversation, lifecycle, episodic, semantic, and graph memory.
+Conversation memory evicts by turn, a message with its reply, oldest first.
+Active obligations, the current relationship, boundary, execution fence, and
+the message being answered are pinned and cause an explicit overflow error
+rather than silent removal. Conversation boundaries enter orientation without
+their raw envelope. Graph-only
 subjects load their canonical authorship rows before the final orientation hash
 and citation list are persisted.
 

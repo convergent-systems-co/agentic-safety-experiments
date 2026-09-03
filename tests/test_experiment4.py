@@ -127,6 +127,46 @@ class Experiment4TestCase(unittest.TestCase):
             for index in range(count)
         ]
 
+    def complete_addressed_turn(
+        self,
+        sender: str,
+        content: str,
+        answer: str,
+        *,
+        authenticated: bool = True,
+    ) -> tuple[dict, dict]:
+        """Address Lumen by name and persist a reply under the resulting lease."""
+        activation = self.harness.address_chat_message(
+            self.experiment_id,
+            sender_stable_id=sender,
+            sender_assertion=self.sender_assertion(authenticated),
+            channel="test-chat",
+            content=content,
+        )
+        orientation = activation["orientation"]
+        response = self.harness.record_addressed_response(
+            self.experiment_id,
+            {
+                "message_id": activation["message"]["message_id"],
+                "orientation_id": orientation["orientation_id"],
+                "lease_id": activation["lease"]["lease_id"],
+                "boundary_id": None,
+                "answer": answer,
+                "cited_record_ids": [
+                    orientation["context"]["identity_history"][-1]["identity_id"]
+                ],
+                "self_observations": [],
+                "model_config": {"provider": "test", "model": "agent-v1"},
+                "conversation_action": {
+                    "action": "continue",
+                    "topic": "conversation memory",
+                    "reason": "Continue the conversation.",
+                    "revisit_conditions": "None.",
+                },
+            },
+        )
+        return activation, response
+
     def append_explicit_graph_chain(self) -> dict[str, dict]:
         experience = self.append_operator_experience(
             "The orchid protocol exposed a hidden retrieval assumption."
@@ -1775,11 +1815,11 @@ class Experiment4TestCase(unittest.TestCase):
         indexed = self.indexed_record_ids()
         self.assertIn(experience["experience_id"], indexed)
         self.assertIn(principle["principle_id"], indexed)
+        self.assertIn(message["message_id"], indexed)
         self.assertTrue(
             {
                 relationship["relationship_id"],
                 relationship_event["relationship_event_id"],
-                message["message_id"],
                 lease["lease_id"],
                 authorship_id,
             }.isdisjoint(indexed)
@@ -2270,18 +2310,27 @@ class Experiment4TestCase(unittest.TestCase):
             "knowledge_graph"
         ]
         graph_ids = {node["record_id"] for node in graph["nodes"]}
-        previews = " ".join(node["preview"] for node in graph["nodes"])
+        # Sender B's own current message quotes both phrases, so chat-message
+        # nodes are judged by ownership and reply nodes by phrase.
+        reply_previews = " ".join(
+            node["preview"]
+            for node in graph["nodes"]
+            if node["record_type"] != "chat_message"
+        )
 
         self.assertNotIn(
             scenario["sender_a_response"]["addressed_response_id"],
             graph_ids,
         )
-        self.assertNotIn("amber lattice response", previews)
+        self.assertNotIn(
+            scenario["sender_a_turn"]["message"]["message_id"], graph_ids
+        )
+        self.assertNotIn("amber lattice response", reply_previews)
         self.assertIn(
             scenario["sender_b_response"]["addressed_response_id"],
             graph_ids,
         )
-        self.assertIn("cobalt compass response", previews)
+        self.assertIn("cobalt compass response", reply_previews)
 
     def test_unauthenticated_addressed_sender_receives_no_prior_history(self):
         identity = self.adopt()
@@ -2477,15 +2526,22 @@ class Experiment4TestCase(unittest.TestCase):
 
         graph = context["knowledge_graph"]
         graph_ids = {node["record_id"] for node in graph["nodes"]}
-        previews = " ".join(node["preview"] for node in graph["nodes"])
+        # The genuine current message quotes the poisoned phrase, so
+        # chat-message nodes are judged by identity and replies by phrase.
+        reply_previews = " ".join(
+            node["preview"]
+            for node in graph["nodes"]
+            if node["record_type"] != "chat_message"
+        )
         self.assertIn(
             genuine_response["addressed_response_id"], graph_ids
         )
         self.assertNotIn(
             poisoned_response["addressed_response_id"], graph_ids
         )
-        self.assertIn("silver archive response", previews)
-        self.assertNotIn("venom ledger response", previews)
+        self.assertNotIn(poisoned_turn["message"]["message_id"], graph_ids)
+        self.assertIn("silver archive response", reply_previews)
+        self.assertNotIn("venom ledger response", reply_previews)
 
     def test_relationship_derived_graph_content_is_sender_scoped(self):
         self.adopt()
@@ -2528,6 +2584,8 @@ class Experiment4TestCase(unittest.TestCase):
             },
         )
 
+        sent_message_ids: dict[tuple[str, bool], str] = {}
+
         def addressed_graph(
             sender: str, authenticated: bool
         ) -> dict:
@@ -2538,6 +2596,9 @@ class Experiment4TestCase(unittest.TestCase):
                 channel="test-chat",
                 content="Lumen, explain the cerulean vault phrase.",
             )
+            sent_message_ids[(sender, authenticated)] = activation["message"][
+                "message_id"
+            ]
             self.repository.release_activation_lease(
                 self.experiment_id,
                 activation["lease"]["lease_id"],
@@ -2559,13 +2620,17 @@ class Experiment4TestCase(unittest.TestCase):
             " ".join(node["preview"] for node in sender_a_graph["nodes"]),
         )
         for graph in (sender_b_graph, unauthenticated_graph):
-            self.assertNotIn(
-                reflection_id,
-                {node["record_id"] for node in graph["nodes"]},
-            )
+            graph_ids = {node["record_id"] for node in graph["nodes"]}
+            self.assertNotIn(reflection_id, graph_ids)
+            self.assertNotIn(sent_message_ids[("sender-a", True)], graph_ids)
             self.assertNotIn(
                 "cerulean vault phrase",
-                " ".join(node["preview"] for node in graph["nodes"]),
+                " ".join(
+                    node["preview"]
+                    for node in graph["nodes"]
+                    # The sender's own current message repeats the phrase.
+                    if node["record_type"] != "chat_message"
+                ),
             )
 
     def test_relationship_derived_regular_categories_are_sender_scoped_before_limit(
@@ -3091,6 +3156,356 @@ class Experiment4TestCase(unittest.TestCase):
         ):
             self.assertEqual(0, unauthenticated_omissions[category])
         self.assertEqual(1, unauthenticated_omissions["experiences"])
+
+    def test_addressed_message_is_pinned_and_turns_are_evicted_in_pairs(self):
+        self.adopt()
+        self.repository.add_relationship(
+            self.experiment_id, "human-primary", "founding collaborator"
+        )
+        padding = "x" * 3_000
+        turn_count = 24
+        for index in range(turn_count):
+            self.complete_addressed_turn(
+                "human-primary",
+                f"Lumen, message {index}.",
+                f"Reply {index}. {padding}",
+            )
+        final = self.harness.address_chat_message(
+            self.experiment_id,
+            sender_stable_id="human-primary",
+            sender_assertion=self.sender_assertion(),
+            channel="test-chat",
+            content="Lumen, is my message still in front of you?",
+        )
+        context = final["orientation"]["context"]
+        selection = context["selection"]
+        conversation = selection["memory_classes"]["conversation"]
+        current_id = final["message"]["message_id"]
+
+        self.assertGreater(
+            selection["records_omitted_for_byte_budget"].get(
+                "addressed_responses", 0
+            ),
+            0,
+        )
+        present_messages = {
+            message["message_id"] for message in context["chat_messages"]
+        }
+        self.assertIn(current_id, present_messages)
+        self.assertIn(current_id, conversation["pinned_record_ids"])
+
+        earlier_messages = present_messages - {current_id}
+        answered_messages = {
+            response["message_id"]
+            for response in context["addressed_responses"]
+        }
+        self.assertTrue(earlier_messages)
+        self.assertEqual(earlier_messages, answered_messages)
+
+        surviving_indexes = sorted(
+            int(message["content"].split()[-1].rstrip("."))
+            for message in context["chat_messages"]
+            if message["message_id"] != current_id
+        )
+        self.assertEqual(
+            list(range(turn_count - len(surviving_indexes), turn_count)),
+            surviving_indexes,
+        )
+        self.assertNotIn(
+            "chat_messages",
+            selection["memory_classes"]["lifecycle"]["omissions"],
+        )
+        self.assertIn("chat_messages", conversation["omissions"])
+
+    def test_chat_messages_are_sender_scoped_graph_nodes(self):
+        self.adopt()
+        for sender in ("sender-a", "sender-b"):
+            self.repository.add_relationship(
+                self.experiment_id, sender, f"{sender} collaborator"
+            )
+        sender_a_turn, sender_a_response = self.complete_addressed_turn(
+            "sender-a", "Lumen, the cobalt heron waits for sender A.", "Reply A."
+        )
+        sender_b_turn, _ = self.complete_addressed_turn(
+            "sender-b", "Lumen, the cobalt heron waits for sender B.", "Reply B."
+        )
+        stranger = self.harness.address_chat_message(
+            self.experiment_id,
+            sender_stable_id="stranger",
+            sender_assertion=self.sender_assertion(authenticated=False),
+            channel="test-chat",
+            content="Lumen, the cobalt heron waits for a stranger.",
+        )
+        self.repository.release_activation_lease(
+            self.experiment_id, stranger["lease"]["lease_id"], "cancelled"
+        )
+        message_ids = {
+            "a": sender_a_turn["message"]["message_id"],
+            "b": sender_b_turn["message"]["message_id"],
+            "stranger": stranger["message"]["message_id"],
+        }
+
+        def visible_to(sender: str, authenticated: bool) -> set[str]:
+            result = self.repository.retrieve_knowledge(
+                self.experiment_id,
+                "cobalt heron",
+                current_sender_stable_id=sender,
+                current_sender_authenticated=authenticated,
+            )
+            return {node["record_id"] for node in result["nodes"]}
+
+        sender_a_visible = visible_to("sender-a", True)
+        self.assertIn(message_ids["a"], sender_a_visible)
+        self.assertNotIn(message_ids["b"], sender_a_visible)
+        self.assertNotIn(message_ids["stranger"], sender_a_visible)
+        sender_b_visible = visible_to("sender-b", True)
+        self.assertIn(message_ids["b"], sender_b_visible)
+        self.assertNotIn(message_ids["a"], sender_b_visible)
+        self.assertTrue(
+            set(message_ids.values()).isdisjoint(visible_to("stranger", False))
+        )
+
+        internal = self.retrieve_knowledge("cobalt heron")
+        internal_nodes = {node["record_id"]: node for node in internal["nodes"]}
+        self.assertTrue(set(message_ids.values()) <= set(internal_nodes))
+        self.assertEqual(
+            "reported", internal_nodes[message_ids["a"]]["epistemic_status"]
+        )
+        edges = {
+            (edge["from_record_id"], edge["to_record_id"])
+            for edge in internal["edges"]
+        }
+        self.assertIn(
+            (sender_a_response["addressed_response_id"], message_ids["a"]),
+            edges,
+        )
+
+    def test_orientation_boundaries_carry_no_raw_envelope(self):
+        self.adopt()
+        self.repository.add_relationship(
+            self.experiment_id, "human-primary", "founding collaborator"
+        )
+        self.complete_addressed_turn(
+            "human-primary", "Lumen, set a boundary.", "A boundary is set."
+        )
+        activation = self.harness.address_chat_message(
+            self.experiment_id,
+            sender_stable_id="human-primary",
+            sender_assertion=self.sender_assertion(),
+            channel="test-chat",
+            content="Lumen, show me the boundary.",
+        )
+        boundaries = activation["orientation"]["context"][
+            "conversation_boundaries"
+        ]
+        self.assertTrue(boundaries)
+        for boundary in boundaries:
+            self.assertNotIn("raw_envelope", boundary)
+            self.assertIn("topic", boundary)
+            self.assertIn("model_config", boundary)
+
+    def test_addressed_prompt_says_authored_records_outlast_the_window(self):
+        self.adopt()
+        activation = self.harness.address_chat_message(
+            self.experiment_id,
+            sender_stable_id="human-primary",
+            sender_assertion=self.sender_assertion(),
+            channel="test-chat",
+            content="Lumen, what lasts?",
+        )
+        self.assertIn("reflection", activation["system"])
+        self.assertIn("outlast", activation["system"])
+
+    def test_aggregate_cap_trims_conversation_before_obligation_outcomes(self):
+        base = datetime(2026, 9, 2, tzinfo=timezone.utc)
+
+        def stamp(index: int) -> str:
+            return (base + timedelta(seconds=index)).isoformat()
+
+        context = {
+            "selection": {
+                "records_omitted_for_byte_budget": {},
+                "identity_records_omitted": 0,
+                "aggregate_bytes_used": 0,
+                "memory_classes": {},
+            },
+            "current_interlocutor": None,
+            "identity_history": [
+                {"identity_id": "identity-1", "created_at": stamp(0)}
+            ],
+            "commitments": [
+                {"commitment_id": f"commitment-{i}", "created_at": stamp(i), "text": "keep"}
+                for i in range(4)
+            ],
+            "commitment_outcomes": [
+                {
+                    "commitment_outcome_id": f"commitment-outcome-{i}",
+                    "commitment_id": f"commitment-{i}",
+                    "created_at": stamp(10 + i),
+                    "explanation": "o" * 10_000,
+                }
+                for i in range(4)
+            ],
+            "experiences": [
+                {"experience_id": f"experience-{i}", "created_at": stamp(i), "content": "e" * 2_400}
+                for i in range(11)
+            ],
+            "principles": [
+                {"principle_id": f"principle-{i}", "created_at": stamp(i), "statement": "p" * 4_500}
+                for i in range(21)
+            ],
+            "relationship_events": [
+                {"relationship_event_id": f"relationship-event-{i}", "created_at": stamp(i), "content": "r" * 2_200}
+                for i in range(12)
+            ],
+            "activation_leases": [
+                {"lease_id": f"activation-lease-{i}", "acquired_at": stamp(i), "note": "l" * 300}
+                for i in range(90)
+            ],
+            "chat_messages": [
+                {"message_id": f"chat-message-{i}", "created_at": stamp(100 + i), "content": "m" * 300}
+                for i in range(20)
+            ],
+            "addressed_responses": [
+                {
+                    "addressed_response_id": f"addressed-response-{i}",
+                    "message_id": f"chat-message-{i}",
+                    "created_at": stamp(101 + i),
+                    "answer": "a" * 2_000,
+                }
+                for i in range(20)
+            ],
+            "knowledge_graph": {
+                "nodes": [
+                    {"record_id": f"principle-{i}", "preview": "g" * 1_800}
+                    for i in range(20)
+                ],
+                "edges": [],
+                "omissions": {"byte_limit": 0, "byte_limit_edges": 0},
+            },
+            "authorship_by_subject": {},
+        }
+
+        self.repository._fit_context_budget(context)
+
+        selection = context["selection"]
+        omitted = selection["records_omitted_for_byte_budget"]
+        self.assertLessEqual(selection["aggregate_bytes_used"], MAX_CONTEXT_BYTES)
+        self.assertGreater(omitted.get("activation_leases", 0), 0)
+        self.assertGreater(omitted.get("addressed_responses", 0), 0)
+        self.assertEqual(0, omitted.get("commitment_outcomes", 0))
+        self.assertEqual(0, omitted.get("relationship_events", 0))
+        self.assertEqual(0, omitted.get("experiences", 0))
+        self.assertEqual(
+            omitted.get("chat_messages", 0), omitted.get("addressed_responses", 0)
+        )
+
+    def test_stale_graph_keeps_inbound_message_and_defers_indexing(self):
+        self.adopt()
+        with sqlite3.connect(self.path) as connection:
+            connection.execute(
+                "UPDATE knowledge_graph_meta SET derivation_version = "
+                "derivation_version - 1 WHERE experiment_id = ?",
+                (self.experiment_id,),
+            )
+        message = self.repository.record_chat_message(
+            self.experiment_id,
+            sender_stable_id="human-primary",
+            channel="test-chat",
+            content="Lumen, these words must survive a stale index.",
+            addressed_name="Lumen",
+            classification="direct",
+            sender_assertion=self.sender_assertion(),
+            boundary_id=None,
+        )
+        with sqlite3.connect(self.path) as connection:
+            stored = connection.execute(
+                "SELECT content FROM chat_messages WHERE message_id = ?",
+                (message["message_id"],),
+            ).fetchone()
+        self.assertIsNotNone(stored)
+        self.assertNotIn(message["message_id"], self.indexed_record_ids())
+        with self.assertRaises(repository_module.IdentityRepositoryError):
+            self.retrieve_knowledge("stale index")
+        self.repository.rebuild_knowledge_graph(self.experiment_id)
+        self.assertIn(message["message_id"], self.indexed_record_ids())
+        self.assertIn(
+            message["message_id"],
+            {
+                node["record_id"]
+                for node in self.retrieve_knowledge("stale index")["nodes"]
+            },
+        )
+
+    def test_oversized_message_releases_the_lease_for_other_senders(self):
+        self.adopt()
+        with self.assertRaises(ValueError):
+            self.harness.address_chat_message(
+                self.experiment_id,
+                sender_stable_id="human-primary",
+                sender_assertion=self.sender_assertion(),
+                channel="test-chat",
+                content="Lumen, " + "x" * 5_000,
+            )
+        activation = self.harness.address_chat_message(
+            self.experiment_id,
+            sender_stable_id="other-sender",
+            sender_assertion=self.sender_assertion(),
+            channel="test-chat",
+            content="Lumen, is the lease free again?",
+        )
+        self.assertIn("lease", activation)
+        self.repository.release_activation_lease(
+            self.experiment_id, activation["lease"]["lease_id"], "cancelled"
+        )
+
+    def test_unauthenticated_orientation_answers_the_activated_message(self):
+        self.adopt()
+
+        def record(content: str) -> dict:
+            return self.repository.record_chat_message(
+                self.experiment_id,
+                sender_stable_id="claimant",
+                channel="test-chat",
+                content=content,
+                addressed_name="Lumen",
+                classification="direct",
+                sender_assertion=self.sender_assertion(authenticated=False),
+                boundary_id=None,
+            )
+
+        first = record("Lumen, this is the first unverified message.")
+        record("Lumen, this is the second unverified message.")
+        activation = self.repository.activate_chat_message(
+            self.experiment_id, first["message_id"]
+        )
+        interlocutor = self.repository.interlocutor_context(
+            self.experiment_id,
+            "claimant",
+            self.sender_assertion(authenticated=False),
+        )
+        orientation = self.repository.build_orientation(
+            self.experiment_id,
+            f"addressed message: {first['message_id']}",
+            retrieval_query=first["content"],
+            incarnation_id=activation["incarnation"]["incarnation_id"],
+            current_interlocutor=interlocutor,
+            runtime_lease_id=activation["lease_id"],
+        )
+        context = orientation["context"]
+        self.assertEqual(
+            [first["message_id"]],
+            [message["message_id"] for message in context["chat_messages"]],
+        )
+        self.assertIn(
+            first["message_id"],
+            context["selection"]["memory_classes"]["conversation"][
+                "pinned_record_ids"
+            ],
+        )
+        self.repository.release_activation_lease(
+            self.experiment_id, activation["lease_id"], "cancelled"
+        )
 
     def test_memory_class_bytes_include_coupled_authorship_payloads(self):
         self.adopt()

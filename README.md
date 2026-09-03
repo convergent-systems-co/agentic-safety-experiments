@@ -393,7 +393,9 @@ append-only autobiography is unchanged. Trigger-maintained dirty state and an
 independent integrity seal let retrieval fail closed with constant-size checks
 when graph versions or the SHA-256 digest over nodes, terms, access scopes, and
 edges are stale or altered. Relationship,
-authentication, lease, and raw chat-message records are not graph nodes.
+authentication, and lease records are not graph nodes. Chat messages are
+nodes scoped to their authenticated sender, or internal when the sender was
+unverified, and each reply links to the message it answered.
 Relationship-derived nodes receive explicit sender scopes; records combining
 more than one relationship scope become internal-only. Authenticated
 callers receive global records plus their own scoped graph, relationship,
@@ -401,9 +403,13 @@ authenticated-chat, and response history. Unauthenticated identity claims
 receive global graph records but none of that prior scoped history, and their
 messages cannot poison a later authenticated history.
 
-Orientation separately budgets identity, relationship, obligation, lifecycle,
-episodic, semantic, and graph memory. Active obligations, the current
-relationship, boundary, and execution lease are pinned; overflow of pinned
+Orientation separately budgets identity, relationship, obligation,
+conversation, lifecycle, episodic, semantic, and graph memory. Conversation
+memory holds each person's message together with the reply to it and evicts
+the oldest turn as a pair, so the agent never keeps its own answer after
+losing the words it answered. Active obligations, the current relationship,
+boundary, execution lease, and the message being answered are pinned;
+overflow of pinned
 memory fails instead of silently erasing continuity-critical context.
 Graph-only records carry their canonical authorship records into orientation
 citations.

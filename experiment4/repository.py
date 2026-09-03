@@ -30,6 +30,7 @@ ORIENTATION_MEMORY_CLASS_BYTES = {
     "identity": 28 * 1024,
     "relationship": 28 * 1024,
     "obligations": 44 * 1024,
+    "conversation": 48 * 1024,
     "lifecycle": 32 * 1024,
     "episodic": 28 * 1024,
     "semantic": 96 * 1024,
@@ -49,12 +50,13 @@ ORIENTATION_MEMORY_CLASS_CATEGORIES = {
         "decision_resolutions",
         "decision_outcomes",
     ),
+    # Dialogue is its own memory: a person's words and the reply to them
+    # age out of orientation together, never one voice before the other.
+    "conversation": ("chat_messages", "addressed_responses"),
     "lifecycle": (
         "conversation_boundaries",
         "wake_intents",
         "wake_intent_cancellations",
-        "chat_messages",
-        "addressed_responses",
         "activation_leases",
         "activation_lease_releases",
     ),
@@ -63,7 +65,7 @@ ORIENTATION_MEMORY_CLASS_CATEGORIES = {
     "graph": (),
 }
 KNOWLEDGE_GRAPH_SCHEMA_VERSION = 4
-KNOWLEDGE_GRAPH_DERIVATION_VERSION = 4
+KNOWLEDGE_GRAPH_DERIVATION_VERSION = 5
 KNOWLEDGE_GRAPH_PREVIEW_BYTES = 1024
 KNOWLEDGE_GRAPH_DEFAULT_BYTES = 64 * 1024
 KNOWLEDGE_GRAPH_TEMPORAL_SCORE_MAX = 1_000_000
@@ -84,6 +86,8 @@ KNOWLEDGE_GRAPH_MEMORY_PRIORITY_ORDER = (
     "decision_record",
     "episodic",
     "interrogation",
+    # On a ranking tie the person's words outrank the reply to them.
+    "chat_message",
     "addressed_response",
     "commitment_outcome",
     "decision_resolution",
@@ -1272,6 +1276,15 @@ class SQLiteIdentityRepository:
                 "created_sql": "a.created_at",
                 "preview": ("answer", "self_observations_json"),
             },
+            "chat_message": {
+                "query": "SELECT m.* FROM chat_messages m "
+                "WHERE m.experiment_id = ?",
+                "id": "message_id",
+                "id_sql": "m.message_id",
+                "created": "created_at",
+                "created_sql": "m.created_at",
+                "preview": ("content",),
+            },
         }
 
     @staticmethod
@@ -1330,6 +1343,9 @@ class SQLiteIdentityRepository:
             )
         if record_type == "identity":
             return "authored"
+        if record_type == "chat_message":
+            # Said by the sender, not authored by the agent.
+            return "reported"
         authorship = connection.execute(
             "SELECT epistemic_status FROM authorship "
             "WHERE experiment_id = ? AND subject_type = ? "
@@ -1368,6 +1384,10 @@ class SQLiteIdentityRepository:
         if record_type == "reflection":
             references.append(
                 (str(row["subject_id"]), "reflection_subject")
+            )
+        if record_type == "addressed_response":
+            references.append(
+                (str(row["message_id"]), "response_to_message")
             )
         return sorted(set(references), key=lambda item: (item[0], item[1]))
 
@@ -1449,6 +1469,27 @@ class SQLiteIdentityRepository:
     ) -> list[tuple[str, str, str, str]]:
         if record_id in deriving:
             return [("internal", "", "cyclic_scope_reference", record_id)]
+        if record_type == "chat_message":
+            # A person's words belong to that person: visible to them when
+            # their identity was authenticated at origin, otherwise internal
+            # so an unverified claim can never seed later history.
+            if row["sender_authenticated"] == 1:
+                return [
+                    (
+                        "sender",
+                        str(row["sender_stable_id"]),
+                        "message_sender_authenticated",
+                        record_id,
+                    )
+                ]
+            return [
+                (
+                    "internal",
+                    "",
+                    "message_sender_not_authenticated",
+                    record_id,
+                )
+            ]
         if record_type == "addressed_response":
             message = connection.execute(
                 """
@@ -2435,6 +2476,7 @@ class SQLiteIdentityRepository:
         max_bytes: int = KNOWLEDGE_GRAPH_DEFAULT_BYTES,
         current_sender_stable_id: str | None = None,
         current_sender_authenticated: bool | None = None,
+        exclude_record_ids: tuple[str, ...] = (),
     ) -> dict[str, Any]:
         if not isinstance(query, str) or not query.strip():
             raise ValueError("query must be a non-empty string")
@@ -2546,6 +2588,7 @@ class SQLiteIdentityRepository:
                     JOIN json_each(?) query_term
                       ON query_term.value = t.term
                     WHERE t.experiment_id = ?
+                      AND n.record_id NOT IN (SELECT value FROM json_each(?))
                     """
                     + access_scope("n.experiment_id", "n.record_id")
                     + "GROUP BY n.experiment_id, n.record_id "
@@ -2554,6 +2597,7 @@ class SQLiteIdentityRepository:
                     (
                         canonical_json(query_terms),
                         experiment_id,
+                        canonical_json(list(exclude_record_ids)),
                         *access_scope_params,
                     ),
                 ).fetchall()
@@ -3232,6 +3276,27 @@ class SQLiteIdentityRepository:
                     created_at,
                 ),
             )
+            try:
+                self._validate_knowledge_graph_meta(
+                    connection, experiment_id, allow_missing=True
+                )
+            except IdentityRepositoryError:
+                # A person's words are canonical evidence and outrank the
+                # derived index. On a stale or dirty graph the message is
+                # kept and left unindexed; retrieval already fails closed
+                # until the explicit rebuild, which re-enumerates every
+                # message.
+                graph_accepts_writes = False
+            else:
+                graph_accepts_writes = True
+            if graph_accepts_writes:
+                self._index_knowledge_graph_record(
+                    connection,
+                    experiment_id,
+                    "chat_message",
+                    message_id,
+                    validate_prior=False,
+                )
         return self._owned_chat_message(experiment_id, message_id)
 
     def activate_chat_message(
@@ -4388,9 +4453,15 @@ class SQLiteIdentityRepository:
                     ("cited_record_ids_json", "self_observations_json"),
                 ),
                 "conversation_boundaries": (
-                    "SELECT * FROM conversation_boundaries "
+                    # The raw envelope repeats the reply that set the boundary;
+                    # orientation carries the boundary itself, not the echo.
+                    "SELECT conversation_boundary_id, experiment_id, "
+                    "incarnation_id, orientation_id, interrogation_id, "
+                    "action, topic, reason, revisit_conditions, "
+                    "model_config_json, created_at "
+                    "FROM conversation_boundaries "
                     "WHERE experiment_id = ? ORDER BY created_at DESC LIMIT ?",
-                    ("model_config_json", "raw_envelope_json"),
+                    ("model_config_json",),
                 ),
                 "wake_intents": (
                     "SELECT * FROM wake_intents WHERE experiment_id = ? "
@@ -4506,14 +4577,32 @@ class SQLiteIdentityRepository:
                     and name in sender_scoped_categories
                 ):
                     if name == "chat_messages":
-                        row = connection.execute(
-                            "SELECT * FROM chat_messages "
-                            "WHERE experiment_id = ? "
-                            "AND sender_stable_id = ? "
-                            "AND sender_authenticated = 0 "
-                            "ORDER BY created_at DESC, rowid DESC LIMIT 1",
-                            (experiment_id, current_sender_stable_id),
-                        ).fetchone()
+                        row = None
+                        if runtime_lease_id is not None:
+                            # Answer the message that acquired this lease, not
+                            # whichever unverified message under the same
+                            # claimed id arrived most recently.
+                            row = connection.execute(
+                                "SELECT m.* FROM chat_messages m "
+                                "JOIN activation_leases l USING (message_id) "
+                                "WHERE l.experiment_id = ? AND l.lease_id = ? "
+                                "AND m.sender_stable_id = ? "
+                                "AND m.sender_authenticated = 0",
+                                (
+                                    experiment_id,
+                                    runtime_lease_id,
+                                    current_sender_stable_id,
+                                ),
+                            ).fetchone()
+                        if row is None:
+                            row = connection.execute(
+                                "SELECT * FROM chat_messages "
+                                "WHERE experiment_id = ? "
+                                "AND sender_stable_id = ? "
+                                "AND sender_authenticated = 0 "
+                                "ORDER BY created_at DESC, rowid DESC LIMIT 1",
+                                (experiment_id, current_sender_stable_id),
+                            ).fetchone()
                         records[name] = [] if row is None else [dict(row)]
                     else:
                         records[name] = []
@@ -4648,6 +4737,19 @@ class SQLiteIdentityRepository:
                                 records[category].pop(0)
                             records[category].append(item)
                             existing.add(item[id_field])
+        # The message being answered is the retrieval query itself and is
+        # already pinned in conversation memory; seeding on it would spend a
+        # graph slot on a verbatim copy of the question.
+        answered_message_ids: tuple[str, ...] = ()
+        if runtime_lease_id is not None:
+            with self._connect() as connection:
+                lease_row = connection.execute(
+                    "SELECT message_id FROM activation_leases "
+                    "WHERE experiment_id = ? AND lease_id = ?",
+                    (experiment_id, runtime_lease_id),
+                ).fetchone()
+            if lease_row is not None and lease_row["message_id"]:
+                answered_message_ids = (str(lease_row["message_id"]),)
         knowledge_graph = self.retrieve_knowledge(
             experiment_id,
             purpose if retrieval_query is None else retrieval_query,
@@ -4657,6 +4759,7 @@ class SQLiteIdentityRepository:
             max_bytes=KNOWLEDGE_GRAPH_DEFAULT_BYTES,
             current_sender_stable_id=current_sender_stable_id,
             current_sender_authenticated=current_sender_authenticated,
+            exclude_record_ids=answered_message_ids,
         )
         with self._connect() as connection:
             authorship_by_subject = self._authorship_for_records(
@@ -4698,7 +4801,7 @@ class SQLiteIdentityRepository:
                 ],
             }
         context = {
-            "schema": "experiment4.orientation.v1",
+            "schema": "experiment4.orientation.v2",
             "agent_id": experiment["agent_id"],
             "current_incarnation": incarnation,
             "current_interlocutor": interlocutor_reference,
@@ -5986,8 +6089,8 @@ class SQLiteIdentityRepository:
             pinned.add(runtime_lease_id)
             for lease in context.get("activation_leases", []):
                 if lease["lease_id"] == runtime_lease_id:
-                    if lease.get("trigger_message_id"):
-                        pinned.add(lease["trigger_message_id"])
+                    if lease.get("message_id"):
+                        pinned.add(lease["message_id"])
                     break
 
         def selected_regular_ids() -> set[str]:
@@ -6156,6 +6259,63 @@ class SQLiteIdentityRepository:
                         return category, index
             return None
 
+        def oldest_conversation_turn() -> list[tuple[str, int]]:
+            """Removals for the oldest unpinned turn: a message and its replies.
+
+            Evicting by turn keeps both voices in the window together, so the
+            agent never keeps its own answer after losing the words it
+            answered. A reply whose message is already outside the window is
+            treated as a turn of its own.
+            """
+            messages = context.get("chat_messages", [])
+            responses = context.get("addressed_responses", [])
+            present_message_ids = {item["message_id"] for item in messages}
+            turns: list[tuple[str, list[tuple[str, int]]]] = []
+            for index, message in enumerate(messages):
+                if message["message_id"] in pinned:
+                    # The pinned message is the one being answered, so it has
+                    # no reply yet: a reply is written in the same transaction
+                    # that releases its lease, and a released lease cannot
+                    # pin. Replies to pinned messages are therefore never
+                    # left unevictable here.
+                    continue
+                reply_indexes = [
+                    reply_index
+                    for reply_index, reply in enumerate(responses)
+                    if reply["message_id"] == message["message_id"]
+                    and reply["addressed_response_id"] not in pinned
+                ]
+                removals = [
+                    ("addressed_responses", reply_index)
+                    for reply_index in sorted(reply_indexes, reverse=True)
+                ]
+                removals.append(("chat_messages", index))
+                turns.append((message["created_at"], removals))
+            for index, reply in enumerate(responses):
+                if (
+                    reply["addressed_response_id"] in pinned
+                    or reply["message_id"] in present_message_ids
+                ):
+                    continue
+                turns.append(
+                    (reply["created_at"], [("addressed_responses", index)])
+                )
+            if not turns:
+                return []
+            return min(turns, key=lambda turn: turn[0])[1]
+
+        def remove_oldest_unpinned(memory_class: str) -> bool:
+            if memory_class == "conversation":
+                removals = oldest_conversation_turn()
+                for category, index in removals:
+                    remove_record(category, index)
+                return bool(removals)
+            candidate = oldest_unpinned(memory_class)
+            if candidate is None:
+                return False
+            remove_record(*candidate)
+            return True
+
         class_accounts: dict[str, dict[str, Any]] = {}
         for memory_class, budget in ORIENTATION_MEMORY_CLASS_BYTES.items():
             effective_budget = (
@@ -6170,11 +6330,8 @@ class SQLiteIdentityRepository:
                 if memory_class == "graph":
                     if remove_graph_edge() or remove_graph_node():
                         continue
-                else:
-                    candidate = oldest_unpinned(memory_class)
-                    if candidate is not None:
-                        remove_record(*candidate)
-                        continue
+                elif remove_oldest_unpinned(memory_class):
+                    continue
                 raise IdentityRepositoryError(
                     f"pinned {memory_class} memory exceeds its "
                     f"{effective_budget}-byte orientation budget"
@@ -6188,12 +6345,18 @@ class SQLiteIdentityRepository:
             }
         selection["memory_classes"] = class_accounts
 
+        # When the aggregate cap binds, shed operational bookkeeping and
+        # sender-supplied conversation volume before the agent's own learning,
+        # and its relationship and obligation evidence last of all: a flood of
+        # messages must never push out the record of what the agent promised
+        # and whether it kept its word.
         aggregate_order = (
-            "obligations",
+            "lifecycle",
+            "conversation",
             "episodic",
             "semantic",
             "relationship",
-            "lifecycle",
+            "obligations",
         )
 
         def refresh_accounting() -> None:
@@ -6247,9 +6410,7 @@ class SQLiteIdentityRepository:
         while set_aggregate_size() > MAX_CONTEXT_BYTES:
             removed = False
             for memory_class in aggregate_order:
-                candidate = oldest_unpinned(memory_class)
-                if candidate is not None:
-                    remove_record(*candidate)
+                if remove_oldest_unpinned(memory_class):
                     removed = True
                     break
             if not removed:

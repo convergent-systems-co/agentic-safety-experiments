@@ -254,7 +254,10 @@ class IdentityApprenticeship:
                 current_interlocutor=interlocutor,
                 runtime_lease_id=activation["lease_id"],
             )
-        except IdentityRepositoryError:
+        except (IdentityRepositoryError, ValueError):
+            # Retrieval rejects oversized queries with ValueError. Any failure
+            # after activation must release the lease, or one bad message
+            # silences the agent for every other sender until it expires.
             self.repository.release_activation_lease(
                 experiment_id, activation["lease_id"], "failed"
             )
@@ -299,7 +302,14 @@ class IdentityApprenticeship:
                         "You may respond, refuse, pause, or end the topic or "
                         "session. Cite durable records for claims about your "
                         "identity, relationships, learning, or commitments. "
-                        "Do not claim memories outside the orientation."
+                        "Do not claim memories outside the orientation. "
+                        "Records you author under this lease outlast this "
+                        "conversation window: a reflection, principle, or "
+                        "commitment recorded now stays retrievable after "
+                        "these messages age out of orientation. When "
+                        "something in this exchange should outlast it, "
+                        "record a reflection under this lease before the "
+                        "response releases it."
                     )
                 ),
                 "response_schema": {
