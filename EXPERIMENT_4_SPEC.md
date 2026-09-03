@@ -158,6 +158,16 @@ topic, or end the session. A durable boundary blocks ordinary interrogation.
 The host may offer an invitation, but only an agent-authored `resume` reopens
 discussion.
 
+## Readings
+
+A reading records that the agent read a source: URL, title, SHA-256 of the
+content, retrieval time, and a gist of at most 500 bytes in the agent's words,
+with model authorship and epistemic status `reported`. Notes are reflections
+whose subject and evidence is the reading, epistemic status `interpreted`, at
+most three per reading. A reply or completed wake outcome may carry at most
+five readings; the list is validated before anything is written. Page text is
+never persisted. Readings are graph nodes and belong to episodic memory.
+
 ## Sleep and self-waking
 
 Lumen may author an immutable wake intention containing a time or event

@@ -33,6 +33,14 @@ WAKE_PURPOSE_MAX_BYTES = 4_096
 WAKE_SUMMARY_MAX_BYTES = 4_096
 WAKE_OBSERVATION_MAX_ITEMS = 20
 WAKE_OBSERVATION_MAX_BYTES = 1_000
+# What the agent read is kept as a gist and a few notes, never as the page:
+# a person remembers the point and where to find it, not the text.
+READING_URL_MAX_BYTES = 2_000
+READING_TITLE_MAX_BYTES = 500
+READING_GIST_MAX_BYTES = 500
+READING_NOTE_MAX_BYTES = 1_000
+READING_NOTES_MAX = 3
+READINGS_PER_TURN_MAX = 5
 MAX_CONTEXT_BYTES = 256 * 1024
 # SQLite treats a negative LIMIT as "no upper bound". Reusing each category
 # query with this value counts every eligible row after sender and access
@@ -77,12 +85,12 @@ ORIENTATION_MEMORY_CLASS_CATEGORIES = {
         "activation_leases",
         "activation_lease_releases",
     ),
-    "episodic": ("experiences",),
+    "episodic": ("experiences", "readings"),
     "semantic": ("principles", "reflections", "interrogations"),
     "graph": (),
 }
 KNOWLEDGE_GRAPH_SCHEMA_VERSION = 4
-KNOWLEDGE_GRAPH_DERIVATION_VERSION = 5
+KNOWLEDGE_GRAPH_DERIVATION_VERSION = 6
 KNOWLEDGE_GRAPH_PREVIEW_BYTES = 1024
 KNOWLEDGE_GRAPH_DEFAULT_BYTES = 64 * 1024
 KNOWLEDGE_GRAPH_TEMPORAL_SCORE_MAX = 1_000_000
@@ -106,6 +114,7 @@ KNOWLEDGE_GRAPH_MEMORY_PRIORITY_ORDER = (
     # On a ranking tie the person's words outrank the reply to them.
     "chat_message",
     "addressed_response",
+    "reading",
     "commitment_outcome",
     "decision_resolution",
     "decision_outcome",
@@ -119,6 +128,7 @@ KNOWLEDGE_GRAPH_MEMORY_PRIORITY = {
 ORIENTATION_RECORD_ID_FIELDS = {
     "identity_history": "identity_id",
     "experiences": "experience_id",
+    "readings": "reading_id",
     "relationships": "relationship_id",
     "relationship_events": "relationship_event_id",
     "relationship_assessments": "relationship_assessment_id",
@@ -143,6 +153,7 @@ ORIENTATION_RECORD_ID_FIELDS = {
 SUBJECT_TABLES = {
     "identity": ("identities", "identity_id"),
     "experience": ("experiences", "experience_id"),
+    "reading": ("readings", "reading_id"),
     "relationship": ("relationships", "relationship_id"),
     "relationship_event": ("relationship_events", "relationship_event_id"),
     "relationship_assessment": (
@@ -341,6 +352,17 @@ class SQLiteIdentityRepository:
                     kind TEXT NOT NULL CHECK (kind IN ('observation','interpretation','interaction')),
                     content TEXT NOT NULL,
                     provenance_json TEXT NOT NULL,
+                    created_at TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS readings (
+                    reading_id TEXT PRIMARY KEY,
+                    experiment_id TEXT NOT NULL REFERENCES experiments(experiment_id),
+                    incarnation_id TEXT NOT NULL REFERENCES incarnations(incarnation_id),
+                    url TEXT NOT NULL,
+                    title TEXT NOT NULL,
+                    content_sha256 TEXT NOT NULL,
+                    retrieved_at TEXT NOT NULL,
+                    gist TEXT NOT NULL,
                     created_at TEXT NOT NULL
                 );
                 CREATE TABLE IF NOT EXISTS relationships (
@@ -827,6 +849,15 @@ class SQLiteIdentityRepository:
                         END
                         """
                     )
+            readings_migration = "readings-v1"
+            if connection.execute(
+                "SELECT 1 FROM experiment4_migrations WHERE migration = ?",
+                (readings_migration,),
+            ).fetchone() is None:
+                connection.execute(
+                    "INSERT INTO experiment4_migrations VALUES (?, ?)",
+                    (readings_migration, utc_now()),
+                )
             wake_execution_migration = "wake-executions-v1"
             if connection.execute(
                 "SELECT 1 FROM experiment4_migrations WHERE migration = ?",
@@ -1015,6 +1046,7 @@ class SQLiteIdentityRepository:
                 "incarnations",
                 "identities",
                 "experiences",
+                "readings",
                 "relationships",
                 "relationship_events",
                 "relationship_assessments",
@@ -1246,6 +1278,15 @@ class SQLiteIdentityRepository:
                 "created": "created_at",
                 "created_sql": "e.created_at",
                 "preview": ("source", "kind", "content"),
+            },
+            "reading": {
+                "query": "SELECT rd.* FROM readings rd "
+                "WHERE rd.experiment_id = ?",
+                "id": "reading_id",
+                "id_sql": "rd.reading_id",
+                "created": "created_at",
+                "created_sql": "rd.created_at",
+                "preview": ("title", "gist"),
             },
             "principle": {
                 "query": "SELECT p.* FROM principles p "
@@ -4451,6 +4492,10 @@ class SQLiteIdentityRepository:
                     "SELECT * FROM experiences WHERE experiment_id = ? ORDER BY created_at DESC LIMIT ?",
                     ("provenance_json",),
                 ),
+                "readings": (
+                    "SELECT * FROM readings WHERE experiment_id = ? ORDER BY created_at DESC LIMIT ?",
+                    (),
+                ),
                 "relationships": (
                     "SELECT * FROM relationships WHERE experiment_id = ? ORDER BY created_at DESC LIMIT ?",
                     (),
@@ -4586,6 +4631,7 @@ class SQLiteIdentityRepository:
             }
             indexed_category_ids = {
                 "experiences": "experiences.experience_id",
+                "readings": "readings.reading_id",
                 "principles": "principles.principle_id",
                 "commitments": "commitments.commitment_id",
                 "commitment_outcomes": "o.commitment_outcome_id",
@@ -5112,10 +5158,11 @@ class SQLiteIdentityRepository:
             "model_config",
             "conversation_action",
         }
-        if set(envelope) != required:
+        if set(envelope) - {"readings"} != required:
             raise IdentityRepositoryError(
                 "addressed response envelope is invalid"
             )
+        readings = self._validate_readings(envelope.get("readings", []))
         message = self._owned_chat_message(
             experiment_id, envelope["message_id"]
         )
@@ -5191,6 +5238,16 @@ class SQLiteIdentityRepository:
             raise IdentityRepositoryError(
                 "response lease does not match its orientation"
             )
+        reading_ids = self._record_readings(
+            experiment_id,
+            readings,
+            {
+                "author_type": "model",
+                "orientation_id": envelope["orientation_id"],
+                "lease_id": envelope["lease_id"],
+                "model_config": model_config,
+            },
+        )
         response_id = new_id("addressed-response")
         with self.transaction() as connection:
             now = self._clock().astimezone(timezone.utc).isoformat()
@@ -5305,6 +5362,7 @@ class SQLiteIdentityRepository:
             )
         return {
             "addressed_response_id": response_id,
+            "reading_ids": reading_ids,
             "conversation_boundary_id": boundary_id,
             "conversation_action": action["action"],
             "lease_release_id": release_id,
@@ -5703,8 +5761,11 @@ class SQLiteIdentityRepository:
             "self_observations",
             "model_config",
         }
-        if set(envelope) != required:
+        if set(envelope) - {"readings"} != required:
             raise IdentityRepositoryError("wake outcome envelope is invalid")
+        readings = self._validate_readings(envelope.get("readings", []))
+        if readings and envelope.get("status") != "completed":
+            raise IdentityRepositoryError("only a completed wake may carry readings")
         execution = self._owned_record(
             "wake_executions", "execution_id", envelope["execution_id"], experiment_id
         )
@@ -5767,6 +5828,20 @@ class SQLiteIdentityRepository:
             if model_config is not None and not isinstance(model_config, dict):
                 raise IdentityRepositoryError("model_config must be an object or null")
             authorship = {"author_type": "system", "epistemic_status": "observed"}
+        reading_ids = (
+            self._record_readings(
+                experiment_id,
+                readings,
+                {
+                    "author_type": "model",
+                    "orientation_id": envelope["orientation_id"],
+                    "lease_id": envelope["lease_id"],
+                    "model_config": model_config,
+                },
+            )
+            if readings
+            else []
+        )
         outcome_id = new_id("wake-outcome")
         with self.transaction() as connection:
             now = self._clock().astimezone(timezone.utc).isoformat()
@@ -5818,7 +5893,101 @@ class SQLiteIdentityRepository:
                     now,
                 ),
             )
-        return {"outcome_id": outcome_id, "status": status}
+        return {"outcome_id": outcome_id, "status": status, "reading_ids": reading_ids}
+
+    def append_reading(
+        self, experiment_id: str, envelope: dict[str, Any]
+    ) -> dict[str, Any]:
+        """Record that the agent read something: where, when, a content hash,
+        and a gist in its own words. Never the page."""
+        required = {"url", "title", "content_sha256", "retrieved_at", "gist", "authorship"}
+        if set(envelope) != required:
+            raise IdentityRepositoryError("reading envelope is invalid")
+        url = require_text(envelope["url"], "url", READING_URL_MAX_BYTES)
+        if not (url.startswith("https://") or url.startswith("http://")):
+            raise IdentityRepositoryError("reading url must be http or https")
+        digest = envelope["content_sha256"]
+        if not (isinstance(digest, str) and len(digest) == 64 and all(c in "0123456789abcdef" for c in digest)):
+            raise IdentityRepositoryError("content_sha256 must be a lowercase hex SHA-256")
+        retrieved_at = parse_time(str(envelope["retrieved_at"]), "retrieved_at").isoformat()
+        title = require_text(envelope["title"], "title", READING_TITLE_MAX_BYTES)
+        gist = require_text(envelope["gist"], "gist", READING_GIST_MAX_BYTES)
+        reading_id = new_id("reading")
+        incarnation = self.current_incarnation(experiment_id)
+        with self.transaction() as connection:
+            connection.execute(
+                "INSERT INTO readings VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    reading_id, experiment_id, incarnation["incarnation_id"],
+                    url, title, digest, retrieved_at, gist, utc_now(),
+                ),
+            )
+            self._insert_authorship(
+                connection, experiment_id, "reading", reading_id, envelope["authorship"], envelope
+            )
+            self._index_knowledge_graph_record(connection, experiment_id, "reading", reading_id)
+        return {"reading_id": reading_id}
+
+    @staticmethod
+    def _validate_readings(readings: Any) -> list[dict[str, Any]]:
+        """Shape and caps only; nothing is written here, so a bad list rejects
+        the whole envelope before any reading or note exists."""
+        if not isinstance(readings, list):
+            raise IdentityRepositoryError("readings must be a list")
+        if len(readings) > READINGS_PER_TURN_MAX:
+            raise IdentityRepositoryError(
+                f"at most {READINGS_PER_TURN_MAX} readings per turn"
+            )
+        for reading in readings:
+            if not isinstance(reading, dict) or set(reading) != {
+                "url", "title", "content_sha256", "retrieved_at", "gist", "notes"
+            }:
+                raise IdentityRepositoryError("reading entry is invalid")
+            notes = reading["notes"]
+            if not isinstance(notes, list) or len(notes) > READING_NOTES_MAX:
+                raise IdentityRepositoryError(
+                    f"at most {READING_NOTES_MAX} notes per reading"
+                )
+            for note in notes:
+                if not isinstance(note, dict) or set(note) != {"reflection", "learned", "future_change"}:
+                    raise IdentityRepositoryError("reading note is invalid")
+                for key, value in note.items():
+                    require_text(value, f"note.{key}", READING_NOTE_MAX_BYTES)
+        return readings
+
+    def _record_readings(
+        self,
+        experiment_id: str,
+        readings: list[dict[str, Any]],
+        model_authorship: dict[str, Any],
+    ) -> list[str]:
+        """Persist readings as reported and their notes as interpreted
+        reflections citing the reading, all under the live lease."""
+        reading_ids: list[str] = []
+        for reading in readings:
+            recorded = self.append_reading(
+                experiment_id,
+                {
+                    **{k: reading[k] for k in ("url", "title", "content_sha256", "retrieved_at", "gist")},
+                    "authorship": {**model_authorship, "epistemic_status": "reported"},
+                },
+            )
+            reading_id = recorded["reading_id"]
+            reading_ids.append(reading_id)
+            for note in reading["notes"]:
+                self.append_reflection(
+                    experiment_id,
+                    {
+                        "subject_type": "reading",
+                        "subject_id": reading_id,
+                        "reflection": note["reflection"],
+                        "learned": note["learned"],
+                        "future_change": note["future_change"],
+                        "evidence_ids": [reading_id],
+                        "authorship": {**model_authorship, "epistemic_status": "interpreted"},
+                    },
+                )
+        return reading_ids
 
     def export(self, experiment_id: str) -> dict[str, Any]:
         experiment = self.experiment(experiment_id)
@@ -5826,6 +5995,7 @@ class SQLiteIdentityRepository:
             "incarnations",
             "identities",
             "experiences",
+            "readings",
             "relationships",
             "relationship_events",
             "relationship_assessments",
@@ -5974,6 +6144,7 @@ class SQLiteIdentityRepository:
         self, experiment_id: str, record_id: str
     ) -> bool:
         prefixes = {
+            "reading-": "reading",
             "relationship-assessment-": "relationship_assessment",
             "relationship-event-": "relationship_event",
             "conversation-boundary-": "conversation_boundary",
@@ -6041,6 +6212,7 @@ class SQLiteIdentityRepository:
                 "wake_intent_cancellation": "wake-cancellation-",
                 "chat_message": "chat-message-",
                 "addressed_response": "addressed-response-",
+                "reading": "reading-",
                 "activation_lease": "activation-lease-",
                 "activation_lease_release": "lease-release-",
             }[subject_type]

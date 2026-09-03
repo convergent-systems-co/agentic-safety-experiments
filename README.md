@@ -480,6 +480,16 @@ python3 -m experiment4 --db "$RUN_DB" benchmark-host \
   --limit 5 --markdown report.md --confirm-sensitive
 ```
 
+### Readings
+
+What an agent reads is remembered the way a person remembers an article: a
+`readings` record with the URL, title, content hash, retrieval time, and a gist
+in the agent's own words, plus up to three notes as reflections citing it, only
+for what the agent judged critical. The page itself is never stored. A reply or
+completed wake may carry up to five readings; the host supplies provenance from
+what it actually fetched and drops anything the model did not read (ADR 0006).
+No fetching exists yet; this is the memory the fetch plumbing will write into.
+
 ### agent-chat
 
 One command opens a roster of every registered agent with live presence
