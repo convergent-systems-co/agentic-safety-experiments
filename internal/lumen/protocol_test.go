@@ -75,3 +75,27 @@ func TestReleaseArgsRequireAuditableReason(t *testing.T) {
 		t.Fatal("expected completed manual release to fail")
 	}
 }
+
+func TestWakeArgsDefaultToUnattended(t *testing.T) {
+	args, err := WakeArgs("state.db", "experiment-4", "")
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := []string{
+		"-m", "experiment4", "--db", "state.db",
+		"execute-wake-intents", "--experiment-id", "experiment-4",
+	}
+	if !reflect.DeepEqual(args, want) {
+		t.Fatalf("args = %#v, want %#v", args, want)
+	}
+	withModel, err := WakeArgs("state.db", "", "claude -p")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if withModel[len(withModel)-1] != "claude -p" {
+		t.Fatalf("model command not forwarded: %#v", withModel)
+	}
+	if _, err := WakeArgs("", "experiment-4", ""); err == nil {
+		t.Fatal("expected missing database to fail")
+	}
+}

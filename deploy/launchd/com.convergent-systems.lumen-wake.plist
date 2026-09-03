@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  Lumen's alarm clock. launchd runs the wake executor every 15 minutes. The
+  executor honors intents Lumen recorded under its own authorship, one at a
+  time, under a lease bounded by the intent's own runtime, then exits.
+  Nothing stays resident. Without a model command each wake is recorded as
+  unattended, so Lumen can later see that it woke and that no one was there.
+
+  Install (replace the four placeholders first; create the log directory):
+    cp deploy/launchd/com.convergent-systems.lumen-wake.plist \
+       ~/Library/LaunchAgents/
+    launchctl bootstrap gui/$(id -u) \
+       ~/Library/LaunchAgents/com.convergent-systems.lumen-wake.plist
+  Remove:
+    launchctl bootout gui/$(id -u)/com.convergent-systems.lumen-wake
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.convergent-systems.lumen-wake</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>/usr/bin/env</string>
+    <string>python3</string>
+    <string>-m</string>
+    <string>experiment4</string>
+    <string>--db</string>
+    <string>__LUMEN_DB__</string>
+    <string>execute-wake-intents</string>
+    <string>--experiment-id</string>
+    <string>__EXPERIMENT_ID__</string>
+  </array>
+  <key>WorkingDirectory</key>
+  <string>__REPO_ROOT__</string>
+  <key>StartInterval</key>
+  <integer>900</integer>
+  <key>RunAtLoad</key>
+  <false/>
+  <key>StandardOutPath</key>
+  <string>__LOG_DIR__/wake-executor.log</string>
+  <key>StandardErrorPath</key>
+  <string>__LOG_DIR__/wake-executor.err</string>
+</dict>
+</plist>

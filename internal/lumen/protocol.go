@@ -109,6 +109,30 @@ func ReleaseArgs(
 	), nil
 }
 
+// WakeArgs builds the process contract for honoring due wake intents. An
+// empty model command records each wake as unattended, which is the safe
+// default for an alarm nobody is listening to.
+func WakeArgs(
+	database string,
+	experimentID string,
+	modelCommand string,
+) ([]string, error) {
+	if database == "" {
+		return nil, fmt.Errorf("database is required")
+	}
+	args := []string{
+		"-m", "experiment4", "--db", database,
+		"execute-wake-intents",
+	}
+	if experimentID != "" {
+		args = append(args, "--experiment-id", experimentID)
+	}
+	if modelCommand != "" {
+		args = append(args, "--model-command", modelCommand)
+	}
+	return args, nil
+}
+
 func (runner Runner) Run(ctx context.Context, args []string) error {
 	python := runner.Python
 	if python == "" {

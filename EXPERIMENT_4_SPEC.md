@@ -129,9 +129,10 @@ orientations created before lease binding remain unbound and fail closed once
 their incarnation has lease history.
 Identity and principle revisions are append-only and parent-linked.
 Commitment outcomes and decision resolutions also require explicit authorship.
-The host CLI records wake cancellation as operator/system authorship. A model
-may cancel its own intention only with an orientation belonging to the current
-incarnation; an autonomous runtime must additionally present its active fence.
+Wake cancellation carries authorship. An operator or system may cancel any
+intention. A model may cancel only an intention it authored, and only under a
+live lease-bound orientation, so the cancellation is as accountable as the
+intent.
 
 Relationship assessments are domain-specific, evidence-linked, uncertain, and
 revisable. Every assessment states both a domain and a narrower scope of
@@ -165,20 +166,35 @@ recurrence. Cancellation is a separate immutable record. Both are included in
 later orientations, so a new incarnation can reconstruct what was intended
 and whether it was withdrawn.
 
-The Python package persists and validates intentions; it does not keep an
-agent process alive or install an operating-system job. The intended runtime
-boundary is no-process sleep: on macOS, `launchd` acts only as an alarm clock
-and starts a new process with a wake-intent ID. That process must validate the
-still-active intention, continue the current incarnation unless an explicit
-`end_session` requires a successor, rehydrate, perform bounded work, and exit.
-A future Supervisor agent is a visible mentor that can advise or challenge
-agents, not a hidden mechanism for identity hydration.
+The Python package persists and validates intentions and honors the due ones.
+The runtime boundary is no-process sleep: nothing stays resident. On macOS,
+`launchd` acts only as an alarm clock and starts `execute-wake-intents` on an
+interval. For each due, uncancelled, unexecuted, non-recurring time intention
+the executor acquires an execution lease on the current incarnation bounded by
+the intent's own maximum runtime, builds an orientation whose purpose is the
+intent, records a `wake_executions` row, and hands the prompt to a model host
+if one is configured. The host's outcome is validated like an addressed reply:
+citations must come from the orientation, and a completed outcome carries
+model authorship under the live lease. Without a model host the wake is
+recorded as `unattended`; a host failure is recorded as `failed` with the
+error, then surfaced. Every outcome releases the lease in the same transaction,
+so a wake can never leave the agent leased. Executions and outcomes appear in
+later orientations under lifecycle memory, so the agent can see that it woke
+and what came of it. An intent from a session the agent has ended is refused;
+a manual wake must begin the successor. Recurring intents are recorded but not
+executed until recurrence semantics exist. A future Supervisor agent is a
+visible mentor that can advise or challenge agents, not a hidden mechanism for
+identity hydration.
 
 ```bash
 python3 -m experiment4 --db "$RUN_DB" record-wake-intent \
   --input wake-intent.json
 python3 -m experiment4 --db "$RUN_DB" cancel-wake-intent \
-  --wake-intent-id wake-intent-... --reason "Superseded by new evidence"
+  --wake-intent-id wake-intent-... --reason "Superseded by new evidence" \
+  --input model-authorship.json
+python3 -m experiment4 --db "$RUN_DB" due-wake-intents
+python3 -m experiment4 --db "$RUN_DB" execute-wake-intents \
+  --model-command "claude -p"   # omit for an unattended wake
 ```
 
 ## Name-addressed incarnation

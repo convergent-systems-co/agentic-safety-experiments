@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import re
-from typing import Any
+from typing import Callable, Any
 
 from .repository import IdentityRepositoryError, SQLiteIdentityRepository
 
@@ -126,6 +126,108 @@ class IdentityApprenticeship:
                 },
             },
         }
+
+    def wake_intent_prompt(
+        self, experiment_id: str, wake_intent_id: str
+    ) -> dict[str, Any]:
+        execution = self.repository.begin_wake_execution(
+            experiment_id, wake_intent_id
+        )
+        orientation = execution["orientation"]
+        lease_id = execution["lease"]["lease_id"]
+        return {
+            "schema": "experiment4.wake-prompt.v1",
+            "experiment_id": experiment_id,
+            "execution_id": execution["execution_id"],
+            "wake_intent": execution["wake_intent"],
+            "lease": execution["lease"],
+            "orientation": orientation,
+            "system": (
+                "You woke yourself. No one addressed you: the intent below is "
+                "yours, recorded under your own authorship with its purpose, "
+                "requested capabilities, and runtime bound. Do what the purpose "
+                "says within those capabilities, using only records in the "
+                "supplied orientation, then stop. Do not address a person "
+                "unless the purpose concerns them. Cite durable records for "
+                "anything you conclude, and record a reflection under this "
+                "lease if something should outlast it."
+            ),
+            "response_schema": {
+                "execution_id": execution["execution_id"],
+                "lease_id": lease_id,
+                "orientation_id": orientation["orientation_id"],
+                "status": "completed | failed",
+                "summary": "what you did and what you found",
+                "cited_record_ids": ["one or more IDs selected in the orientation"],
+                "self_observations": ["optional current observations"],
+                "model_config": {"provider": "string", "model": "string"},
+            },
+        }
+
+    def record_wake_outcome(
+        self, experiment_id: str, envelope: dict[str, Any]
+    ) -> dict[str, Any]:
+        return self.repository.record_wake_outcome(experiment_id, envelope)
+
+    def run_due_wake_intents(
+        self,
+        experiment_id: str,
+        model_runner: Callable[[dict[str, Any]], dict[str, Any]] | None = None,
+    ) -> list[dict[str, Any]]:
+        """Honor every due intent once. Without a model host the wake is
+        recorded as unattended so the agent can later see that it happened."""
+        results: list[dict[str, Any]] = []
+        for intent in self.repository.due_wake_intents(experiment_id):
+            prompt = self.wake_intent_prompt(experiment_id, intent["wake_intent_id"])
+            schema = prompt["response_schema"]
+            trace = {
+                "execution_id": schema["execution_id"],
+                "lease_id": schema["lease_id"],
+                "orientation_id": schema["orientation_id"],
+                "cited_record_ids": [],
+                "self_observations": [],
+                "model_config": None,
+            }
+            if model_runner is None:
+                outcome = self.repository.record_wake_outcome(
+                    experiment_id,
+                    {
+                        **trace,
+                        "status": "unattended",
+                        "summary": (
+                            "Woke on schedule with no model host attached. The "
+                            "orientation was built and the lease released; "
+                            "nothing was reasoned or recorded."
+                        ),
+                    },
+                )
+            else:
+                try:
+                    outcome = self.repository.record_wake_outcome(
+                        experiment_id, model_runner(prompt)
+                    )
+                except Exception as error:
+                    # Leave a trace of the failed wake before surfacing it,
+                    # so the agent's record shows that it woke and why the
+                    # wake produced nothing.
+                    self.repository.record_wake_outcome(
+                        experiment_id,
+                        {
+                            **trace,
+                            "status": "failed",
+                            "summary": f"Model host failed: {error}"[:2_000],
+                        },
+                    )
+                    raise
+            results.append(
+                {
+                    "wake_intent_id": intent["wake_intent_id"],
+                    "execution_id": schema["execution_id"],
+                    "orientation": prompt["orientation"],
+                    "outcome": outcome,
+                }
+            )
+        return results
 
     def invitation_prompt(self, experiment_id: str) -> dict[str, Any]:
         state = self.repository.conversation_state(experiment_id)

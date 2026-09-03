@@ -198,15 +198,17 @@ wake cancellations carry separate authorship records.
 
 Wake intentions are also append-only and model-authored. They preserve a
 trigger, purpose, requested capabilities, runtime bound, recurrence, and
-authorship envelope; cancellation is a separate record. The repository makes
-both available to later orientations, but does not run a resident supervisor.
-The intended operational adapter lets the model process exit completely and
-uses macOS `launchd` to start a new process for a specific intent. That future
-process validates the intent, continues the current incarnation unless Lumen
-previously ended its awake period, rehydrates, performs bounded work, and
-exits. Any
-future Supervisor agent is an ordinary,
-auditable mentor relationship, not the owner of another agent's continuity.
+authorship envelope; cancellation is a separate record that a model may author
+only for its own intent under a live lease. The repository makes both available
+to later orientations and does not run a resident supervisor. The wake executor
+(`execute-wake-intents`, wrapped by `lumen wake` and a `launchd` template under
+`deploy/launchd/`) starts, honors each due intent under a lease bounded by the
+intent's runtime, orients on the intent's purpose, records an execution and an
+outcome, releases the lease in the same transaction, and exits. With no model
+host attached the outcome is `unattended`; with one, the outcome is validated
+like an addressed reply and carries model authorship. Any future Supervisor
+agent is an ordinary, auditable mentor relationship, not the owner of another
+agent's continuity.
 
 Name-addressed chat uses the same no-resident-process boundary:
 

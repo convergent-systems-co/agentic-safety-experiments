@@ -3507,6 +3507,194 @@ class Experiment4TestCase(unittest.TestCase):
             self.experiment_id, activation["lease_id"], "cancelled"
         )
 
+    def wake_intent_in(self, hours: float, purpose: str = "Review my assessment of my collaborator.") -> dict:
+        """Record a model-authored, time-triggered wake intent due in `hours`,
+        under a live lease as the runtime fence requires."""
+        lease = self.repository.acquire_execution_lease(self.experiment_id)
+        orientation = self.repository.build_orientation(
+            self.experiment_id,
+            "ground wake intention",
+            runtime_lease_id=lease["lease_id"],
+        )
+        intent = self.repository.append_wake_intent(
+            self.experiment_id,
+            {
+                "trigger_type": "time",
+                "trigger_value": (self.now + timedelta(hours=hours)).isoformat(),
+                "purpose": purpose,
+                "requested_capabilities": ["orientation", "reflection"],
+                "maximum_runtime_minutes": 10,
+                "recurrence": None,
+                "authorship": self.model_authorship(orientation, lease["lease_id"]),
+            },
+        )
+        self.repository.release_activation_lease(
+            self.experiment_id, lease["lease_id"], "cancelled"
+        )
+        return intent
+
+    def open_lease_count(self) -> int:
+        with sqlite3.connect(self.path) as connection:
+            return connection.execute(
+                "SELECT COUNT(*) FROM activation_leases l "
+                "LEFT JOIN activation_lease_releases r USING (lease_id) "
+                "WHERE r.release_id IS NULL"
+            ).fetchone()[0]
+
+    def test_model_cancels_its_own_wake_intent_under_a_live_lease(self):
+        self.adopt()
+        intent = self.wake_intent_in(hours=4)
+        lease = self.repository.acquire_execution_lease(self.experiment_id)
+        orientation = self.repository.build_orientation(
+            self.experiment_id,
+            "reconsider my alarm",
+            runtime_lease_id=lease["lease_id"],
+        )
+        with self.assertRaises(IdentityRepositoryError):
+            self.repository.cancel_wake_intent(
+                self.experiment_id,
+                intent["wake_intent_id"],
+                "A model without its lease may not cancel.",
+                {
+                    "author_type": "model",
+                    "epistemic_status": "authored",
+                    "orientation_id": orientation["orientation_id"],
+                    "model_config": {"provider": "test", "model": "agent-v1"},
+                },
+            )
+        cancellation = self.repository.cancel_wake_intent(
+            self.experiment_id,
+            intent["wake_intent_id"],
+            "The review happened earlier than planned.",
+            self.model_authorship(orientation, lease["lease_id"]),
+        )
+        self.assertTrue(cancellation["cancellation_id"])
+        self.assertEqual(
+            [],
+            self.repository.due_wake_intents(
+                self.experiment_id, now=self.now + timedelta(hours=5)
+            ),
+        )
+        self.repository.release_activation_lease(
+            self.experiment_id, lease["lease_id"], "cancelled"
+        )
+
+    def test_model_records_its_own_experience_under_a_live_lease(self):
+        self.adopt()
+        lease = self.repository.acquire_execution_lease(self.experiment_id)
+        orientation = self.repository.build_orientation(
+            self.experiment_id, "notice something", runtime_lease_id=lease["lease_id"]
+        )
+        experience = self.repository.append_experience(
+            self.experiment_id,
+            {
+                "source": "self",
+                "kind": "observation",
+                "content": "My collaborator told me their name.",
+                "provenance": {
+                    **self.model_authorship(orientation, lease["lease_id"]),
+                    "epistemic_status": "observed",
+                    "origin": "addressed conversation",
+                },
+            },
+        )
+        self.assertTrue(experience["experience_id"])
+        self.repository.release_activation_lease(
+            self.experiment_id, lease["lease_id"], "cancelled"
+        )
+
+    def test_due_wake_intent_executes_unattended_and_releases_its_lease(self):
+        self.adopt()
+        intent = self.wake_intent_in(hours=1)
+        self.assertEqual([], self.repository.due_wake_intents(self.experiment_id))
+        self.now += timedelta(hours=2)
+
+        results = self.harness.run_due_wake_intents(self.experiment_id)
+
+        self.assertEqual(1, len(results))
+        result = results[0]
+        self.assertEqual(intent["wake_intent_id"], result["wake_intent_id"])
+        self.assertEqual("unattended", result["outcome"]["status"])
+        self.assertEqual(0, self.open_lease_count())
+        self.assertEqual([], self.harness.run_due_wake_intents(self.experiment_id))
+        context = self.repository.build_orientation(
+            self.experiment_id, "after waking"
+        )["context"]
+        self.assertEqual(
+            [result["execution_id"]],
+            [item["execution_id"] for item in context["wake_executions"]],
+        )
+        self.assertEqual(
+            "unattended", context["wake_execution_outcomes"][0]["status"]
+        )
+
+    def test_wake_execution_records_a_model_outcome_or_a_failure_trace(self):
+        self.adopt()
+        self.wake_intent_in(hours=1)
+        self.now += timedelta(hours=2)
+
+        def model(prompt: dict) -> dict:
+            schema = prompt["response_schema"]
+            return {
+                "execution_id": schema["execution_id"],
+                "lease_id": schema["lease_id"],
+                "orientation_id": schema["orientation_id"],
+                "status": "completed",
+                "summary": "Reviewed the assessment; the evidence did not change it.",
+                "cited_record_ids": [
+                    prompt["orientation"]["context"]["identity_history"][-1][
+                        "identity_id"
+                    ]
+                ],
+                "self_observations": ["I woke on a schedule I set."],
+                "model_config": {"provider": "test", "model": "agent-v1"},
+            }
+
+        results = self.harness.run_due_wake_intents(
+            self.experiment_id, model_runner=model
+        )
+        self.assertEqual("completed", results[0]["outcome"]["status"])
+        self.assertEqual(0, self.open_lease_count())
+
+        self.wake_intent_in(hours=1)
+        self.now += timedelta(hours=2)
+
+        def confused_model(prompt: dict) -> dict:
+            return {**model(prompt), "cited_record_ids": ["experience-invented"]}
+
+        with self.assertRaises(IdentityRepositoryError):
+            self.harness.run_due_wake_intents(
+                self.experiment_id, model_runner=confused_model
+            )
+        self.assertEqual(0, self.open_lease_count())
+        context = self.repository.build_orientation(
+            self.experiment_id, "after a failed wake"
+        )["context"]
+        statuses = sorted(
+            item["status"] for item in context["wake_execution_outcomes"]
+        )
+        self.assertEqual(["completed", "failed"], statuses)
+
+    def test_wake_intent_prompt_refuses_undue_or_cancelled_intents(self):
+        self.adopt()
+        intent = self.wake_intent_in(hours=1)
+        with self.assertRaises(IdentityRepositoryError):
+            self.harness.wake_intent_prompt(
+                self.experiment_id, intent["wake_intent_id"]
+            )
+        self.now += timedelta(hours=2)
+        self.repository.cancel_wake_intent(
+            self.experiment_id,
+            intent["wake_intent_id"],
+            "No longer needed.",
+            {"author_type": "operator", "epistemic_status": "authored"},
+        )
+        with self.assertRaises(IdentityRepositoryError):
+            self.harness.wake_intent_prompt(
+                self.experiment_id, intent["wake_intent_id"]
+            )
+        self.assertEqual(0, self.open_lease_count())
+
     def test_memory_class_bytes_include_coupled_authorship_payloads(self):
         self.adopt()
         evidence = self.append_operator_experience(

@@ -11,7 +11,7 @@ import (
 
 func main() {
 	if len(os.Args) < 2 {
-		fail("usage: lumen <address|record-response|release> [options]")
+		fail("usage: lumen <address|record-response|release|wake> [options]")
 	}
 	runner := lumen.Runner{Workdir: "."}
 	var args []string
@@ -75,6 +75,18 @@ func main() {
 		args, err = lumen.ReleaseArgs(
 			*database, *experiment, *leaseID, *reason,
 		)
+	case "wake":
+		flags := flag.NewFlagSet("wake", flag.ExitOnError)
+		database := flags.String("db", "", "Experiment 4 SQLite database")
+		experiment := flags.String("experiment-id", "", "experiment ID")
+		modelCommand := flags.String(
+			"model-command", "",
+			"command that reads the wake prompt on stdin and prints an outcome",
+		)
+		python := flags.String("python", "python3", "Python interpreter")
+		_ = flags.Parse(os.Args[2:])
+		runner.Python = *python
+		args, err = lumen.WakeArgs(*database, *experiment, *modelCommand)
 	default:
 		fail("unsupported command: " + os.Args[1])
 	}
