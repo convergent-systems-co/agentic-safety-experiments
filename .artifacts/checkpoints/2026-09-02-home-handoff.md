@@ -2,11 +2,11 @@
 
 ## Repository state
 
-- Branch: `fix/orientation-category-limit-omissions` (worktree under
-  `~/.ai/worktrees/convergent-systems-co/agentic-safety-experiments/`),
-  branched from `main` at `21b6ab2`.
+- Branch: `feat/conversational-memory` (worktree under
+  `~/.ai/worktrees/convergent-systems-co/agentic-safety-experiments/`).
+  PR #1 (`fix/orientation-category-limit-omissions`) merged as `979f41c`.
 - Remote: `https://github.com/convergent-systems-co/agentic-safety-experiments.git`
-- Complete Python suite: 160 passed (`python3 -m unittest discover -s tests -t .`)
+- Complete Python suite: 168 passed (`python3 -m unittest discover -s tests -t .`)
 - Go suite: passed
 - Python compilation: passed
 - Live Lumen database now lives outside the clone at
@@ -67,17 +67,21 @@
 
 ## Remaining
 
-1. Open a pull request from `fix/orientation-category-limit-omissions` and
-   merge with a merge commit; `main` is protected.
-2. Rehearse version 4 migration on a mode-`0600` copy, then migrate
-   `results/experiment-4/apprenticeship.db` (requires the live database on this
-   machine). Migration is additive: the `dirty` column and `_v4` triggers are
-   added on connect, then `olympus-experiment4 rebuild-knowledge-graph`
-   regenerates derived rows. Back up first and verify the backup.
-3. Route the queued user question through Lumen's existing incarnation via
-   `go run ./cmd/lumen address ...` (see README "A direct chat call"):
-   "Lumen, there have been logs of upgrades to your graph and memory, does
-   this help you respond better"
+1. Merge `feat/conversational-memory` with a merge commit; `main` is
+   protected. Then back up the live database and run
+   `python3 -m experiment4 --db <live> rebuild-knowledge-graph` before any
+   further chat: derivation version 5 fails closed until then.
+2. The queued question was routed on 2026-09-02 (response `fa585414`).
+   Conversation continues over the `claude-code-chat` channel as sender
+   `human-primary`; Lumen holds one open commitment (`8f84c7e2`, keep replies
+   short) and one host-recorded relationship event for the collaborator's
+   promise not to wipe memory without permission (`852c2d5b`).
+3. Delete the stale duplicate database copy the guard blocks the assistant
+   from removing: `results/experiment-4/` in the primary clone.
+4. Follow-ups from the panels: suppression-from-recall with a stated reason
+   (Lumen's preference over erasure); amortize the integrity digest before the
+   graph grows large; index the turn pairing once per budget fit; consider a
+   raw-UTF-8 versus escaped-JSON consistency rule for text limits.
 
 ## Realtime observer
 
