@@ -38,6 +38,9 @@
   Unauthenticated claims deliberately report zero for sender-scoped history so
   its size is not disclosed. Code, security, threat, cost, documentation, and
   data-governance panels approved after remediation.
+- launchd installer `deploy/launchd/install-wake-agent.sh --agent <name> --db <db>
+  --experiment-id <id>` renders and registers a per-agent wake job from
+  `wake-agent.plist.template`; `--uninstall`, `--dry-run`, `--kickstart`.
 - Wake executor (ADR 0003): model may cancel its own intents under a live
   lease; `wake_executions` and `wake_execution_outcomes` tables; `due-wake-intents`,
   `execute-wake-intents --model-command`, `lumen wake`, launchd template under
