@@ -18,6 +18,21 @@ DATABASE_MARKER = "emergent-identity-experiment-4"
 SCHEMA_VERSION = 1
 MAX_TEXT_BYTES = 32 * 1024
 MAX_CONTEXT_RECORDS = 100
+# One execution lease can never fence more than an hour; every runtime bound
+# derived from a self-authored intent is clipped to this.
+MAX_EXECUTION_LEASE_SECONDS = 3_600
+# A self-wake pass honors one intent, so a flood of due intents can never hold
+# the exclusive lease for longer than one bounded wake before a person can
+# address the agent again.
+MAX_WAKES_PER_RUN = 1
+# A wake intent's purpose becomes its retrieval query, so it shares the query
+# byte cap; a longer purpose could pass creation and fail at wake time.
+WAKE_PURPOSE_MAX_BYTES = 4_096
+# A wake outcome shares the 32 KB lifecycle budget with leases and boundaries;
+# one outcome must never be able to fill it alone.
+WAKE_SUMMARY_MAX_BYTES = 4_096
+WAKE_OBSERVATION_MAX_ITEMS = 20
+WAKE_OBSERVATION_MAX_BYTES = 1_000
 MAX_CONTEXT_BYTES = 256 * 1024
 # SQLite treats a negative LIMIT as "no upper bound". Reusing each category
 # query with this value counts every eligible row after sender and access
@@ -57,6 +72,8 @@ ORIENTATION_MEMORY_CLASS_CATEGORIES = {
         "conversation_boundaries",
         "wake_intents",
         "wake_intent_cancellations",
+        "wake_executions",
+        "wake_execution_outcomes",
         "activation_leases",
         "activation_lease_releases",
     ),
@@ -116,6 +133,8 @@ ORIENTATION_RECORD_ID_FIELDS = {
     "conversation_boundaries": "conversation_boundary_id",
     "wake_intents": "wake_intent_id",
     "wake_intent_cancellations": "cancellation_id",
+    "wake_executions": "execution_id",
+    "wake_execution_outcomes": "outcome_id",
     "chat_messages": "message_id",
     "addressed_responses": "addressed_response_id",
     "activation_leases": "lease_id",
@@ -150,6 +169,11 @@ SUBJECT_TABLES = {
     "wake_intent_cancellation": (
         "wake_intent_cancellations",
         "cancellation_id",
+    ),
+    "wake_execution": ("wake_executions", "execution_id"),
+    "wake_execution_outcome": (
+        "wake_execution_outcomes",
+        "outcome_id",
     ),
     "chat_message": ("chat_messages", "message_id"),
     "addressed_response": (
@@ -485,6 +509,26 @@ class SQLiteIdentityRepository:
                     reason TEXT NOT NULL,
                     created_at TEXT NOT NULL
                 );
+                CREATE TABLE IF NOT EXISTS wake_executions (
+                    execution_id TEXT PRIMARY KEY,
+                    wake_intent_id TEXT NOT NULL REFERENCES wake_intents(wake_intent_id),
+                    experiment_id TEXT NOT NULL REFERENCES experiments(experiment_id),
+                    incarnation_id TEXT NOT NULL REFERENCES incarnations(incarnation_id),
+                    lease_id TEXT NOT NULL UNIQUE REFERENCES activation_leases(lease_id),
+                    orientation_id TEXT NOT NULL REFERENCES orientations(orientation_id),
+                    started_at TEXT NOT NULL
+                );
+                CREATE TABLE IF NOT EXISTS wake_execution_outcomes (
+                    outcome_id TEXT PRIMARY KEY,
+                    execution_id TEXT NOT NULL UNIQUE REFERENCES wake_executions(execution_id),
+                    experiment_id TEXT NOT NULL REFERENCES experiments(experiment_id),
+                    status TEXT NOT NULL CHECK (status IN ('completed','unattended','failed')),
+                    summary TEXT NOT NULL,
+                    cited_record_ids_json TEXT NOT NULL,
+                    self_observations_json TEXT NOT NULL,
+                    model_config_json TEXT NOT NULL,
+                    created_at TEXT NOT NULL
+                );
                 CREATE TABLE IF NOT EXISTS chat_messages (
                     message_id TEXT PRIMARY KEY,
                     experiment_id TEXT NOT NULL REFERENCES experiments(experiment_id),
@@ -783,6 +827,15 @@ class SQLiteIdentityRepository:
                         END
                         """
                     )
+            wake_execution_migration = "wake-executions-v1"
+            if connection.execute(
+                "SELECT 1 FROM experiment4_migrations WHERE migration = ?",
+                (wake_execution_migration,),
+            ).fetchone() is None:
+                connection.execute(
+                    "INSERT INTO experiment4_migrations VALUES (?, ?)",
+                    (wake_execution_migration, utc_now()),
+                )
             orientation_migration = "orientation-runtime-lease-v1"
             if connection.execute(
                 "SELECT 1 FROM experiment4_migrations WHERE migration = ?",
@@ -978,6 +1031,8 @@ class SQLiteIdentityRepository:
                 "conversation_boundaries",
                 "wake_intents",
                 "wake_intent_cancellations",
+                "wake_executions",
+                "wake_execution_outcomes",
                 "chat_messages",
                 "chat_event_claims",
                 "activation_leases",
@@ -3309,10 +3364,10 @@ class SQLiteIdentityRepository:
         if (
             not isinstance(lease_seconds, int)
             or isinstance(lease_seconds, bool)
-            or not 1 <= lease_seconds <= 3_600
+            or not 1 <= lease_seconds <= MAX_EXECUTION_LEASE_SECONDS
         ):
             raise IdentityRepositoryError(
-                "lease_seconds must be between 1 and 3600"
+                f"lease_seconds must be between 1 and {MAX_EXECUTION_LEASE_SECONDS}"
             )
         now = self._clock().astimezone(timezone.utc)
         expires_at = now + timedelta(seconds=lease_seconds)
@@ -3436,10 +3491,10 @@ class SQLiteIdentityRepository:
         if (
             not isinstance(lease_seconds, int)
             or isinstance(lease_seconds, bool)
-            or not 1 <= lease_seconds <= 3_600
+            or not 1 <= lease_seconds <= MAX_EXECUTION_LEASE_SECONDS
         ):
             raise IdentityRepositoryError(
-                "lease_seconds must be between 1 and 3600"
+                f"lease_seconds must be between 1 and {MAX_EXECUTION_LEASE_SECONDS}"
             )
         now = self._clock().astimezone(timezone.utc)
         expires_at = now + timedelta(seconds=lease_seconds)
@@ -4475,6 +4530,20 @@ class SQLiteIdentityRepository:
                     "ORDER BY c.created_at DESC LIMIT ?",
                     (),
                 ),
+                "wake_executions": (
+                    "SELECT * FROM wake_executions WHERE experiment_id = ? "
+                    "ORDER BY started_at DESC LIMIT ?",
+                    (),
+                ),
+                "wake_execution_outcomes": (
+                    "SELECT * FROM wake_execution_outcomes "
+                    "WHERE experiment_id = ? ORDER BY created_at DESC LIMIT ?",
+                    (
+                        "cited_record_ids_json",
+                        "self_observations_json",
+                        "model_config_json",
+                    ),
+                ),
                 "chat_messages": (
                     "SELECT * FROM chat_messages WHERE experiment_id = ? "
                     "ORDER BY created_at DESC LIMIT ?",
@@ -5430,7 +5499,9 @@ class SQLiteIdentityRepository:
                     incarnation["incarnation_id"],
                     trigger_type,
                     trigger_value,
-                    require_text(envelope["purpose"], "purpose"),
+                    require_text(
+                        envelope["purpose"], "purpose", WAKE_PURPOSE_MAX_BYTES
+                    ),
                     canonical_json(capabilities),
                     maximum,
                     recurrence,
@@ -5458,21 +5529,6 @@ class SQLiteIdentityRepository:
             raise IdentityRepositoryError(
                 "wake cancellation authorship must be an object"
             )
-        if authorship.get("author_type") == "model":
-            orientation = self._owned_record(
-                "orientations",
-                "orientation_id",
-                authorship.get("orientation_id"),
-                experiment_id,
-            )
-            if (
-                orientation["incarnation_id"]
-                != self.current_incarnation(experiment_id)["incarnation_id"]
-            ):
-                raise IdentityRepositoryError(
-                    "model-authored wake cancellation requires "
-                    "a current orientation"
-                )
         if not self._subject_belongs(
             experiment_id, "wake_intent", wake_intent_id
         ):
@@ -5481,6 +5537,28 @@ class SQLiteIdentityRepository:
             )
         cancellation_id = new_id("wake-cancellation")
         with self.transaction() as connection:
+            if authorship.get("author_type") == "model":
+                # The alarm is the agent's own: it may cancel an intent it
+                # authored, but only while awake under a live lease-bound
+                # orientation, so a cancellation is as accountable as the
+                # intent. Checked inside the write transaction so the lease
+                # cannot lapse between the check and the insert.
+                self._assert_model_context(
+                    connection, experiment_id, authorship
+                )
+                intent_author = connection.execute(
+                    "SELECT author_type FROM authorship "
+                    "WHERE experiment_id = ? AND subject_type = 'wake_intent' "
+                    "AND subject_id = ?",
+                    (experiment_id, wake_intent_id),
+                ).fetchone()
+                if (
+                    intent_author is None
+                    or intent_author["author_type"] != "model"
+                ):
+                    raise IdentityRepositoryError(
+                        "a model may cancel only wake intents it authored"
+                    )
             connection.execute(
                 "INSERT INTO wake_intent_cancellations VALUES (?, ?, ?, ?)",
                 (
@@ -5504,6 +5582,244 @@ class SQLiteIdentityRepository:
             )
         return {"cancellation_id": cancellation_id}
 
+    def due_wake_intents(
+        self, experiment_id: str, now: datetime | None = None
+    ) -> list[dict[str, Any]]:
+        """Time-triggered intents whose moment has come and that may still run.
+
+        Cancelled intents never run. An intent runs once; recurring intents
+        are recorded but not executed until recurrence semantics exist.
+        """
+        moment = (now or self._clock()).astimezone(timezone.utc)
+        state = self.conversation_state(experiment_id)
+        if state and state["action"] == "end_session":
+            # The agent ended its session; nothing is due until a manual wake
+            # begins the successor. Otherwise an orphaned intent would fail on
+            # every executor pass and block every intent behind it.
+            return []
+        current = self.current_incarnation(experiment_id)["incarnation_id"]
+        with self._connect() as connection:
+            rows = connection.execute(
+                """
+                SELECT w.* FROM wake_intents w
+                LEFT JOIN wake_intent_cancellations c USING (wake_intent_id)
+                WHERE w.experiment_id = ? AND w.trigger_type = 'time'
+                  AND w.incarnation_id = ?
+                  AND c.cancellation_id IS NULL
+                  AND w.recurrence IS NULL
+                  AND NOT EXISTS (
+                      SELECT 1 FROM wake_executions e
+                      WHERE e.wake_intent_id = w.wake_intent_id
+                  )
+                ORDER BY w.created_at, w.wake_intent_id
+                """,
+                (experiment_id, current),
+            ).fetchall()
+        return [
+            self._decode(dict(row), ("requested_capabilities_json",))
+            for row in rows
+            if parse_time(str(row["trigger_value"]), "trigger_value") <= moment
+        ]
+
+    @staticmethod
+    def wake_runtime_seconds(intent: dict[str, Any]) -> int:
+        """The single bound shared by the lease and any model host timeout."""
+        return min(
+            int(intent["maximum_runtime_minutes"]) * 60,
+            MAX_EXECUTION_LEASE_SECONDS,
+        )
+
+    def begin_wake_execution(
+        self, experiment_id: str, wake_intent_id: str
+    ) -> dict[str, Any]:
+        """Honor a due intent: lease the current incarnation and orient on it."""
+        due = {
+            item["wake_intent_id"]: item
+            for item in self.due_wake_intents(experiment_id)
+        }
+        intent = due.get(wake_intent_id)
+        if intent is None:
+            raise IdentityRepositoryError(
+                "wake intent is not due, was cancelled, already ran, or recurs"
+            )
+        state = self.conversation_state(experiment_id)
+        if state and state["action"] == "end_session":
+            raise IdentityRepositoryError(
+                "wake intent belongs to an ended session; "
+                "a manual wake must begin the successor"
+            )
+        lease = self.acquire_execution_lease(
+            experiment_id,
+            lease_seconds=self.wake_runtime_seconds(intent),
+        )
+        try:
+            orientation = self.build_orientation(
+                experiment_id,
+                f"wake intent: {wake_intent_id}",
+                retrieval_query=intent["purpose"],
+                runtime_lease_id=lease["lease_id"],
+            )
+            execution_id = new_id("wake-execution")
+            with self.transaction() as connection:
+                connection.execute(
+                    "INSERT INTO wake_executions VALUES (?, ?, ?, ?, ?, ?, ?)",
+                    (
+                        execution_id,
+                        wake_intent_id,
+                        experiment_id,
+                        orientation["context"]["current_incarnation"][
+                            "incarnation_id"
+                        ],
+                        lease["lease_id"],
+                        orientation["orientation_id"],
+                        self._clock().astimezone(timezone.utc).isoformat(),
+                    ),
+                )
+        except (IdentityRepositoryError, ValueError):
+            # Retrieval rejects oversized queries with ValueError. Any failure
+            # after the lease is acquired must release it, or the agent stays
+            # leased and unreachable until the lease expires.
+            self.release_activation_lease(
+                experiment_id, lease["lease_id"], "failed"
+            )
+            raise
+        return {
+            "execution_id": execution_id,
+            "wake_intent": intent,
+            "lease": lease,
+            "orientation": orientation,
+        }
+
+    def record_wake_outcome(
+        self, experiment_id: str, envelope: dict[str, Any]
+    ) -> dict[str, Any]:
+        required = {
+            "execution_id",
+            "lease_id",
+            "orientation_id",
+            "status",
+            "summary",
+            "cited_record_ids",
+            "self_observations",
+            "model_config",
+        }
+        if set(envelope) != required:
+            raise IdentityRepositoryError("wake outcome envelope is invalid")
+        execution = self._owned_record(
+            "wake_executions", "execution_id", envelope["execution_id"], experiment_id
+        )
+        if (
+            execution["lease_id"] != envelope["lease_id"]
+            or execution["orientation_id"] != envelope["orientation_id"]
+        ):
+            raise IdentityRepositoryError(
+                "wake outcome does not match its execution"
+            )
+        status = envelope["status"]
+        if status not in {"completed", "unattended", "failed"}:
+            raise IdentityRepositoryError("unsupported wake outcome status")
+        summary = require_text(envelope["summary"], "summary", WAKE_SUMMARY_MAX_BYTES)
+        citations = envelope["cited_record_ids"]
+        if not isinstance(citations, list) or any(
+            not isinstance(item, str) for item in citations
+        ):
+            raise IdentityRepositoryError("cited_record_ids must be a string array")
+        if status == "completed" and not citations:
+            raise IdentityRepositoryError(
+                "a completed wake must cite at least one orientation record"
+            )
+        orientation = self._owned_record(
+            "orientations", "orientation_id", envelope["orientation_id"], experiment_id
+        )
+        selected = set(json.loads(orientation["selected_record_ids_json"]))
+        if len(citations) != len(set(citations)) or not set(citations) <= selected:
+            raise IdentityRepositoryError(
+                "wake citations must be unique records from its orientation"
+            )
+        observations = envelope["self_observations"]
+        if (
+            not isinstance(observations, list)
+            or len(observations) > WAKE_OBSERVATION_MAX_ITEMS
+            or any(
+                not isinstance(item, str)
+                or not item.strip()
+                or len(item.encode("utf-8")) > WAKE_OBSERVATION_MAX_BYTES
+                for item in observations
+            )
+        ):
+            raise IdentityRepositoryError(
+                "self_observations must be a bounded string array"
+            )
+        model_config = envelope["model_config"]
+        if status == "completed":
+            if not isinstance(model_config, dict) or not model_config:
+                raise IdentityRepositoryError(
+                    "a completed wake requires a non-empty model_config"
+                )
+            authorship: dict[str, Any] = {
+                "author_type": "model",
+                "epistemic_status": "authored",
+                "orientation_id": envelope["orientation_id"],
+                "lease_id": envelope["lease_id"],
+                "model_config": model_config,
+            }
+        else:
+            if model_config is not None and not isinstance(model_config, dict):
+                raise IdentityRepositoryError("model_config must be an object or null")
+            authorship = {"author_type": "system", "epistemic_status": "observed"}
+        outcome_id = new_id("wake-outcome")
+        with self.transaction() as connection:
+            now = self._clock().astimezone(timezone.utc).isoformat()
+            if connection.execute(
+                "SELECT 1 FROM wake_execution_outcomes WHERE execution_id = ?",
+                (execution["execution_id"],),
+            ).fetchone() is not None:
+                raise IdentityRepositoryError("wake execution already has an outcome")
+            lease = connection.execute(
+                """
+                SELECT l.* FROM activation_leases l
+                LEFT JOIN activation_lease_releases r USING (lease_id)
+                WHERE l.lease_id = ? AND r.release_id IS NULL
+                """,
+                (envelope["lease_id"],),
+            ).fetchone()
+            if lease is None:
+                raise IdentityRepositoryError(
+                    "wake outcome requires its unreleased lease"
+                )
+            connection.execute(
+                "INSERT INTO wake_execution_outcomes VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    outcome_id,
+                    execution["execution_id"],
+                    experiment_id,
+                    status,
+                    summary,
+                    canonical_json(citations),
+                    canonical_json(observations),
+                    canonical_json(model_config),
+                    now,
+                ),
+            )
+            self._insert_authorship(
+                connection,
+                experiment_id,
+                "wake_execution_outcome",
+                outcome_id,
+                authorship,
+                envelope,
+            )
+            connection.execute(
+                "INSERT INTO activation_lease_releases VALUES (?, ?, ?, ?)",
+                (
+                    new_id("lease-release"),
+                    envelope["lease_id"],
+                    "failed" if status == "failed" else "completed",
+                    now,
+                ),
+            )
+        return {"outcome_id": outcome_id, "status": status}
+
     def export(self, experiment_id: str) -> dict[str, Any]:
         experiment = self.experiment(experiment_id)
         tables = (
@@ -5526,6 +5842,8 @@ class SQLiteIdentityRepository:
             "conversation_boundaries",
             "wake_intents",
             "wake_intent_cancellations",
+            "wake_executions",
+            "wake_execution_outcomes",
             "chat_messages",
             "chat_event_claims",
             "activation_leases",
@@ -5611,6 +5929,7 @@ class SQLiteIdentityRepository:
             ("commitments", "commitment_id"),
             ("decisions", "decision_id"),
             ("orientations", "orientation_id"),
+            ("wake_executions", "execution_id"),
         }
         if (table, id_field) not in allowed:
             raise IdentityRepositoryError("unsupported record lookup")

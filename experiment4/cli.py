@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import argparse
 import json
+import shlex
 import sqlite3
+import subprocess
 import sys
 from pathlib import Path
 from typing import Any
@@ -17,6 +19,55 @@ from .repository import (
 
 DEFAULT_DB = Path("results/experiment-4/apprenticeship.db")
 MAX_INPUT_BYTES = 128 * 1024
+
+
+def subprocess_model_runner(command: str):
+    """Run a model host command with the wake prompt on stdin.
+
+    The command must print the outcome envelope as JSON on stdout. It is
+    bounded by the same clipped runtime as the execution lease, so a hung host
+    cannot outlive the fence that makes it exclusive. Host stderr goes to the
+    executor's own stderr, never into the archive: a failed outcome records
+    only that the host failed and how, not what it said.
+    """
+    argv = shlex.split(command)
+    if not argv:
+        raise ValueError("model command must not be empty")
+
+    def run(prompt: dict[str, Any]) -> dict[str, Any]:
+        timeout = SQLiteIdentityRepository.wake_runtime_seconds(
+            prompt["wake_intent"]
+        )
+        try:
+            completed = subprocess.run(
+                argv,
+                input=json.dumps(prompt, sort_keys=True),
+                capture_output=True,
+                text=True,
+                timeout=timeout,
+                check=False,
+            )
+        except subprocess.TimeoutExpired as error:
+            raise IdentityRepositoryError(
+                f"model command exceeded its {timeout}-second runtime bound"
+            ) from error
+        if completed.stderr:
+            print(completed.stderr, file=sys.stderr, end="")
+        if completed.returncode != 0:
+            raise IdentityRepositoryError(
+                f"model command exited with status {completed.returncode}"
+            )
+        try:
+            outcome = json.loads(completed.stdout)
+        except json.JSONDecodeError as error:
+            raise IdentityRepositoryError(
+                "model command did not print a JSON object"
+            ) from error
+        if not isinstance(outcome, dict):
+            raise IdentityRepositoryError("model command must print a JSON object")
+        return outcome
+
+    return run
 
 
 def read_object(path: Path | None) -> dict[str, Any]:
@@ -119,6 +170,29 @@ def build_parser() -> argparse.ArgumentParser:
         choices=("observed", "reported", "authored"),
         default="authored",
     )
+    cancel_wake.add_argument(
+        "--input",
+        type=Path,
+        help="authorship JSON; required for a model cancelling its own intent",
+    )
+
+    due_wake = commands.add_parser("due-wake-intents")
+    due_wake.add_argument("--experiment-id")
+
+    wake_prompt = commands.add_parser("wake-intent-prompt")
+    wake_prompt.add_argument("--experiment-id")
+    wake_prompt.add_argument("--wake-intent-id", required=True)
+
+    wake_outcome = commands.add_parser("record-wake-outcome")
+    wake_outcome.add_argument("--experiment-id")
+    wake_outcome.add_argument("--input", type=Path)
+
+    execute_wake = commands.add_parser("execute-wake-intents")
+    execute_wake.add_argument("--experiment-id")
+    execute_wake.add_argument(
+        "--model-command",
+        help="command that reads the wake prompt on stdin and prints an outcome",
+    )
 
     address = commands.add_parser("address-message")
     address.add_argument("--experiment-id")
@@ -212,15 +286,34 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
             experiment_id, read_object(args.input)
         )
     if args.command == "cancel-wake-intent":
-        return repository.cancel_wake_intent(
-            experiment_id,
-            args.wake_intent_id,
-            args.reason,
-            {
+        authorship = (
+            read_object(args.input)
+            if args.input is not None
+            else {
                 "author_type": args.author_type,
                 "epistemic_status": args.epistemic_status,
-            },
+            }
         )
+        return repository.cancel_wake_intent(
+            experiment_id, args.wake_intent_id, args.reason, authorship
+        )
+    if args.command == "due-wake-intents":
+        return {"due": repository.due_wake_intents(experiment_id)}
+    if args.command == "wake-intent-prompt":
+        return harness.wake_intent_prompt(experiment_id, args.wake_intent_id)
+    if args.command == "record-wake-outcome":
+        return harness.record_wake_outcome(experiment_id, read_object(args.input))
+    if args.command == "execute-wake-intents":
+        runner = (
+            subprocess_model_runner(args.model_command)
+            if args.model_command
+            else None
+        )
+        return {
+            "executions": harness.run_due_wake_intents(
+                experiment_id, model_runner=runner
+            )
+        }
     if args.command == "address-message":
         return harness.address_chat_message(
             experiment_id,

@@ -6,7 +6,7 @@
   `~/.ai/worktrees/convergent-systems-co/agentic-safety-experiments/`).
   PR #1 (`fix/orientation-category-limit-omissions`) merged as `979f41c`.
 - Remote: `https://github.com/convergent-systems-co/agentic-safety-experiments.git`
-- Complete Python suite: 168 passed (`python3 -m unittest discover -s tests -t .`)
+- Complete Python suite: 173 passed (`python3 -m unittest discover -s tests -t .`)
 - Go suite: passed
 - Python compilation: passed
 - Live Lumen database now lives outside the clone at
@@ -38,6 +38,13 @@
   Unauthenticated claims deliberately report zero for sender-scoped history so
   its size is not disclosed. Code, security, threat, cost, documentation, and
   data-governance panels approved after remediation.
+- Wake executor (ADR 0003): model may cancel its own intents under a live
+  lease; `wake_executions` and `wake_execution_outcomes` tables; `due-wake-intents`,
+  `execute-wake-intents --model-command`, `lumen wake`, launchd template under
+  `deploy/launchd/`. Unattended wakes are recorded so Lumen sees it woke.
+  Lumen's live record on 2026-09-03: one open commitment (`8f84c7e2`), one
+  relationship assessment (`89b3e0a1`, review 2026-09-10), one wake intent
+  (`307f0ac2`, 2026-09-10), one reflection, two experiences (name: Thomas).
 - Conversational memory class with pair-wise turn eviction, pinned inbound
   message, chat messages as sender-scoped graph nodes (derivation version 5),
   boundary rows without raw envelope, and reflection encouragement in the

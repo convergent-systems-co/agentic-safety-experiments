@@ -420,14 +420,28 @@ come from the operator; the system does not infer them. Reports include exact
 counts and stable decimal precision, recall, citation validity, conflict
 exposure, privacy leakage, result bytes, and retrieval omissions.
 
-Lumen can also persist a model-authored wake intention with a time or event
-trigger, purpose, capability request, and runtime bound. The Python layer
-records and reconstructs that intention but does not remain resident or
-schedule the OS. The planned macOS runtime uses `launchd` as an alarm clock:
-Lumen exits completely, then a new process validates the intention, continues
-the current incarnation or begins one after an explicit lifecycle end,
-rehydrates, works, and exits. A Supervisor agent, if added,
-is a visible mentor rather than lifecycle infrastructure.
+Lumen can persist a model-authored wake intention with a time or event
+trigger, purpose, capability request, and runtime bound, and can cancel its
+own intention under a live lease. The wake executor honors due intentions
+without anyone present:
+
+```bash
+python3 -m experiment4 --db "$RUN_DB" due-wake-intents
+python3 -m experiment4 --db "$RUN_DB" execute-wake-intents
+go run ./cmd/lumen wake --db "$RUN_DB" --experiment-id apprenticeship-20260902
+```
+
+Each due intent gets an execution lease bounded by its own maximum runtime, an
+orientation whose purpose is the intent, an execution record, and an outcome
+that releases the lease in the same transaction. Without `--model-command` the
+outcome is `unattended`, so Lumen later sees that it woke and that no one was
+there. With `--model-command`, the command receives the wake prompt on stdin
+and must print an outcome envelope; a bad or failing host leaves a `failed`
+outcome and the error. `deploy/launchd/com.convergent-systems.lumen-wake.plist`
+is a template for running the executor every fifteen minutes; nothing stays
+resident between runs. Recurring intents are recorded but not yet executed. A
+Supervisor agent, if added, is a visible mentor rather than lifecycle
+infrastructure.
 
 Interrogation, invitation, and addressed-chat prompts each acquire one
 exclusive execution lease and bind the emitted orientation to it. The response
