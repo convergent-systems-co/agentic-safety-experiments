@@ -9,10 +9,12 @@
 - Complete Python suite: 160 passed (`python3 -m unittest discover -s tests -t .`)
 - Go suite: passed
 - Python compilation: passed
-- Live Lumen database (`results/experiment-4/apprenticeship.db`) is not
-  present in this checkout. It is gitignored and must be transferred over a
-  secure channel. It has not been intentionally migrated to knowledge-graph
-  version 4.
+- Live Lumen database now lives outside the clone at
+  `~/.ai/data/agentic-safety-experiments/experiment-4/apprenticeship.db`
+  (mode 0600), with a verified pre-migration backup beside it under
+  `backups/`. Every command needs `--db` with that path. Migrated to
+  knowledge-graph schema version 4 on 2026-09-02; derivation version 5 needs
+  one explicit rebuild after this change merges.
 
 ## Completed
 
@@ -36,6 +38,14 @@
   Unauthenticated claims deliberately report zero for sender-scoped history so
   its size is not disclosed. Code, security, threat, cost, documentation, and
   data-governance panels approved after remediation.
+- Conversational memory class with pair-wise turn eviction, pinned inbound
+  message, chat messages as sender-scoped graph nodes (derivation version 5),
+  boundary rows without raw envelope, and reflection encouragement in the
+  addressed system text. ADR 0002. Regressions:
+  `test_addressed_message_is_pinned_and_turns_are_evicted_in_pairs`,
+  `test_chat_messages_are_sender_scoped_graph_nodes`,
+  `test_orientation_boundaries_carry_no_raw_envelope`,
+  `test_addressed_prompt_says_authored_records_outlast_the_window`.
 
 ## Advisory follow-ups (not blocking)
 

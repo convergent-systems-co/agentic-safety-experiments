@@ -48,7 +48,9 @@ or consciousness. A retrieval miss does not establish that an event never
 happened.
 
 Relationship, relationship-event, relationship-assessment, authentication,
-chat-message, lease, release, and authorship rows are excluded as graph nodes.
+lease, release, and authorship rows are excluded as graph nodes. Chat messages
+are nodes: scoped to the sender when authenticated at origin, internal
+otherwise, with an edge from each reply to the message it answered.
 For addressed chat, metadata filtering happens before graph relevance ranking
 and traversal. Every node has derived `global`, authenticated `sender`, or
 `internal` access scope. Relationship evidence propagates sender scope through
@@ -83,16 +85,18 @@ python3 -m experiment4 --db "$RUN_DB" retrieve-knowledge \
 
 Both incremental indexing and rebuild occur transactionally. Rebuild changes
 only derived graph tables and must reproduce the same graph for unchanged
-canonical records. Version 4 metadata records schema and derivation versions,
+canonical records. Graph metadata records schema and derivation versions,
 trigger-maintained dirty state, an independent seal, and a SHA-256 digest over
 nodes, terms, scopes, and edges. Retrieval uses constant-size checks and fails
 closed on stale, dirty, or mismatched state until an explicit rebuild.
 
 Orientation reports separate byte budgets, retained usage, omissions, and
-pinned IDs for identity, relationship, obligations, lifecycle, episodic,
-semantic, and graph memory. Identity lineage, the authenticated current
-relationship, open commitments, unresolved decisions, the current boundary,
-and the current execution lease cannot be silently trimmed. If pinned context
+pinned IDs for identity, relationship, obligations, conversation, lifecycle,
+episodic, semantic, and graph memory. Conversation memory pairs each message
+with its reply and evicts the oldest pair first. Identity lineage, the
+authenticated current relationship, open commitments, unresolved decisions,
+the current boundary, the current execution lease, and the message being
+answered cannot be silently trimmed. If pinned context
 alone cannot fit, orientation construction fails explicitly.
 
 Retrieval quality can be evaluated against operator-supplied cases:
