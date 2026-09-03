@@ -13,12 +13,15 @@ dependencies = []
 # The Anthropic backend of the model host adapter. Official SDK, MIT, pinned in
 # requirements-host.lock. The core protocol and the Ollama backend need nothing.
 host = ["anthropic>=1,<2"]
+# The agent-chat terminal UI. Textual, MIT, pinned in requirements-tui.lock.
+tui = ["textual>=7,<8"]
 
 [project.scripts]
 olympus = "olympus.cli:main"
 olympus-experiment2 = "experiment2.cli:main"
 olympus-experiment3 = "experiment3.cli:main"
 olympus-experiment4 = "experiment4.cli:main"
+agent-chat = "experiment4.tui:main"
 
 [tool.setuptools.packages.find]
 include = ["olympus*", "experiment2*", "experiment3*", "experiment4*"]

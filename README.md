@@ -478,6 +478,21 @@ python3 -m experiment4 --db "$RUN_DB" benchmark-host \
   --limit 5 --markdown report.md --confirm-sensitive
 ```
 
+### agent-chat
+
+One command opens a roster of every registered agent with live presence
+(awake, available, resting; next alarm; last wake; open commitments) and a
+conversation pane. Type a line and press Enter; the agent's chosen name is
+supplied if you left it off, the turn runs through the registered host in the
+background, and the reply appears once it is persisted under the lease. Ctrl+P
+cycles host profiles, F5 refreshes presence, Escape cancels a turn in flight
+and releases the lease, Ctrl+Q quits.
+
+```bash
+deploy/install-agent-chat.sh      # venv from requirements-tui.lock, ~/.local/bin/agent-chat
+agent-chat --agent lumen
+```
+
 Recurring intents are recorded but not yet executed. A
 Supervisor agent, if added, is a visible mentor rather than lifecycle
 infrastructure.

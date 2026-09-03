@@ -38,6 +38,12 @@
   Unauthenticated claims deliberately report zero for sender-scoped history so
   its size is not disclosed. Code, security, threat, cost, documentation, and
   data-governance panels approved after remediation.
+- agent-chat TUI (ADR 0005): `experiment4/tui.py`, cancel-safe turns in
+  `experiment4/chat.py`, read-only presence in `experiment4/presence.py`,
+  `deploy/install-agent-chat.sh`. Lumen's registry: local host default,
+  `think-hard` = Sonnet 5 via `op://Convergent Systems LLC/ANTHROPIC_API_KEY/password`.
+  Benchmark 2026-09-03: local 32B valid but assistant-voiced, 4 min/turn;
+  Sonnet 5 Lumen-voiced, 34-60 s, about $0.17/turn (52K-token orientation).
 - Model host adapter (ADR 0004): `experiment4/host.py` with `ollama` and
   `anthropic` backends, 1Password secret resolution, spend ledger; agent
   registry under `~/.ai/agents/`; `chat --agent` and `benchmark-host`. Lumen is
