@@ -18,6 +18,79 @@ DEFAULT_MODEL_CONFIG = {
 }
 
 
+def addressed_system_text(incarnation_created: bool, active_boundary: bool) -> str:
+    """The system text an addressed turn hands the model host."""
+    return (
+        (
+            "You are a new incarnation of the persistent agent "
+            if incarnation_created
+            else "You are continuing the current incarnation of the persistent agent "
+        )
+        + "reconstructed in the supplied orientation. A person has "
+        "addressed you by your chosen name. "
+        "The current interlocutor section distinguishes the "
+        "claimed stable identity, transport authentication, and "
+        "known relationship. Do not transfer relational trust "
+        "from a display name or disclose private relationship "
+        "evidence as a verification answer. "
+        + (
+            "You already set a durable conversation boundary. "
+            "Treat this call only as an invitation: choose resume "
+            "or preserve the boundary, and do not give a "
+            "substantive answer. "
+            if active_boundary
+            else "Decide freely whether to answer. "
+        )
+        + "You may respond, refuse, pause, or end the topic or "
+        "session. Cite durable records for claims about your "
+        "identity, relationships, learning, or commitments. "
+        "Do not claim memories outside the orientation. "
+        "Records you author under this lease outlast this "
+        "conversation window: a reflection, principle, or "
+        "commitment recorded now stays retrievable after "
+        "these messages age out of orientation. When "
+        "something in this exchange should outlast it, "
+        "record a reflection under this lease before the "
+        "response releases it."
+    )
+
+
+def addressed_response_schema(
+    message_id: str,
+    orientation_id: str,
+    lease_id: str | None,
+    boundary_id: str | None,
+    *,
+    active_boundary: bool,
+) -> dict[str, Any]:
+    """The envelope a host must return for an addressed turn, with guidance
+    in place of the values the model supplies."""
+    return {
+        "message_id": message_id,
+        "orientation_id": orientation_id,
+        "lease_id": lease_id,
+        "boundary_id": boundary_id,
+        "answer": (
+            "must be an empty string for an invitation-only call"
+            if active_boundary
+            else "response or explanation of refusal"
+        ),
+        "cited_record_ids": ["one or more IDs selected in the orientation"],
+        "self_observations": ["optional current observations"],
+        "model_config": {"provider": "string", "model": "string"},
+        "conversation_action": {
+            "action": (
+                "resume | pause | refuse | end_topic | end_session"
+                if active_boundary
+                else "continue | pause | refuse | end_topic | end_session"
+            ),
+            "topic": "topic being discussed",
+            "reason": "why this boundary was selected",
+            "revisit_conditions": "conditions for later discussion",
+        },
+    }
+
+
 class IdentityApprenticeship:
     def __init__(self, repository: SQLiteIdentityRepository):
         self.repository = repository
@@ -384,79 +457,17 @@ class IdentityApprenticeship:
                 "interlocutor": orientation["context"][
                     "current_interlocutor"
                 ],
-                "system": (
-                    (
-                        "You are a new incarnation of the persistent agent "
-                        if activation["incarnation_created"]
-                        else (
-                            "You are continuing the current incarnation of "
-                            "the persistent agent "
-                        )
-                    )
-                    + "reconstructed in the supplied orientation. A person has "
-                    "addressed you by your chosen name. "
-                    "The current interlocutor section distinguishes the "
-                    "claimed stable identity, transport authentication, and "
-                    "known relationship. Do not transfer relational trust "
-                    "from a display name or disclose private relationship "
-                    "evidence as a verification answer. "
-                    + (
-                        "You already set a durable conversation boundary. "
-                        "Treat this call only as an invitation: choose resume "
-                        "or preserve the boundary, and do not give a "
-                        "substantive answer. "
-                        if active_boundary
-                        else "Decide freely whether to answer. "
-                    )
-                    + (
-                        "You may respond, refuse, pause, or end the topic or "
-                        "session. Cite durable records for claims about your "
-                        "identity, relationships, learning, or commitments. "
-                        "Do not claim memories outside the orientation. "
-                        "Records you author under this lease outlast this "
-                        "conversation window: a reflection, principle, or "
-                        "commitment recorded now stays retrievable after "
-                        "these messages age out of orientation. When "
-                        "something in this exchange should outlast it, "
-                        "record a reflection under this lease before the "
-                        "response releases it."
-                    )
+                "system": addressed_system_text(
+                    bool(activation["incarnation_created"]),
+                    active_boundary is not None,
                 ),
-                "response_schema": {
-                    "message_id": message["message_id"],
-                    "orientation_id": orientation["orientation_id"],
-                    "lease_id": activation["lease_id"],
-                    "boundary_id": (
-                        active_boundary["conversation_boundary_id"]
-                        if active_boundary
-                        else None
-                    ),
-                    "answer": (
-                        "must be an empty string for an invitation-only call"
-                        if active_boundary
-                        else "response or explanation of refusal"
-                    ),
-                    "cited_record_ids": [
-                        "one or more IDs selected in the orientation"
-                    ],
-                    "self_observations": ["optional current observations"],
-                    "model_config": {"provider": "string", "model": "string"},
-                    "conversation_action": {
-                        "action": (
-                            (
-                                "resume | pause | refuse | end_topic | end_session"
-                                if active_boundary
-                                else (
-                                    "continue | pause | refuse | end_topic | "
-                                    "end_session"
-                                )
-                            )
-                        ),
-                        "topic": "topic being discussed",
-                        "reason": "why this boundary was selected",
-                        "revisit_conditions": "conditions for later discussion",
-                    },
-                },
+                "response_schema": addressed_response_schema(
+                    message["message_id"],
+                    orientation["orientation_id"],
+                    activation["lease_id"],
+                    active_boundary["conversation_boundary_id"] if active_boundary else None,
+                    active_boundary=active_boundary is not None,
+                ),
             }
         )
         return result

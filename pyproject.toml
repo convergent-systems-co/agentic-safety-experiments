@@ -9,6 +9,11 @@ description = "Controlled persistent-observer and multi-agent identity experimen
 requires-python = ">=3.9"
 dependencies = []
 
+[project.optional-dependencies]
+# The Anthropic backend of the model host adapter. Official SDK, MIT, pinned in
+# requirements-host.lock. The core protocol and the Ollama backend need nothing.
+host = ["anthropic>=1,<2"]
+
 [project.scripts]
 olympus = "olympus.cli:main"
 olympus-experiment2 = "experiment2.cli:main"

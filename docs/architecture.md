@@ -213,6 +213,17 @@ are size-bounded, and the executor honors one intent per pass. Any future Superv
 agent is an ordinary, auditable mentor relationship, not the owner of another
 agent's continuity.
 
+A model host is any command that reads a prompt on stdin and prints an
+envelope on stdout; the wake executor and the `chat` command share the
+contract. `experiment4/host.py` implements it with a local Ollama backend and
+an Anthropic SDK backend, resolves API credentials from 1Password at call
+time without storing them, fixes identifiers and the served model in the
+envelope, and caps daily API spend per agent under a file lock. An agent
+registry under `~/.ai/agents/` names each agent's database, experiment,
+sender identity, and host command, so an agent is reachable from any
+terminal by name. `benchmark-host` replays recorded turns through a
+candidate host read-only so the choice of model rests on evidence.
+
 Name-addressed chat uses the same no-resident-process boundary:
 
 ```text

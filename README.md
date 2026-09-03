@@ -451,7 +451,34 @@ The installer renders `deploy/launchd/wake-agent.plist.template` with the
 agent's name in the job label and log directory, verifies the executor can open
 the database, lints and registers the job, and prints how to remove it. Add
 `--model-command` to attend wakes, `--dry-run` to inspect the job first, and
-`--kickstart` to run one pass immediately. Nothing stays resident between runs. Recurring intents are recorded but not yet executed. A
+`--kickstart` to run one pass immediately. Nothing stays resident between runs.
+
+### Model hosts, chat, and the replay benchmark
+
+A model host is any command that reads a prompt on stdin and prints an
+envelope on stdout; the wake executor and the chat command share it.
+`experiment4/host.py` provides one with two backends. The local backend talks
+to Ollama and keeps the record on the machine; the API backend uses the
+official Anthropic SDK (`pip install -e ".[host]"`, pinned in
+`requirements-host.lock`) and resolves the key at call time from 1Password
+(`--secret-ref "op://Vault/Item/field"`) or an environment variable
+(`env:NAME`), never storing it. The host fixes identifiers and records which
+model answered; the repository validates the rest. A per-agent spend ledger
+caps API spend per day.
+
+```bash
+# register an agent once (configuration, never secrets; written mode 0600)
+python3 -m experiment4 register-agent --input lumen-agent.json
+python3 -m experiment4 agents
+python3 -m experiment4 chat --agent lumen --message "Lumen, are you there?" --plain
+python3 -m experiment4 chat --agent lumen --profile think-hard --message "Lumen, ..."
+# judge a candidate host against what was actually said, read-only
+python3 -m experiment4 --db "$RUN_DB" benchmark-host \
+  --host-command "python3 -m experiment4.host --backend ollama --model qwen2.5:32b-instruct" \
+  --limit 5 --markdown report.md --confirm-sensitive
+```
+
+Recurring intents are recorded but not yet executed. A
 Supervisor agent, if added, is a visible mentor rather than lifecycle
 infrastructure.
 
