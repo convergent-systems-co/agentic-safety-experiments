@@ -4577,14 +4577,32 @@ class SQLiteIdentityRepository:
                     and name in sender_scoped_categories
                 ):
                     if name == "chat_messages":
-                        row = connection.execute(
-                            "SELECT * FROM chat_messages "
-                            "WHERE experiment_id = ? "
-                            "AND sender_stable_id = ? "
-                            "AND sender_authenticated = 0 "
-                            "ORDER BY created_at DESC, rowid DESC LIMIT 1",
-                            (experiment_id, current_sender_stable_id),
-                        ).fetchone()
+                        row = None
+                        if runtime_lease_id is not None:
+                            # Answer the message that acquired this lease, not
+                            # whichever unverified message under the same
+                            # claimed id arrived most recently.
+                            row = connection.execute(
+                                "SELECT m.* FROM chat_messages m "
+                                "JOIN activation_leases l USING (message_id) "
+                                "WHERE l.experiment_id = ? AND l.lease_id = ? "
+                                "AND m.sender_stable_id = ? "
+                                "AND m.sender_authenticated = 0",
+                                (
+                                    experiment_id,
+                                    runtime_lease_id,
+                                    current_sender_stable_id,
+                                ),
+                            ).fetchone()
+                        if row is None:
+                            row = connection.execute(
+                                "SELECT * FROM chat_messages "
+                                "WHERE experiment_id = ? "
+                                "AND sender_stable_id = ? "
+                                "AND sender_authenticated = 0 "
+                                "ORDER BY created_at DESC, rowid DESC LIMIT 1",
+                                (experiment_id, current_sender_stable_id),
+                            ).fetchone()
                         records[name] = [] if row is None else [dict(row)]
                     else:
                         records[name] = []

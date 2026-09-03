@@ -3459,6 +3459,54 @@ class Experiment4TestCase(unittest.TestCase):
             self.experiment_id, activation["lease"]["lease_id"], "cancelled"
         )
 
+    def test_unauthenticated_orientation_answers_the_activated_message(self):
+        self.adopt()
+
+        def record(content: str) -> dict:
+            return self.repository.record_chat_message(
+                self.experiment_id,
+                sender_stable_id="claimant",
+                channel="test-chat",
+                content=content,
+                addressed_name="Lumen",
+                classification="direct",
+                sender_assertion=self.sender_assertion(authenticated=False),
+                boundary_id=None,
+            )
+
+        first = record("Lumen, this is the first unverified message.")
+        record("Lumen, this is the second unverified message.")
+        activation = self.repository.activate_chat_message(
+            self.experiment_id, first["message_id"]
+        )
+        interlocutor = self.repository.interlocutor_context(
+            self.experiment_id,
+            "claimant",
+            self.sender_assertion(authenticated=False),
+        )
+        orientation = self.repository.build_orientation(
+            self.experiment_id,
+            f"addressed message: {first['message_id']}",
+            retrieval_query=first["content"],
+            incarnation_id=activation["incarnation"]["incarnation_id"],
+            current_interlocutor=interlocutor,
+            runtime_lease_id=activation["lease_id"],
+        )
+        context = orientation["context"]
+        self.assertEqual(
+            [first["message_id"]],
+            [message["message_id"] for message in context["chat_messages"]],
+        )
+        self.assertIn(
+            first["message_id"],
+            context["selection"]["memory_classes"]["conversation"][
+                "pinned_record_ids"
+            ],
+        )
+        self.repository.release_activation_lease(
+            self.experiment_id, activation["lease_id"], "cancelled"
+        )
+
     def test_memory_class_bytes_include_coupled_authorship_payloads(self):
         self.adopt()
         evidence = self.append_operator_experience(
