@@ -5,6 +5,14 @@ experiment, how the human is identified on this channel, and the host command
 that voices the agent (with optional named profiles such as ``think-hard``).
 A secret reference like ``op://...`` may appear in a host command; the value
 is resolved by the host at call time and never stored here.
+
+Keys: ``name`` (lowercase, digits, hyphens), ``db``, ``experiment_id``,
+``sender`` {``stable_id``, ``issuer``, ``verifier_version``, ``channel``},
+``host`` {``command``: argv list, ``profiles``: {name: argv list}}.
+Optional: ``display_name``, the agent's chosen name, which lets chat supply the
+vocative when a line omits it; ``repo_root``, an existing directory used as the
+host command's working directory, so ``-m experiment4.host`` resolves against
+a trusted checkout (prefer absolute script paths in ``command`` regardless).
 """
 from __future__ import annotations
 
@@ -48,6 +56,13 @@ def validate_agent(config: dict[str, Any]) -> dict[str, Any]:
     for profile, command in host.get("profiles", {}).items():
         if not isinstance(command, list) or not command:
             raise RegistryError(f"host profile {profile!r} must be a non-empty argv list")
+    if "display_name" in config and not (
+        isinstance(config["display_name"], str) and config["display_name"].strip()
+    ):
+        raise RegistryError("display_name must be a non-empty string when present")
+    repo_root = config.get("repo_root")
+    if repo_root is not None and not (isinstance(repo_root, str) and Path(repo_root).is_dir()):
+        raise RegistryError("repo_root must be an existing directory when present")
     return config
 
 

@@ -222,7 +222,11 @@ envelope, and caps daily API spend per agent under a file lock. An agent
 registry under `~/.ai/agents/` names each agent's database, experiment,
 sender identity, and host command, so an agent is reachable from any
 terminal by name. `benchmark-host` replays recorded turns through a
-candidate host read-only so the choice of model rests on evidence.
+candidate host read-only so the choice of model rests on evidence. `agent-chat`
+(ADR 0005) is one screen over the same pieces: a roster with presence read
+from each database in read-only mode, the transcript, and one input line; a
+turn runs the host as a killable child so cancellation, interrupt, or hangup
+releases the lease rather than stranding it.
 
 Name-addressed chat uses the same no-resident-process boundary:
 

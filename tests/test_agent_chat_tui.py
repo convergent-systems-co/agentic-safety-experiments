@@ -71,6 +71,9 @@ class ChatSessionTestCase(AgentFixture):
         self.assertEqual("Lumen, hello", chat.address_text(self.agent, "  Lumen, hello "))
         self.assertEqual("lumen: hi", chat.address_text(self.agent, "lumen: hi"))
         self.assertEqual("hello", chat.address_text({"name": "x"}, "hello"))
+        # A name followed by letters is not the name: the harness would not wake.
+        self.assertEqual("Lumen, Lumens are brighter", chat.address_text(self.agent, "Lumens are brighter"))
+        self.assertEqual("Lumen, Lumens are brighter", chat.run_turn(self.agent, "Lumens are brighter")["sent"])
 
     def test_a_turn_without_the_name_is_still_a_direct_address(self):
         result = chat.run_turn(self.agent, "are you there?")
@@ -108,6 +111,15 @@ class ChatSessionTestCase(AgentFixture):
         with self.assertRaises(IdentityRepositoryError):
             chat.run_turn(broken, "Lumen, this breaks.")
         self.assertEqual(0, self.open_leases())
+
+
+class RegistryFieldsTestCase(AgentFixture):
+    def test_optional_fields_are_validated(self):
+        with self.assertRaises(registry.RegistryError):
+            registry.validate_agent({**self.agent, "repo_root": "/no/such/dir"})
+        with self.assertRaises(registry.RegistryError):
+            registry.validate_agent({**self.agent, "display_name": " "})
+        self.assertEqual(self.agent["name"], registry.validate_agent({**self.agent, "repo_root": self.temporary.name})["name"])
 
 
 class PresenceTestCase(AgentFixture):
@@ -148,11 +160,15 @@ class ScreenTestCase(AgentFixture):
         from experiment4.tui import AgentChatApp
 
         async def scenario():
-            app = AgentChatApp(agent_names=["lumen-test"])
+            other = registry.save_agent({**self.agent, "name": "other-test"})
+            app = AgentChatApp(agent_names=["lumen-test", "other-test"])
             async with app.run_test() as pilot:
                 await pilot.pause()
                 self.assertEqual("lumen-test", app.agent["name"])
                 self.assertIn("Lumen: available", str(app.query_one("#presence").render()))
+                roster = app.query_one("#roster")
+                self.assertEqual("○ other-test", str(roster.get_option_at_index(1).prompt))
+                self.assertIn("spend: untracked", str(app.query_one("#status").render()))
                 line = app.query_one("#line", Input)
                 line.value = "are you there?"
                 await pilot.press("enter")

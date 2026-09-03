@@ -97,7 +97,14 @@ class AgentChatTestCase(unittest.TestCase):
     def test_unaddressed_message_is_recorded_without_waking(self):
         result = chat_turn(registry.load_agent("lumen-test"), "just thinking aloud")
         self.assertFalse(result["addressed"])
+        self.assertIn("not addressed", result["note"])
         self.assertEqual(0, self.open_leases())
+
+    def test_cli_supplies_the_chosen_name_when_display_name_is_registered(self):
+        registry.save_agent({**registry.load_agent("lumen-test"), "display_name": "Lumen"})
+        result = chat_turn(registry.load_agent("lumen-test"), "just thinking aloud")
+        self.assertTrue(result["addressed"])
+        self.assertEqual("Lumen, just thinking aloud", result["sent"])
 
     def test_cli_chat_uses_the_registry_not_the_default_database(self):
         args = build_parser().parse_args(["chat", "--agent", "lumen-test", "--message", "Lumen, via the CLI."])

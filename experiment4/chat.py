@@ -17,7 +17,7 @@ from pathlib import Path
 from typing import Any, Callable
 
 from . import registry
-from .harness import IdentityApprenticeship
+from .harness import IdentityApprenticeship, starts_with_name
 from .repository import IdentityRepositoryError, SQLiteIdentityRepository
 
 CHAT_LEASE_SECONDS = 900
@@ -35,9 +35,16 @@ def address_text(agent: dict[str, Any], content: str) -> str:
     display_name the text is sent unchanged."""
     stripped = content.strip()
     name = agent.get("display_name")
-    if not name or stripped.lower().startswith(str(name).lower()):
+    if not name or starts_with_name(str(name), stripped):
         return stripped
     return f"{name}, {stripped}"
+
+
+HostStderrSink = Callable[[str], None]
+
+
+def _print_stderr(text: str) -> None:
+    print(text, file=sys.stderr, end="")
 
 
 def run_host_process(
@@ -46,10 +53,12 @@ def run_host_process(
     timeout_seconds: int,
     cancel: threading.Event | None = None,
     cwd: str | None = None,
+    stderr_sink: HostStderrSink = _print_stderr,
 ) -> dict[str, Any]:
     """Run a host as a child process; kill it on cancel or timeout.
 
-    Host stderr goes to this process's stderr, never into the archive.
+    Host stderr goes to the sink (this process's stderr by default, the screen
+    in the TUI), never into the archive, on every path including cancel.
     """
     process = subprocess.Popen(
         argv, stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
@@ -68,14 +77,17 @@ def run_host_process(
 
     worker = threading.Thread(target=communicate, daemon=True)
     worker.start()
+    cancelled = False
     while worker.is_alive():
         worker.join(0.2)
         if cancel is not None and cancel.is_set() and process.poll() is None:
             process.kill()
             worker.join()
-            raise ChatCancelled("turn cancelled; the lease is being released")
+            cancelled = True
     if result.get("err"):
-        print(result["err"], file=sys.stderr, end="")
+        stderr_sink(result["err"])
+    if cancelled:
+        raise ChatCancelled("turn cancelled; the lease is being released")
     if result.get("timeout"):
         raise IdentityRepositoryError(f"model host exceeded its {timeout_seconds}-second bound")
     if process.returncode != 0:
@@ -96,6 +108,7 @@ def run_turn(
     *,
     status: StatusCallback | None = None,
     cancel: threading.Event | None = None,
+    stderr_sink: HostStderrSink = _print_stderr,
 ) -> dict[str, Any]:
     repository = SQLiteIdentityRepository(Path(agent["db"]))
     harness = IdentityApprenticeship(repository)
@@ -115,7 +128,15 @@ def run_turn(
         lease_seconds=CHAT_LEASE_SECONDS,
     )
     if activation["addressing"]["classification"] != "direct":
-        return {"addressed": False, "sent": sent, "message_id": activation["message"]["message_id"]}
+        return {
+            "addressed": False,
+            "sent": sent,
+            "message_id": activation["message"]["message_id"],
+            "note": (
+                "recorded but not addressed; start the line with the agent's "
+                "chosen name so it wakes"
+            ),
+        }
     lease_id = activation["lease"]["lease_id"]
     recorded = False
     try:
@@ -123,7 +144,7 @@ def run_turn(
             status(f"{agent.get('display_name') or agent['name']} is thinking")
         envelope = run_host_process(
             registry.host_command(agent, profile), activation, CHAT_LEASE_SECONDS,
-            cancel=cancel, cwd=agent.get("repo_root"),
+            cancel=cancel, cwd=agent.get("repo_root"), stderr_sink=stderr_sink,
         )
         response = harness.record_addressed_response(agent["experiment_id"], envelope)
         recorded = True

@@ -25,19 +25,25 @@ def _connect(db: str) -> sqlite3.Connection:
 def agent_presence(agent: dict[str, Any]) -> dict[str, Any]:
     if not Path(agent["db"]).exists():
         return {"state": "missing", "detail": "database not found"}
-    now = datetime.now(timezone.utc).isoformat()
+    now = datetime.now(timezone.utc)
     experiment_id = agent["experiment_id"]
     connection = _connect(agent["db"])
     try:
-        lease = connection.execute(
-            """
-            SELECT l.expires_at FROM activation_leases l
-            LEFT JOIN activation_lease_releases r USING (lease_id)
-            WHERE l.experiment_id = ? AND r.release_id IS NULL AND l.expires_at > ?
-            LIMIT 1
-            """,
-            (experiment_id, now),
-        ).fetchone()
+        # Compare as times, not strings: isoformat drops zero microseconds.
+        lease = next(
+            (
+                row for row in connection.execute(
+                    """
+                    SELECT l.expires_at FROM activation_leases l
+                    LEFT JOIN activation_lease_releases r USING (lease_id)
+                    WHERE l.experiment_id = ? AND r.release_id IS NULL
+                    """,
+                    (experiment_id,),
+                )
+                if datetime.fromisoformat(row["expires_at"]) > now
+            ),
+            None,
+        )
         boundary = connection.execute(
             "SELECT action, topic, created_at FROM conversation_boundaries "
             "WHERE experiment_id = ? ORDER BY created_at DESC LIMIT 1",

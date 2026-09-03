@@ -10,7 +10,11 @@ flight (the lease is released), Ctrl+Q quits.
 from __future__ import annotations
 
 import argparse
+import json
+import signal
 import threading
+import time
+from pathlib import Path
 from datetime import datetime, timezone
 from typing import Any
 
@@ -22,6 +26,7 @@ from textual.widgets import Footer, Header, Input, OptionList, RichLog, Static
 from textual.widgets.option_list import Option
 
 from . import chat, presence, registry
+from .host import SpendLedger
 
 STATE_MARK = {"awake": "●", "available": "○", "resting": "◌", "missing": "✕"}
 PRESENCE_REFRESH_SECONDS = 30
@@ -35,6 +40,27 @@ def short_time(stamp: str | None) -> str:
     except ValueError:
         return stamp
     return moment.astimezone().strftime("%b %d %H:%M")
+
+
+def ledger_path(agent: dict[str, Any], profile: str | None) -> str | None:
+    """The spend ledger the agent's host was told to use, if any."""
+    argv = registry.host_command(agent, profile)
+    if "--ledger" in argv:
+        index = argv.index("--ledger")
+        if index + 1 < len(argv):
+            return argv[index + 1]
+    return None
+
+
+def spend_text(agent: dict[str, Any], profile: str | None) -> str:
+    path = ledger_path(agent, profile)
+    if path is None:
+        return "spend: untracked"
+    try:
+        spent = SpendLedger(Path(path), 0.0).spent_today()
+    except Exception:  # an unreadable ledger is reported, not hidden
+        return "spend: ledger unreadable"
+    return f"spent today: ${spent:.2f}"
 
 
 def presence_lines(agent: dict[str, Any], info: dict[str, Any]) -> str:
@@ -124,29 +150,42 @@ class AgentChatApp(App[None]):
                 transcript.write("    (no reply recorded)")
             transcript.write("")
         self.action_refresh()
-        self.set_status("host: default  ·  Ctrl+P to change  ·  Esc cancels a turn")
+        self.show_host_status()
 
-    def action_refresh(self) -> None:
+    def show_host_status(self) -> None:
         if self.agent is None:
             return
-        info = presence.agent_presence(self.agent)
-        self.query_one("#presence", Static).update(presence_lines(self.agent, info))
+        self.set_status(
+            f"host: {self.profile or 'default'}  ·  {spend_text(self.agent, self.profile)}  ·  "
+            "Ctrl+P changes host  ·  Esc cancels a turn"
+        )
+
+    def action_refresh(self) -> None:
         roster = self.query_one("#roster", OptionList)
         for index, name in enumerate(self.agent_names):
-            mark = STATE_MARK.get(info["state"], "○") if name == self.agent["name"] else "○"
-            roster.replace_option_prompt_at_index(index, f"{mark} {name}")
+            try:
+                info = presence.agent_presence(registry.load_agent(name))
+            except registry.RegistryError:
+                info = {"state": "missing", "detail": "registry entry invalid"}
+            roster.replace_option_prompt_at_index(index, f"{STATE_MARK.get(info['state'], '○')} {name}")
+            if self.agent is not None and name == self.agent["name"]:
+                self.query_one("#presence", Static).update(presence_lines(self.agent, info))
 
     def on_option_list_option_selected(self, event: OptionList.OptionSelected) -> None:
-        if event.option.id:
-            self.select_agent(str(event.option.id))
-            self.query_one("#line", Input).focus()
+        if not event.option.id:
+            return
+        if self.busy:
+            self.set_status("a turn is in flight; finish it or press Esc before switching agents")
+            return
+        self.select_agent(str(event.option.id))
+        self.query_one("#line", Input).focus()
 
     def action_toggle_profile(self) -> None:
         if self.agent is None:
             return
         profiles = [None] + list(self.agent["host"].get("profiles", {}))
         self.profile = profiles[(profiles.index(self.profile) + 1) % len(profiles)]
-        self.set_status(f"host: {self.profile or 'default'}  ·  Ctrl+P to change  ·  Esc cancels a turn")
+        self.show_host_status()
 
     def action_cancel_turn(self) -> None:
         if self.busy and self.cancel_event is not None:
@@ -165,6 +204,24 @@ class AgentChatApp(App[None]):
         self.cancel_event = threading.Event()
         self.send_turn(self.agent, content, self.profile, self.cancel_event)
 
+    def note_host_stderr(self, text: str) -> None:
+        """Host diagnostics land in the transcript, bounded; a cost record is
+        summarized rather than dumped."""
+        transcript = self.query_one("#transcript", RichLog)
+        for line in text.strip().splitlines()[-5:]:
+            try:
+                record = json.loads(line)
+            except json.JSONDecodeError:
+                transcript.write(f"    host: {line[:200]}")
+                continue
+            if isinstance(record, dict) and record.get("event") == "model_host_turn":
+                transcript.write(
+                    f"    host: {record.get('model')} · in {record.get('input_tokens')} out {record.get('output_tokens')}"
+                    f" · ${float(record.get('cost_usd') or 0):.3f} · {record.get('seconds')} s"
+                )
+            else:
+                transcript.write(f"    host: {str(record.get('error') if isinstance(record, dict) else record)[:200]}")
+
     @work(thread=True, exclusive=True)
     def send_turn(self, agent: dict[str, Any], content: str, profile: str | None, cancel: threading.Event) -> None:
         transcript = self.query_one("#transcript", RichLog)
@@ -176,6 +233,7 @@ class AgentChatApp(App[None]):
                 agent, content, profile,
                 status=lambda text: self.call_from_thread(self.set_status, f"{text} ({profile or 'default'} host)…"),
                 cancel=cancel,
+                stderr_sink=lambda text: self.call_from_thread(self.note_host_stderr, text),
             )
             if result["addressed"]:
                 label = agent.get("display_name") or agent["name"]
@@ -185,7 +243,7 @@ class AgentChatApp(App[None]):
                 )
                 self.call_from_thread(self.set_status, f"persisted {result['addressed_response_id']}  ·  action: {result['conversation_action']}")
             else:
-                self.call_from_thread(transcript.write, "    (recorded; not a direct address)")
+                self.call_from_thread(transcript.write, f"    ({result['note']})")
         except chat.ChatCancelled:
             self.call_from_thread(transcript.write, "    (cancelled; lease released)")
             self.call_from_thread(self.set_status, "cancelled")
@@ -194,8 +252,13 @@ class AgentChatApp(App[None]):
             self.call_from_thread(self.set_status, "turn failed; lease released")
         finally:
             self.call_from_thread(transcript.write, "")
-            self.busy = False
-            self.call_from_thread(self.action_refresh)
+            self.call_from_thread(self.finish_turn)
+
+    def finish_turn(self) -> None:
+        self.busy = False
+        self.cancel_event = None
+        self.action_refresh()
+        self.show_host_status()
 
     async def action_quit(self) -> None:
         if self.busy and self.cancel_event is not None:
@@ -204,11 +267,31 @@ class AgentChatApp(App[None]):
         self.exit()
 
 
+def install_hangup_handlers(app: AgentChatApp) -> None:
+    """A closed terminal must not strand the agent's lease: cancel the turn in
+    flight and give the worker a moment to release before exiting."""
+
+    def handle(signum, frame):  # noqa: ARG001
+        if app.cancel_event is not None:
+            app.cancel_event.set()
+        deadline = 5.0
+        while app.busy and deadline > 0:
+            time.sleep(0.1)
+            deadline -= 0.1
+        raise SystemExit(128 + signum)
+
+    for name in ("SIGHUP", "SIGTERM"):
+        if hasattr(signal, name):
+            signal.signal(getattr(signal, name), handle)
+
+
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(prog="agent-chat", description=__doc__.split("\n\n")[0])
     parser.add_argument("--agent", help="agent to select first")
     args = parser.parse_args(argv)
-    AgentChatApp(start_with=args.agent).run()
+    app = AgentChatApp(start_with=args.agent)
+    install_hangup_handlers(app)
+    app.run()
     return 0
 
 

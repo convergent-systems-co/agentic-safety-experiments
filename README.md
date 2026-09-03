@@ -467,7 +467,9 @@ model answered; the repository validates the rest. A per-agent spend ledger
 caps API spend per day.
 
 ```bash
-# register an agent once (configuration, never secrets; written mode 0600)
+# register an agent once (configuration, never secrets; written mode 0600).
+# Keys are listed in experiment4/registry.py; display_name lets chat supply the
+# agent's name when you leave it off, repo_root is the host's working directory.
 python3 -m experiment4 register-agent --input lumen-agent.json
 python3 -m experiment4 agents
 python3 -m experiment4 chat --agent lumen --message "Lumen, are you there?" --plain

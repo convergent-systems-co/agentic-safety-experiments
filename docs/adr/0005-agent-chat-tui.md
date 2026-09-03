@@ -56,3 +56,16 @@ screen test runs only where Textual is installed and is skipped elsewhere.
 The registry-supplied sender assertion is asserted by the tool itself: anyone
 with a shell as this user speaks as the registered sender. That is the trust
 boundary of a local single-user tool and is recorded here plainly.
+
+Review findings folded in: host diagnostics are shown in the transcript, never
+written to the raw terminal under the screen; the status line shows today's
+spend from the agent's ledger; the roster reads presence for every agent, not
+only the selected one; the name prefix uses the same word-boundary rule the
+harness uses to decide a direct address; SIGHUP and SIGTERM cancel the turn in
+flight and wait up to five seconds for the release. Two residuals are
+accepted: a process killed outright still strands the lease until it expires,
+at most fifteen minutes, and every line typed in the screen is a direct
+address, so an incidental mention that should not wake the agent must come
+through another channel. Registry entries may set `display_name` (the chosen
+name) and `repo_root` (an existing, trusted checkout used as the host's
+working directory); prefer absolute script paths in host commands regardless.
