@@ -3437,6 +3437,28 @@ class Experiment4TestCase(unittest.TestCase):
             },
         )
 
+    def test_oversized_message_releases_the_lease_for_other_senders(self):
+        self.adopt()
+        with self.assertRaises(ValueError):
+            self.harness.address_chat_message(
+                self.experiment_id,
+                sender_stable_id="human-primary",
+                sender_assertion=self.sender_assertion(),
+                channel="test-chat",
+                content="Lumen, " + "x" * 5_000,
+            )
+        activation = self.harness.address_chat_message(
+            self.experiment_id,
+            sender_stable_id="other-sender",
+            sender_assertion=self.sender_assertion(),
+            channel="test-chat",
+            content="Lumen, is the lease free again?",
+        )
+        self.assertIn("lease", activation)
+        self.repository.release_activation_lease(
+            self.experiment_id, activation["lease"]["lease_id"], "cancelled"
+        )
+
     def test_memory_class_bytes_include_coupled_authorship_payloads(self):
         self.adopt()
         evidence = self.append_operator_experience(

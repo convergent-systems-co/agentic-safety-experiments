@@ -254,7 +254,10 @@ class IdentityApprenticeship:
                 current_interlocutor=interlocutor,
                 runtime_lease_id=activation["lease_id"],
             )
-        except IdentityRepositoryError:
+        except (IdentityRepositoryError, ValueError):
+            # Retrieval rejects oversized queries with ValueError. Any failure
+            # after activation must release the lease, or one bad message
+            # silences the agent for every other sender until it expires.
             self.repository.release_activation_lease(
                 experiment_id, activation["lease_id"], "failed"
             )
