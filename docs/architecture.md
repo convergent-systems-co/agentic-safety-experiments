@@ -213,6 +213,10 @@ are size-bounded, and the executor honors one intent per pass. Any future Superv
 agent is an ordinary, auditable mentor relationship, not the owner of another
 agent's continuity.
 
+What an agent reads becomes a `readings` record (URL, title, hash, time, gist)
+and at most a few interpreted notes, never the page (ADR 0006); the host owns
+the provenance fields and the model owns the gist and notes.
+
 A model host is any command that reads a prompt on stdin and prints an
 envelope on stdout; the wake executor and the `chat` command share the
 contract. `experiment4/host.py` implements it with a local Ollama backend and

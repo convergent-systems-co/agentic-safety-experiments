@@ -38,6 +38,10 @@
   Unauthenticated claims deliberately report zero for sender-scoped history so
   its size is not disclosed. Code, security, threat, cost, documentation, and
   data-governance panels approved after remediation.
+- Readings memory (ADR 0006): `readings` table, notes as reflections, envelope
+  `readings` on replies and completed wakes, host-owned provenance, rubric in
+  system text. Derivation version 6: rebuild the live graph after merge.
+  Fetch plumbing (read-only web access) is the next decision, not built.
 - agent-chat TUI (ADR 0005): `experiment4/tui.py`, cancel-safe turns in
   `experiment4/chat.py`, read-only presence in `experiment4/presence.py`,
   `deploy/install-agent-chat.sh`. Lumen's registry: local host default,

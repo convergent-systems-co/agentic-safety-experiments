@@ -152,10 +152,32 @@ def envelope_json_schema(kind: str) -> dict[str, Any]:
                 "additionalProperties": False,
             },
         }
+    required = list(properties)
+    properties["readings"] = {
+        "type": "array",
+        "items": {
+            "type": "object",
+            "properties": {
+                "url": string,
+                "gist": string,
+                "notes": {
+                    "type": "array",
+                    "items": {
+                        "type": "object",
+                        "properties": {"reflection": string, "learned": string, "future_change": string},
+                        "required": ["reflection", "learned", "future_change"],
+                        "additionalProperties": False,
+                    },
+                },
+            },
+            "required": ["url", "gist", "notes"],
+            "additionalProperties": False,
+        },
+    }
     return {
         "type": "object",
         "properties": properties,
-        "required": list(properties),
+        "required": required,
         "additionalProperties": False,
     }
 
@@ -190,16 +212,53 @@ def build_prompt_parts(prompt: dict[str, Any]) -> tuple[str, str, str]:
     return system, stable, "\n\n".join(tail_parts)
 
 
+def attach_readings(
+    envelope: dict[str, Any], fetched: dict[str, dict[str, str]]
+) -> dict[str, Any]:
+    """The model supplies gist and notes; the host supplies provenance.
+
+    Only URLs the host actually fetched survive, carrying the host's title,
+    content hash, and retrieval time, so a model cannot claim to have read
+    what it did not. With nothing fetched, no readings are attached at all.
+    """
+    claimed = envelope.get("readings")
+    attached = []
+    if isinstance(claimed, list):
+        for item in claimed:
+            if not isinstance(item, dict):
+                continue
+            record = fetched.get(str(item.get("url", "")))
+            if record is None:
+                continue
+            notes = item.get("notes") if isinstance(item.get("notes"), list) else []
+            attached.append({
+                "url": str(item["url"]),
+                "title": record["title"],
+                "content_sha256": record["content_sha256"],
+                "retrieved_at": record["retrieved_at"],
+                "gist": str(item.get("gist", "")),
+                "notes": [
+                    {k: str(note.get(k, "")) for k in ("reflection", "learned", "future_change")}
+                    for note in notes if isinstance(note, dict)
+                ],
+            })
+    result = {key: value for key, value in envelope.items() if key != "readings"}
+    if attached:
+        result["readings"] = attached
+    return result
+
+
 def fix_envelope(
     envelope: dict[str, Any],
     prompt: dict[str, Any],
     model_config: dict[str, str],
 ) -> dict[str, Any]:
     """Overwrite what a model must never be trusted with: identifiers and
-    the record of which model answered."""
+    the record of which model answered. Readings are dropped here; the host
+    re-attaches only those it fetched (see attach_readings)."""
     schema = prompt.get("response_schema", {})
     kind = envelope_kind(schema)
-    allowed = set(envelope_json_schema(kind)["properties"])
+    allowed = set(envelope_json_schema(kind)["properties"]) - {"readings"}
     fixed = {key: value for key, value in envelope.items() if key in allowed}
     for key in CHAT_FIXED_KEYS if kind == "chat" else WAKE_FIXED_KEYS:
         fixed[key] = schema.get(key)

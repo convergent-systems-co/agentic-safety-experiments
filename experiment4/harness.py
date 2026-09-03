@@ -18,6 +18,15 @@ DEFAULT_MODEL_CONFIG = {
 }
 
 
+READING_RUBRIC = (
+    "If you read sources this turn, return them under readings: for each, a "
+    "gist in your own words of at most five hundred characters and up to "
+    "three notes, recorded only when something changes what you would do, "
+    "believe, or promise, or when you would want to find it again. Never copy "
+    "page text; the page is not kept, only your gist and the way back to it."
+)
+
+
 def starts_with_name(name: str, content: str) -> bool:
     """The vocative rule that wakes an agent: the name at the start, followed
     by the end of the text or punctuation or space, so 'Lumens' is not 'Lumen'."""
@@ -58,7 +67,7 @@ def addressed_system_text(incarnation_created: bool, active_boundary: bool) -> s
         "these messages age out of orientation. When "
         "something in this exchange should outlast it, "
         "record a reflection under this lease before the "
-        "response releases it."
+        "response releases it. " + READING_RUBRIC
     )
 
 
@@ -234,7 +243,7 @@ class IdentityApprenticeship:
                 "supplied orientation, then stop. Do not address a person "
                 "unless the purpose concerns them. Cite durable records for "
                 "anything you conclude, and record a reflection under this "
-                "lease if something should outlast it."
+                "lease if something should outlast it. " + READING_RUBRIC
             ),
             "response_schema": {
                 "execution_id": execution["execution_id"],
