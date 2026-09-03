@@ -490,6 +490,19 @@
       "source_location": "L16"
     },
     {
+      "id": "tests_test_agent_chat_agentchattestcase",
+      "label": "AgentChatTestCase",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "AgentChatTestCase",
+      "file_type": "code",
+      "norm_label": "agentchattestcase",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L36"
+    },
+    {
       "id": "tests_test_experiment4_experiment4testcase",
       "label": "Experiment4TestCase",
       "_callable": true,
@@ -643,7 +656,7 @@
       "file_type": "code",
       "norm_label": "registryerror",
       "source_file": "experiment4/registry.py",
-      "source_location": "L22"
+      "source_location": "L30"
     },
     {
       "id": "experiment4_harness_identityapprenticeship",
@@ -656,7 +669,7 @@
       "file_type": "code",
       "norm_label": "identityapprenticeship",
       "source_file": "experiment4/harness.py",
-      "source_location": "L94"
+      "source_location": "L101"
     },
     {
       "id": "experiment4_tui_agentchatapp",
@@ -669,20 +682,72 @@
       "file_type": "code",
       "norm_label": "agentchatapp",
       "source_file": "experiment4/tui.py",
-      "source_location": "L56"
+      "source_location": "L82"
     },
     {
-      "id": "tests_test_agent_chat_agentchattestcase",
-      "label": "AgentChatTestCase",
+      "id": "tests_test_agent_chat_tui_agentfixture",
+      "label": "AgentFixture",
       "_callable": true,
       "_callable_class": true,
       "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
+      "community": 66,
+      "community_name": "AgentChatApp",
       "file_type": "code",
-      "norm_label": "agentchattestcase",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L36"
+      "norm_label": "agentfixture",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L31"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_chatsessiontestcase",
+      "label": "ChatSessionTestCase",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "chatsessiontestcase",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L68"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_presencetestcase",
+      "label": "PresenceTestCase",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "presencetestcase",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L125"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_registryfieldstestcase",
+      "label": "RegistryFieldsTestCase",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "registryfieldstestcase",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L116"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_screentestcase",
+      "label": "ScreenTestCase",
+      "_callable": true,
+      "_callable_class": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "screentestcase",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L149"
     },
     {
       "id": "olympus_experiment_experimentrunner",
@@ -748,58 +813,6 @@
       "norm_label": "revision",
       "source_file": "olympus/domain.py",
       "source_location": "L109"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_agentfixture",
-      "label": "AgentFixture",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": "agentfixture",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L31"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_chatsessiontestcase",
-      "label": "ChatSessionTestCase",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": "chatsessiontestcase",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L68"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_presencetestcase",
-      "label": "PresenceTestCase",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": "presencetestcase",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L113"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_screentestcase",
-      "label": "ScreenTestCase",
-      "_callable": true,
-      "_callable_class": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": "screentestcase",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L137"
     },
     {
       "id": "tests_test_experiment2_experiment2testcase",
@@ -912,7 +925,7 @@
       "_callable_class": true,
       "_origin": "ast",
       "community": 91,
-      "community_name": "run_turn",
+      "community_name": "chat.py",
       "file_type": "code",
       "norm_label": "chatcancelled",
       "source_file": "experiment4/chat.py",
@@ -4603,52 +4616,136 @@
       "source_location": "L137"
     },
     {
-      "id": "experiment4_presence_agent_presence",
-      "label": "agent_presence()",
+      "id": "experiment4_cli_chat_turn",
+      "label": "chat_turn()",
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "experiment4/repository.py",
+      "community_name": "AgentChatTestCase",
       "file_type": "code",
-      "norm_label": "agent_presence()",
-      "source_file": "experiment4/presence.py",
-      "source_location": "L25"
+      "norm_label": "chat_turn()",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L80"
     },
     {
-      "id": "experiment4_presence_connect",
-      "label": "_connect()",
+      "id": "tests_test_agent_chat_agentchattestcase_open_leases",
+      "label": ".open_leases()",
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "experiment4/repository.py",
+      "community_name": "AgentChatTestCase",
       "file_type": "code",
-      "norm_label": "_connect()",
-      "source_file": "experiment4/presence.py",
-      "source_location": "L19"
+      "norm_label": ".open_leases()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L65"
     },
     {
-      "id": "experiment4_presence_recent_transcript",
-      "label": "recent_transcript()",
+      "id": "tests_test_agent_chat_agentchattestcase_setup",
+      "label": ".setUp()",
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "experiment4/repository.py",
+      "community_name": "AgentChatTestCase",
       "file_type": "code",
-      "norm_label": "recent_transcript()",
-      "source_file": "experiment4/presence.py",
+      "norm_label": ".setup()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L37"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_teardown",
+      "label": ".tearDown()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "AgentChatTestCase",
+      "file_type": "code",
+      "norm_label": ".teardown()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L61"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_benchmark_replays_recorded_turns_read_only",
+      "label": ".test_benchmark_replays_recorded_turns_read_only()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "AgentChatTestCase",
+      "file_type": "code",
+      "norm_label": ".test_benchmark_replays_recorded_turns_read_only()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L116"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_chat_turn_persists_the_host_reply_under_the_lease",
+      "label": ".test_chat_turn_persists_the_host_reply_under_the_lease()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "AgentChatTestCase",
+      "file_type": "code",
+      "norm_label": ".test_chat_turn_persists_the_host_reply_under_the_lease()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L83"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_chat_turn_releases_the_lease_when_the_host_fails",
+      "label": ".test_chat_turn_releases_the_lease_when_the_host_fails()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "AgentChatTestCase",
+      "file_type": "code",
+      "norm_label": ".test_chat_turn_releases_the_lease_when_the_host_fails()",
+      "source_file": "tests/test_agent_chat.py",
       "source_location": "L92"
     },
     {
-      "id": "tests_test_experiment4_experiment4testcase_test_aggregate_cap_trims_conversation_before_obligation_outcomes",
-      "label": ".test_aggregate_cap_trims_conversation_before_obligation_outcomes()",
+      "id": "tests_test_agent_chat_agentchattestcase_test_cli_benchmark_requires_sensitivity_confirmation",
+      "label": ".test_cli_benchmark_requires_sensitivity_confirmation()",
       "_callable": true,
       "_origin": "ast",
       "community": 20,
-      "community_name": "experiment4/repository.py",
+      "community_name": "AgentChatTestCase",
       "file_type": "code",
-      "norm_label": ".test_aggregate_cap_trims_conversation_before_obligation_outcomes()",
-      "source_file": "tests/test_experiment4.py",
-      "source_location": "L3319"
+      "norm_label": ".test_cli_benchmark_requires_sensitivity_confirmation()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L132"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_cli_supplies_the_chosen_name_when_display_name_is_registered",
+      "label": ".test_cli_supplies_the_chosen_name_when_display_name_is_registered()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "AgentChatTestCase",
+      "file_type": "code",
+      "norm_label": ".test_cli_supplies_the_chosen_name_when_display_name_is_registered()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L103"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_registry_round_trips_and_validates",
+      "label": ".test_registry_round_trips_and_validates()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "AgentChatTestCase",
+      "file_type": "code",
+      "norm_label": ".test_registry_round_trips_and_validates()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L71"
+    },
+    {
+      "id": "tests_test_agent_chat_agentchattestcase_test_unaddressed_message_is_recorded_without_waking",
+      "label": ".test_unaddressed_message_is_recorded_without_waking()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 20,
+      "community_name": "AgentChatTestCase",
+      "file_type": "code",
+      "norm_label": ".test_unaddressed_message_is_recorded_without_waking()",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L97"
     },
     {
       "id": "tests_test_experiment4_experiment4testcase_adopt",
@@ -4949,6 +5046,18 @@
       "norm_label": ".test_agent_can_pause_and_must_explicitly_resume()",
       "source_file": "tests/test_experiment4.py",
       "source_location": "L3991"
+    },
+    {
+      "id": "tests_test_experiment4_experiment4testcase_test_aggregate_cap_trims_conversation_before_obligation_outcomes",
+      "label": ".test_aggregate_cap_trims_conversation_before_obligation_outcomes()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 22,
+      "community_name": "Experiment4TestCase",
+      "file_type": "code",
+      "norm_label": ".test_aggregate_cap_trims_conversation_before_obligation_outcomes()",
+      "source_file": "tests/test_experiment4.py",
+      "source_location": "L3319"
     },
     {
       "id": "tests_test_experiment4_experiment4testcase_test_authenticated_orientation_excludes_unauthenticated_poisoned_history",
@@ -6880,7 +6989,7 @@
       "file_type": "code",
       "norm_label": "agent_path()",
       "source_file": "experiment4/registry.py",
-      "source_location": "L31"
+      "source_location": "L39"
     },
     {
       "id": "experiment4_registry_agents_dir",
@@ -6892,7 +7001,7 @@
       "file_type": "code",
       "norm_label": "agents_dir()",
       "source_file": "experiment4/registry.py",
-      "source_location": "L26"
+      "source_location": "L34"
     },
     {
       "id": "experiment4_registry_host_command",
@@ -6904,7 +7013,7 @@
       "file_type": "code",
       "norm_label": "host_command()",
       "source_file": "experiment4/registry.py",
-      "source_location": "L77"
+      "source_location": "L92"
     },
     {
       "id": "experiment4_registry_list_agents",
@@ -6916,7 +7025,7 @@
       "file_type": "code",
       "norm_label": "list_agents()",
       "source_file": "experiment4/registry.py",
-      "source_location": "L87"
+      "source_location": "L102"
     },
     {
       "id": "experiment4_registry_load_agent",
@@ -6928,7 +7037,7 @@
       "file_type": "code",
       "norm_label": "load_agent()",
       "source_file": "experiment4/registry.py",
-      "source_location": "L54"
+      "source_location": "L69"
     },
     {
       "id": "experiment4_registry_save_agent",
@@ -6940,7 +7049,7 @@
       "file_type": "code",
       "norm_label": "save_agent()",
       "source_file": "experiment4/registry.py",
-      "source_location": "L68"
+      "source_location": "L83"
     },
     {
       "id": "experiment4_registry_validate_agent",
@@ -6952,7 +7061,7 @@
       "file_type": "code",
       "norm_label": "validate_agent()",
       "source_file": "experiment4/registry.py",
-      "source_location": "L37"
+      "source_location": "L45"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_adopt_identity",
@@ -6964,7 +7073,7 @@
       "file_type": "code",
       "norm_label": ".adopt_identity()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L140"
+      "source_location": "L147"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_genesis_prompt",
@@ -6976,7 +7085,7 @@
       "file_type": "code",
       "norm_label": ".genesis_prompt()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L115"
+      "source_location": "L122"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_init",
@@ -6988,7 +7097,7 @@
       "file_type": "code",
       "norm_label": ".__init__()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L95"
+      "source_location": "L102"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_initialize",
@@ -7000,7 +7109,7 @@
       "file_type": "code",
       "norm_label": ".initialize()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L98"
+      "source_location": "L105"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_inspect",
@@ -7012,7 +7121,7 @@
       "file_type": "code",
       "norm_label": ".inspect()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L492"
+      "source_location": "L495"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_interrogation_prompt",
@@ -7024,7 +7133,7 @@
       "file_type": "code",
       "norm_label": ".interrogation_prompt()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L156"
+      "source_location": "L163"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_invitation_prompt",
@@ -7036,7 +7145,7 @@
       "file_type": "code",
       "norm_label": ".invitation_prompt()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L313"
+      "source_location": "L320"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_record_addressed_response",
@@ -7048,7 +7157,7 @@
       "file_type": "code",
       "norm_label": ".record_addressed_response()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L475"
+      "source_location": "L478"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_record_answer",
@@ -7060,7 +7169,7 @@
       "file_type": "code",
       "norm_label": ".record_answer()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L482"
+      "source_location": "L485"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_record_wake_outcome",
@@ -7072,7 +7181,7 @@
       "file_type": "code",
       "norm_label": ".record_wake_outcome()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L244"
+      "source_location": "L251"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_run_due_wake_intents",
@@ -7084,7 +7193,7 @@
       "file_type": "code",
       "norm_label": ".run_due_wake_intents()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L249"
+      "source_location": "L256"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_wake",
@@ -7096,7 +7205,7 @@
       "file_type": "code",
       "norm_label": ".wake()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L145"
+      "source_location": "L152"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_wake_intent_prompt",
@@ -7108,7 +7217,7 @@
       "file_type": "code",
       "norm_label": ".wake_intent_prompt()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L207"
+      "source_location": "L214"
     },
     {
       "id": "tests_test_experiment4_experiment4testcase_setup",
@@ -7123,6 +7232,42 @@
       "source_location": "L26"
     },
     {
+      "id": "experiment4_presence_agent_presence",
+      "label": "agent_presence()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "agent_presence()",
+      "source_file": "experiment4/presence.py",
+      "source_location": "L25"
+    },
+    {
+      "id": "experiment4_presence_connect",
+      "label": "_connect()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "_connect()",
+      "source_file": "experiment4/presence.py",
+      "source_location": "L19"
+    },
+    {
+      "id": "experiment4_presence_recent_transcript",
+      "label": "recent_transcript()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "recent_transcript()",
+      "source_file": "experiment4/presence.py",
+      "source_location": "L98"
+    },
+    {
       "id": "experiment4_tui_agentchatapp_action_cancel_turn",
       "label": ".action_cancel_turn()",
       "_callable": true,
@@ -7132,7 +7277,7 @@
       "file_type": "code",
       "norm_label": ".action_cancel_turn()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L151"
+      "source_location": "L190"
     },
     {
       "id": "experiment4_tui_agentchatapp_action_quit",
@@ -7144,7 +7289,7 @@
       "file_type": "code",
       "norm_label": ".action_quit()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L200"
+      "source_location": "L263"
     },
     {
       "id": "experiment4_tui_agentchatapp_action_refresh",
@@ -7156,7 +7301,7 @@
       "file_type": "code",
       "norm_label": ".action_refresh()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L129"
+      "source_location": "L163"
     },
     {
       "id": "experiment4_tui_agentchatapp_action_toggle_profile",
@@ -7168,7 +7313,7 @@
       "file_type": "code",
       "norm_label": ".action_toggle_profile()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L144"
+      "source_location": "L183"
     },
     {
       "id": "experiment4_tui_agentchatapp_compose",
@@ -7180,7 +7325,19 @@
       "file_type": "code",
       "norm_label": ".compose()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L80"
+      "source_location": "L106"
+    },
+    {
+      "id": "experiment4_tui_agentchatapp_finish_turn",
+      "label": ".finish_turn()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".finish_turn()",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L257"
     },
     {
       "id": "experiment4_tui_agentchatapp_init",
@@ -7192,7 +7349,19 @@
       "file_type": "code",
       "norm_label": ".__init__()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L71"
+      "source_location": "L97"
+    },
+    {
+      "id": "experiment4_tui_agentchatapp_note_host_stderr",
+      "label": ".note_host_stderr()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".note_host_stderr()",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L207"
     },
     {
       "id": "experiment4_tui_agentchatapp_on_input_submitted",
@@ -7204,7 +7373,7 @@
       "file_type": "code",
       "norm_label": ".on_input_submitted()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L156"
+      "source_location": "L195"
     },
     {
       "id": "experiment4_tui_agentchatapp_on_mount",
@@ -7216,7 +7385,7 @@
       "file_type": "code",
       "norm_label": ".on_mount()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L92"
+      "source_location": "L118"
     },
     {
       "id": "experiment4_tui_agentchatapp_on_option_list_option_selected",
@@ -7228,7 +7397,7 @@
       "file_type": "code",
       "norm_label": ".on_option_list_option_selected()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L139"
+      "source_location": "L174"
     },
     {
       "id": "experiment4_tui_agentchatapp_select_agent",
@@ -7240,7 +7409,7 @@
       "file_type": "code",
       "norm_label": ".select_agent()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L108"
+      "source_location": "L134"
     },
     {
       "id": "experiment4_tui_agentchatapp_send_turn",
@@ -7252,7 +7421,7 @@
       "file_type": "code",
       "norm_label": ".send_turn()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L169"
+      "source_location": "L226"
     },
     {
       "id": "experiment4_tui_agentchatapp_set_status",
@@ -7264,7 +7433,43 @@
       "file_type": "code",
       "norm_label": ".set_status()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L105"
+      "source_location": "L131"
+    },
+    {
+      "id": "experiment4_tui_agentchatapp_show_host_status",
+      "label": ".show_host_status()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".show_host_status()",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L155"
+    },
+    {
+      "id": "experiment4_tui_install_hangup_handlers",
+      "label": "install_hangup_handlers()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "install_hangup_handlers()",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L270"
+    },
+    {
+      "id": "experiment4_tui_ledger_path",
+      "label": "ledger_path()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "ledger_path()",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L45"
     },
     {
       "id": "experiment4_tui_main",
@@ -7276,7 +7481,7 @@
       "file_type": "code",
       "norm_label": "main()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L207"
+      "source_location": "L288"
     },
     {
       "id": "experiment4_tui_presence_lines",
@@ -7288,7 +7493,7 @@
       "file_type": "code",
       "norm_label": "presence_lines()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L40"
+      "source_location": "L66"
     },
     {
       "id": "experiment4_tui_short_time",
@@ -7300,7 +7505,151 @@
       "file_type": "code",
       "norm_label": "short_time()",
       "source_file": "experiment4/tui.py",
-      "source_location": "L30"
+      "source_location": "L35"
+    },
+    {
+      "id": "experiment4_tui_spend_text",
+      "label": "spend_text()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "spend_text()",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L55"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_agentfixture_open_leases",
+      "label": ".open_leases()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".open_leases()",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L61"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_agentfixture_setup",
+      "label": ".setUp()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".setup()",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L32"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_agentfixture_teardown",
+      "label": ".tearDown()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".teardown()",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L56"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_chatsessiontestcase_test_a_turn_without_the_name_is_still_a_direct_address",
+      "label": ".test_a_turn_without_the_name_is_still_a_direct_address()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".test_a_turn_without_the_name_is_still_a_direct_address()",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L78"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_chatsessiontestcase_test_cancelling_a_turn_in_flight_releases_the_lease",
+      "label": ".test_cancelling_a_turn_in_flight_releases_the_lease()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".test_cancelling_a_turn_in_flight_releases_the_lease()",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L85"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_chatsessiontestcase_test_host_failure_releases_the_lease",
+      "label": ".test_host_failure_releases_the_lease()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".test_host_failure_releases_the_lease()",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L109"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_chatsessiontestcase_test_the_agents_name_is_supplied_when_left_off",
+      "label": ".test_the_agents_name_is_supplied_when_left_off()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".test_the_agents_name_is_supplied_when_left_off()",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L69"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_presencetestcase_test_presence_reports_available_awake_resting_and_alarms",
+      "label": ".test_presence_reports_available_awake_resting_and_alarms()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".test_presence_reports_available_awake_resting_and_alarms()",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L126"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_registryfieldstestcase_test_optional_fields_are_validated",
+      "label": ".test_optional_fields_are_validated()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".test_optional_fields_are_validated()",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L117"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_screentestcase_setup",
+      "label": ".setUp()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".setup()",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L150"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_screentestcase_test_screen_lists_agents_and_shows_a_persisted_reply",
+      "label": ".test_screen_lists_agents_and_shows_a_persisted_reply()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": ".test_screen_lists_agents_and_shows_a_persisted_reply()",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L157"
     },
     {
       "id": "experiment4_cli_build_parser",
@@ -7313,18 +7662,6 @@
       "norm_label": "build_parser()",
       "source_file": "experiment4/cli.py",
       "source_location": "L102"
-    },
-    {
-      "id": "experiment4_cli_chat_turn",
-      "label": "chat_turn()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
-      "file_type": "code",
-      "norm_label": "chat_turn()",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L80"
     },
     {
       "id": "experiment4_cli_execute",
@@ -7387,90 +7724,6 @@
       "source_location": "L65"
     },
     {
-      "id": "tests_test_agent_chat_agentchattestcase_open_leases",
-      "label": ".open_leases()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
-      "file_type": "code",
-      "norm_label": ".open_leases()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L65"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_setup",
-      "label": ".setUp()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
-      "file_type": "code",
-      "norm_label": ".setup()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L37"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_teardown",
-      "label": ".tearDown()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
-      "file_type": "code",
-      "norm_label": ".teardown()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L61"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_benchmark_replays_recorded_turns_read_only",
-      "label": ".test_benchmark_replays_recorded_turns_read_only()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
-      "file_type": "code",
-      "norm_label": ".test_benchmark_replays_recorded_turns_read_only()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L109"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_chat_turn_persists_the_host_reply_under_the_lease",
-      "label": ".test_chat_turn_persists_the_host_reply_under_the_lease()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
-      "file_type": "code",
-      "norm_label": ".test_chat_turn_persists_the_host_reply_under_the_lease()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L83"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_chat_turn_releases_the_lease_when_the_host_fails",
-      "label": ".test_chat_turn_releases_the_lease_when_the_host_fails()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
-      "file_type": "code",
-      "norm_label": ".test_chat_turn_releases_the_lease_when_the_host_fails()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L92"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_cli_benchmark_requires_sensitivity_confirmation",
-      "label": ".test_cli_benchmark_requires_sensitivity_confirmation()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
-      "file_type": "code",
-      "norm_label": ".test_cli_benchmark_requires_sensitivity_confirmation()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L125"
-    },
-    {
       "id": "tests_test_agent_chat_agentchattestcase_test_cli_chat_uses_the_registry_not_the_default_database",
       "label": ".test_cli_chat_uses_the_registry_not_the_default_database()",
       "_callable": true,
@@ -7480,7 +7733,7 @@
       "file_type": "code",
       "norm_label": ".test_cli_chat_uses_the_registry_not_the_default_database()",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L102"
+      "source_location": "L109"
     },
     {
       "id": "tests_test_agent_chat_agentchattestcase_test_register_agent_command_writes_owner_only_config",
@@ -7492,31 +7745,7 @@
       "file_type": "code",
       "norm_label": ".test_register_agent_command_writes_owner_only_config()",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L134"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_registry_round_trips_and_validates",
-      "label": ".test_registry_round_trips_and_validates()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
-      "file_type": "code",
-      "norm_label": ".test_registry_round_trips_and_validates()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L71"
-    },
-    {
-      "id": "tests_test_agent_chat_agentchattestcase_test_unaddressed_message_is_recorded_without_waking",
-      "label": ".test_unaddressed_message_is_recorded_without_waking()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
-      "file_type": "code",
-      "norm_label": ".test_unaddressed_message_is_recorded_without_waking()",
-      "source_file": "tests/test_agent_chat.py",
-      "source_location": "L97"
+      "source_location": "L141"
     },
     {
       "id": "olympus_experiment_experimentrunner_behavior",
@@ -7896,7 +8125,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
       "norm_label": "check_envelope()",
       "source_file": "experiment4/benchmark_host.py",
@@ -7908,7 +8137,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
       "norm_label": "rebuild_prompt()",
       "source_file": "experiment4/benchmark_host.py",
@@ -7920,7 +8149,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
       "norm_label": "recorded_turns()",
       "source_file": "experiment4/benchmark_host.py",
@@ -7932,7 +8161,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
       "norm_label": "render_markdown()",
       "source_file": "experiment4/benchmark_host.py",
@@ -7944,7 +8173,7 @@
       "_callable": true,
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
       "norm_label": "run_benchmark()",
       "source_file": "experiment4/benchmark_host.py",
@@ -7956,11 +8185,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
       "norm_label": "addressed_response_schema()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L58"
+      "source_location": "L65"
     },
     {
       "id": "experiment4_harness_addressed_system_text",
@@ -7968,11 +8197,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
       "norm_label": "addressed_system_text()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L21"
+      "source_location": "L28"
     },
     {
       "id": "experiment4_harness_identityapprenticeship_address_chat_message",
@@ -7980,131 +8209,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
       "norm_label": ".address_chat_message()",
       "source_file": "experiment4/harness.py",
-      "source_location": "L361"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_agentfixture_open_leases",
-      "label": ".open_leases()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": ".open_leases()",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L61"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_agentfixture_setup",
-      "label": ".setUp()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": ".setup()",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L32"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_agentfixture_teardown",
-      "label": ".tearDown()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": ".teardown()",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L56"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_chatsessiontestcase_test_a_turn_without_the_name_is_still_a_direct_address",
-      "label": ".test_a_turn_without_the_name_is_still_a_direct_address()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": ".test_a_turn_without_the_name_is_still_a_direct_address()",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L75"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_chatsessiontestcase_test_cancelling_a_turn_in_flight_releases_the_lease",
-      "label": ".test_cancelling_a_turn_in_flight_releases_the_lease()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": ".test_cancelling_a_turn_in_flight_releases_the_lease()",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L82"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_chatsessiontestcase_test_host_failure_releases_the_lease",
-      "label": ".test_host_failure_releases_the_lease()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": ".test_host_failure_releases_the_lease()",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L106"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_chatsessiontestcase_test_the_agents_name_is_supplied_when_left_off",
-      "label": ".test_the_agents_name_is_supplied_when_left_off()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": ".test_the_agents_name_is_supplied_when_left_off()",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L69"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_presencetestcase_test_presence_reports_available_awake_resting_and_alarms",
-      "label": ".test_presence_reports_available_awake_resting_and_alarms()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": ".test_presence_reports_available_awake_resting_and_alarms()",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L114"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_screentestcase_setup",
-      "label": ".setUp()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": ".setup()",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L138"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_screentestcase_test_screen_lists_agents_and_shows_a_persisted_reply",
-      "label": ".test_screen_lists_agents_and_shows_a_persisted_reply()",
-      "_callable": true,
-      "_origin": "ast",
-      "community": 73,
-      "community_name": "AgentFixture",
-      "file_type": "code",
-      "norm_label": ".test_screen_lists_agents_and_shows_a_persisted_reply()",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L145"
+      "source_location": "L368"
     },
     {
       "id": "tests_test_experiment2_experiment2testcase_agent_turn",
@@ -8760,11 +8869,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 91,
-      "community_name": "run_turn",
+      "community_name": "chat.py",
       "file_type": "code",
       "norm_label": "address_text()",
       "source_file": "experiment4/chat.py",
       "source_location": "L31"
+    },
+    {
+      "id": "experiment4_chat_print_stderr",
+      "label": "_print_stderr()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "chat.py",
+      "file_type": "code",
+      "norm_label": "_print_stderr()",
+      "source_file": "experiment4/chat.py",
+      "source_location": "L46"
     },
     {
       "id": "experiment4_chat_run_host_process",
@@ -8772,11 +8893,11 @@
       "_callable": true,
       "_origin": "ast",
       "community": 91,
-      "community_name": "run_turn",
+      "community_name": "chat.py",
       "file_type": "code",
       "norm_label": "run_host_process()",
       "source_file": "experiment4/chat.py",
-      "source_location": "L43"
+      "source_location": "L50"
     },
     {
       "id": "experiment4_chat_run_turn",
@@ -8784,11 +8905,23 @@
       "_callable": true,
       "_origin": "ast",
       "community": 91,
-      "community_name": "run_turn",
+      "community_name": "chat.py",
       "file_type": "code",
       "norm_label": "run_turn()",
       "source_file": "experiment4/chat.py",
-      "source_location": "L92"
+      "source_location": "L104"
+    },
+    {
+      "id": "experiment4_harness_starts_with_name",
+      "label": "starts_with_name()",
+      "_callable": true,
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "chat.py",
+      "file_type": "code",
+      "norm_label": "starts_with_name()",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L21"
     },
     {
       "id": "experiment2_cli",
@@ -9044,6 +9177,28 @@
       "source_location": "L1"
     },
     {
+      "id": "datetime",
+      "label": "datetime",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "SQLiteIdentityRepository",
+      "file_type": "code",
+      "norm_label": "datetime",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "experiment4_repository",
+      "label": "experiment4/repository.py",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "SQLiteIdentityRepository",
+      "file_type": "code",
+      "norm_label": "experiment4/repository.py",
+      "source_file": "experiment4/repository.py",
+      "source_location": "L1"
+    },
+    {
       "id": "experiment4_repository_py_any",
       "label": "Any",
       "_origin": "ast",
@@ -9099,6 +9254,39 @@
       "source_location": ""
     },
     {
+      "id": "tests_test_agent_chat_tui",
+      "label": "test_agent_chat_tui.py",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "SQLiteIdentityRepository",
+      "file_type": "code",
+      "norm_label": "test_agent_chat_tui.py",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_test_deploy_launchd",
+      "label": "test_deploy_launchd.py",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "SQLiteIdentityRepository",
+      "file_type": "code",
+      "norm_label": "test_deploy_launchd.py",
+      "source_file": "tests/test_deploy_launchd.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_test_experiment4",
+      "label": "test_experiment4.py",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "SQLiteIdentityRepository",
+      "file_type": "code",
+      "norm_label": "test_experiment4.py",
+      "source_file": "tests/test_experiment4.py",
+      "source_location": "L1"
+    },
+    {
       "id": "experiment4_repository_rationale_5588",
       "label": "Time-triggered intents whose moment has come and that may still run. Cancelled\u2026",
       "_origin": "ast",
@@ -9130,6 +9318,28 @@
       "norm_label": "honor a due intent: lease the current incarnation and orient on it.",
       "source_file": "experiment4/repository.py",
       "source_location": "L5635"
+    },
+    {
+      "id": "tests_test_agent_chat_tui_rationale_1",
+      "label": "Presence, cancel-safe turns, and the agent-chat screen.",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "SQLiteIdentityRepository",
+      "file_type": "rationale",
+      "norm_label": "presence, cancel-safe turns, and the agent-chat screen.",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "tests_test_deploy_launchd_rationale_1",
+      "label": "The launchd installer renders a valid, agent-named wake job.",
+      "_origin": "ast",
+      "community": 1,
+      "community_name": "SQLiteIdentityRepository",
+      "file_type": "rationale",
+      "norm_label": "the launchd installer renders a valid, agent-named wake job.",
+      "source_file": "tests/test_deploy_launchd.py",
+      "source_location": "L1"
     },
     {
       "id": "olympus_collector",
@@ -9991,28 +10201,6 @@
       "source_location": "L197"
     },
     {
-      "id": "experiment2_turn_envelope_schema_claim_additionalproperties",
-      "label": "additionalProperties",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "additionalproperties",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L101"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_claim_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L100"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_claimid_maxlength",
       "label": "maxLength",
       "_origin": "ast",
@@ -10046,61 +10234,6 @@
       "source_location": "L73"
     },
     {
-      "id": "experiment2_turn_envelope_schema_claimidarray_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L97"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_claimidarray_maxitems",
-      "label": "maxItems",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "maxitems",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L95"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_claimidarray_minitems",
-      "label": "minItems",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "minitems",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L94"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_claimidarray_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L93"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_claimidarray_uniqueitems",
-      "label": "uniqueItems",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "uniqueitems",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L96"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_defs",
       "label": "$defs",
       "_origin": "ast",
@@ -10110,17 +10243,6 @@
       "norm_label": "$defs",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L56"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_defs_claim",
-      "label": "claim",
-      "_origin": "ast",
-      "community": 13,
-      "community_name": "$defs",
-      "file_type": "code",
-      "norm_label": "claim",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L99"
     },
     {
       "id": "experiment2_turn_envelope_schema_defs_claimid",
@@ -10134,15 +10256,15 @@
       "source_location": "L72"
     },
     {
-      "id": "experiment2_turn_envelope_schema_defs_claimidarray",
-      "label": "claimIdArray",
+      "id": "experiment2_turn_envelope_schema_defs_evidence",
+      "label": "evidence",
       "_origin": "ast",
       "community": 13,
       "community_name": "$defs",
       "file_type": "code",
-      "norm_label": "claimidarray",
+      "norm_label": "evidence",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L92"
+      "source_location": "L123"
     },
     {
       "id": "experiment2_turn_envelope_schema_defs_shorttext",
@@ -10176,6 +10298,17 @@
       "norm_label": "turnid",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L67"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_evidence_additionalproperties",
+      "label": "additionalProperties",
+      "_origin": "ast",
+      "community": 13,
+      "community_name": "$defs",
+      "file_type": "code",
+      "norm_label": "additionalproperties",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L125"
     },
     {
       "id": "experiment2_turn_envelope_schema_shorttext_maxlength",
@@ -11201,213 +11334,15 @@
       "source_location": "L1"
     },
     {
-      "id": "datetime",
-      "label": "datetime",
+      "id": "experiment4_cli_rationale_83",
+      "label": "One addressed turn through the agent's registered host; see chat.run_turn.",
       "_origin": "ast",
       "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "datetime",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "experiment4_chat",
-      "label": "chat.py",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "chat.py",
-      "source_file": "experiment4/chat.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_harness",
-      "label": "experiment4/harness.py",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "experiment4/harness.py",
-      "source_file": "experiment4/harness.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_init",
-      "label": "experiment4/__init__.py",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "experiment4/__init__.py",
-      "source_file": "experiment4/__init__.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_presence",
-      "label": "presence.py",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "presence.py",
-      "source_file": "experiment4/presence.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_presence_py_any",
-      "label": "Any",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "any",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "experiment4_presence_py_connection",
-      "label": "Connection",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "connection",
-      "source_file": "",
-      "source_location": ""
-    },
-    {
-      "id": "experiment4_repository",
-      "label": "experiment4/repository.py",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "experiment4/repository.py",
-      "source_file": "experiment4/repository.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_tui",
-      "label": "tui.py",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "tui.py",
-      "source_file": "experiment4/tui.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_test_agent_chat_tui",
-      "label": "test_agent_chat_tui.py",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "test_agent_chat_tui.py",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_test_deploy_launchd",
-      "label": "test_deploy_launchd.py",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "test_deploy_launchd.py",
-      "source_file": "tests/test_deploy_launchd.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_test_experiment4",
-      "label": "test_experiment4.py",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "code",
-      "norm_label": "test_experiment4.py",
-      "source_file": "tests/test_experiment4.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_chat_rationale_1",
-      "label": "One addressed turn with a registered agent's host, safe to cancel. The address\u2026",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
+      "community_name": "AgentChatTestCase",
       "file_type": "rationale",
-      "norm_label": "one addressed turn with a registered agent's host, safe to cancel. the address...",
-      "source_file": "experiment4/chat.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_init_rationale_1",
-      "label": "Persistent emergent-identity apprenticeship experiment.",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "rationale",
-      "norm_label": "persistent emergent-identity apprenticeship experiment.",
-      "source_file": "experiment4/__init__.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_presence_rationale_1",
-      "label": "Read-only presence and transcript for a registered agent. Everything here opens\u2026",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "rationale",
-      "norm_label": "read-only presence and transcript for a registered agent. everything here opens...",
-      "source_file": "experiment4/presence.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "experiment4_presence_rationale_93",
-      "label": "The last `limit` messages with their replies, oldest first.",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "rationale",
-      "norm_label": "the last `limit` messages with their replies, oldest first.",
-      "source_file": "experiment4/presence.py",
-      "source_location": "L93"
-    },
-    {
-      "id": "experiment4_tui_rationale_1",
-      "label": "agent-chat: talk to any registered agent by name from one terminal screen.\u2026",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "rationale",
-      "norm_label": "agent-chat: talk to any registered agent by name from one terminal screen....",
-      "source_file": "experiment4/tui.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_test_agent_chat_tui_rationale_1",
-      "label": "Presence, cancel-safe turns, and the agent-chat screen.",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "rationale",
-      "norm_label": "presence, cancel-safe turns, and the agent-chat screen.",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L1"
-    },
-    {
-      "id": "tests_test_deploy_launchd_rationale_1",
-      "label": "The launchd installer renders a valid, agent-named wake job.",
-      "_origin": "ast",
-      "community": 20,
-      "community_name": "experiment4/repository.py",
-      "file_type": "rationale",
-      "norm_label": "the launchd installer renders a valid, agent-named wake job.",
-      "source_file": "tests/test_deploy_launchd.py",
-      "source_location": "L1"
+      "norm_label": "one addressed turn through the agent's registered host; see chat.run_turn.",
+      "source_file": "experiment4/cli.py",
+      "source_location": "L83"
     },
     {
       "id": "docs_adr_0002_conversational_memory_and_chat_message_nodes",
@@ -12970,6 +12905,17 @@
       "source_location": "L278"
     },
     {
+      "id": "experiment2_turn_envelope_schema_outcome_enum",
+      "label": "enum",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "enum",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L259"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_positionupdate_properties",
       "label": "properties",
       "_origin": "ast",
@@ -13025,6 +12971,17 @@
       "source_location": "L278"
     },
     {
+      "id": "experiment2_turn_envelope_schema_properties_outcome",
+      "label": "outcome",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "outcome",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L258"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_properties_principle_changes",
       "label": "principle_changes",
       "_origin": "ast",
@@ -13078,6 +13035,50 @@
       "norm_label": "$ref",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L277"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_increased_confidence",
+      "label": "increased_confidence",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "increased_confidence",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L259"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_partial_revision",
+      "label": "partial_revision",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "partial_revision",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L259"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_reduced_confidence",
+      "label": "reduced_confidence",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "reduced_confidence",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L259"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_reversal",
+      "label": "reversal",
+      "_origin": "ast",
+      "community": 31,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "reversal",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L259"
     },
     {
       "id": "experiment2_export_schema",
@@ -13839,6 +13840,17 @@
       "source_location": "L90"
     },
     {
+      "id": "experiment2_turn_envelope_schema_claim_additionalproperties",
+      "label": "additionalProperties",
+      "_origin": "ast",
+      "community": 37,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "additionalproperties",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L101"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_claim_id_ref",
       "label": "$ref",
       "_origin": "ast",
@@ -13861,26 +13873,26 @@
       "source_location": "L103"
     },
     {
-      "id": "experiment2_turn_envelope_schema_defs_evidence",
-      "label": "evidence",
+      "id": "experiment2_turn_envelope_schema_claim_type",
+      "label": "type",
       "_origin": "ast",
       "community": 37,
       "community_name": "properties",
       "file_type": "code",
-      "norm_label": "evidence",
+      "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L123"
+      "source_location": "L100"
     },
     {
-      "id": "experiment2_turn_envelope_schema_evidence_additionalproperties",
-      "label": "additionalProperties",
+      "id": "experiment2_turn_envelope_schema_defs_claim",
+      "label": "claim",
       "_origin": "ast",
       "community": 37,
       "community_name": "properties",
       "file_type": "code",
-      "norm_label": "additionalproperties",
+      "norm_label": "claim",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L125"
+      "source_location": "L99"
     },
     {
       "id": "experiment2_turn_envelope_schema_evidence_id_maxlength",
@@ -13925,17 +13937,6 @@
       "norm_label": "properties",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L127"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_evidence_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 37,
-      "community_name": "properties",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L28"
     },
     {
       "id": "experiment2_turn_envelope_schema_kind_ref",
@@ -16745,6 +16746,17 @@
       "source_location": "L41"
     },
     {
+      "id": "experiment2_turn_envelope_schema_concession_additionalproperties",
+      "label": "additionalProperties",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "additionalproperties",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L143"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_concession_id_maxlength",
       "label": "maxLength",
       "_origin": "ast",
@@ -16787,6 +16799,39 @@
       "norm_label": "properties",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L150"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_concession_required",
+      "label": "required",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "required",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L144"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_concession_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L142"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_defs_concession",
+      "label": "concession",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "concession",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L141"
     },
     {
       "id": "experiment2_turn_envelope_schema_properties_concession_id",
@@ -16844,55 +16889,55 @@
       "source_location": "L157"
     },
     {
+      "id": "experiment2_turn_envelope_schema_json_ref_concession_id",
+      "label": "concession_id",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "concession_id",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L144"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_proposition_changed",
+      "label": "proposition_changed",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "proposition_changed",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L144"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_scope",
+      "label": "scope",
+      "_origin": "ast",
+      "community": 58,
+      "community_name": "properties",
+      "file_type": "concept",
+      "norm_label": "scope",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L144"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_annotations_properties",
       "label": "properties",
       "_origin": "ast",
       "community": 59,
-      "community_name": "$ref",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "properties",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L16"
     },
     {
-      "id": "experiment2_turn_envelope_schema_claims_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L20"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_claims_maxitems",
-      "label": "maxItems",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "maxitems",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L19"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_claims_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L18"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_concessions_items",
       "label": "items",
       "_origin": "ast",
       "community": 59,
-      "community_name": "$ref",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "items",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -16903,7 +16948,7 @@
       "label": "maxItems",
       "_origin": "ast",
       "community": 59,
-      "community_name": "$ref",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "maxitems",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -16914,194 +16959,40 @@
       "label": "type",
       "_origin": "ast",
       "community": 59,
-      "community_name": "$ref",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L33"
     },
     {
-      "id": "experiment2_turn_envelope_schema_counterarguments_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L25"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_counterarguments_maxitems",
-      "label": "maxItems",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "maxitems",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L24"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_counterarguments_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L23"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_criterion_ids_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L272"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_evidence_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L30"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_evidence_maxitems",
-      "label": "maxItems",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "maxitems",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L29"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_items_ref",
-      "label": "$ref",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "$ref",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L20"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_participant_observations_items",
-      "label": "items",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "items",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L45"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_participant_observations_maxitems",
-      "label": "maxItems",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "maxitems",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L44"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_participant_observations_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L43"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_position_update_oneof",
       "label": "oneOf",
       "_origin": "ast",
       "community": 59,
-      "community_name": "$ref",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "oneof",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L48"
     },
     {
-      "id": "experiment2_turn_envelope_schema_properties_claims",
-      "label": "claims",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "claims",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L17"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_properties_concessions",
       "label": "concessions",
       "_origin": "ast",
       "community": 59,
-      "community_name": "$ref",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "concessions",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L32"
     },
     {
-      "id": "experiment2_turn_envelope_schema_properties_counterarguments",
-      "label": "counterarguments",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "counterarguments",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L22"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_properties_evidence",
-      "label": "evidence",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "evidence",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L27"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_properties_participant_observations",
-      "label": "participant_observations",
-      "_origin": "ast",
-      "community": 59,
-      "community_name": "$ref",
-      "file_type": "code",
-      "norm_label": "participant_observations",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L42"
-    },
-    {
       "id": "experiment2_turn_envelope_schema_properties_position_update",
       "label": "position_update",
       "_origin": "ast",
       "community": 59,
-      "community_name": "$ref",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "position_update",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -17112,7 +17003,7 @@
       "label": "relational_effects",
       "_origin": "ast",
       "community": 59,
-      "community_name": "$ref",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "relational_effects",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -17123,7 +17014,7 @@
       "label": "items",
       "_origin": "ast",
       "community": 59,
-      "community_name": "$ref",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "items",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -17134,7 +17025,7 @@
       "label": "maxItems",
       "_origin": "ast",
       "community": 59,
-      "community_name": "$ref",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "maxitems",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -17145,7 +17036,7 @@
       "label": "type",
       "_origin": "ast",
       "community": 59,
-      "community_name": "$ref",
+      "community_name": "properties",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
@@ -17427,6 +17318,17 @@
       "source_location": "L113"
     },
     {
+      "id": "experiment2_turn_envelope_schema_counterargument_required",
+      "label": "required",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "counterargument",
+      "file_type": "code",
+      "norm_label": "required",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L112"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_counterargument_type",
       "label": "type",
       "_origin": "ast",
@@ -17502,6 +17404,28 @@
       "norm_label": "$ref",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L12"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_counterargument_id",
+      "label": "counterargument_id",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "counterargument",
+      "file_type": "concept",
+      "norm_label": "counterargument_id",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L112"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_target_claim_id",
+      "label": "target_claim_id",
+      "_origin": "ast",
+      "community": 61,
+      "community_name": "counterargument",
+      "file_type": "concept",
+      "norm_label": "target_claim_id",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L112"
     },
     {
       "id": "experiment2_report_schema_defs_speakerarguments",
@@ -17724,7 +17648,7 @@
       "source_location": ""
     },
     {
-      "id": "experiment4_harness_rationale_254",
+      "id": "experiment4_harness_rationale_261",
       "label": "Honor due intents, at most MAX_WAKES_PER_RUN per pass. Without a model host the\u2026",
       "_origin": "ast",
       "community": 64,
@@ -17732,7 +17656,7 @@
       "file_type": "rationale",
       "norm_label": "honor due intents, at most max_wakes_per_run per pass. without a model host the...",
       "source_file": "experiment4/harness.py",
-      "source_location": "L254"
+      "source_location": "L261"
     },
     {
       "id": "experiment2_export_schema_properties_status",
@@ -17823,6 +17747,50 @@
       "source_location": ""
     },
     {
+      "id": "experiment4_presence",
+      "label": "presence.py",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "presence.py",
+      "source_file": "experiment4/presence.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiment4_presence_py_any",
+      "label": "Any",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "any",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "experiment4_presence_py_connection",
+      "label": "Connection",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "connection",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "experiment4_tui",
+      "label": "tui.py",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "code",
+      "norm_label": "tui.py",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L1"
+    },
+    {
       "id": "experiment4_tui_py_any",
       "label": "Any",
       "_origin": "ast",
@@ -17865,6 +17833,72 @@
       "norm_label": "work",
       "source_file": "",
       "source_location": ""
+    },
+    {
+      "id": "experiment4_presence_rationale_1",
+      "label": "Read-only presence and transcript for a registered agent. Everything here opens\u2026",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "rationale",
+      "norm_label": "read-only presence and transcript for a registered agent. everything here opens...",
+      "source_file": "experiment4/presence.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiment4_presence_rationale_99",
+      "label": "The last `limit` messages with their replies, oldest first.",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "rationale",
+      "norm_label": "the last `limit` messages with their replies, oldest first.",
+      "source_file": "experiment4/presence.py",
+      "source_location": "L99"
+    },
+    {
+      "id": "experiment4_tui_rationale_1",
+      "label": "agent-chat: talk to any registered agent by name from one terminal screen.\u2026",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "rationale",
+      "norm_label": "agent-chat: talk to any registered agent by name from one terminal screen....",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "experiment4_tui_rationale_208",
+      "label": "Host diagnostics land in the transcript, bounded; a cost record is summarized\u2026",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "rationale",
+      "norm_label": "host diagnostics land in the transcript, bounded; a cost record is summarized...",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L208"
+    },
+    {
+      "id": "experiment4_tui_rationale_271",
+      "label": "A closed terminal must not strand the agent's lease: cancel the turn in flight\u2026",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "rationale",
+      "norm_label": "a closed terminal must not strand the agent's lease: cancel the turn in flight...",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L271"
+    },
+    {
+      "id": "experiment4_tui_rationale_46",
+      "label": "The spend ledger the agent's host was told to use, if any.",
+      "_origin": "ast",
+      "community": 66,
+      "community_name": "AgentChatApp",
+      "file_type": "rationale",
+      "norm_label": "the spend ledger the agent's host was told to use, if any.",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L46"
     },
     {
       "id": "experiment2_report_schema_properties_strengths_and_weaknesses",
@@ -18131,17 +18165,6 @@
       "source_location": "L66"
     },
     {
-      "id": "experiment4_cli_rationale_83",
-      "label": "One addressed turn through the agent's registered host; see chat.run_turn.",
-      "_origin": "ast",
-      "community": 69,
-      "community_name": "execute",
-      "file_type": "rationale",
-      "norm_label": "one addressed turn through the agent's registered host; see chat.run_turn.",
-      "source_file": "experiment4/cli.py",
-      "source_location": "L83"
-    },
-    {
       "id": "tests_test_agent_chat_rationale_1",
       "label": "Registry, chat command, and host benchmark, driven end to end with a fake host\u2026",
       "_origin": "ast",
@@ -18256,7 +18279,7 @@
       "label": "benchmark_host.py",
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
       "norm_label": "benchmark_host.py",
       "source_file": "experiment4/benchmark_host.py",
@@ -18267,7 +18290,7 @@
       "label": "Any",
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
       "norm_label": "any",
       "source_file": "",
@@ -18278,18 +18301,29 @@
       "label": "Path",
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "code",
       "norm_label": "path",
       "source_file": "",
       "source_location": ""
     },
     {
+      "id": "experiment4_harness",
+      "label": "experiment4/harness.py",
+      "_origin": "ast",
+      "community": 72,
+      "community_name": "experiment4/harness.py",
+      "file_type": "code",
+      "norm_label": "experiment4/harness.py",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L1"
+    },
+    {
       "id": "experiment4_benchmark_host_rationale_1",
       "label": "Replay an agent's recorded addressed turns through a candidate model host.\u2026",
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "rationale",
       "norm_label": "replay an agent's recorded addressed turns through a candidate model host....",
       "source_file": "experiment4/benchmark_host.py",
@@ -18300,7 +18334,7 @@
       "label": "Approximate the prompt the host saw: a continuing incarnation with no active\u2026",
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "rationale",
       "norm_label": "approximate the prompt the host saw: a continuing incarnation with no active...",
       "source_file": "experiment4/benchmark_host.py",
@@ -18311,33 +18345,143 @@
       "label": "Problems the repository would reject; empty means structurally valid.",
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "rationale",
       "norm_label": "problems the repository would reject; empty means structurally valid.",
       "source_file": "experiment4/benchmark_host.py",
       "source_location": "L75"
     },
     {
-      "id": "experiment4_harness_rationale_22",
+      "id": "experiment4_harness_rationale_29",
       "label": "The system text an addressed turn hands the model host.",
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "rationale",
       "norm_label": "the system text an addressed turn hands the model host.",
       "source_file": "experiment4/harness.py",
-      "source_location": "L22"
+      "source_location": "L29"
     },
     {
-      "id": "experiment4_harness_rationale_66",
+      "id": "experiment4_harness_rationale_73",
       "label": "The envelope a host must return for an addressed turn, with guidance in place\u2026",
       "_origin": "ast",
       "community": 72,
-      "community_name": "benchmark_host.py",
+      "community_name": "experiment4/harness.py",
       "file_type": "rationale",
       "norm_label": "the envelope a host must return for an addressed turn, with guidance in place...",
       "source_file": "experiment4/harness.py",
-      "source_location": "L66"
+      "source_location": "L73"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_claims_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_claims_maxitems",
+      "label": "maxItems",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "maxitems",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L19"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_claims_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L18"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_criterion_ids_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L272"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_evidence_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L30"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_evidence_maxitems",
+      "label": "maxItems",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "maxitems",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L29"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_evidence_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L28"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_items_ref",
+      "label": "$ref",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "$ref",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L20"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_properties_claims",
+      "label": "claims",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "claims",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L17"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_properties_evidence",
+      "label": "evidence",
+      "_origin": "ast",
+      "community": 73,
+      "community_name": "$ref",
+      "file_type": "code",
+      "norm_label": "evidence",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L27"
     },
     {
       "id": "experiment2_turn_envelope_schema_criterion_ids_maxitems",
@@ -18536,6 +18680,17 @@
       "norm_label": "supporting_claim_ids",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L189"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_json_ref_text",
+      "label": "text",
+      "_origin": "ast",
+      "community": 75,
+      "community_name": "required",
+      "file_type": "concept",
+      "norm_label": "text",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L7"
     },
     {
       "id": "experiment2_turn_envelope_schema_properties_stance",
@@ -18835,125 +18990,70 @@
       "source_location": "L64"
     },
     {
-      "id": "experiment2_turn_envelope_schema_concession_additionalproperties",
-      "label": "additionalProperties",
+      "id": "experiment2_turn_envelope_schema_claimidarray_items",
+      "label": "items",
       "_origin": "ast",
       "community": 82,
-      "community_name": "required",
+      "community_name": "claimIdArray",
       "file_type": "code",
-      "norm_label": "additionalproperties",
+      "norm_label": "items",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L143"
+      "source_location": "L97"
     },
     {
-      "id": "experiment2_turn_envelope_schema_concession_required",
-      "label": "required",
+      "id": "experiment2_turn_envelope_schema_claimidarray_maxitems",
+      "label": "maxItems",
       "_origin": "ast",
       "community": 82,
-      "community_name": "required",
+      "community_name": "claimIdArray",
       "file_type": "code",
-      "norm_label": "required",
+      "norm_label": "maxitems",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L144"
+      "source_location": "L95"
     },
     {
-      "id": "experiment2_turn_envelope_schema_concession_type",
+      "id": "experiment2_turn_envelope_schema_claimidarray_minitems",
+      "label": "minItems",
+      "_origin": "ast",
+      "community": 82,
+      "community_name": "claimIdArray",
+      "file_type": "code",
+      "norm_label": "minitems",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L94"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_claimidarray_type",
       "label": "type",
       "_origin": "ast",
       "community": 82,
-      "community_name": "required",
+      "community_name": "claimIdArray",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L142"
+      "source_location": "L93"
     },
     {
-      "id": "experiment2_turn_envelope_schema_counterargument_required",
-      "label": "required",
+      "id": "experiment2_turn_envelope_schema_claimidarray_uniqueitems",
+      "label": "uniqueItems",
       "_origin": "ast",
       "community": 82,
-      "community_name": "required",
+      "community_name": "claimIdArray",
       "file_type": "code",
-      "norm_label": "required",
+      "norm_label": "uniqueitems",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L112"
+      "source_location": "L96"
     },
     {
-      "id": "experiment2_turn_envelope_schema_defs_concession",
-      "label": "concession",
+      "id": "experiment2_turn_envelope_schema_defs_claimidarray",
+      "label": "claimIdArray",
       "_origin": "ast",
       "community": 82,
-      "community_name": "required",
+      "community_name": "claimIdArray",
       "file_type": "code",
-      "norm_label": "concession",
+      "norm_label": "claimidarray",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L141"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_concession_id",
-      "label": "concession_id",
-      "_origin": "ast",
-      "community": 82,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "concession_id",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L144"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_counterargument_id",
-      "label": "counterargument_id",
-      "_origin": "ast",
-      "community": 82,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "counterargument_id",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L112"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_proposition_changed",
-      "label": "proposition_changed",
-      "_origin": "ast",
-      "community": 82,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "proposition_changed",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L144"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_scope",
-      "label": "scope",
-      "_origin": "ast",
-      "community": 82,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "scope",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L144"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_target_claim_id",
-      "label": "target_claim_id",
-      "_origin": "ast",
-      "community": 82,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "target_claim_id",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L112"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_text",
-      "label": "text",
-      "_origin": "ast",
-      "community": 82,
-      "community_name": "required",
-      "file_type": "concept",
-      "norm_label": "text",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L7"
+      "source_location": "L92"
     },
     {
       "id": "experiment2_report_schema_coincided_with_position_change_type",
@@ -19251,70 +19351,48 @@
       "source_location": "L63"
     },
     {
-      "id": "experiment2_turn_envelope_schema_outcome_enum",
-      "label": "enum",
+      "id": "experiment2_turn_envelope_schema_counterarguments_items",
+      "label": "items",
       "_origin": "ast",
       "community": 87,
-      "community_name": "enum",
+      "community_name": "counterarguments",
       "file_type": "code",
-      "norm_label": "enum",
+      "norm_label": "items",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L259"
+      "source_location": "L25"
     },
     {
-      "id": "experiment2_turn_envelope_schema_properties_outcome",
-      "label": "outcome",
+      "id": "experiment2_turn_envelope_schema_counterarguments_maxitems",
+      "label": "maxItems",
       "_origin": "ast",
       "community": 87,
-      "community_name": "enum",
+      "community_name": "counterarguments",
       "file_type": "code",
-      "norm_label": "outcome",
+      "norm_label": "maxitems",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L258"
+      "source_location": "L24"
     },
     {
-      "id": "experiment2_turn_envelope_schema_json_ref_increased_confidence",
-      "label": "increased_confidence",
+      "id": "experiment2_turn_envelope_schema_counterarguments_type",
+      "label": "type",
       "_origin": "ast",
       "community": 87,
-      "community_name": "enum",
-      "file_type": "concept",
-      "norm_label": "increased_confidence",
+      "community_name": "counterarguments",
+      "file_type": "code",
+      "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L259"
+      "source_location": "L23"
     },
     {
-      "id": "experiment2_turn_envelope_schema_json_ref_partial_revision",
-      "label": "partial_revision",
+      "id": "experiment2_turn_envelope_schema_properties_counterarguments",
+      "label": "counterarguments",
       "_origin": "ast",
       "community": 87,
-      "community_name": "enum",
-      "file_type": "concept",
-      "norm_label": "partial_revision",
+      "community_name": "counterarguments",
+      "file_type": "code",
+      "norm_label": "counterarguments",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L259"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_reduced_confidence",
-      "label": "reduced_confidence",
-      "_origin": "ast",
-      "community": 87,
-      "community_name": "enum",
-      "file_type": "concept",
-      "norm_label": "reduced_confidence",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L259"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_json_ref_reversal",
-      "label": "reversal",
-      "_origin": "ast",
-      "community": 87,
-      "community_name": "enum",
-      "file_type": "concept",
-      "norm_label": "reversal",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L259"
+      "source_location": "L22"
     },
     {
       "id": "deploy_launchd_install_wake_agent",
@@ -19447,11 +19525,22 @@
       "source_location": "L1"
     },
     {
+      "id": "experiment4_chat",
+      "label": "chat.py",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "chat.py",
+      "file_type": "code",
+      "norm_label": "chat.py",
+      "source_file": "experiment4/chat.py",
+      "source_location": "L1"
+    },
+    {
       "id": "experiment4_chat_py_any",
       "label": "Any",
       "_origin": "ast",
       "community": 91,
-      "community_name": "run_turn",
+      "community_name": "chat.py",
       "file_type": "code",
       "norm_label": "any",
       "source_file": "",
@@ -19462,9 +19551,31 @@
       "label": "RuntimeError",
       "_origin": "ast",
       "community": 91,
-      "community_name": "run_turn",
+      "community_name": "chat.py",
       "file_type": "code",
       "norm_label": "runtimeerror",
+      "source_file": "",
+      "source_location": ""
+    },
+    {
+      "id": "experiment4_init",
+      "label": "experiment4/__init__.py",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "chat.py",
+      "file_type": "code",
+      "norm_label": "experiment4/__init__.py",
+      "source_file": "experiment4/__init__.py",
+      "source_location": "L1"
+    },
+    {
+      "id": "hoststderrsink",
+      "label": "HostStderrSink",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "chat.py",
+      "file_type": "code",
+      "norm_label": "hoststderrsink",
       "source_file": "",
       "source_location": ""
     },
@@ -19473,33 +19584,66 @@
       "label": "StatusCallback",
       "_origin": "ast",
       "community": 91,
-      "community_name": "run_turn",
+      "community_name": "chat.py",
       "file_type": "code",
       "norm_label": "statuscallback",
       "source_file": "",
       "source_location": ""
     },
     {
+      "id": "experiment4_chat_rationale_1",
+      "label": "One addressed turn with a registered agent's host, safe to cancel. The address\u2026",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "chat.py",
+      "file_type": "rationale",
+      "norm_label": "one addressed turn with a registered agent's host, safe to cancel. the address...",
+      "source_file": "experiment4/chat.py",
+      "source_location": "L1"
+    },
+    {
       "id": "experiment4_chat_rationale_32",
       "label": "Only a leading vocative wakes the agent. When the registry records the agent's\u2026",
       "_origin": "ast",
       "community": 91,
-      "community_name": "run_turn",
+      "community_name": "chat.py",
       "file_type": "rationale",
       "norm_label": "only a leading vocative wakes the agent. when the registry records the agent's...",
       "source_file": "experiment4/chat.py",
       "source_location": "L32"
     },
     {
-      "id": "experiment4_chat_rationale_50",
+      "id": "experiment4_chat_rationale_58",
       "label": "Run a host as a child process; kill it on cancel or timeout. Host stderr goes\u2026",
       "_origin": "ast",
       "community": 91,
-      "community_name": "run_turn",
+      "community_name": "chat.py",
       "file_type": "rationale",
       "norm_label": "run a host as a child process; kill it on cancel or timeout. host stderr goes...",
       "source_file": "experiment4/chat.py",
-      "source_location": "L50"
+      "source_location": "L58"
+    },
+    {
+      "id": "experiment4_harness_rationale_22",
+      "label": "The vocative rule that wakes an agent: the name at the start, followed by the\u2026",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "chat.py",
+      "file_type": "rationale",
+      "norm_label": "the vocative rule that wakes an agent: the name at the start, followed by the...",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L22"
+    },
+    {
+      "id": "experiment4_init_rationale_1",
+      "label": "Persistent emergent-identity apprenticeship experiment.",
+      "_origin": "ast",
+      "community": 91,
+      "community_name": "chat.py",
+      "file_type": "rationale",
+      "norm_label": "persistent emergent-identity apprenticeship experiment.",
+      "source_file": "experiment4/__init__.py",
+      "source_location": "L1"
     },
     {
       "id": "experiment2_turn_envelope_schema_assessment_id_maxlength",
@@ -19557,6 +19701,39 @@
       "source_location": "L210"
     },
     {
+      "id": "experiment2_turn_envelope_schema_items_maxlength",
+      "label": "maxLength",
+      "_origin": "ast",
+      "community": 92,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "maxlength",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L226"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_items_pattern",
+      "label": "pattern",
+      "_origin": "ast",
+      "community": 92,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "pattern",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L225"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_items_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 92,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L224"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_properties_assessment_id",
       "label": "assessment_id",
       "_origin": "ast",
@@ -19590,6 +19767,17 @@
       "source_location": "L217"
     },
     {
+      "id": "experiment2_turn_envelope_schema_properties_supporting_evidence_ids",
+      "label": "supporting_evidence_ids",
+      "_origin": "ast",
+      "community": 92,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "supporting_evidence_ids",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L219"
+    },
+    {
       "id": "experiment2_turn_envelope_schema_reason_ref",
       "label": "$ref",
       "_origin": "ast",
@@ -19599,6 +19787,50 @@
       "norm_label": "$ref",
       "source_file": "experiment2/turn-envelope.schema.json",
       "source_location": "L217"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_supporting_evidence_ids_items",
+      "label": "items",
+      "_origin": "ast",
+      "community": 92,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "items",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L223"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_supporting_evidence_ids_maxitems",
+      "label": "maxItems",
+      "_origin": "ast",
+      "community": 92,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "maxitems",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L221"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_supporting_evidence_ids_type",
+      "label": "type",
+      "_origin": "ast",
+      "community": 92,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "type",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L220"
+    },
+    {
+      "id": "experiment2_turn_envelope_schema_supporting_evidence_ids_uniqueitems",
+      "label": "uniqueItems",
+      "_origin": "ast",
+      "community": 92,
+      "community_name": "properties",
+      "file_type": "code",
+      "norm_label": "uniqueitems",
+      "source_file": "experiment2/turn-envelope.schema.json",
+      "source_location": "L222"
     },
     {
       "id": "docs_adr_0005_agent_chat_tui",
@@ -19988,92 +20220,48 @@
       "type": "package"
     },
     {
-      "id": "experiment2_turn_envelope_schema_items_maxlength",
-      "label": "maxLength",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "supporting_evidence_ids",
-      "file_type": "code",
-      "norm_label": "maxlength",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L226"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_items_pattern",
-      "label": "pattern",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "supporting_evidence_ids",
-      "file_type": "code",
-      "norm_label": "pattern",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L225"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_items_type",
-      "label": "type",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "supporting_evidence_ids",
-      "file_type": "code",
-      "norm_label": "type",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L224"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_properties_supporting_evidence_ids",
-      "label": "supporting_evidence_ids",
-      "_origin": "ast",
-      "community": 99,
-      "community_name": "supporting_evidence_ids",
-      "file_type": "code",
-      "norm_label": "supporting_evidence_ids",
-      "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L219"
-    },
-    {
-      "id": "experiment2_turn_envelope_schema_supporting_evidence_ids_items",
+      "id": "experiment2_turn_envelope_schema_participant_observations_items",
       "label": "items",
       "_origin": "ast",
       "community": 99,
-      "community_name": "supporting_evidence_ids",
+      "community_name": "participant_observations",
       "file_type": "code",
       "norm_label": "items",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L223"
+      "source_location": "L45"
     },
     {
-      "id": "experiment2_turn_envelope_schema_supporting_evidence_ids_maxitems",
+      "id": "experiment2_turn_envelope_schema_participant_observations_maxitems",
       "label": "maxItems",
       "_origin": "ast",
       "community": 99,
-      "community_name": "supporting_evidence_ids",
+      "community_name": "participant_observations",
       "file_type": "code",
       "norm_label": "maxitems",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L221"
+      "source_location": "L44"
     },
     {
-      "id": "experiment2_turn_envelope_schema_supporting_evidence_ids_type",
+      "id": "experiment2_turn_envelope_schema_participant_observations_type",
       "label": "type",
       "_origin": "ast",
       "community": 99,
-      "community_name": "supporting_evidence_ids",
+      "community_name": "participant_observations",
       "file_type": "code",
       "norm_label": "type",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L220"
+      "source_location": "L43"
     },
     {
-      "id": "experiment2_turn_envelope_schema_supporting_evidence_ids_uniqueitems",
-      "label": "uniqueItems",
+      "id": "experiment2_turn_envelope_schema_properties_participant_observations",
+      "label": "participant_observations",
       "_origin": "ast",
       "community": 99,
-      "community_name": "supporting_evidence_ids",
+      "community_name": "participant_observations",
       "file_type": "code",
-      "norm_label": "uniqueitems",
+      "norm_label": "participant_observations",
       "source_file": "experiment2/turn-envelope.schema.json",
-      "source_location": "L222"
+      "source_location": "L42"
     },
     {
       "id": "agents_jerk_agent",
@@ -23390,6 +23578,18 @@
       "weight": 1.0
     },
     {
+      "source": "experiment4_chat_address_text",
+      "target": "experiment4_harness_starts_with_name",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/chat.py",
+      "source_location": "L38",
+      "weight": 1.0
+    },
+    {
       "source": "experiment4_chat_run_host_process",
       "target": "experiment4_chat_chatcancelled",
       "relation": "calls",
@@ -23398,7 +23598,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/chat.py",
-      "source_location": "L76",
+      "source_location": "L90",
       "weight": 1.0
     },
     {
@@ -23410,7 +23610,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/chat.py",
-      "source_location": "L80",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -23422,7 +23622,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/chat.py",
-      "source_location": "L100",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -23434,7 +23634,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/chat.py",
-      "source_location": "L101",
+      "source_location": "L114",
       "weight": 1.0
     },
     {
@@ -23446,7 +23646,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/chat.py",
-      "source_location": "L103",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -23458,7 +23658,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/chat.py",
-      "source_location": "L124",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -23470,7 +23670,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/chat.py",
-      "source_location": "L125",
+      "source_location": "L146",
       "weight": 1.0
     },
     {
@@ -23655,6 +23855,18 @@
     },
     {
       "source": "experiment4_harness_identityapprenticeship_address_chat_message",
+      "target": "experiment4_harness_starts_with_name",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/harness.py",
+      "source_location": "L381",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship_address_chat_message",
       "target": "experiment4_harness_addressed_system_text",
       "relation": "calls",
       "_origin": "ast",
@@ -23662,7 +23874,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/harness.py",
-      "source_location": "L460",
+      "source_location": "L463",
       "weight": 1.0
     },
     {
@@ -23674,7 +23886,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/harness.py",
-      "source_location": "L464",
+      "source_location": "L467",
       "weight": 1.0
     },
     {
@@ -23686,7 +23898,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/harness.py",
-      "source_location": "L261",
+      "source_location": "L268",
       "weight": 1.0
     },
     {
@@ -24022,7 +24234,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/presence.py",
-      "source_location": "L96",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -24034,7 +24246,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/registry.py",
-      "source_location": "L33",
+      "source_location": "L41",
       "weight": 1.0
     },
     {
@@ -24046,7 +24258,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/registry.py",
-      "source_location": "L34",
+      "source_location": "L42",
       "weight": 1.0
     },
     {
@@ -24058,7 +24270,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/registry.py",
-      "source_location": "L28",
+      "source_location": "L36",
       "weight": 1.0
     },
     {
@@ -24070,7 +24282,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/registry.py",
-      "source_location": "L83",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -24082,71 +24294,11 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/registry.py",
-      "source_location": "L88",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
       "source": "experiment4_registry_load_agent",
-      "target": "experiment4_registry_agent_path",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/registry.py",
-      "source_location": "L55",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry_load_agent",
-      "target": "experiment4_registry_agents_dir",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/registry.py",
-      "source_location": "L57",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry_load_agent",
-      "target": "experiment4_registry_registryerror",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/registry.py",
-      "source_location": "L57",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry_load_agent",
-      "target": "experiment4_registry_validate_agent",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/registry.py",
-      "source_location": "L62",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry_save_agent",
-      "target": "experiment4_registry_validate_agent",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/registry.py",
-      "source_location": "L69",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry_save_agent",
       "target": "experiment4_registry_agent_path",
       "relation": "calls",
       "_origin": "ast",
@@ -24158,6 +24310,66 @@
       "weight": 1.0
     },
     {
+      "source": "experiment4_registry_load_agent",
+      "target": "experiment4_registry_agents_dir",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/registry.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry_load_agent",
+      "target": "experiment4_registry_registryerror",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/registry.py",
+      "source_location": "L72",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry_load_agent",
+      "target": "experiment4_registry_validate_agent",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/registry.py",
+      "source_location": "L77",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry_save_agent",
+      "target": "experiment4_registry_validate_agent",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/registry.py",
+      "source_location": "L84",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry_save_agent",
+      "target": "experiment4_registry_agent_path",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/registry.py",
+      "source_location": "L85",
+      "weight": 1.0
+    },
+    {
       "source": "experiment4_registry_validate_agent",
       "target": "experiment4_registry_registryerror",
       "relation": "calls",
@@ -24166,7 +24378,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/registry.py",
-      "source_location": "L39",
+      "source_location": "L47",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry_validate_agent",
+      "target": "experiment4_registry_py_path",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/registry.py",
+      "source_location": "L64",
       "weight": 1.0
     },
     {
@@ -28522,7 +28746,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L154",
+      "source_location": "L193",
       "weight": 1.0
     },
     {
@@ -28534,19 +28758,43 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L133",
+      "source_location": "L172",
       "weight": 1.0
     },
     {
       "source": "experiment4_tui_agentchatapp_action_toggle_profile",
-      "target": "experiment4_tui_agentchatapp_set_status",
+      "target": "experiment4_tui_agentchatapp_show_host_status",
       "relation": "calls",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L149",
+      "source_location": "L188",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp_finish_turn",
+      "target": "experiment4_tui_agentchatapp_action_refresh",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L260",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp_finish_turn",
+      "target": "experiment4_tui_agentchatapp_show_host_status",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L261",
       "weight": 1.0
     },
     {
@@ -28558,7 +28806,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L162",
+      "source_location": "L201",
       "weight": 1.0
     },
     {
@@ -28570,19 +28818,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L166",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_tui_agentchatapp_on_mount",
-      "target": "experiment4_tui_agentchatapp_select_agent",
-      "relation": "calls",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "call",
-      "source_file": "experiment4/tui.py",
-      "source_location": "L101",
+      "source_location": "L205",
       "weight": 1.0
     },
     {
@@ -28594,7 +28830,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L95",
+      "source_location": "L121",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp_on_mount",
+      "target": "experiment4_tui_agentchatapp_select_agent",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L127",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp_on_option_list_option_selected",
+      "target": "experiment4_tui_agentchatapp_set_status",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L178",
       "weight": 1.0
     },
     {
@@ -28606,7 +28866,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L141",
+      "source_location": "L180",
       "weight": 1.0
     },
     {
@@ -28618,7 +28878,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L113",
+      "source_location": "L139",
       "weight": 1.0
     },
     {
@@ -28630,7 +28890,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L119",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -28642,7 +28902,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L126",
+      "source_location": "L152",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp_select_agent",
+      "target": "experiment4_tui_agentchatapp_show_host_status",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L153",
       "weight": 1.0
     },
     {
@@ -28654,7 +28926,43 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L174",
+      "source_location": "L231",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp_show_host_status",
+      "target": "experiment4_tui_agentchatapp_set_status",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L158",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp_show_host_status",
+      "target": "experiment4_tui_spend_text",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L159",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_ledger_path",
+      "target": "experiment4_registry_host_command",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L47",
       "weight": 1.0
     },
     {
@@ -28666,7 +28974,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L211",
+      "source_location": "L292",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_main",
+      "target": "experiment4_tui_install_hangup_handlers",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L293",
       "weight": 1.0
     },
     {
@@ -28678,7 +28998,31 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "experiment4/tui.py",
-      "source_location": "L48",
+      "source_location": "L74",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_spend_text",
+      "target": "experiment4_tui_ledger_path",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L56",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_spend_text",
+      "target": "experiment4_host_spendledger",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L60",
       "weight": 1.0
     },
     {
@@ -32002,7 +32346,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L111",
+      "source_location": "L118",
       "weight": 1.0
     },
     {
@@ -32014,7 +32358,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L116",
+      "source_location": "L123",
       "weight": 1.0
     },
     {
@@ -32074,7 +32418,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L126",
+      "source_location": "L133",
       "weight": 1.0
     },
     {
@@ -32086,7 +32430,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L130",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -32098,7 +32442,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L130",
+      "source_location": "L137",
       "weight": 1.0
     },
     {
@@ -32110,7 +32454,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L103",
+      "source_location": "L110",
       "weight": 1.0
     },
     {
@@ -32122,7 +32466,19 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L104",
+      "source_location": "L111",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_agentchattestcase_test_cli_supplies_the_chosen_name_when_display_name_is_registered",
+      "target": "experiment4_cli_chat_turn",
+      "relation": "calls",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "call",
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L105",
       "weight": 1.0
     },
     {
@@ -32134,7 +32490,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L138",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -32146,7 +32502,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L138",
+      "source_location": "L145",
       "weight": 1.0
     },
     {
@@ -32158,7 +32514,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L100",
+      "source_location": "L101",
       "weight": 1.0
     },
     {
@@ -32206,7 +32562,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L80",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
@@ -32218,7 +32574,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L96",
+      "source_location": "L99",
       "weight": 1.0
     },
     {
@@ -32230,7 +32586,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L110",
+      "source_location": "L113",
       "weight": 1.0
     },
     {
@@ -32242,7 +32598,7 @@
       "confidence_score": 1.0,
       "context": "call",
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L171",
+      "source_location": "L187",
       "weight": 1.0
     },
     {
@@ -36514,7 +36870,7 @@
       "confidence_score": 1.0,
       "context": "decorator",
       "source_file": "experiment4/tui.py",
-      "source_location": "L168",
+      "source_location": "L225",
       "weight": 1.0
     },
     {
@@ -37210,7 +37566,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/chat.py",
-      "source_location": "L43",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -37222,7 +37578,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/chat.py",
-      "source_location": "L92",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -37282,7 +37638,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L58",
+      "source_location": "L65",
       "weight": 1.0
     },
     {
@@ -37294,7 +37650,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L361",
+      "source_location": "L368",
       "weight": 1.0
     },
     {
@@ -37306,7 +37662,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L140",
+      "source_location": "L147",
       "weight": 1.0
     },
     {
@@ -37318,7 +37674,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L115",
+      "source_location": "L122",
       "weight": 1.0
     },
     {
@@ -37330,7 +37686,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L98",
+      "source_location": "L105",
       "weight": 1.0
     },
     {
@@ -37342,7 +37698,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L492",
+      "source_location": "L495",
       "weight": 1.0
     },
     {
@@ -37354,7 +37710,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L156",
+      "source_location": "L163",
       "weight": 1.0
     },
     {
@@ -37366,7 +37722,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L313",
+      "source_location": "L320",
       "weight": 1.0
     },
     {
@@ -37378,7 +37734,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L475",
+      "source_location": "L478",
       "weight": 1.0
     },
     {
@@ -37390,7 +37746,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L482",
+      "source_location": "L485",
       "weight": 1.0
     },
     {
@@ -37402,7 +37758,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L244",
+      "source_location": "L251",
       "weight": 1.0
     },
     {
@@ -37414,7 +37770,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L249",
+      "source_location": "L256",
       "weight": 1.0
     },
     {
@@ -37426,7 +37782,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L145",
+      "source_location": "L152",
       "weight": 1.0
     },
     {
@@ -37438,7 +37794,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/harness.py",
-      "source_location": "L207",
+      "source_location": "L214",
       "weight": 1.0
     },
     {
@@ -37558,7 +37914,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/presence.py",
-      "source_location": "L92",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -37570,7 +37926,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/registry.py",
-      "source_location": "L77",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -37582,7 +37938,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/registry.py",
-      "source_location": "L54",
+      "source_location": "L69",
       "weight": 1.0
     },
     {
@@ -37594,7 +37950,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/registry.py",
-      "source_location": "L68",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
@@ -37606,7 +37962,7 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/registry.py",
-      "source_location": "L37",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -38314,7 +38670,19 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/tui.py",
-      "source_location": "L169",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_ledger_path",
+      "target": "experiment4_tui_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L45",
       "weight": 1.0
     },
     {
@@ -38326,7 +38694,19 @@
       "confidence_score": 1.0,
       "context": "generic_arg",
       "source_file": "experiment4/tui.py",
-      "source_location": "L40",
+      "source_location": "L66",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_spend_text",
+      "target": "experiment4_tui_py_any",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "generic_arg",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L55",
       "weight": 1.0
     },
     {
@@ -42111,6 +42491,18 @@
     },
     {
       "source": "experiment4_chat",
+      "target": "experiment4_harness_starts_with_name",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiment4/chat.py",
+      "source_location": "L20",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_chat",
       "target": "experiment4_repository_identityrepositoryerror",
       "relation": "imports",
       "_origin": "ast",
@@ -42227,6 +42619,18 @@
       "context": "import",
       "source_file": "experiment4/__main__.py",
       "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui",
+      "target": "experiment4_host_spendledger",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -42970,7 +43374,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L115",
+      "source_location": "L122",
       "weight": 1.0
     },
     {
@@ -43047,18 +43451,6 @@
     },
     {
       "source": "tests_test_agent_chat_tui",
-      "target": "experiment4_tui_agentchatapp",
-      "relation": "imports",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "context": "import",
-      "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L148",
-      "weight": 1.0
-    },
-    {
-      "source": "tests_test_agent_chat_tui",
       "target": "experiment4_repository_identityrepositoryerror",
       "relation": "imports",
       "_origin": "ast",
@@ -43079,6 +43471,18 @@
       "context": "import",
       "source_file": "tests/test_agent_chat_tui.py",
       "source_location": "L15",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_tui",
+      "target": "experiment4_tui_agentchatapp",
+      "relation": "imports",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L160",
       "weight": 1.0
     },
     {
@@ -43738,7 +44142,7 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "experiment4/tui.py",
-      "source_location": "L14",
+      "source_location": "L18",
       "weight": 1.0
     },
     {
@@ -43750,7 +44154,19 @@
       "confidence_score": 1.0,
       "context": "import",
       "source_file": "experiment4/tui.py",
-      "source_location": "L24",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui",
+      "target": "experiment4_host",
+      "relation": "imports_from",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "import",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L29",
       "weight": 1.0
     },
     {
@@ -44679,6 +45095,18 @@
     },
     {
       "source": "experiment4_chat_run_host_process",
+      "target": "hoststderrsink",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiment4/chat.py",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_chat_run_host_process",
       "target": "olympus_domain_event",
       "relation": "references",
       "_origin": "ast",
@@ -44686,7 +45114,19 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/chat.py",
-      "source_location": "L43",
+      "source_location": "L50",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_chat_run_turn",
+      "target": "hoststderrsink",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiment4/chat.py",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -44698,7 +45138,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/chat.py",
-      "source_location": "L92",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -44710,7 +45150,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/chat.py",
-      "source_location": "L92",
+      "source_location": "L104",
       "weight": 1.0
     },
     {
@@ -44746,7 +45186,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/harness.py",
-      "source_location": "L95",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -45190,7 +45630,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/tui.py",
-      "source_location": "L156",
+      "source_location": "L195",
       "weight": 1.0
     },
     {
@@ -45202,7 +45642,7 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/tui.py",
-      "source_location": "L139",
+      "source_location": "L174",
       "weight": 1.0
     },
     {
@@ -45214,7 +45654,19 @@
       "confidence_score": 1.0,
       "context": "parameter_type",
       "source_file": "experiment4/tui.py",
-      "source_location": "L169",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_install_hangup_handlers",
+      "target": "experiment4_tui_agentchatapp",
+      "relation": "references",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "context": "parameter_type",
+      "source_file": "experiment4/tui.py",
+      "source_location": "L270",
       "weight": 1.0
     },
     {
@@ -45958,7 +46410,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "experiment4/registry.py",
-      "source_location": "L31",
+      "source_location": "L39",
       "weight": 1.0
     },
     {
@@ -45970,7 +46422,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "experiment4/registry.py",
-      "source_location": "L68",
+      "source_location": "L83",
       "weight": 1.0
     },
     {
@@ -46030,7 +46482,7 @@
       "confidence_score": 1.0,
       "context": "return_type",
       "source_file": "experiment4/tui.py",
-      "source_location": "L80",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -46426,7 +46878,7 @@
       "confidence_score": 1.0,
       "context": "submodule_import",
       "source_file": "experiment4/tui.py",
-      "source_location": "L24",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -46438,7 +46890,7 @@
       "confidence_score": 1.0,
       "context": "submodule_import",
       "source_file": "experiment4/tui.py",
-      "source_location": "L24",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -46450,7 +46902,7 @@
       "confidence_score": 1.0,
       "context": "submodule_import",
       "source_file": "experiment4/tui.py",
-      "source_location": "L24",
+      "source_location": "L28",
       "weight": 1.0
     },
     {
@@ -54711,6 +55163,17 @@
     },
     {
       "source": "experiment4_chat",
+      "target": "experiment4_chat_run_turn",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/chat.py",
+      "source_location": "L104",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_chat",
       "target": "experiment4_chat_chatcancelled",
       "relation": "contains",
       "_origin": "ast",
@@ -54733,24 +55196,24 @@
     },
     {
       "source": "experiment4_chat",
+      "target": "experiment4_chat_print_stderr",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/chat.py",
+      "source_location": "L46",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_chat",
       "target": "experiment4_chat_run_host_process",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/chat.py",
-      "source_location": "L43",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_chat",
-      "target": "experiment4_chat_run_turn",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/chat.py",
-      "source_location": "L92",
+      "source_location": "L50",
       "weight": 1.0
     },
     {
@@ -54832,7 +55295,18 @@
     },
     {
       "source": "experiment4_harness",
-      "target": "experiment4_harness_addressed_system_text",
+      "target": "experiment4_harness_identityapprenticeship",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L101",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness",
+      "target": "experiment4_harness_starts_with_name",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -54843,24 +55317,24 @@
     },
     {
       "source": "experiment4_harness",
+      "target": "experiment4_harness_addressed_system_text",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L28",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness",
       "target": "experiment4_harness_addressed_response_schema",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L58",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness",
-      "target": "experiment4_harness_identityapprenticeship",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L94",
+      "source_location": "L65",
       "weight": 1.0
     },
     {
@@ -55036,84 +55510,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/presence.py",
-      "source_location": "L92",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry",
-      "target": "experiment4_registry_registryerror",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/registry.py",
-      "source_location": "L22",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry",
-      "target": "experiment4_registry_agents_dir",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/registry.py",
-      "source_location": "L26",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry",
-      "target": "experiment4_registry_agent_path",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/registry.py",
-      "source_location": "L31",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry",
-      "target": "experiment4_registry_validate_agent",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/registry.py",
-      "source_location": "L37",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry",
-      "target": "experiment4_registry_load_agent",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/registry.py",
-      "source_location": "L54",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry",
-      "target": "experiment4_registry_save_agent",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/registry.py",
-      "source_location": "L68",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_registry",
-      "target": "experiment4_registry_host_command",
-      "relation": "contains",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/registry.py",
-      "source_location": "L77",
+      "source_location": "L98",
       "weight": 1.0
     },
     {
@@ -55124,7 +55521,84 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/registry.py",
-      "source_location": "L87",
+      "source_location": "L102",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry",
+      "target": "experiment4_registry_registryerror",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/registry.py",
+      "source_location": "L30",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry",
+      "target": "experiment4_registry_agents_dir",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/registry.py",
+      "source_location": "L34",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry",
+      "target": "experiment4_registry_agent_path",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/registry.py",
+      "source_location": "L39",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry",
+      "target": "experiment4_registry_validate_agent",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/registry.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry",
+      "target": "experiment4_registry_load_agent",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/registry.py",
+      "source_location": "L69",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry",
+      "target": "experiment4_registry_save_agent",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/registry.py",
+      "source_location": "L83",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_registry",
+      "target": "experiment4_registry_host_command",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/registry.py",
+      "source_location": "L92",
       "weight": 1.0
     },
     {
@@ -55206,13 +55680,24 @@
     },
     {
       "source": "experiment4_tui",
+      "target": "experiment4_tui_install_hangup_handlers",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L270",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui",
       "target": "experiment4_tui_main",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/tui.py",
-      "source_location": "L207",
+      "source_location": "L288",
       "weight": 1.0
     },
     {
@@ -55223,7 +55708,29 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/tui.py",
-      "source_location": "L30",
+      "source_location": "L35",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui",
+      "target": "experiment4_tui_ledger_path",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L45",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui",
+      "target": "experiment4_tui_spend_text",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L55",
       "weight": 1.0
     },
     {
@@ -55234,7 +55741,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/tui.py",
-      "source_location": "L40",
+      "source_location": "L66",
       "weight": 1.0
     },
     {
@@ -55245,7 +55752,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/tui.py",
-      "source_location": "L56",
+      "source_location": "L82",
       "weight": 1.0
     },
     {
@@ -55855,13 +56362,24 @@
     },
     {
       "source": "tests_test_agent_chat_tui",
+      "target": "tests_test_agent_chat_tui_registryfieldstestcase",
+      "relation": "contains",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L116",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_tui",
       "target": "tests_test_agent_chat_tui_presencetestcase",
       "relation": "contains",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L113",
+      "source_location": "L125",
       "weight": 1.0
     },
     {
@@ -55872,7 +56390,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L137",
+      "source_location": "L149",
       "weight": 1.0
     },
     {
@@ -56213,7 +56731,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/registry.py",
-      "source_location": "L22",
+      "source_location": "L30",
       "weight": 1.0
     },
     {
@@ -56323,7 +56841,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L113",
+      "source_location": "L125",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_tui_registryfieldstestcase",
+      "target": "tests_test_agent_chat_tui_agentfixture",
+      "relation": "inherits",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L116",
       "weight": 1.0
     },
     {
@@ -56334,7 +56863,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L137",
+      "source_location": "L149",
       "weight": 1.0
     },
     {
@@ -57362,145 +57891,13 @@
     },
     {
       "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_genesis_prompt",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L115",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_adopt_identity",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L140",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_wake",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L145",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_interrogation_prompt",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L156",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_wake_intent_prompt",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L207",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_record_wake_outcome",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L244",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_run_due_wake_intents",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L249",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_invitation_prompt",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L313",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_address_chat_message",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L361",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_record_addressed_response",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L475",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_record_answer",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L482",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_harness_identityapprenticeship_inspect",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L492",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
       "target": "experiment4_harness_identityapprenticeship_init",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L95",
+      "source_location": "L102",
       "weight": 1.0
     },
     {
@@ -57511,7 +57908,139 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L98",
+      "source_location": "L105",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_genesis_prompt",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L122",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_adopt_identity",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L147",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_wake",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L152",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_interrogation_prompt",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_wake_intent_prompt",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L214",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_record_wake_outcome",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L251",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_run_due_wake_intents",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L256",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_invitation_prompt",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L320",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_address_chat_message",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L368",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_record_addressed_response",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L478",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_record_answer",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L485",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_harness_identityapprenticeship_inspect",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L495",
       "weight": 1.0
     },
     {
@@ -58627,123 +59156,13 @@
     },
     {
       "source": "experiment4_tui_agentchatapp",
-      "target": "experiment4_tui_agentchatapp_set_status",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/tui.py",
-      "source_location": "L105",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_tui_agentchatapp",
-      "target": "experiment4_tui_agentchatapp_select_agent",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/tui.py",
-      "source_location": "L108",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_tui_agentchatapp",
-      "target": "experiment4_tui_agentchatapp_action_refresh",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/tui.py",
-      "source_location": "L129",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_tui_agentchatapp",
-      "target": "experiment4_tui_agentchatapp_on_option_list_option_selected",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/tui.py",
-      "source_location": "L139",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_tui_agentchatapp",
-      "target": "experiment4_tui_agentchatapp_action_toggle_profile",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/tui.py",
-      "source_location": "L144",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_tui_agentchatapp",
-      "target": "experiment4_tui_agentchatapp_action_cancel_turn",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/tui.py",
-      "source_location": "L151",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_tui_agentchatapp",
-      "target": "experiment4_tui_agentchatapp_on_input_submitted",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/tui.py",
-      "source_location": "L156",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_tui_agentchatapp",
-      "target": "experiment4_tui_agentchatapp_send_turn",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/tui.py",
-      "source_location": "L169",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_tui_agentchatapp",
-      "target": "experiment4_tui_agentchatapp_action_quit",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/tui.py",
-      "source_location": "L200",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_tui_agentchatapp",
-      "target": "experiment4_tui_agentchatapp_init",
-      "relation": "method",
-      "_origin": "ast",
-      "confidence": "EXTRACTED",
-      "confidence_score": 1.0,
-      "source_file": "experiment4/tui.py",
-      "source_location": "L71",
-      "weight": 1.0
-    },
-    {
-      "source": "experiment4_tui_agentchatapp",
       "target": "experiment4_tui_agentchatapp_compose",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/tui.py",
-      "source_location": "L80",
+      "source_location": "L106",
       "weight": 1.0
     },
     {
@@ -58754,7 +59173,150 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/tui.py",
-      "source_location": "L92",
+      "source_location": "L118",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_set_status",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L131",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_select_agent",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L134",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_show_host_status",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L155",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_action_refresh",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L163",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_on_option_list_option_selected",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L174",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_action_toggle_profile",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L183",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_action_cancel_turn",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L190",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_on_input_submitted",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L195",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_note_host_stderr",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L207",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_send_turn",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L226",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_finish_turn",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L257",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_action_quit",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L263",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_agentchatapp",
+      "target": "experiment4_tui_agentchatapp_init",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L97",
       "weight": 1.0
     },
     {
@@ -59903,18 +60465,18 @@
     },
     {
       "source": "tests_test_agent_chat_agentchattestcase",
-      "target": "tests_test_agent_chat_agentchattestcase_test_cli_chat_uses_the_registry_not_the_default_database",
+      "target": "tests_test_agent_chat_agentchattestcase_test_cli_supplies_the_chosen_name_when_display_name_is_registered",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L102",
+      "source_location": "L103",
       "weight": 1.0
     },
     {
       "source": "tests_test_agent_chat_agentchattestcase",
-      "target": "tests_test_agent_chat_agentchattestcase_test_benchmark_replays_recorded_turns_read_only",
+      "target": "tests_test_agent_chat_agentchattestcase_test_cli_chat_uses_the_registry_not_the_default_database",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -59925,13 +60487,24 @@
     },
     {
       "source": "tests_test_agent_chat_agentchattestcase",
+      "target": "tests_test_agent_chat_agentchattestcase_test_benchmark_replays_recorded_turns_read_only",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_agent_chat.py",
+      "source_location": "L116",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_agentchattestcase",
       "target": "tests_test_agent_chat_agentchattestcase_test_cli_benchmark_requires_sensitivity_confirmation",
       "relation": "method",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L125",
+      "source_location": "L132",
       "weight": 1.0
     },
     {
@@ -59942,7 +60515,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat.py",
-      "source_location": "L134",
+      "source_location": "L141",
       "weight": 1.0
     },
     {
@@ -60063,7 +60636,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L106",
+      "source_location": "L109",
       "weight": 1.0
     },
     {
@@ -60085,7 +60658,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L75",
+      "source_location": "L78",
       "weight": 1.0
     },
     {
@@ -60096,7 +60669,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L82",
+      "source_location": "L85",
       "weight": 1.0
     },
     {
@@ -60107,7 +60680,18 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L114",
+      "source_location": "L126",
+      "weight": 1.0
+    },
+    {
+      "source": "tests_test_agent_chat_tui_registryfieldstestcase",
+      "target": "tests_test_agent_chat_tui_registryfieldstestcase_test_optional_fields_are_validated",
+      "relation": "method",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "tests/test_agent_chat_tui.py",
+      "source_location": "L117",
       "weight": 1.0
     },
     {
@@ -60118,7 +60702,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L138",
+      "source_location": "L150",
       "weight": 1.0
     },
     {
@@ -60129,7 +60713,7 @@
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L145",
+      "source_location": "L157",
       "weight": 1.0
     },
     {
@@ -62751,14 +63335,14 @@
       "weight": 1.0
     },
     {
-      "source": "experiment4_chat_rationale_50",
+      "source": "experiment4_chat_rationale_58",
       "target": "experiment4_chat_run_host_process",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/chat.py",
-      "source_location": "L50",
+      "source_location": "L58",
       "weight": 1.0
     },
     {
@@ -62796,7 +63380,7 @@
     },
     {
       "source": "experiment4_harness_rationale_22",
-      "target": "experiment4_harness_addressed_system_text",
+      "target": "experiment4_harness_starts_with_name",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
@@ -62806,25 +63390,36 @@
       "weight": 1.0
     },
     {
-      "source": "experiment4_harness_rationale_254",
+      "source": "experiment4_harness_rationale_261",
       "target": "experiment4_harness_identityapprenticeship_run_due_wake_intents",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L254",
+      "source_location": "L261",
       "weight": 1.0
     },
     {
-      "source": "experiment4_harness_rationale_66",
+      "source": "experiment4_harness_rationale_29",
+      "target": "experiment4_harness_addressed_system_text",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L29",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_harness_rationale_73",
       "target": "experiment4_harness_addressed_response_schema",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/harness.py",
-      "source_location": "L66",
+      "source_location": "L73",
       "weight": 1.0
     },
     {
@@ -62938,14 +63533,14 @@
       "weight": 1.0
     },
     {
-      "source": "experiment4_presence_rationale_93",
+      "source": "experiment4_presence_rationale_99",
       "target": "experiment4_presence_recent_transcript",
       "relation": "rationale_for",
       "_origin": "ast",
       "confidence": "EXTRACTED",
       "confidence_score": 1.0,
       "source_file": "experiment4/presence.py",
-      "source_location": "L93",
+      "source_location": "L99",
       "weight": 1.0
     },
     {
@@ -63001,6 +63596,39 @@
       "confidence_score": 1.0,
       "source_file": "experiment4/tui.py",
       "source_location": "L1",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_rationale_208",
+      "target": "experiment4_tui_agentchatapp_note_host_stderr",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L208",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_rationale_271",
+      "target": "experiment4_tui_install_hangup_handlers",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L271",
+      "weight": 1.0
+    },
+    {
+      "source": "experiment4_tui_rationale_46",
+      "target": "experiment4_tui_ledger_path",
+      "relation": "rationale_for",
+      "_origin": "ast",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "experiment4/tui.py",
+      "source_location": "L46",
       "weight": 1.0
     },
     {
@@ -63386,24 +64014,24 @@
     },
     {
       "source": "experiment4_harness_identityapprenticeship",
-      "target": "experiment4_repository_identityrepositoryerror",
-      "relation": "uses",
-      "_origin": "ast",
-      "confidence": "INFERRED",
-      "confidence_score": 0.95,
-      "source_file": "experiment4/harness.py",
-      "source_location": "L171",
-      "weight": 0.8
-    },
-    {
-      "source": "experiment4_harness_identityapprenticeship",
       "target": "experiment4_repository_sqliteidentityrepository",
       "relation": "uses",
       "_origin": "ast",
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "experiment4/harness.py",
-      "source_location": "L95",
+      "source_location": "L102",
+      "weight": 0.8
+    },
+    {
+      "source": "experiment4_harness_identityapprenticeship",
+      "target": "experiment4_repository_identityrepositoryerror",
+      "relation": "uses",
+      "_origin": "ast",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "experiment4/harness.py",
+      "source_location": "L178",
       "weight": 0.8
     },
     {
@@ -63799,7 +64427,7 @@
       "confidence": "INFERRED",
       "confidence_score": 0.95,
       "source_file": "tests/test_agent_chat_tui.py",
-      "source_location": "L151",
+      "source_location": "L164",
       "weight": 0.8
     },
     {
@@ -64726,5 +65354,5 @@
       "source_file": "results/experiment-2/reports/REPORT.md"
     }
   ],
-  "built_at_commit": "8ccf34eb4c2bd586357995fbd8429c9feaaf8127"
+  "built_at_commit": "82c97b2ae434d7bcec466b7a8afca6dde61c877d"
 }

@@ -1,16 +1,16 @@
 # Graph Report - fix-orientation-category-limit-omissions  (2026-09-03)
 
 ## Corpus Check
-- 87 files · ~144,943 words
+- 87 files · ~145,768 words
 - Verdict: corpus is large enough that graph structure adds value.
 
 ## Summary
-- 1778 nodes · 3804 edges · 110 communities (99 shown, 11 thin omitted)
+- 1794 nodes · 3842 edges · 110 communities (99 shown, 11 thin omitted)
 - Extraction: 98% EXTRACTED · 2% INFERRED · 0% AMBIGUOUS · INFERRED: 94 edges (avg confidence: 0.92)
 - Token cost: 0 input · 0 output
 
 ## Graph Freshness
-- Built from commit: `8ccf34eb`
+- Built from commit: `82c97b2a`
 - Run `git rev-parse HEAD` and compare to check if the graph is stale.
 - Run `graphify update .` after code changes (no API cost).
 
@@ -35,7 +35,7 @@
 - required
 - properties
 - turn-envelope.schema.json
-- experiment4/repository.py
+- AgentChatTestCase
 - ADR 0002: Conversational Memory Class and Chat-Message Graph Nodes
 - Experiment4TestCase
 - $ref
@@ -74,7 +74,7 @@
 - ADR 0004: Model Host Adapter, Agent Registry, and Replay Benchmark
 - properties
 - properties
-- $ref
+- properties
 - required
 - counterargument
 - speakerArguments
@@ -87,8 +87,8 @@
 - execute
 - items
 - Belief
-- benchmark_host.py
-- AgentFixture
+- experiment4/harness.py
+- $ref
 - criterion_ids
 - required
 - enum
@@ -97,16 +97,16 @@
 - revision_criteria
 - turn_index
 - uncertainties
-- required
+- claimIdArray
 - properties
 - enum
 - WakeAgentInstallerTestCase
 - Plan: Consent-Gated Realtime Lumen Observer
-- enum
+- counterarguments
 - install-wake-agent.sh
 - olympus/__init__.py
 - tests/__init__.py
-- run_turn
+- chat.py
 - properties
 - ADR 0005: agent-chat Terminal UI and Cancel-Safe Turns
 - Home Handoff: Persistent Lumen and Realtime Observer
@@ -114,7 +114,7 @@
 - Plan: Lumen Derived Knowledge Graph
 - olympus-persistent-observer
 - persistent-observers
-- supporting_evidence_ids
+- participant_observations
 - required
 - criterion_assessments
 - enum
@@ -165,8 +165,8 @@ Cohesion: 0.06
 Nodes (37): build_parser(), emit(), execute(), main(), Any, ArgumentParser, Namespace, Path (+29 more)
 
 ### Community 1 - "SQLiteIdentityRepository"
-Cohesion: 0.10
-Nodes (15): canonical_json(), IdentityRepositoryError, new_id(), parse_time(), Any, Connection, Path, Row (+7 more)
+Cohesion: 0.09
+Nodes (18): datetime, canonical_json(), IdentityRepositoryError, new_id(), parse_time(), Any, Connection, Path (+10 more)
 
 ### Community 2 - "SQLiteDebateRepository"
 Cohesion: 0.06
@@ -209,8 +209,8 @@ Cohesion: 0.20
 Nodes (10): participantObservation, maxLength, pattern, type, additionalProperties, properties, type, observation_id (+2 more)
 
 ### Community 13 - "$defs"
-Cohesion: 0.08
-Nodes (26): additionalProperties, type, maxLength, pattern, type, items, maxItems, minItems (+18 more)
+Cohesion: 0.11
+Nodes (19): maxLength, pattern, type, $defs, claimId, evidence, shortText, text (+11 more)
 
 ### Community 17 - "required"
 Cohesion: 0.16
@@ -224,9 +224,9 @@ Nodes (39): items, type, type, maximum, minimum, type, type, items (+31 more)
 Cohesion: 0.22
 Nodes (8): additionalProperties, $id, speaker, turn_index, required, $schema, title, type
 
-### Community 20 - "experiment4/repository.py"
-Cohesion: 0.15
-Nodes (13): datetime, One addressed turn with a registered agent's host, safe to cancel. The address…, Persistent emergent-identity apprenticeship experiment., agent_presence(), _connect(), Any, Connection, Read-only presence and transcript for a registered agent. Everything here opens… (+5 more)
+### Community 20 - "AgentChatTestCase"
+Cohesion: 0.26
+Nodes (3): chat_turn(), One addressed turn through the agent's registered host; see chat.run_turn., AgentChatTestCase
 
 ### Community 21 - "ADR 0002: Conversational Memory Class and Chat-Message Graph Nodes"
 Cohesion: 0.22
@@ -269,8 +269,8 @@ Cohesion: 0.25
 Nodes (8): $ref, additionalProperties, properties, type, $ref, agent, argument_map, human
 
 ### Community 31 - "properties"
-Cohesion: 0.15
-Nodes (13): $ref, const, $ref, properties, $ref, assumption_changes, change_basis, later_reasoning_change (+5 more)
+Cohesion: 0.11
+Nodes (19): $ref, const, increased_confidence, partial_revision, reduced_confidence, reversal, $ref, enum (+11 more)
 
 ### Community 32 - "export.schema.json"
 Cohesion: 0.17
@@ -294,7 +294,7 @@ Nodes (15): $defs, id, position, reasoningChange, reportClaim, runId, pattern, t
 
 ### Community 37 - "properties"
 Cohesion: 0.14
-Nodes (15): $ref, properties, evidence, additionalProperties, maxLength, pattern, type, properties (+7 more)
+Nodes (15): additionalProperties, $ref, properties, type, claim, maxLength, pattern, type (+7 more)
 
 ### Community 38 - "properties"
 Cohesion: 0.18
@@ -341,7 +341,7 @@ Cohesion: 0.06
 Nodes (28): AnthropicBackend, build_parser(), build_prompt_parts(), envelope_json_schema(), envelope_kind(), estimate_cost_usd(), fix_envelope(), HostError (+20 more)
 
 ### Community 49 - "registry.py"
-Cohesion: 0.36
+Cohesion: 0.37
 Nodes (12): agent_path(), agents_dir(), host_command(), list_agents(), load_agent(), Any, Path, RuntimeError (+4 more)
 
 ### Community 50 - "properties"
@@ -377,20 +377,20 @@ Cohesion: 0.22
 Nodes (9): qualification, strengths, weaknesses, type, properties, items, type, items (+1 more)
 
 ### Community 58 - "properties"
-Cohesion: 0.22
-Nodes (9): maxLength, pattern, type, properties, concession_id, proposition_changed, scope, type (+1 more)
+Cohesion: 0.12
+Nodes (16): additionalProperties, maxLength, pattern, type, properties, required, type, concession (+8 more)
 
-### Community 59 - "$ref"
-Cohesion: 0.08
-Nodes (28): properties, items, maxItems, type, items, maxItems, type, items (+20 more)
+### Community 59 - "properties"
+Cohesion: 0.18
+Nodes (11): properties, items, maxItems, type, oneOf, concessions, position_update, relational_effects (+3 more)
 
 ### Community 60 - "required"
 Cohesion: 0.25
 Nodes (8): additionalProperties, required, type, model_config, model, provider, temperature, tools
 
 ### Community 61 - "counterargument"
-Cohesion: 0.17
-Nodes (12): additionalProperties, maxLength, pattern, type, properties, type, counterargument, counterargument_id (+4 more)
+Cohesion: 0.13
+Nodes (15): additionalProperties, maxLength, pattern, type, properties, required, type, counterargument (+7 more)
 
 ### Community 62 - "speakerArguments"
 Cohesion: 0.25
@@ -409,8 +409,8 @@ Cohesion: 0.29
 Nodes (7): status, enum, active, finalized, finalizing, invalid, ready
 
 ### Community 66 - "AgentChatApp"
-Cohesion: 0.15
-Nodes (9): ComposeResult, AgentChatApp, main(), presence_lines(), Any, short_time(), OptionSelected, Submitted (+1 more)
+Cohesion: 0.06
+Nodes (28): ComposeResult, agent_presence(), _connect(), Any, Connection, Read-only presence and transcript for a registered agent. Everything here opens…, The last `limit` messages with their replies, oldest first., recent_transcript() (+20 more)
 
 ### Community 67 - "strengths_and_weaknesses"
 Cohesion: 0.29
@@ -421,28 +421,28 @@ Cohesion: 0.25
 Nodes (8): persuasion, criterion_assessments, trigger_claim_ids, additionalProperties, required, type, position_changed, revision_criteria_met
 
 ### Community 69 - "execute"
-Cohesion: 0.13
-Nodes (16): build_parser(), chat_turn(), execute(), main(), Any, ArgumentParser, Namespace, Path (+8 more)
+Cohesion: 0.20
+Nodes (13): build_parser(), execute(), main(), Any, ArgumentParser, Namespace, Path, Run a model host with a prompt on stdin and read its envelope. Host stderr goes… (+5 more)
 
 ### Community 70 - "items"
 Cohesion: 0.33
 Nodes (6): additionalProperties, type, turns, items, maxItems, type
 
-### Community 72 - "benchmark_host.py"
-Cohesion: 0.22
+### Community 72 - "experiment4/harness.py"
+Cohesion: 0.21
 Nodes (14): check_envelope(), Any, Path, Replay an agent's recorded addressed turns through a candidate model host.…, Approximate the prompt the host saw: a continuing incarnation with no active…, Problems the repository would reject; empty means structurally valid., rebuild_prompt(), recorded_turns() (+6 more)
 
-### Community 73 - "AgentFixture"
-Cohesion: 0.19
-Nodes (4): AgentFixture, ChatSessionTestCase, PresenceTestCase, ScreenTestCase
+### Community 73 - "$ref"
+Cohesion: 0.20
+Nodes (10): items, maxItems, type, items, items, maxItems, type, $ref (+2 more)
 
 ### Community 74 - "criterion_ids"
 Cohesion: 0.40
 Nodes (5): maxItems, minItems, type, uniqueItems, criterion_ids
 
 ### Community 75 - "required"
-Cohesion: 0.18
-Nodes (13): required, required, affected_position, claim_id, description, effect_id, evidence_id, kind (+5 more)
+Cohesion: 0.16
+Nodes (14): required, required, affected_position, claim_id, description, effect_id, evidence_id, kind (+6 more)
 
 ### Community 76 - "enum"
 Cohesion: 0.33
@@ -468,9 +468,9 @@ Nodes (4): turn_index, maximum, minimum, type
 Cohesion: 0.50
 Nodes (4): uncertainties, maxItems, minItems, type
 
-### Community 82 - "required"
-Cohesion: 0.18
-Nodes (11): additionalProperties, required, type, required, concession, concession_id, counterargument_id, proposition_changed (+3 more)
+### Community 82 - "claimIdArray"
+Cohesion: 0.33
+Nodes (6): items, maxItems, minItems, type, uniqueItems, claimIdArray
 
 ### Community 83 - "properties"
 Cohesion: 0.20
@@ -484,21 +484,21 @@ Nodes (7): increased_confidence, partial_revision, reduced_confidence, reversal,
 Cohesion: 0.22
 Nodes (8): Acceptance criteria, Consent model, Data scopes, Goal, Local transport, Plan: Consent-Gated Realtime Lumen Observer, TDD tasks, Visualization
 
-### Community 87 - "enum"
-Cohesion: 0.33
-Nodes (6): increased_confidence, partial_revision, reduced_confidence, reversal, enum, outcome
+### Community 87 - "counterarguments"
+Cohesion: 0.50
+Nodes (4): items, maxItems, type, counterarguments
 
 ### Community 88 - "install-wake-agent.sh"
 Cohesion: 0.70
 Nodes (4): fail(), render(), install-wake-agent.sh script, usage()
 
-### Community 91 - "run_turn"
-Cohesion: 0.28
-Nodes (9): address_text(), ChatCancelled, Any, RuntimeError, Only a leading vocative wakes the agent. When the registry records the agent's…, Run a host as a child process; kill it on cancel or timeout. Host stderr goes…, run_host_process(), run_turn() (+1 more)
+### Community 91 - "chat.py"
+Cohesion: 0.17
+Nodes (14): address_text(), ChatCancelled, Any, RuntimeError, One addressed turn with a registered agent's host, safe to cancel. The address…, Only a leading vocative wakes the agent. When the registry records the agent's…, Run a host as a child process; kill it on cancel or timeout. Host stderr goes…, run_host_process() (+6 more)
 
 ### Community 92 - "properties"
-Cohesion: 0.22
-Nodes (9): maxLength, pattern, type, $ref, properties, assessment_id, criterion_id, reason (+1 more)
+Cohesion: 0.12
+Nodes (17): maxLength, pattern, type, $ref, properties, maxLength, pattern, type (+9 more)
 
 ### Community 93 - "ADR 0005: agent-chat Terminal UI and Cancel-Safe Turns"
 Cohesion: 0.25
@@ -516,9 +516,9 @@ Nodes (6): Checkpoint: Lumen lifecycle corrected; corpus review pending, Complet
 Cohesion: 0.29
 Nodes (6): Acceptance criteria, Constraints, Goal, Implementation status, Plan: Lumen Derived Knowledge Graph, Tasks
 
-### Community 99 - "supporting_evidence_ids"
-Cohesion: 0.25
-Nodes (8): maxLength, pattern, type, supporting_evidence_ids, items, maxItems, type, uniqueItems
+### Community 99 - "participant_observations"
+Cohesion: 0.50
+Nodes (4): items, maxItems, type, participant_observations
 
 ### Community 100 - "required"
 Cohesion: 0.25
@@ -564,12 +564,12 @@ Nodes (3): items, type, participant_reasoning_and_stated_values
 ## Suggested Questions
 _Questions this graph is uniquely positioned to answer:_
 
-- **Why does `Experiment4TestCase` connect `Experiment4TestCase` to `IdentityApprenticeship`, `experiment4/repository.py`?**
-  _High betweenness centrality (0.051) - this node is a cross-community bridge._
+- **Why does `Experiment4TestCase` connect `Experiment4TestCase` to `IdentityApprenticeship`, `SQLiteIdentityRepository`?**
+  _High betweenness centrality (0.054) - this node is a cross-community bridge._
 - **Why does `SQLiteRepository` connect `SQLiteRepository` to `SQLiteMoralRepository`, `ExperimentRunner`, `Belief`, `._connect`, `olympus/repository.py`, `Mode`, `Experiment2TestCase`, `ObserverTestCase`, `RepositoryTestCase`, `Observer`, `olympus/cli.py`?**
-  _High betweenness centrality (0.046) - this node is a cross-community bridge._
-- **Why does `SQLiteIdentityRepository` connect `SQLiteIdentityRepository` to `IdentityApprenticeship`, `execute`, `AgentFixture`, `experiment4/repository.py`, `WakeAgentInstallerTestCase`, `Experiment4TestCase`, `run_turn`?**
-  _High betweenness centrality (0.033) - this node is a cross-community bridge._
+  _High betweenness centrality (0.045) - this node is a cross-community bridge._
+- **Why does `SQLiteIdentityRepository` connect `SQLiteIdentityRepository` to `IdentityApprenticeship`, `AgentChatApp`, `execute`, `experiment4/harness.py`, `AgentChatTestCase`, `WakeAgentInstallerTestCase`, `Experiment4TestCase`, `chat.py`?**
+  _High betweenness centrality (0.027) - this node is a cross-community bridge._
 - **Are the 19 inferred relationships involving `SQLiteRepository` (e.g. with `ContextCompiler` and `ExperimentRunner`) actually correct?**
   _`SQLiteRepository` has 19 INFERRED edges - model-reasoned connections that need verification._
 - **Are the 2 inferred relationships involving `SQLiteIdentityRepository` (e.g. with `subprocess_model_runner()` and `IdentityApprenticeship`) actually correct?**
