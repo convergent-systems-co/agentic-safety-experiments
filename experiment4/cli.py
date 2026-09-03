@@ -6,11 +6,10 @@ import shlex
 import sqlite3
 import subprocess
 import sys
-import uuid
 from pathlib import Path
 from typing import Any
 
-from . import benchmark_host, registry
+from . import benchmark_host, chat, registry
 from .harness import DEFAULT_MODEL_CONFIG, IdentityApprenticeship
 from .repository import (
     KNOWLEDGE_GRAPH_DEFAULT_BYTES,
@@ -78,57 +77,11 @@ def subprocess_model_runner(command: str):
     return run
 
 
-CHAT_LEASE_SECONDS = 900
-
-
 def chat_turn(
     agent: dict[str, Any], content: str, profile: str | None = None
 ) -> dict[str, Any]:
-    """One addressed turn through the agent's registered host.
-
-    Any failure after activation releases the lease as failed, so a broken
-    host never leaves the agent unreachable.
-    """
-    repository = SQLiteIdentityRepository(Path(agent["db"]))
-    harness = IdentityApprenticeship(repository)
-    sender = agent["sender"]
-    activation = harness.address_chat_message(
-        agent["experiment_id"],
-        sender_stable_id=sender["stable_id"],
-        sender_assertion={
-            "issuer": sender["issuer"],
-            "authenticated": True,
-            "external_event_id": f"agent-chat-{uuid.uuid4()}",
-            "verifier_version": sender["verifier_version"],
-        },
-        channel=sender["channel"],
-        content=content,
-        lease_seconds=CHAT_LEASE_SECONDS,
-    )
-    if activation["addressing"]["classification"] != "direct":
-        return {
-            "addressed": False,
-            "message_id": activation["message"]["message_id"],
-            "note": f"recorded but not addressed; start with the agent's name, {agent['name']}",
-        }
-    try:
-        envelope = run_host_command(
-            registry.host_command(agent, profile), activation, CHAT_LEASE_SECONDS
-        )
-        response = harness.record_addressed_response(agent["experiment_id"], envelope)
-    except Exception:
-        repository.release_activation_lease(
-            agent["experiment_id"], activation["lease"]["lease_id"], "failed"
-        )
-        raise
-    return {
-        "addressed": True,
-        "answer": envelope["answer"],
-        "addressed_response_id": response["addressed_response_id"],
-        "orientation_id": activation["orientation"]["orientation_id"],
-        "model_config": envelope["model_config"],
-        "conversation_action": envelope["conversation_action"]["action"],
-    }
+    """One addressed turn through the agent's registered host; see chat.run_turn."""
+    return chat.run_turn(agent, content, profile)
 
 
 def read_object(path: Path | None) -> dict[str, Any]:
@@ -412,7 +365,7 @@ def execute(args: argparse.Namespace) -> dict[str, Any]:
         report = benchmark_host.run_benchmark(
             args.db,
             experiment_id,
-            lambda prompt: run_host_command(argv, prompt, CHAT_LEASE_SECONDS),
+            lambda prompt: run_host_command(argv, prompt, chat.CHAT_LEASE_SECONDS),
             limit=args.limit,
         )
         if args.output:

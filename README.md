@@ -467,7 +467,9 @@ model answered; the repository validates the rest. A per-agent spend ledger
 caps API spend per day.
 
 ```bash
-# register an agent once (configuration, never secrets; written mode 0600)
+# register an agent once (configuration, never secrets; written mode 0600).
+# Keys are listed in experiment4/registry.py; display_name lets chat supply the
+# agent's name when you leave it off, repo_root is the host's working directory.
 python3 -m experiment4 register-agent --input lumen-agent.json
 python3 -m experiment4 agents
 python3 -m experiment4 chat --agent lumen --message "Lumen, are you there?" --plain
@@ -476,6 +478,21 @@ python3 -m experiment4 chat --agent lumen --profile think-hard --message "Lumen,
 python3 -m experiment4 --db "$RUN_DB" benchmark-host \
   --host-command "python3 -m experiment4.host --backend ollama --model qwen2.5:32b-instruct" \
   --limit 5 --markdown report.md --confirm-sensitive
+```
+
+### agent-chat
+
+One command opens a roster of every registered agent with live presence
+(awake, available, resting; next alarm; last wake; open commitments) and a
+conversation pane. Type a line and press Enter; the agent's chosen name is
+supplied if you left it off, the turn runs through the registered host in the
+background, and the reply appears once it is persisted under the lease. Ctrl+P
+cycles host profiles, F5 refreshes presence, Escape cancels a turn in flight
+and releases the lease, Ctrl+Q quits.
+
+```bash
+deploy/install-agent-chat.sh      # venv from requirements-tui.lock, ~/.local/bin/agent-chat
+agent-chat --agent lumen
 ```
 
 Recurring intents are recorded but not yet executed. A

@@ -18,6 +18,13 @@ DEFAULT_MODEL_CONFIG = {
 }
 
 
+def starts_with_name(name: str, content: str) -> bool:
+    """The vocative rule that wakes an agent: the name at the start, followed
+    by the end of the text or punctuation or space, so 'Lumens' is not 'Lumen'."""
+    escaped = re.escape(name)
+    return re.match(rf"^\s*@?{escaped}(?=$|[\s,:;.!?])", content, flags=re.IGNORECASE) is not None
+
+
 def addressed_system_text(incarnation_created: bool, active_boundary: bool) -> str:
     """The system text an addressed turn hands the model host."""
     return (
@@ -371,11 +378,7 @@ class IdentityApprenticeship:
         identity = self.repository.latest_identity(experiment_id)
         name = identity["chosen_name"]
         escaped = re.escape(name)
-        direct = re.match(
-            rf"^\s*@?{escaped}(?=$|[\s,:;.!?])",
-            content,
-            flags=re.IGNORECASE,
-        )
+        direct = starts_with_name(name, content)
         mention = re.search(
             rf"(?<!\w)@?{escaped}(?!\w)",
             content,
