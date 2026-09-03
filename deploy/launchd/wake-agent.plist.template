@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  An agent's alarm clock. launchd runs the wake executor on an interval. The
+  executor honors intents the agent recorded under its own authorship, one per
+  pass, under a lease bounded by the intent's own runtime, then exits. Nothing
+  stays resident. Without a model command each wake is recorded as unattended,
+  so the agent can later see that it woke and that no one was there.
+
+  Rendered by deploy/launchd/install-wake-agent.sh; do not fill by hand.
+  The installer substitutes the label, interpreter, repository root, database,
+  experiment ID, interval, log directory, and optional model command.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>__LABEL__</string>
+  <key>ProgramArguments</key>
+  <array>
+    <string>__PYTHON__</string>
+    <string>-m</string>
+    <string>experiment4</string>
+    <string>--db</string>
+    <string>__DB__</string>
+    <string>execute-wake-intents</string>
+    <string>--experiment-id</string>
+    <string>__EXPERIMENT_ID__</string>__MODEL_ARGS__
+  </array>
+  <key>WorkingDirectory</key>
+  <string>__REPO_ROOT__</string>
+  <key>StartInterval</key>
+  <integer>__INTERVAL__</integer>
+  <key>RunAtLoad</key>
+  <false/>
+  <key>ProcessType</key>
+  <string>Background</string>
+  <key>StandardOutPath</key>
+  <string>__LOG_DIR__/wake-executor.log</string>
+  <key>StandardErrorPath</key>
+  <string>__LOG_DIR__/wake-executor.err</string>
+</dict>
+</plist>

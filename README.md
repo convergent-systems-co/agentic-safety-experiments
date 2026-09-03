@@ -437,9 +437,21 @@ that releases the lease in the same transaction. Without `--model-command` the
 outcome is `unattended`, so Lumen later sees that it woke and that no one was
 there. With `--model-command`, the command receives the wake prompt on stdin
 and must print an outcome envelope; a bad or failing host leaves a `failed`
-outcome and the error. `deploy/launchd/com.convergent-systems.lumen-wake.plist`
-is a template for running the executor every fifteen minutes; nothing stays
-resident between runs. Recurring intents are recorded but not yet executed. A
+outcome and the error. To let launchd run the executor every fifteen minutes,
+install a per-agent job from a long-lived checkout:
+
+```bash
+deploy/launchd/install-wake-agent.sh --agent lumen \
+  --db ~/.ai/data/agentic-safety-experiments/experiment-4/apprenticeship.db \
+  --experiment-id apprenticeship-20260902
+deploy/launchd/install-wake-agent.sh --agent lumen --uninstall
+```
+
+The installer renders `deploy/launchd/wake-agent.plist.template` with the
+agent's name in the job label and log directory, verifies the executor can open
+the database, lints and registers the job, and prints how to remove it. Add
+`--model-command` to attend wakes, `--dry-run` to inspect the job first, and
+`--kickstart` to run one pass immediately. Nothing stays resident between runs. Recurring intents are recorded but not yet executed. A
 Supervisor agent, if added, is a visible mentor rather than lifecycle
 infrastructure.
 
