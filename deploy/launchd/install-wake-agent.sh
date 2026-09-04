@@ -112,12 +112,25 @@ render() {
   LABEL="$LABEL" PYTHON="$PYTHON" REPO_ROOT="$REPO_ROOT" DB="$DB" \
   EXPERIMENT_ID="$EXPERIMENT_ID" INTERVAL="$INTERVAL" LOG_DIR="$LOG_DIR" \
   MODEL_ARGS="$MODEL_ARGS" "$PYTHON" - "$TEMPLATE" <<'PY'
-import os, sys
+import os, re, sys
+KEYS = ("LABEL", "PYTHON", "REPO_ROOT", "DB", "EXPERIMENT_ID", "INTERVAL", "LOG_DIR", "MODEL_ARGS")
 text = open(sys.argv[1], encoding="utf-8").read()
-for key in ("LABEL", "PYTHON", "REPO_ROOT", "DB", "EXPERIMENT_ID", "INTERVAL", "LOG_DIR", "MODEL_ARGS"):
+# Validate the TEMPLATE's placeholders, before substituting anything. The
+# previous check scanned the RENDERED plist for any "__" at all, so a
+# substituted VALUE containing a double underscore looked like an unfilled
+# placeholder. macOS temp paths routinely do -- /var/folders/67/w__hpdvj.../T/
+# -- so a perfectly rendered plist was rejected and the installer refused to
+# run for any user whose database, log directory or repository path happened
+# to contain "__".
+placeholders = {m.group(0) for m in re.finditer(r"__[A-Z][A-Z0-9_]*__", text)}
+unfillable = sorted(placeholders - {f"__{key}__" for key in KEYS})
+if unfillable:
+    raise SystemExit(
+        "template has placeholders the installer cannot fill: "
+        + ", ".join(unfillable)
+    )
+for key in KEYS:
     text = text.replace(f"__{key}__", os.environ[key])
-if "__" in text.split("-->", 1)[1]:
-    raise SystemExit("unfilled placeholder remains in rendered plist")
 sys.stdout.write(text)
 PY
 }

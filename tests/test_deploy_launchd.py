@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import platform
+import re
 import shutil
 import subprocess
 import tempfile
@@ -54,7 +55,13 @@ class WakeAgentInstallerTestCase(unittest.TestCase):
         self.assertIn("com.convergent-systems.test-agent-wake", plist)
         self.assertIn(str(self.database), plist)
         self.assertIn("execute-wake-intents", plist)
-        self.assertNotIn("__", plist.split("-->", 1)[1])
+        # No UNFILLED PLACEHOLDER may remain. Asserting on a bare "__"
+        # instead conflated placeholders with substituted values: macOS temp
+        # paths contain a double underscore (/var/folders/67/w__hpdvj.../T/),
+        # so this failed on a correctly rendered plist.
+        self.assertIsNone(
+            re.search(r"__[A-Z][A-Z0-9_]*__", plist.split("-->", 1)[1])
+        )
         self.assertNotIn("--model-command", plist)
         lint = Path(self.temporary.name) / "job.plist"
         lint.write_text(plist)
